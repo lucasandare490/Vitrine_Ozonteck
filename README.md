@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#  Vitrine Ozonteck
 
-## Getting Started
+Uma plataforma de e-commerce moderna e responsiva construída para otimizar a experiência de compra, com foco em uma jornada de checkout fluida e conversão.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Catálogo Dinâmico:** Apresentação de produtos com interface limpa e animações suaves.
+- **Carrinho de Compras Inteligente:** Gerenciamento de estado global para adicionar, remover e alterar quantidades de produtos em tempo real.
+- **Checkout em Etapas (Multi-step):** Navegação intuitiva dividida em Revisão, Endereço e Pagamento.
+- **Autopreenchimento de Endereço:** Integração com a API ViaCEP para busca automática de logradouro, bairro e cidade a partir do CEP.
+- **Máscaras de Input:** Formatação automática para CPF e números de WhatsApp (Celular).
+- **Pagamento Integrado:** Checkout transparente utilizando o Brick do Mercado Pago, suportando transações via Cartão de Crédito, Pix e Boleto Bancário com telas de sucesso customizadas.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+##  Tecnologias Utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **[Next.js](https://nextjs.org/)** - Framework React para renderização e rotas.
+- **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática para maior segurança e previsibilidade do código.
+- **[Tailwind CSS](https://tailwindcss.com/)** - Estilização utilitária para construção rápida e responsiva de interfaces.
+- **[Zustand](https://github.com/pmndrs/zustand)** - Gerenciamento de estado global simplificado (utilizado no carrinho).
+- **[Supabase](https://supabase.com/)** - Banco de dados PostgreSQL e backend as a service (BaaS) para listagem de produtos.
+- **[Mercado Pago SDK React](https://github.com/mercadopago/sdk-react)** - Integração de pagamentos (Checkout Brick).
+- **[Lucide React](https://lucide.dev/)** - Biblioteca de ícones.
 
-## Learn More
+## 🛠️ Como rodar o projeto localmente
 
-To learn more about Next.js, take a look at the following resources:
+Siga as instruções abaixo para executar o projeto em sua máquina:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Pré-requisitos
+- [Node.js](https://nodejs.org/en/) instalado.
+- Gerenciador de pacotes (NPM, Yarn ou PNPM).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Passo a passo
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone o repositório:**
+   ```bash
+   git clone [https://github.com/seu-usuario/Vitrine_Ozonteck.git](https://github.com/seu-usuario/Vitrine_Ozonteck.git)
