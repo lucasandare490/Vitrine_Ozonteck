@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAFC;
+  --foreground: #0f172a;
+  color-scheme: light; /* O MATADOR DE SOMBRAS: Força o navegador a usar o vazio branco */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+html, body {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ocultar barra de rolagem horizontal em áreas específicas */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
