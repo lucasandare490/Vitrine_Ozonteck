@@ -2,10 +2,8 @@
 
 import { useState, useEffect, useRef, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
-import FloatingCart from '@/components/FloatingCart';
 import ProductCard from '@/components/ProductCard';
-import { MapPin, Phone, Heart, ArrowDown, ArrowUp, Search, CheckCircle2 } from 'lucide-react';
-import Link from 'next/link';
+import { MapPin, Phone, Heart, ArrowDown, ArrowUp, Search } from 'lucide-react';
 
 const FadeInOnLoad = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -77,7 +75,6 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    // 1. CARREGAMENTO INICIAL
     async function loadProducts() {
       const { data, error } = await supabase.from('produtos').select('*');
       
@@ -104,7 +101,6 @@ export default function Home() {
     
     loadProducts();
 
-    // 2. OUVINTE EM TEMPO REAL (REALTIME)
     const channel = supabase
       .channel('schema-db-changes')
       .on(
@@ -148,38 +144,6 @@ export default function Home() {
   return (
     <main className="min-h-screen text-slate-900 selection:bg-teal-600 selection:text-white relative overflow-hidden flex flex-col">
       <OzoneBackground />
-
-      <header className="w-full bg-[#FAFAFC]/80 backdrop-blur-xl border-b border-slate-200/80 sticky top-0 z-50">
-        <nav className="w-full flex items-center justify-between px-5 sm:px-10 lg:px-16 py-3 sm:py-4 max-w-[1800px] mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 lg:gap-5">
-            <div className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-teal-900 flex items-center gap-1.5">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-teal-500 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6">
-                <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2.5"/>
-                <circle cx="7" cy="15" r="4" stroke="currentColor" strokeWidth="2.5"/>
-                <circle cx="17" cy="15" r="4" stroke="currentColor" strokeWidth="2.5"/>
-              </svg>
-              OZONTECK<span className="text-teal-500">.</span>
-            </div>
-            <span className="text-[9px] lg:text-[11px] font-bold text-teal-600 sm:border-l sm:border-slate-300 sm:pl-4 lg:pl-5 uppercase tracking-widest mt-0.5 sm:mt-0">
-              Unidade Recife
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-4 lg:gap-6">
-            <Link 
-              href="/sobre_cliente" 
-              className="text-xs lg:text-[13px] font-bold bg-white border border-teal-200 text-teal-700 hover:bg-teal-600 hover:text-white hover:border-teal-600 px-5 py-2 lg:px-6 lg:py-2 rounded-full transition-all shadow-sm hidden sm:block"
-            >
-              Nossa História
-            </Link>
-            
-            <div className="text-[10px] sm:text-xs lg:text-[13px] font-bold text-slate-500 hidden sm:flex items-center gap-2 border-l border-slate-200 pl-4 lg:pl-6">
-              <CheckCircle2 className="text-teal-500 w-3.5 h-3.5 lg:w-4 lg:h-4"/>
-              Distribuidor Autorizado
-            </div>
-          </div>
-        </nav>
-      </header>
 
       <section className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pt-10 pb-12 sm:pt-16 sm:pb-16 flex flex-col items-center text-center relative z-10">
         <FadeInOnLoad delay={200}>
@@ -373,8 +337,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      <FloatingCart />
     </main>
   );
 }

@@ -1,14 +1,14 @@
 'use client';
 
 import { useCartStore } from '@/store/useCartStore';
-import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, FileText, MapPin, Truck, CheckCircle2 } from 'lucide-react';
-import Link from 'next/link';
+import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, FileText, MapPin, Truck, CheckCircle2, MessageCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { initMercadoPago, Payment } from '@mercadopago/sdk-react';
+import { initMercadoPago, Payment, StatusScreen } from '@mercadopago/sdk-react';
 
 initMercadoPago(process.env.NEXT_PUBLIC_MP_PUBLIC_KEY as string, { locale: 'pt-BR' });
 
@@ -88,10 +88,13 @@ type CustomerData = {
 }
 
 export default function ListaDeInteresse() {
+  const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
   const [imagesMap, setImagesMap] = useState<Record<string, string>>({}); 
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'payment'>('cart');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success'>('idle');
+  
+  const [generatedPaymentId, setGeneratedPaymentId] = useState<string>('');
 
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '', email: '', cpf: '', phone: '', zipCode: '', street: '', number: '', complement: '', neighborhood: '', city: '', state: ''
@@ -198,16 +201,12 @@ export default function ListaDeInteresse() {
   
   const customization = {
     visual: {
-      style: {
-        theme: "default",
-      },
-      texts: {
-        formTitle: "Escolha a forma de pagamento",
-      }
+      style: { theme: "default" },
+      texts: { formTitle: "Pague com Crédito, Débito, Pix ou Boleto" }
     },
     paymentMethods: {
       ticket: "all",
-      // Removida a opção debitCard para evitar confusão com o Cartão Virtual CAIXA
+      bankTransfer: "all",
       creditCard: "all",
       mercadoPago: "all",
     },
@@ -218,8 +217,10 @@ export default function ListaDeInteresse() {
       
       const enhancedFormData = {
         ...formData,
+        cart_items: items,
         description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
-        notification_url: 'https://signatures-commentary-surely-soccer.trycloudflare.com/api/webhook',
+        notification_url: 'https://headlines-broadcast-vital-disciplines.trycloudflare.com/api/webhook',
+        metadata: { phone: customerData.phone },
         payer: {
           ...formData.payer,
           email: customerData.email,
@@ -248,8 +249,8 @@ export default function ListaDeInteresse() {
         .then((response) => response.json())
         .then((data) => {
           if (data.status === 'approved' || data.status === 'in_process' || data.status === 'pending') {
+            setGeneratedPaymentId(String(data.id));
             setPaymentStatus('success');
-            clearCart();
             resolve(data); 
           } else {
             reject(data);
@@ -265,8 +266,13 @@ export default function ListaDeInteresse() {
   const onError = async (error: any) => { console.log(error); };
   const onReady = async () => { console.log("Brick Carregado com sucesso!"); };
 
+  const whatsappText = `Olá! Acabei de registrar um pedido na Vitrine Ozonteck.\n\n*Resumo do Pedido:*\n${items.map(i => `${i.quantity}x ${i.name}`).join('\n')}\n*Total:* R$ ${getTotal().toFixed(2).replace('.', ',')}\n\n*Entregar para:*\n${customerData.name}\n${customerData.phone}\n${customerData.street}, ${customerData.number} - ${customerData.neighborhood}\n${customerData.city}/${customerData.state} - CEP: ${customerData.zipCode}\n\nAguardando confirmação de pagamento!`;
+  const whatsappLink = `https://wa.me/5581900000000?text=${encodeURIComponent(whatsappText)}`;
+
+  const isFormValid = customerData.email.length > 3 && customerData.name.length > 2 && customerData.zipCode && customerData.number && customerData.cpf.length >= 14;
+
   return (
-    <main className="min-h-screen text-slate-900 selection:bg-teal-600 selection:text-white relative overflow-x-hidden flex flex-col">
+    <main className="min-h-screen text-slate-900 selection:bg-teal-600 selection:text-white relative flex flex-col">
       <OzoneBackground />
 
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 pt-4 sm:pt-6 pb-10 relative z-10 flex-1 flex flex-col">
@@ -274,8 +280,8 @@ export default function ListaDeInteresse() {
         <RevealOnScroll delay={100} className="w-full text-left mb-6">
           {paymentStatus !== 'success' && (
             <button 
-              onClick={() => checkoutStep === 'address' ? setCheckoutStep('cart') : checkoutStep === 'payment' ? setCheckoutStep('address') : window.history.back()}
-              className="inline-flex items-center text-xs lg:text-[13px] font-bold text-teal-700 bg-white hover:bg-teal-600 hover:text-white border border-teal-200/60 rounded-full px-5 py-2 mb-5 transition-all duration-300 shadow-sm hover:shadow-md"
+              onClick={() => checkoutStep === 'address' ? setCheckoutStep('cart') : checkoutStep === 'payment' ? setCheckoutStep('address') : router.push('/')}
+              className="inline-flex items-center text-xs lg:text-[13px] font-bold text-teal-700 bg-white hover:bg-teal-600 hover:text-white border border-teal-200/60 rounded-full px-5 py-2 mb-5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer relative z-50"
             >
               <ArrowLeft className="mr-2 w-4 h-4" /> VOLTAR
             </button>
@@ -297,60 +303,77 @@ export default function ListaDeInteresse() {
           </div>
         </RevealOnScroll>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start w-full">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start w-full relative z-20">
           
-          {/* LADO ESQUERDO */}
           <div className={cn(
-            "w-full lg:flex-1 bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-[1.5rem] p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] overflow-hidden relative transition-all duration-500",
-            paymentStatus === 'success' ? 'bg-teal-50/50 border-teal-100' : ''
+            "w-full bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-[1.5rem] p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] relative transition-all duration-500",
+            paymentStatus === 'success' ? 'bg-teal-50/50 border-teal-100' : 'lg:flex-1'
           )}>
             
             {paymentStatus === 'success' && (
-              <div className="p-5 sm:p-10 flex flex-col justify-center items-center text-center animate-in fade-in zoom-in-[0.98] duration-700 bg-transparent">
+              <div className="p-5 sm:p-8 flex flex-col justify-center items-center text-center animate-in fade-in zoom-in-[0.98] duration-700 bg-transparent">
                 <CheckCircle2 size={64} className="text-teal-500 mb-5" />
                 <h2 className="text-2xl font-black text-slate-800 mb-3">Tudo certo com os seus dados!</h2>
+                
                 <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-md mx-auto mb-6">
-                  Seu pedido foi registrado em nosso sistema. Siga as instruções no painel ao lado para concluir o pagamento via Pix ou Boleto.
+                  Seu pedido foi registrado em nosso sistema. Verifique as instruções de pagamento no painel ao lado. Se escolheu Pix ou Boleto, você pode concluí-lo por lá!
                 </p>
+                
                 <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm mb-8 w-full max-w-sm">
                   <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Comprovante enviado para</p>
                   <p className="text-sm font-bold text-slate-800 truncate">{customerData.email}</p>
                 </div>
-                <Link 
-                  href="/" 
-                  className="inline-block bg-white text-teal-700 border border-teal-200 hover:bg-teal-50 font-bold py-2.5 px-6 rounded-full transition-all shadow-sm"
-                >
-                  Voltar ao Catálogo
-                </Link>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
+                  <a 
+                    href={whatsappLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => clearCart()}
+                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold py-3.5 px-6 rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto cursor-pointer relative z-50"
+                  >
+                    <MessageCircle size={18} />
+                    Avisar no WhatsApp
+                  </a>
+                  <button 
+                    onClick={() => {
+                      clearCart();
+                      router.push('/');
+                    }}
+                    className="inline-flex justify-center items-center bg-white text-teal-700 border border-teal-200 hover:bg-teal-50 font-bold py-3.5 px-6 rounded-full transition-all shadow-sm w-full sm:w-auto cursor-pointer relative z-50"
+                  >
+                    Voltar ao Catálogo
+                  </button>
+                </div>
               </div>
             )}
 
             {paymentStatus !== 'success' && items.length === 0 && (
-              <div className="p-5 flex flex-col justify-center animate-in fade-in duration-500 bg-transparent text-center">
+              <div className="p-5 flex flex-col justify-center animate-in fade-in duration-500 bg-transparent text-center relative z-50">
                 <FileText className="text-slate-300 mx-auto mb-5" size={40} />
                 <h3 className="text-lg font-bold text-slate-800 mb-2">Nenhum produto selecionado</h3>
                 <p className="text-slate-500 text-sm mb-6 font-medium">Sua lista de interesse está vazia no momento.</p>
-                <Link 
-                  href="/" 
-                  className="inline-block bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-all shadow-sm mx-auto"
+                <button 
+                  onClick={() => router.push('/')}
+                  className="inline-flex justify-center items-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-all shadow-sm mx-auto cursor-pointer relative z-50"
                 >
                   Navegar pelos produtos
-                </Link>
+                </button>
               </div>
             )}
 
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'cart' && (
-              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out overflow-y-auto">
-                <div className="flex justify-between items-center pb-4 border-b border-slate-200 mb-2">
+              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out">
+                <div className="flex justify-between items-center pb-4 border-b border-slate-200 mb-2 relative z-50">
                   <h2 className="text-xs lg:text-sm font-black text-slate-800 uppercase tracking-wider">Revisão dos Itens</h2>
-                  <button onClick={clearCart} className="flex items-center gap-1.5 text-[11px] lg:text-xs font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50/50 hover:bg-red-50 px-3 py-1.5 rounded-full border border-red-100">
+                  <button onClick={clearCart} className="flex items-center gap-1.5 text-[11px] lg:text-xs font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50/50 hover:bg-red-50 px-3 py-1.5 rounded-full border border-red-100 cursor-pointer">
                     <Trash2 size={14} /> Esvaziar
                   </button>
                 </div>
                 <div className="divide-y divide-slate-100/80">
                   {items.map((item, index) => (
                     <RevealOnScroll key={item.id} delay={100 + (index * 50)}>
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center py-4 relative group">
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center py-4 relative group z-40">
                         <div className="col-span-6 flex items-center gap-3 lg:gap-4">
                           <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center shrink-0 border border-slate-200/50 overflow-hidden relative">
                             {imagesMap[item.code] ? <img src={imagesMap[item.code]} alt={item.name} className="w-full h-full object-cover object-center" /> : <ImageIcon className="text-slate-300" size={16} />}
@@ -361,26 +384,26 @@ export default function ListaDeInteresse() {
                           </div>
                         </div>
                         <div className="hidden md:block col-span-2 text-center text-xs lg:text-sm font-semibold text-slate-600">R$ {item.price.toFixed(2).replace('.', ',')}</div>
-                        <div className="col-span-12 md:col-span-2 flex justify-start md:justify-center mt-2 md:mt-0">
+                        <div className="col-span-12 md:col-span-2 flex justify-start md:justify-center mt-2 md:mt-0 relative z-50">
                           <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 shadow-sm">
-                            <button onClick={() => decreaseItem(item.id)} className="w-6 h-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 rounded-md transition-colors"><Minus size={12} strokeWidth={2.5} /></button>
+                            <button onClick={() => decreaseItem(item.id)} className="w-6 h-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 rounded-md transition-colors cursor-pointer"><Minus size={12} strokeWidth={2.5} /></button>
                             <span className="w-8 text-center text-xs font-bold text-slate-800">{item.quantity}</span>
-                            <button onClick={() => addItem({ id: item.id, code: item.code, name: item.name, price: item.price, estoque: item.estoque })} className="w-6 h-6 flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-md transition-colors"><Plus size={12} strokeWidth={2.5} /></button>
+                            <button onClick={() => addItem({ id: item.id, code: item.code, name: item.name, price: item.price, estoque: item.estoque })} className="w-6 h-6 flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-md transition-colors cursor-pointer"><Plus size={12} strokeWidth={2.5} /></button>
                           </div>
                         </div>
-                        <div className="col-span-12 md:col-span-2 flex justify-between md:justify-end items-center mt-1 md:mt-0">
+                        <div className="col-span-12 md:col-span-2 flex justify-between md:justify-end items-center mt-1 md:mt-0 relative z-50">
                           <div className="md:hidden text-[10px] font-bold text-slate-400 uppercase">Subtotal:</div>
                           <div className="flex items-center gap-3">
                             <span className="text-sm font-black text-teal-700">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
-                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-1" title="Remover produto"><Trash2 size={16} /></button>
+                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-1 cursor-pointer" title="Remover produto"><Trash2 size={16} /></button>
                           </div>
                         </div>
                       </div>
                     </RevealOnScroll>
                   ))}
                 </div>
-                <div className="mt-6 flex justify-end pb-2">
-                  <button onClick={() => setCheckoutStep('address')} className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md">
+                <div className="mt-6 flex justify-end pb-2 relative z-50">
+                  <button onClick={() => setCheckoutStep('address')} className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer">
                     Continuar para Entrega
                   </button>
                 </div>
@@ -388,29 +411,29 @@ export default function ListaDeInteresse() {
             )}
 
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'address' && (
-              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out bg-white/40 overflow-y-auto">
+              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out bg-white/40">
                 <div className="flex items-center gap-2 pb-4 border-b border-slate-200 mb-6">
                   <Truck size={18} className="text-teal-600"/>
                   <h2 className="text-xs lg:text-sm font-black text-slate-800 uppercase tracking-wider">Dados de Entrega</h2>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="space-y-4 relative z-50">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
-                      <input name="name" value={customerData.name} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Ex: João da Silva"/>
+                      <input name="name" value={customerData.name} onChange={handleCustomerDataChange} onBlur={(e) => setCustomerData(prev => ({...prev, name: e.target.value}))} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Ex: João da Silva"/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
-                      <input name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="(81) 90000-0000"/>
+                      <input name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="(81) 90000-0000"/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
-                      <input type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="seu@email.com"/>
+                      <input type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} onBlur={(e) => setCustomerData(prev => ({...prev, email: e.target.value}))} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="seu@email.com"/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CPF</label>
-                      <input name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="000.000.000-00"/>
+                      <input name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="000.000.000-00"/>
                     </div>
                   </div>
 
@@ -419,40 +442,40 @@ export default function ListaDeInteresse() {
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 flex justify-between">
                         CEP {isFetchingCep && <span className="text-teal-500 text-[9px]">Buscando...</span>}
                       </label>
-                      <input name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="00000-000"/>
+                      <input name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="00000-000"/>
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Rua / Logradouro</label>
-                      <input name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
+                      <input name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Número</label>
-                      <input name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
+                      <input name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Complemento</label>
-                      <input name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Apto, Bloco, Casa..."/>
+                      <input name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Apto, Bloco, Casa..."/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Bairro</label>
-                      <input name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
+                      <input name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Cidade</label>
-                      <input name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
+                      <input name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
                     </div>
                     <div>
                       <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Estado</label>
-                      <input name="state" value={customerData.state} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
+                      <input name="state" value={customerData.state} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-8 flex justify-end pb-2">
+                <div className="mt-8 flex justify-end pb-2 relative z-50">
                   <button 
                     onClick={() => setCheckoutStep('payment')} 
-                    disabled={!customerData.zipCode || !customerData.number || customerData.cpf.length < 14}
-                    className="bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-full transition-all shadow-md"
+                    disabled={!isFormValid}
+                    className="bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer"
                   >
                     Ir para Pagamento
                   </button>
@@ -461,51 +484,51 @@ export default function ListaDeInteresse() {
             )}
 
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'payment' && (
-              <div className="animate-in fade-in duration-500 flex flex-col items-center justify-center bg-transparent py-10">
+              <div className="animate-in fade-in duration-500 flex flex-col items-center justify-center bg-transparent py-10 relative z-50">
                 <MapPin size={48} className="text-teal-300 mb-4"/>
                 <h3 className="text-xl font-bold text-slate-800 mb-2">Tudo pronto!</h3>
                 <p className="text-sm text-slate-500 mb-8 text-center max-w-sm leading-relaxed">Seus dados de entrega já foram registrados em nosso sistema. Utilize o painel seguro ao lado para finalizar o pagamento.</p>
-                <button onClick={() => setCheckoutStep('address')} className="text-xs font-bold text-teal-600 hover:text-teal-700 hover:underline border border-teal-100 bg-teal-50 px-4 py-2 rounded-full transition-colors">Revisar meus dados de entrega</button>
+                <button onClick={() => setCheckoutStep('address')} className="text-xs font-bold text-teal-600 hover:text-teal-700 hover:underline border border-teal-100 bg-teal-50 px-4 py-2 rounded-full transition-colors cursor-pointer">Revisar meus dados de entrega</button>
               </div>
             )}
           </div>
 
-          {/* PAYMENT BRICK (LADO DIREITO) */}
-          {!(items.length === 0 && paymentStatus !== 'success') && (
-            <div className={cn(
-              "w-full lg:w-[420px] xl:w-[480px] shrink-0 transition-all duration-500", 
-              checkoutStep === 'payment' || paymentStatus === 'success' ? 'opacity-100 pointer-events-auto' : 'opacity-40 pointer-events-none'
-            )}>
-              <RevealOnScroll delay={400}>
-                <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-lg shadow-slate-200/40 relative">
-                  
-                  {checkoutStep !== 'payment' && paymentStatus !== 'success' && (
-                    <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-2xl">
-                      <p className="text-sm font-bold text-slate-600 px-4 text-center bg-white py-2 rounded-lg shadow-sm border border-slate-100">
-                        Preencha o endereço ao lado<br/>para liberar o pagamento.
-                      </p>
+          <div className={cn(
+            "w-full lg:w-[420px] xl:w-[480px] shrink-0 transition-all duration-500 relative z-50", 
+            checkoutStep === 'payment' || paymentStatus === 'success' ? 'opacity-100 pointer-events-auto' : 'opacity-40 pointer-events-none'
+          )}>
+            <RevealOnScroll delay={400}>
+              <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-lg shadow-slate-200/40 relative min-h-[400px]">
+                
+                {checkoutStep !== 'payment' && paymentStatus !== 'success' && (
+                  <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-2xl">
+                    <p className="text-sm font-bold text-slate-600 px-4 text-center bg-white py-2 rounded-lg shadow-sm border border-slate-100">
+                      Preencha o endereço ao lado<br/>para liberar o pagamento.
+                    </p>
+                  </div>
+                )}
+                
+                {paymentStatus !== 'success' && (
+                  <>
+                    <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider mb-4 pb-3 border-b border-slate-100">Resumo</h3>
+                    <div className="space-y-2 mb-4 text-xs font-medium">
+                      <div className="flex justify-between items-center text-slate-600">
+                        <span>Subtotal produtos</span>
+                        <span>R$ {getTotal().toFixed(2).replace('.', ',')}</span>
+                      </div>
                     </div>
-                  )}
-                  
-                  {paymentStatus !== 'success' && (
-                    <>
-                      <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider mb-4 pb-3 border-b border-slate-100">Resumo</h3>
-                      <div className="space-y-2 mb-4 text-xs font-medium">
-                        <div className="flex justify-between items-center text-slate-600">
-                          <span>Subtotal produtos</span>
-                          <span>R$ {getTotal().toFixed(2).replace('.', ',')}</span>
-                        </div>
-                      </div>
-                      <div className="pt-3 border-t border-slate-200 flex justify-between items-end mb-4 gap-2">
-                        <p className="text-xs font-bold text-slate-800">Total a Pagar</p>
-                        <p className="text-xl font-black text-teal-700">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
-                      </div>
-                    </>
-                  )}
-                  
-                  <div className="w-full">
-                    {/* Renderizamos apenas se estiver no passo de pagamento ou sucesso */}
-                    {(checkoutStep === 'payment' || paymentStatus === 'success') && (
+                    <div className="pt-3 border-t border-slate-200 flex justify-between items-end mb-4 gap-2">
+                      <p className="text-xs font-bold text-slate-800">Total a Pagar</p>
+                      <p className="text-xl font-black text-teal-700">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
+                    </div>
+                    
+                    <div className="bg-teal-50 border border-teal-100 rounded-lg p-3 mb-4 flex items-center justify-center text-center animate-in fade-in duration-500">
+                      <span className="text-xs font-bold text-teal-800">
+                        💳 Na opção "Cartão de Crédito", você também pode usar o seu Débito!
+                      </span>
+                    </div>
+
+                    <div className="w-full">
                       <Payment
                         initialization={initialization}
                         customization={customization}
@@ -513,12 +536,23 @@ export default function ListaDeInteresse() {
                         onReady={onReady}
                         onError={onError}
                       />
-                    )}
+                    </div>
+                  </>
+                )}
+                
+                {paymentStatus === 'success' && generatedPaymentId && (
+                  <div className="w-full animate-in fade-in duration-500">
+                    <StatusScreen
+                      initialization={{ paymentId: generatedPaymentId }}
+                      onReady={() => console.log('Status Screen Ready')}
+                      onError={(error) => console.log('Erro no Status Screen:', error)}
+                    />
                   </div>
-                </div>
-              </RevealOnScroll>
-            </div>
-          )}
+                )}
+                
+              </div>
+            </RevealOnScroll>
+          </div>
 
         </div>
       </div>

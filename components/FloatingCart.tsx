@@ -4,14 +4,19 @@ import { useCartStore } from '@/store/useCartStore';
 import { ShoppingBag } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // 1. Importando o rastreador de rotas
 
 export default function FloatingCart() {
   const [isMounted, setIsMounted] = useState(false);
   const items = useCartStore((state) => state.items);
+  const pathname = usePathname(); // 2. Pegando o endereço da página atual
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // 3. A MÁGICA AQUI: Se a página atual for o login, o componente retorna nulo (fica invisível)
+  if (pathname === '/login') return null;
 
   if (!isMounted) return null;
 
