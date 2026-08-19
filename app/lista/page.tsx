@@ -90,6 +90,8 @@ type CustomerData = {
 export default function ListaDeInteresse() {
   const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
+  const [user, setUser] = useState<any>(null); // NOVO: Estado do Usuário Logado
+  
   const [imagesMap, setImagesMap] = useState<Record<string, string>>({}); 
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'payment'>('cart');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success'>('idle');
@@ -121,6 +123,15 @@ export default function ListaDeInteresse() {
     }
     loadImages();
     setIsMounted(true);
+
+    // NOVO: Verifica se o utilizador tem sessão ativa para liberar o checkout
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        setCustomerData(prev => ({ ...prev, email: session.user.email || '' }));
+      }
+    });
+
   }, []);
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -403,7 +414,16 @@ export default function ListaDeInteresse() {
                   ))}
                 </div>
                 <div className="mt-6 flex justify-end pb-2 relative z-50">
-                  <button onClick={() => setCheckoutStep('address')} className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer">
+                  <button 
+                    onClick={() => {
+                      if (user) {
+                        setCheckoutStep('address'); // Se estiver logado, avança para a entrega
+                      } else {
+                        router.push('/login'); // NOVO: Manda para o Login se não estiver autenticado
+                      }
+                    }} 
+                    className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer"
+                  >
                     Continuar para Entrega
                   </button>
                 </div>
