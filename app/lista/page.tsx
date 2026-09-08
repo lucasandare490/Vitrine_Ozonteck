@@ -1,12 +1,13 @@
 'use client';
 
 import { useCartStore } from '@/store/useCartStore';
-import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, FileText, MapPin, Truck, CheckCircle2, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, MapPin, Truck, CheckCircle2, MessageCircle, Home, Briefcase, User, CreditCard, Phone, Mail, Package, ShieldCheck, Lock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useRef, ReactNode } from 'react';
 import { supabase } from '@/lib/supabase';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import toast from 'react-hot-toast';
 
 import { initMercadoPago, Payment, StatusScreen } from '@mercadopago/sdk-react';
 
@@ -38,7 +39,7 @@ const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: Rea
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={cn(`transition-all duration-700 ease-out`, isVisible ? 'opacity-100' : 'opacity-0', className)}
+      className={cn(`transition-all duration-700 ease-out`, isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4', className)}
     >
       {children}
     </div>
@@ -47,55 +48,30 @@ const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: Rea
 
 const OzoneBackground = () => (
   <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
-    <style dangerouslySetInnerHTML={{__html: `
-      @keyframes float1 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        33% { transform: translate(150px, -100px) scale(1.05); }
-        66% { transform: translate(-100px, 120px) scale(0.95); }
-      }
-      @keyframes float2 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        50% { transform: translate(-150px, 150px) scale(1.05); }
-      }
-    `}} />
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-70" style={{ animation: 'float1 25s ease-in-out infinite' }}>
+    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-40">
       <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-64 h-64 bg-teal-300/60 rounded-full blur-[80px] absolute -left-20 animate-[pulse_8s_ease-in-out_infinite]"></div>
-        <div className="w-56 h-56 bg-cyan-300/60 rounded-full blur-[80px] absolute top-20 animate-[pulse_10s_ease-in-out_infinite_alternate]"></div>
-      </div>
-    </div>
-    <div className="absolute top-[60%] right-[-10%] sm:right-[10%] opacity-60" style={{ animation: 'float2 30s ease-in-out infinite' }}>
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute -left-10 animate-[pulse_12s_ease-in-out_infinite_alternate]"></div>
-        <div className="w-80 h-80 bg-teal-300/60 rounded-full blur-[100px] absolute -right-20 animate-[pulse_9s_ease-in-out_infinite]"></div>
+        <div className="w-96 h-96 bg-teal-300/40 rounded-full blur-[100px] absolute -left-20 animate-pulse"></div>
+        <div className="w-80 h-80 bg-cyan-300/40 rounded-full blur-[100px] absolute top-20"></div>
       </div>
     </div>
   </div>
 );
 
 type CustomerData = {
-  name: string;
-  email: string;
-  cpf: string;
-  phone: string;
-  zipCode: string;
-  street: string;
-  number: string;
-  complement: string;
-  neighborhood: string;
-  city: string;
-  state: string;
+  name: string; email: string; cpf: string; phone: string; zipCode: string; street: string; number: string; complement: string; neighborhood: string; city: string; state: string;
 }
 
 export default function ListaDeInteresse() {
   const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
-  const [user, setUser] = useState<any>(null); // NOVO: Estado do Usuário Logado
+  const [user, setUser] = useState<any>(null); 
   
+  const [savedAddresses, setSavedAddresses] = useState<any[]>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState<string | null>('new');
+
   const [imagesMap, setImagesMap] = useState<Record<string, string>>({}); 
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'payment'>('cart');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success'>('idle');
-  
   const [generatedPaymentId, setGeneratedPaymentId] = useState<string>('');
 
   const [customerData, setCustomerData] = useState<CustomerData>({
@@ -111,28 +87,65 @@ export default function ListaDeInteresse() {
   const getTotal = useCartStore((state) => state.getTotal);
 
   useEffect(() => {
-    async function loadImages() {
-      const { data } = await supabase.from('produtos').select('code, image_url');
-      if (data) {
+    async function loadInitialData() {
+      const { data: prodData } = await supabase.from('produtos').select('code, image_url');
+      if (prodData) {
         const map: Record<string, string> = {};
-        data.forEach(item => {
-          map[item.code] = item.image_url;
-        });
+        prodData.forEach(item => { map[item.code] = item.image_url; });
         setImagesMap(map);
       }
-    }
-    loadImages();
-    setIsMounted(true);
 
-    // NOVO: Verifica se o utilizador tem sessão ativa para liberar o checkout
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+      const { data: { session } } = await supabase.auth.getSession();
+      
       if (session?.user) {
-        setCustomerData(prev => ({ ...prev, email: session.user.email || '' }));
+        setUser(session.user);
+        const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+        const { data: addrs } = await supabase.from('enderecos').select('*').eq('user_id', session.user.id).order('principal', { ascending: false });
+        
+        if (addrs && addrs.length > 0) {
+          setSavedAddresses(addrs);
+          handleSelectAddress(addrs[0], profile, session.user.email);
+        } else if (profile && profile.cep) {
+          const fallbackAddress = { id: 'fallback', apelido: 'Endereço Principal', cep: profile.cep, rua: profile.endereco_completo?.split(',')[0] || '', numero: 'S/N', bairro: '', cidade: '', estado: '' };
+          setSavedAddresses([fallbackAddress]);
+          handleSelectAddress(fallbackAddress, profile, session.user.email);
+        } else {
+          setCustomerData(prev => ({
+            ...prev, email: session.user.email || '', name: profile?.nome || '', cpf: profile?.cpf || '', phone: profile?.telefone || ''
+          }));
+          setSelectedAddressId('new');
+        }
       }
-    });
-
+      setIsMounted(true);
+    }
+    loadInitialData();
   }, []);
+
+  const handleSelectAddress = (addr: any, profile?: any, email?: string) => {
+    setSelectedAddressId(addr.id);
+    setCustomerData(prev => ({
+      ...prev,
+      email: email || prev.email,
+      name: profile?.nome || prev.name,
+      cpf: profile?.cpf || prev.cpf,
+      phone: profile?.telefone || prev.phone,
+      zipCode: addr.cep || '',
+      street: addr.rua || '',
+      number: addr.numero || '',
+      neighborhood: addr.bairro || '',
+      city: addr.cidade || '',
+      state: addr.estado || '',
+      complement: ''
+    }));
+  };
+
+  const handleSelectNewAddress = () => {
+    setSelectedAddressId('new');
+    setCustomerData(prev => ({
+      ...prev,
+      zipCode: '', street: '', number: '', neighborhood: '', city: '', state: '', complement: ''
+    }));
+  };
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -156,7 +169,7 @@ export default function ListaDeInteresse() {
           }));
         }
       } catch (error) {
-        console.error("Erro ao buscar CEP", error);
+        toast.error("Erro ao buscar CEP");
       } finally {
         setIsFetchingCep(false);
       }
@@ -172,12 +185,13 @@ export default function ListaDeInteresse() {
       value = value.replace(/(\d{3})(\d)/, '$1.$2');
       value = value.replace(/(\d{3})(\d)/, '$1.$2');
       value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    }
-    if (name === 'phone') {
+    } else if (name === 'phone') {
       value = value.replace(/\D/g, '');
       if (value.length > 11) value = value.slice(0,11);
       value = value.replace(/(\d{2})(\d)/, '($1) $2');
       value = value.replace(/(\d{4,5})(\d{4})$/, '$1-$2');
+    } else if (name === 'number') {
+      value = value.replace(/\D/g, '');
     }
 
     setCustomerData(prev => ({ ...prev, [name]: value }));
@@ -195,10 +209,7 @@ export default function ListaDeInteresse() {
       email: customerData.email,
       firstName: firstName,
       lastName: lastName,
-      identification: {
-        type: "CPF",
-        number: customerData.cpf.replace(/\D/g, ''),
-      },
+      identification: { type: "CPF", number: customerData.cpf.replace(/\D/g, '') },
       address: {
         zipCode: customerData.zipCode.replace(/\D/g, ''),
         streetName: customerData.street,
@@ -211,36 +222,25 @@ export default function ListaDeInteresse() {
   };
   
   const customization = {
-    visual: {
-      style: { theme: "default" },
-      texts: { formTitle: "Pague com Crédito, Débito, Pix ou Boleto" }
-    },
-    paymentMethods: {
-      ticket: "all",
-      bankTransfer: "all",
-      creditCard: "all",
-      mercadoPago: "all",
-    },
+    visual: { style: { theme: "default" }, texts: { formTitle: "Pagamento Protegido" } },
+    paymentMethods: { ticket: "all", bankTransfer: "all", creditCard: "all", mercadoPago: "all" },
   } as any;
 
-  const onSubmit = async ({ selectedPaymentMethod, formData }: any) => {
+  const onSubmit = async ({ formData }: any) => {
     return new Promise((resolve, reject) => {
-      
       const enhancedFormData = {
         ...formData,
         cart_items: items,
         description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
-        notification_url: 'https://headlines-broadcast-vital-disciplines.trycloudflare.com/api/webhook',
+        // FOI AQUI QUE INSERI O SEU LINK DO TÚNEL LOCAL PARA QUE A API RECEBA:
+        notification_url: 'https://fruity-cows-listen.loca.lt/api/webhook',
         metadata: { phone: customerData.phone },
         payer: {
           ...formData.payer,
           email: customerData.email,
           first_name: firstName || 'Cliente',
           last_name: lastName || 'Sem Sobrenome',
-          identification: {
-            type: "CPF",
-            number: customerData.cpf.replace(/\D/g, '')
-          },
+          identification: { type: "CPF", number: customerData.cpf.replace(/\D/g, '') },
           address: {
             zip_code: customerData.zipCode.replace(/\D/g, ''),
             street_name: customerData.street || 'Não informado',
@@ -267,315 +267,372 @@ export default function ListaDeInteresse() {
             reject(data);
           }
         })
-        .catch((error) => {
-          console.error(error);
-          reject(error);
-        });
+        .catch((error) => reject(error));
     });
   };
 
+  const onReady = async () => { console.log('Brick Carregado'); };
   const onError = async (error: any) => { console.log(error); };
-  const onReady = async () => { console.log("Brick Carregado com sucesso!"); };
 
   const whatsappText = `Olá! Acabei de registrar um pedido na Vitrine Ozonteck.\n\n*Resumo do Pedido:*\n${items.map(i => `${i.quantity}x ${i.name}`).join('\n')}\n*Total:* R$ ${getTotal().toFixed(2).replace('.', ',')}\n\n*Entregar para:*\n${customerData.name}\n${customerData.phone}\n${customerData.street}, ${customerData.number} - ${customerData.neighborhood}\n${customerData.city}/${customerData.state} - CEP: ${customerData.zipCode}\n\nAguardando confirmação de pagamento!`;
   const whatsappLink = `https://wa.me/5581900000000?text=${encodeURIComponent(whatsappText)}`;
 
-  const isFormValid = customerData.email.length > 3 && customerData.name.length > 2 && customerData.zipCode && customerData.number && customerData.cpf.length >= 14;
+  const cpfClean = customerData.cpf.replace(/\D/g, '');
+  const cepClean = customerData.zipCode.replace(/\D/g, '');
+  const isFormValid = customerData.email.length > 3 && customerData.name.length > 2 && cepClean.length === 8 && customerData.number && cpfClean.length === 11;
 
   return (
-    <main className="min-h-screen text-slate-900 selection:bg-teal-600 selection:text-white relative flex flex-col">
+    <main className="min-h-screen text-slate-900 relative flex flex-col overflow-hidden">
       <OzoneBackground />
 
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-12 pt-4 sm:pt-6 pb-10 relative z-10 flex-1 flex flex-col">
+      {/* CONTAINER GLOBAL DE 1800px COM GRID OFFSET */}
+      <section className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-10 pb-24 relative z-10 flex-1 flex flex-col">
         
-        <RevealOnScroll delay={100} className="w-full text-left mb-6">
+        {/* CABEÇALHO SUPERIOR */}
+        <RevealOnScroll delay={0} className="w-full mb-8">
+          
           {paymentStatus !== 'success' && (
             <button 
               onClick={() => checkoutStep === 'address' ? setCheckoutStep('cart') : checkoutStep === 'payment' ? setCheckoutStep('address') : router.push('/')}
-              className="inline-flex items-center text-xs lg:text-[13px] font-bold text-teal-700 bg-white hover:bg-teal-600 hover:text-white border border-teal-200/60 rounded-full px-5 py-2 mb-5 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer relative z-50"
+              className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-5 transition-colors uppercase tracking-widest"
             >
-              <ArrowLeft className="mr-2 w-4 h-4" /> VOLTAR
+              <ArrowLeft size={12} /> {checkoutStep === 'cart' ? 'Voltar para a Loja' : 'Voltar à etapa anterior'}
             </button>
           )}
 
-          <div>
-            <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold text-slate-900 tracking-tight uppercase leading-none">
-              {paymentStatus === 'success' ? 'Pedido Registrado!' : 'Finalizar Pedido'}
-            </h1>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-5 border-b border-slate-200/60">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                <Lock className="text-teal-600 w-7 h-7 sm:w-8 sm:h-8" strokeWidth={2.5} />
+                {paymentStatus === 'success' ? 'Pedido Registrado!' : 'Checkout Seguro'}
+              </h1>
+              <p className="text-slate-500 text-sm mt-1.5 font-medium">
+                {paymentStatus === 'success' ? 'Acompanhe as instruções abaixo.' : 'Finalize sua compra com total segurança.'}
+              </p>
+            </div>
+            
+            {/* INDICADOR DE PASSOS (Pílula Elegante) */}
             {paymentStatus !== 'success' && (
-              <div className="flex gap-4 mt-3">
-                <div className={cn("text-xs font-bold uppercase transition-colors duration-500", checkoutStep === 'cart' ? 'text-teal-600' : 'text-slate-400')}>1. Carrinho</div>
-                <div className="text-slate-300">/</div>
-                <div className={cn("text-xs font-bold uppercase transition-colors duration-500", checkoutStep === 'address' ? 'text-teal-600' : 'text-slate-400')}>2. Endereço</div>
-                <div className="text-slate-300">/</div>
-                <div className={cn("text-xs font-bold uppercase transition-colors duration-500", checkoutStep === 'payment' ? 'text-teal-600' : 'text-slate-400')}>3. Pagamento</div>
+              <div className="relative flex items-center bg-slate-100 p-1 rounded-full w-full md:w-[360px] shadow-inner border border-slate-200">
+                <div
+                  className="absolute top-1 bottom-1 bg-teal-600 rounded-full transition-all duration-500 ease-out shadow-sm"
+                  style={{
+                    width: 'calc(33.333% - 2.66px)',
+                    left: checkoutStep === 'cart' ? '4px' : checkoutStep === 'address' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
+                  }}
+                ></div>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'cart' ? 'text-white' : 'text-slate-500')}>
+                  1. Carrinho
+                </div>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'address' ? 'text-white' : 'text-slate-500')}>
+                  2. Entrega
+                </div>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'payment' ? 'text-white' : 'text-slate-500')}>
+                  3. Pagamento
+                </div>
               </div>
             )}
           </div>
         </RevealOnScroll>
 
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start w-full relative z-20">
+        {/* ESTRUTURA HORIZONTAL - GRID DE 12 COLUNAS */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full relative z-20">
           
-          <div className={cn(
-            "w-full bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-[1.5rem] p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.02)] relative transition-all duration-500",
-            paymentStatus === 'success' ? 'bg-teal-50/50 border-teal-100' : 'lg:flex-1'
-          )}>
+          {/* =========================================
+              LADO ESQUERDO (Ações Principais - 8 Colunas)
+          ========================================= */}
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
             
+            {/* SUCESSO */}
             {paymentStatus === 'success' && (
-              <div className="p-5 sm:p-8 flex flex-col justify-center items-center text-center animate-in fade-in zoom-in-[0.98] duration-700 bg-transparent">
-                <CheckCircle2 size={64} className="text-teal-500 mb-5" />
-                <h2 className="text-2xl font-black text-slate-800 mb-3">Tudo certo com os seus dados!</h2>
-                
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-md mx-auto mb-6">
-                  Seu pedido foi registrado em nosso sistema. Verifique as instruções de pagamento no painel ao lado. Se escolheu Pix ou Boleto, você pode concluí-lo por lá!
+              <div className="bg-white border border-slate-200 rounded-xl p-8 sm:p-12 shadow-sm flex flex-col justify-center items-center text-center animate-in fade-in zoom-in-95 duration-500">
+                <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mb-6 border-8 border-teal-500/10">
+                  <CheckCircle2 size={40} className="text-teal-500" strokeWidth={2.5} />
+                </div>
+                <h2 className="text-2xl font-black text-slate-800 mb-3 tracking-tight">Tudo certo com os seus dados!</h2>
+                <p className="text-slate-500 text-sm leading-relaxed max-w-md mx-auto mb-8">
+                  Seu pedido foi registrado no sistema. Verifique as instruções de pagamento no painel ao lado (se via PIX ou Boleto) para que a logística seja iniciada.
                 </p>
-                
-                <div className="bg-white p-4 rounded-xl border border-slate-100 shadow-sm mb-8 w-full max-w-sm">
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">Comprovante enviado para</p>
-                  <p className="text-sm font-bold text-slate-800 truncate">{customerData.email}</p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full">
-                  <a 
-                    href={whatsappLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => clearCart()}
-                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold py-3.5 px-6 rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto cursor-pointer relative z-50"
-                  >
-                    <MessageCircle size={18} />
-                    Avisar no WhatsApp
-                  </a>
-                  <button 
-                    onClick={() => {
-                      clearCart();
-                      router.push('/');
-                    }}
-                    className="inline-flex justify-center items-center bg-white text-teal-700 border border-teal-200 hover:bg-teal-50 font-bold py-3.5 px-6 rounded-full transition-all shadow-sm w-full sm:w-auto cursor-pointer relative z-50"
-                  >
-                    Voltar ao Catálogo
-                  </button>
-                </div>
+                <a 
+                  href={whatsappLink} target="_blank" rel="noopener noreferrer" onClick={() => clearCart()}
+                  className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-bold py-3.5 px-8 rounded-lg transition-all shadow-sm"
+                >
+                  <MessageCircle size={18} /> Avisar Consultor no WhatsApp
+                </a>
               </div>
             )}
 
+            {/* CARRINHO VAZIO */}
             {paymentStatus !== 'success' && items.length === 0 && (
-              <div className="p-5 flex flex-col justify-center animate-in fade-in duration-500 bg-transparent text-center relative z-50">
-                <FileText className="text-slate-300 mx-auto mb-5" size={40} />
-                <h3 className="text-lg font-bold text-slate-800 mb-2">Nenhum produto selecionado</h3>
-                <p className="text-slate-500 text-sm mb-6 font-medium">Sua lista de interesse está vazia no momento.</p>
-                <button 
-                  onClick={() => router.push('/')}
-                  className="inline-flex justify-center items-center bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold py-2.5 px-6 rounded-full transition-all shadow-sm mx-auto cursor-pointer relative z-50"
-                >
-                  Navegar pelos produtos
+              <div className="bg-white border border-dashed border-slate-300 rounded-xl p-16 flex flex-col justify-center items-center text-center animate-in fade-in duration-500">
+                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5">
+                  <Package className="text-slate-300" size={28} />
+                </div>
+                <h3 className="text-lg font-bold text-slate-800 mb-2">Carrinho Vazio</h3>
+                <p className="text-slate-500 text-sm mb-8">Você ainda não selecionou nenhum produto para finalizar a compra.</p>
+                <button onClick={() => router.push('/')} className="bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-3 px-8 rounded-lg shadow-sm transition-colors">
+                  Explorar Vitrine
                 </button>
               </div>
             )}
 
+            {/* PASSO 1: CARRINHO */}
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'cart' && (
-              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out">
-                <div className="flex justify-between items-center pb-4 border-b border-slate-200 mb-2 relative z-50">
-                  <h2 className="text-xs lg:text-sm font-black text-slate-800 uppercase tracking-wider">Revisão dos Itens</h2>
-                  <button onClick={clearCart} className="flex items-center gap-1.5 text-[11px] lg:text-xs font-bold text-red-500 hover:text-red-600 transition-colors bg-red-50/50 hover:bg-red-50 px-3 py-1.5 rounded-full border border-red-100 cursor-pointer">
+              <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden animate-in fade-in duration-500">
+                <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50/50">
+                  <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                    <Package size={18} className="text-teal-600" /> Produtos Selecionados
+                  </h2>
+                  <button onClick={clearCart} className="text-xs font-bold text-slate-400 hover:text-red-500 flex items-center gap-1.5 transition-colors uppercase tracking-widest">
                     <Trash2 size={14} /> Esvaziar
                   </button>
                 </div>
-                <div className="divide-y divide-slate-100/80">
+                
+                <div className="divide-y divide-slate-100 px-6">
                   {items.map((item, index) => (
-                    <RevealOnScroll key={item.id} delay={100 + (index * 50)}>
-                      <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center py-4 relative group z-40">
-                        <div className="col-span-6 flex items-center gap-3 lg:gap-4">
-                          <div className="w-14 h-14 bg-slate-100 rounded-lg flex items-center justify-center shrink-0 border border-slate-200/50 overflow-hidden relative">
-                            {imagesMap[item.code] ? <img src={imagesMap[item.code]} alt={item.name} className="w-full h-full object-cover object-center" /> : <ImageIcon className="text-slate-300" size={16} />}
+                    <RevealOnScroll key={item.id} delay={index * 50}>
+                      <div className="flex flex-col sm:flex-row items-center gap-6 py-6">
+                        <div className="flex items-center gap-4 flex-1 w-full">
+                          <div className="w-20 h-20 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 overflow-hidden shrink-0">
+                            {imagesMap[item.code] ? <img src={imagesMap[item.code]} alt={item.name} className="w-full h-full object-cover" /> : <ImageIcon className="text-slate-300" size={20} />}
                           </div>
                           <div>
-                            <p className="text-[9px] font-black text-teal-600 uppercase mb-0.5">Ref: {item.code}</p>
-                            <h3 className="text-xs lg:text-sm font-bold text-slate-900 leading-tight pr-2">{item.name}</h3>
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Ref: {item.code}</p>
+                            <h3 className="text-sm font-bold text-slate-900 leading-snug">{item.name}</h3>
+                            <div className="text-sm font-black text-teal-700 mt-1">R$ {item.price.toFixed(2).replace('.', ',')}</div>
                           </div>
                         </div>
-                        <div className="hidden md:block col-span-2 text-center text-xs lg:text-sm font-semibold text-slate-600">R$ {item.price.toFixed(2).replace('.', ',')}</div>
-                        <div className="col-span-12 md:col-span-2 flex justify-start md:justify-center mt-2 md:mt-0 relative z-50">
-                          <div className="flex items-center bg-white border border-slate-200 rounded-lg p-0.5 shadow-sm">
-                            <button onClick={() => decreaseItem(item.id)} className="w-6 h-6 flex items-center justify-center text-slate-500 hover:bg-slate-100 rounded-md transition-colors cursor-pointer"><Minus size={12} strokeWidth={2.5} /></button>
-                            <span className="w-8 text-center text-xs font-bold text-slate-800">{item.quantity}</span>
-                            <button onClick={() => addItem({ id: item.id, code: item.code, name: item.name, price: item.price, estoque: item.estoque })} className="w-6 h-6 flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-md transition-colors cursor-pointer"><Plus size={12} strokeWidth={2.5} /></button>
+
+                        <div className="flex items-center justify-between w-full sm:w-auto gap-8">
+                          <div className="flex items-center bg-white border border-slate-200 rounded-lg shadow-sm h-10">
+                            <button onClick={() => decreaseItem(item.id)} className="w-10 h-full flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-l-lg transition-colors"><Minus size={14} /></button>
+                            <span className="w-10 text-center text-sm font-bold text-slate-800">{item.quantity}</span>
+                            <button onClick={() => addItem(item)} className="w-10 h-full flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-r-lg transition-colors"><Plus size={14} /></button>
                           </div>
-                        </div>
-                        <div className="col-span-12 md:col-span-2 flex justify-between md:justify-end items-center mt-1 md:mt-0 relative z-50">
-                          <div className="md:hidden text-[10px] font-bold text-slate-400 uppercase">Subtotal:</div>
-                          <div className="flex items-center gap-3">
-                            <span className="text-sm font-black text-teal-700">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
-                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 transition-colors p-1 cursor-pointer" title="Remover produto"><Trash2 size={16} /></button>
+                          <div className="flex items-center gap-4">
+                            <span className="text-base font-black text-slate-900 w-24 text-right">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
+                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 p-2 transition-colors"><Trash2 size={18} /></button>
                           </div>
                         </div>
                       </div>
                     </RevealOnScroll>
                   ))}
                 </div>
-                <div className="mt-6 flex justify-end pb-2 relative z-50">
-                  <button 
-                    onClick={() => {
-                      if (user) {
-                        setCheckoutStep('address'); // Se estiver logado, avança para a entrega
-                      } else {
-                        router.push('/login'); // NOVO: Manda para o Login se não estiver autenticado
-                      }
-                    }} 
-                    className="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer"
-                  >
-                    Continuar para Entrega
-                  </button>
-                </div>
               </div>
             )}
 
+            {/* PASSO 2: ENDEREÇO & DADOS */}
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'address' && (
-              <div className="animate-in fade-in zoom-in-[0.98] duration-300 ease-out bg-white/40">
-                <div className="flex items-center gap-2 pb-4 border-b border-slate-200 mb-6">
-                  <Truck size={18} className="text-teal-600"/>
-                  <h2 className="text-xs lg:text-sm font-black text-slate-800 uppercase tracking-wider">Dados de Entrega</h2>
-                </div>
+              <div className="flex flex-col gap-6 animate-in fade-in duration-500">
                 
-                <div className="space-y-4 relative z-50">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
-                      <input name="name" value={customerData.name} onChange={handleCustomerDataChange} onBlur={(e) => setCustomerData(prev => ({...prev, name: e.target.value}))} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Ex: João da Silva"/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
-                      <input name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="(81) 90000-0000"/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
-                      <input type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} onBlur={(e) => setCustomerData(prev => ({...prev, email: e.target.value}))} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="seu@email.com"/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CPF</label>
-                      <input name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="000.000.000-00"/>
-                    </div>
+                {/* DADOS DO COMPRADOR */}
+                <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+                    <User size={18} className="text-teal-600"/>
+                    <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Dados do Comprador</h2>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-slate-100">
-                    <div className="md:col-span-1">
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5 flex justify-between">
-                        CEP {isFetchingCep && <span className="text-teal-500 text-[9px]">Buscando...</span>}
-                      </label>
-                      <input name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="00000-000"/>
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Rua / Logradouro</label>
-                      <input name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
-                    </div>
+                  
+                  <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Número</label>
-                      <input name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"/>
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Complemento</label>
-                      <input name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full p-3 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Apto, Bloco, Casa..."/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Bairro</label>
-                      <input name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Cidade</label>
-                      <input name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
-                    </div>
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Estado</label>
-                      <input name="state" value={customerData.state} onChange={handleCustomerDataChange} className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none" readOnly/>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-8 flex justify-end pb-2 relative z-50">
-                  <button 
-                    onClick={() => setCheckoutStep('payment')} 
-                    disabled={!isFormValid}
-                    className="bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-bold py-3 px-8 rounded-full transition-all shadow-md cursor-pointer"
-                  >
-                    Ir para Pagamento
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'payment' && (
-              <div className="animate-in fade-in duration-500 flex flex-col items-center justify-center bg-transparent py-10 relative z-50">
-                <MapPin size={48} className="text-teal-300 mb-4"/>
-                <h3 className="text-xl font-bold text-slate-800 mb-2">Tudo pronto!</h3>
-                <p className="text-sm text-slate-500 mb-8 text-center max-w-sm leading-relaxed">Seus dados de entrega já foram registrados em nosso sistema. Utilize o painel seguro ao lado para finalizar o pagamento.</p>
-                <button onClick={() => setCheckoutStep('address')} className="text-xs font-bold text-teal-600 hover:text-teal-700 hover:underline border border-teal-100 bg-teal-50 px-4 py-2 rounded-full transition-colors cursor-pointer">Revisar meus dados de entrega</button>
-              </div>
-            )}
-          </div>
-
-          <div className={cn(
-            "w-full lg:w-[420px] xl:w-[480px] shrink-0 transition-all duration-500 relative z-50", 
-            checkoutStep === 'payment' || paymentStatus === 'success' ? 'opacity-100 pointer-events-auto' : 'opacity-40 pointer-events-none'
-          )}>
-            <RevealOnScroll delay={400}>
-              <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-lg shadow-slate-200/40 relative min-h-[400px]">
-                
-                {checkoutStep !== 'payment' && paymentStatus !== 'success' && (
-                  <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/60 backdrop-blur-[2px] rounded-2xl">
-                    <p className="text-sm font-bold text-slate-600 px-4 text-center bg-white py-2 rounded-lg shadow-sm border border-slate-100">
-                      Preencha o endereço ao lado<br/>para liberar o pagamento.
-                    </p>
-                  </div>
-                )}
-                
-                {paymentStatus !== 'success' && (
-                  <>
-                    <h3 className="text-xs font-black text-slate-800 uppercase tracking-wider mb-4 pb-3 border-b border-slate-100">Resumo</h3>
-                    <div className="space-y-2 mb-4 text-xs font-medium">
-                      <div className="flex justify-between items-center text-slate-600">
-                        <span>Subtotal produtos</span>
-                        <span>R$ {getTotal().toFixed(2).replace('.', ',')}</span>
+                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nome Completo</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><User size={16} className="text-slate-400" /></div>
+                        <input name="name" value={customerData.name} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Ex: João da Silva"/>
                       </div>
                     </div>
-                    <div className="pt-3 border-t border-slate-200 flex justify-between items-end mb-4 gap-2">
-                      <p className="text-xs font-bold text-slate-800">Total a Pagar</p>
-                      <p className="text-xl font-black text-teal-700">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">WhatsApp</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><Phone size={16} className="text-slate-400" /></div>
+                        <input name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="(81) 90000-0000"/>
+                      </div>
                     </div>
-                    
-                    <div className="bg-teal-50 border border-teal-100 rounded-lg p-3 mb-4 flex items-center justify-center text-center animate-in fade-in duration-500">
-                      <span className="text-xs font-bold text-teal-800">
-                        💳 Na opção "Cartão de Crédito", você também pode usar o seu Débito!
-                      </span>
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">E-mail</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><Mail size={16} className="text-slate-400" /></div>
+                        <input type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="seu@email.com"/>
+                      </div>
                     </div>
-
-                    <div className="w-full">
-                      <Payment
-                        initialization={initialization}
-                        customization={customization}
-                        onSubmit={onSubmit}
-                        onReady={onReady}
-                        onError={onError}
-                      />
+                    <div>
+                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">CPF</label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><CreditCard size={16} className="text-slate-400" /></div>
+                        <input name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="000.000.000-00"/>
+                      </div>
                     </div>
-                  </>
-                )}
-                
-                {paymentStatus === 'success' && generatedPaymentId && (
-                  <div className="w-full animate-in fade-in duration-500">
-                    <StatusScreen
-                      initialization={{ paymentId: generatedPaymentId }}
-                      onReady={() => console.log('Status Screen Ready')}
-                      onError={(error) => console.log('Erro no Status Screen:', error)}
-                    />
                   </div>
-                )}
-                
+                </div>
+
+                {/* ENDEREÇO DE ENTREGA */}
+                <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+                  <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+                    <Truck size={18} className="text-teal-600"/>
+                    <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Local de Entrega</h2>
+                  </div>
+
+                  <div className="p-6 sm:p-8">
+                    {user && savedAddresses.length > 0 && (
+                      <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {savedAddresses.map((addr) => (
+                          <div 
+                            key={addr.id} 
+                            onClick={() => handleSelectAddress(addr)}
+                            className={cn(
+                              "p-5 rounded-xl border cursor-pointer transition-all flex items-start gap-4 shadow-sm",
+                              selectedAddressId === addr.id ? 'border-teal-500 bg-teal-50/50 ring-1 ring-teal-500/20' : 'border-slate-200 bg-white hover:border-teal-300'
+                            )}
+                          >
+                            <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0", selectedAddressId === addr.id ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-500')}>
+                              {addr.apelido.toLowerCase() === 'trabalho' ? <Briefcase size={18} /> : <Home size={18} />}
+                            </div>
+                            <div>
+                              <h4 className="text-sm font-bold text-slate-900">{addr.apelido}</h4>
+                              <p className="text-xs text-slate-600 mt-1 leading-relaxed">{addr.rua}, {addr.numero}</p>
+                              <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">CEP {addr.cep}</p>
+                            </div>
+                          </div>
+                        ))}
+                        <div onClick={handleSelectNewAddress} className={cn("p-5 rounded-xl border border-dashed cursor-pointer transition-all flex flex-col items-center justify-center gap-2 min-h-[110px]", selectedAddressId === 'new' ? 'border-teal-500 bg-teal-50/30 text-teal-700' : 'border-slate-300 bg-slate-50/50 text-slate-500 hover:border-teal-400 hover:text-teal-600')}>
+                          <Plus size={24} />
+                          <span className="text-xs font-bold uppercase tracking-widest">Novo endereço</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {selectedAddressId === 'new' && (
+                      <div className="grid grid-cols-12 gap-5">
+                        <div className="col-span-12 sm:col-span-4">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between">
+                            <span>CEP</span> {isFetchingCep && <span className="text-teal-500 lowercase font-normal">(buscando)</span>}
+                          </label>
+                          <input name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="00000-000"/>
+                        </div>
+                        <div className="col-span-12 sm:col-span-6">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Rua / Logradouro</label>
+                          <input name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep || customerData.street !== ''}/>
+                        </div>
+                        <div className="col-span-12 sm:col-span-2">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nº</label>
+                          <input name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="123"/>
+                        </div>
+
+                        <div className="col-span-12 sm:col-span-4">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between"><span>Complemento</span><span className="text-[9px] text-slate-400 font-normal">(Opcional)</span></label>
+                          <input name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Apto, Casa..."/>
+                        </div>
+                        <div className="col-span-12 sm:col-span-4">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Bairro</label>
+                          <input name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep || customerData.neighborhood !== ''}/>
+                        </div>
+                        <div className="col-span-12 sm:col-span-3">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Cidade</label>
+                          <input name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep || customerData.city !== ''}/>
+                        </div>
+                        <div className="col-span-12 sm:col-span-1">
+                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 text-center">UF</label>
+                          <input name="state" value={customerData.state} onChange={handleCustomerDataChange} className="w-full px-2 py-2.5 text-sm uppercase text-center bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep || customerData.state !== ''}/>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
+            )}
+
+            {/* PASSO 3: PAGAMENTO (Wrapper do MP Brick) */}
+            {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'payment' && (
+              <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden animate-in fade-in duration-500 w-full">
+                <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
+                  <CreditCard size={18} className="text-teal-600"/>
+                  <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Finalizar Pagamento</h2>
+                </div>
+                <div className="p-2 sm:p-4">
+                  <Payment initialization={initialization} customization={customization} onSubmit={onSubmit} onReady={onReady} onError={onError} />
+                </div>
+              </div>
+            )}
+            
+          </div>
+
+          {/* =========================================
+              LADO DIREITO (Resumo Pegajoso / Sticky - 4 Colunas)
+          ========================================= */}
+          <div className="lg:col-span-5 xl:col-span-4 shrink-0 lg:sticky lg:top-8 transition-all duration-700 w-full">
+            <RevealOnScroll delay={100}>
+              <div className="bg-white border border-slate-200 rounded-xl shadow-sm flex flex-col overflow-hidden">
+                
+                <div className="p-6 sm:p-8 bg-slate-50/50 border-b border-slate-100">
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6 flex items-center gap-2">
+                    <ShieldCheck size={18} className="text-teal-600" /> Resumo do Pedido
+                  </h3>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-between items-center text-slate-600 text-sm">
+                      <span className="font-medium">Produtos ({items.length})</span>
+                      <span className="text-slate-900 font-bold">R$ {getTotal().toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div className="flex justify-between items-center text-slate-600 text-sm">
+                      <span className="font-medium">Frete Expresso</span>
+                      <span className="text-teal-700 font-black bg-teal-50 px-2.5 py-0.5 rounded uppercase tracking-widest text-[10px] border border-teal-100">Grátis</span>
+                    </div>
+                  </div>
+                  <div className="pt-5 border-t border-slate-200 flex justify-between items-end">
+                    <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Total a Pagar</p>
+                    <p className="text-3xl font-black text-slate-900 tracking-tighter">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-white flex flex-col gap-3">
+                  
+                  {/* BOTÕES DE CONTINUAR AGORA SÃO PRETO LUXO (SLATE-900) */}
+                  {checkoutStep === 'cart' && paymentStatus !== 'success' && (
+                    <button onClick={() => setCheckoutStep('address')} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm">
+                      Continuar para Entrega
+                    </button>
+                  )}
+                  
+                  {checkoutStep === 'address' && paymentStatus !== 'success' && (
+                    <>
+                      <button onClick={() => setCheckoutStep('payment')} disabled={!isFormValid} className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm">
+                        Ir para Pagamento
+                      </button>
+                      <button onClick={() => setCheckoutStep('cart')} className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-600 font-bold py-3 rounded-lg transition-colors text-xs uppercase tracking-widest">
+                        Voltar ao Carrinho
+                      </button>
+                    </>
+                  )}
+
+                  {checkoutStep === 'payment' && paymentStatus !== 'success' && (
+                    <button onClick={() => setCheckoutStep('address')} className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-600 font-bold py-3 rounded-lg transition-colors text-xs uppercase tracking-widest">
+                      Revisar Endereço
+                    </button>
+                  )}
+
+                  {/* Trust Badge */}
+                  <div className="mt-4 bg-slate-50 border border-slate-100 rounded-lg p-4 flex items-start gap-3">
+                    <Lock size={16} className="text-teal-600 mt-0.5 shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-widest">Ambiente 100% Seguro</h4>
+                      <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">
+                        Seus dados são protegidos com criptografia de ponta a ponta. A Ozonteck não armazena os dados do seu cartão.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Status Screen do Mercado Pago em Sucesso */}
+              {paymentStatus === 'success' && generatedPaymentId && (
+                <div className="w-full mt-6 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm animate-in fade-in duration-500">
+                  <StatusScreen initialization={{ paymentId: generatedPaymentId }} onReady={() => console.log('Status Screen Ready')} onError={(error) => console.log('Erro no Status Screen:', error)} />
+                </div>
+              )}
             </RevealOnScroll>
           </div>
 
         </div>
-      </div>
+      </section>
     </main>
   );
 }

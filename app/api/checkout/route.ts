@@ -161,7 +161,9 @@ export async function POST(request: Request) {
         payer: body.payer,
         token: body.token,
         installments: body.installments,
-        issuer_id: body.issuer_id ? Number(body.issuer_id) : undefined,        notification_url: process.env.MP_WEBHOOK_URL as string,
+        issuer_id: body.issuer_id ? Number(body.issuer_id) : undefined,
+        // LINK DO TÚNEL INSERIDO AQUI PARA O MERCADO PAGO AVISAR O SITE
+        notification_url: "https://appliances-red-nicholas-changed.trycloudflare.com",
         metadata: body.metadata 
       }
     });

@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // LIBERA O DOMÍNIO DO CLOUDFLARE PARA O MODO DESENVOLVIMENTO
+  allowedDevOrigins: [
+    "appliances-red-nicholas-changed.trycloudflare.com",
+  ],
   async headers() {
     return [
       {

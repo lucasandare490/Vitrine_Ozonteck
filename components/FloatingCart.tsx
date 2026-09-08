@@ -25,10 +25,10 @@ export default function FloatingCart() {
   if (totalItems === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-50 animate-[bounce_3s_ease-in-out_infinite]">
+    <div className="fixed bottom-4 right-4 z-50 md:hidden animate-[bounce_3s_ease-in-out_infinite]">
       <Link
         href="/lista"
-        className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgb(13,148,136,0.15)] text-teal-900 p-2.5 lg:p-3.5 rounded-xl lg:rounded-2xl flex items-center gap-2.5 lg:gap-3 transition-all hover:scale-105 hover:bg-white focus:outline-none focus:ring-2 focus:ring-teal-100 group"
+        className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgb(13,148,136,0.15)] text-teal-900 p-3 rounded-xl flex items-center gap-2.5 transition-all hover:scale-105 hover:bg-white focus:outline-none focus:ring-2 focus:ring-teal-100 group"
         aria-label="Ver minha seleção"
       >
         <div className="relative">
@@ -37,7 +37,7 @@ export default function FloatingCart() {
             {totalItems}
           </span>
         </div>
-        <div className="text-left hidden sm:block pr-2">
+        <div className="text-left pr-2">
           <p className="text-[8px] font-black text-teal-500 uppercase tracking-widest leading-none mb-1">Sua Seleção</p>
           <p className="text-xs font-bold text-slate-800 leading-none">Revisar Orçamento</p>
         </div>
