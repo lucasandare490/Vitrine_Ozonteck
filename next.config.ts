@@ -5,6 +5,18 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: [
     "appliances-red-nicholas-changed.trycloudflare.com",
   ],
+
+  // CONFIGURAÇÃO DE IMAGENS (Isto é o que remove a "chuva amarela" de avisos no terminal)
+  images: {
+    qualities: [25, 50, 75, 90, 100],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
+
   async headers() {
     return [
       {

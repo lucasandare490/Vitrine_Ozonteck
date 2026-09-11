@@ -7,34 +7,6 @@ import { Mail, Lock, User, ArrowRight, Loader2, ShieldCheck, CheckCircle2, Arrow
 import Link from 'next/link';
 import { useCartStore } from '@/store/useCartStore';
 
-const LoginOzoneBackground = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50 pointer-events-none fixed">
-    <style dangerouslySetInnerHTML={{__html: `
-      @keyframes float1 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        33% { transform: translate(100px, -50px) scale(1.05); }
-        66% { transform: translate(-50px, 80px) scale(0.95); }
-      }
-      @keyframes float2 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        50% { transform: translate(-100px, 100px) scale(1.05); }
-      }
-    `}} />
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-80" style={{ animation: 'float1 25s ease-in-out infinite' }}>
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-64 h-64 bg-teal-300/60 rounded-full blur-[80px] absolute -left-20 animate-[pulse_8s_ease-in-out_infinite]"></div>
-        <div className="w-56 h-56 bg-cyan-300/60 rounded-full blur-[80px] absolute top-20 animate-[pulse_10s_ease-in-out_infinite_alternate]"></div>
-      </div>
-    </div>
-    <div className="absolute top-[60%] right-[-10%] sm:right-[10%] opacity-70" style={{ animation: 'float2 30s ease-in-out infinite' }}>
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute -left-10 animate-[pulse_12s_ease-in-out_infinite_alternate]"></div>
-        <div className="w-80 h-80 bg-teal-300/60 rounded-full blur-[100px] absolute -right-20 animate-[pulse_9s_ease-in-out_infinite]"></div>
-      </div>
-    </div>
-  </div>
-);
-
 export default function Login() {
   const router = useRouter();
   const items = useCartStore((state) => state.items); 
@@ -57,7 +29,6 @@ export default function Login() {
     const verifySession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session && !window.location.hash.includes('type=recovery')) {
-        // Verifica se é admin antes de redirecionar
         const { data: profile } = await supabase.from('profiles').select('role').eq('id', session.user.id).single();
         if (profile?.role === 'admin') {
           router.push('/admin');
@@ -155,7 +126,6 @@ export default function Login() {
 
         if (error || !authData.user) throw new Error('E-mail ou senha incorretos.');
         
-        // Verifica se é admin para redirecionar corretamente
         const { data: profile } = await supabase.from('profiles').select('role').eq('id', authData.user.id).single();
         
         setSuccessMsg('Acesso confirmado! Redirecionando...');
@@ -213,59 +183,80 @@ export default function Login() {
     }
   };
 
-  if (!isMounted) return <div className="min-h-screen bg-[#FAFAFC]" />;
+  if (!isMounted) return <div className="h-screen w-full bg-[#FAFAFC]" />;
 
   return (
-    <main className="min-h-screen lg:h-screen w-full flex flex-col lg:flex-row bg-[#FAFAFC] overflow-x-hidden lg:overflow-y-hidden">
-      
-      {/* LADO ESQUERDO */}
-      <div className="relative hidden lg:flex flex-col lg:w-5/12 xl:w-1/2 bg-teal-950 justify-between p-8 lg:p-16 shadow-2xl z-20 h-full">
-        <div className="absolute top-[-10%] left-[-20%] w-96 h-96 bg-teal-500/30 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[30rem] h-[30rem] bg-emerald-500/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <main className="h-screen w-full flex flex-col lg:flex-row bg-[#FAFAFC] overflow-hidden">
+      <div className="relative hidden lg:flex flex-col lg:w-5/12 xl:w-1/2 bg-teal-950 p-8 lg:p-16 shadow-2xl z-20 h-full">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes verticalFloat1 {
+              0%, 100% { transform: translateY(-30px); }
+              50% { transform: translateY(30px); }
+            }
+            @keyframes verticalFloat2 {
+              0%, 100% { transform: translateY(30px); }
+              50% { transform: translateY(-30px); }
+            }
+          `}} />
+          <div className="absolute top-[15%] left-[10%] w-[200px] h-[200px] bg-teal-400/30 rounded-full blur-[80px]" style={{ animation: 'verticalFloat1 12s ease-in-out infinite' }}></div>
+          <div className="absolute bottom-[20%] right-[10%] w-[250px] h-[250px] bg-cyan-400/20 rounded-full blur-[90px]" style={{ animation: 'verticalFloat2 15s ease-in-out infinite' }}></div>
+        </div>
 
-        <div className="relative z-10">
-          <Link href="/" className="inline-flex items-center text-teal-100 hover:text-white font-bold text-xs uppercase tracking-wider mb-12 transition-colors">
-            <ArrowLeft size={16} className="mr-2" />
-            Voltar à Vitrine
-          </Link>
+        <div className="relative z-10 flex flex-col h-full">
+          <div>
+            <Link href="/" className="inline-flex items-center text-teal-100 hover:text-white font-bold text-xs uppercase tracking-wider mb-12 transition-colors w-max">
+              <ArrowLeft size={16} className="mr-2" />
+              Voltar à Vitrine
+            </Link>
 
-          <div className="mb-6">
-            <div className="inline-block px-3 py-1 mb-4 rounded-full border border-teal-500/30 bg-teal-500/20 text-teal-200 text-[10px] font-black tracking-widest uppercase">
-              Acesso Exclusivo
+            <div className="mb-6">
+              <div className="inline-block px-3 py-1 mb-4 rounded-full border border-teal-500/30 bg-teal-500/20 text-teal-200 text-[10px] font-bold tracking-widest uppercase">
+                Acesso Exclusivo
+              </div>
+              <h1 className="text-3xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
+                Sua vitrine de<br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-cyan-300">
+                  saúde e tecnologia.
+                </span>
+              </h1>
+              <p className="text-teal-100/80 text-sm lg:text-base font-medium max-w-md leading-relaxed">
+                Crie a sua conta para acessar o catálogo completo, montar seus pedidos e receber acompanhamento direto e humanizado com a nossa unidade.
+              </p>
             </div>
-            <h1 className="text-3xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight mb-4">
-              Sua vitrine de<br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-emerald-300">
-                saúde e tecnologia.
-              </span>
-            </h1>
-            <p className="text-teal-100/80 text-sm lg:text-base font-medium max-w-md leading-relaxed">
-              Crie a sua conta para acessar o catálogo completo, montar seus pedidos e receber acompanhamento direto e humanizado com a nossa unidade.
-            </p>
-          </div>
 
-          <div className="space-y-4 mt-8 hidden lg:block">
-            <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
-              <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
-              <span>Acompanhamento consultivo especializado</span>
-            </div>
-            <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
-              <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
-              <span>Gerencie seus pedidos com agilidade</span>
+            <div className="space-y-4 mt-10 hidden lg:block">
+              <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
+                <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
+                <span>Acompanhamento consultivo especializado</span>
+              </div>
+              <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
+                <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
+                <span>Gerenciamento de pedidos com total agilidade</span>
+              </div>
+              <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
+                <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
+                <span>Rastreamento em tempo real das suas entregas</span>
+              </div>
+              <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
+                <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
+                <span>Criação de listas de desejos para compras futuras</span>
+              </div>
+              <div className="flex items-center gap-3 text-teal-50 text-sm font-medium">
+                <CheckCircle2 size={20} className="text-teal-400 shrink-0" />
+                <span>Ambiente 100% seguro com criptografia de ponta</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* LADO DIREITO */}
-      <div className="w-full lg:w-7/12 xl:w-1/2 lg:h-full lg:overflow-y-auto relative flex flex-col justify-center">
-        <LoginOzoneBackground />
-
-        <div className="flex-1 flex flex-col items-center justify-center p-4 py-12 relative z-10 w-full">
-          <div className="w-full max-w-md bg-white/70 backdrop-blur-xl border border-white/60 rounded-[2rem] p-6 sm:p-8 shadow-[0_8px_40px_rgb(0,0,0,0.06)] relative my-auto">
+      <div className="w-full lg:w-7/12 xl:w-1/2 h-full overflow-y-auto relative flex flex-col justify-center bg-[#FAFAFC]">
+        <div className="flex-1 flex flex-col items-center justify-center p-4 py-8 sm:py-12 relative z-10 w-full min-h-full">
+          <div className="w-full max-w-md bg-white border border-slate-200 rounded-[2rem] p-6 sm:p-8 shadow-sm relative my-auto">
             
             <div className="text-center mb-8">
-              <div className="w-14 h-14 bg-teal-50/80 border border-teal-100/80 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-14 h-14 bg-teal-50 border border-teal-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <ShieldCheck size={28} className="text-teal-600" />
               </div>
               <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">
@@ -291,7 +282,7 @@ export default function Login() {
               {!isRecovery && (
                 <>
                   {!isLogin && (
-                    <div className="animate-in fade-in duration-300 space-y-4">
+                    <div className="animate-in fade-in duration-300 space-y-3">
                       <div>
                         <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
                         <div className="relative">
@@ -299,18 +290,14 @@ export default function Login() {
                             <User size={16} className="text-slate-400" />
                           </div>
                           <input
-                            type="text"
-                            name="nome"
-                            value={formData.nome}
-                            onChange={handleChange}
-                            required={!isLogin}
-                            className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                            type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin}
+                            className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                             placeholder="Como devemos chamá-lo(a)?"
                           />
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
                           <div className="relative">
@@ -318,12 +305,8 @@ export default function Login() {
                               <Phone size={16} className="text-slate-400" />
                             </div>
                             <input
-                              type="text"
-                              name="telefone"
-                              value={formData.telefone}
-                              onChange={handleChange}
-                              required={!isLogin}
-                              className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                              type="text" name="telefone" value={formData.telefone} onChange={handleChange} required={!isLogin}
+                              className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                               placeholder="(81) 99999-9999"
                             />
                           </div>
@@ -335,12 +318,8 @@ export default function Login() {
                               <CreditCard size={16} className="text-slate-400" />
                             </div>
                             <input
-                              type="text"
-                              name="cpf"
-                              value={formData.cpf}
-                              onChange={handleChange}
-                              required={!isLogin}
-                              className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                              type="text" name="cpf" value={formData.cpf} onChange={handleChange} required={!isLogin}
+                              className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                               placeholder="000.000.000-00"
                             />
                           </div>
@@ -354,13 +333,8 @@ export default function Login() {
                             <MapPin size={16} className="text-slate-400" />
                           </div>
                           <input
-                            type="text"
-                            name="cep"
-                            value={formData.cep}
-                            onChange={handleChange}
-                            onBlur={(e) => buscarCep(e.target.value)}
-                            required={!isLogin}
-                            className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                            type="text" name="cep" value={formData.cep} onChange={handleChange} onBlur={(e) => buscarCep(e.target.value)} required={!isLogin}
+                            className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                             placeholder="00000-000"
                           />
                         </div>
@@ -373,12 +347,8 @@ export default function Login() {
                             <MapPin size={16} className="text-slate-400" />
                           </div>
                           <input
-                            type="text"
-                            name="endereco"
-                            value={formData.endereco}
-                            onChange={handleChange}
-                            required={!isLogin}
-                            className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                            type="text" name="endereco" value={formData.endereco} onChange={handleChange} required={!isLogin}
+                            className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                             placeholder="Ex: Av. Principal, 123"
                           />
                         </div>
@@ -386,19 +356,15 @@ export default function Login() {
                     </div>
                   )}
 
-                  <div>
+                  <div className={!isLogin ? "pt-1" : ""}>
                     <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Mail size={16} className="text-slate-400" />
                       </div>
                       <input
-                        type="email" 
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full pl-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                        type="email" name="email" value={formData.email} onChange={handleChange} required
+                        className="w-full pl-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                         placeholder="seu.email@dominio.com"
                       />
                     </div>
@@ -415,18 +381,12 @@ export default function Login() {
                     <Lock size={16} className="text-slate-400" />
                   </div>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                    autoComplete="new-password"
-                    className="w-full pl-10 pr-10 p-3 bg-white/90 border border-slate-200/80 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 transition-all placeholder:text-slate-400"
+                    type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} required autoComplete="new-password"
+                    className="w-full pl-10 pr-10 p-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                     placeholder="••••••••"
                   />
                   <button 
-                    type="button" 
-                    onClick={() => setShowPassword(!showPassword)}
+                    type="button" onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-teal-600 transition-colors cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -436,44 +396,27 @@ export default function Login() {
 
               {isLogin && !isRecovery && (
                 <div className="flex justify-end mt-1">
-                  <button 
-                    type="button" 
-                    onClick={handleResetPassword} 
-                    className="text-[11px] font-semibold text-teal-600 hover:text-teal-800 transition-colors cursor-pointer"
-                  >
+                  <button type="button" onClick={handleResetPassword} className="text-[11px] font-bold text-teal-600 hover:text-teal-800 transition-colors cursor-pointer">
                     Esqueceu a senha?
                   </button>
                 </div>
               )}
 
               <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-md hover:shadow-lg flex items-center justify-center mt-6 disabled:opacity-70 disabled:cursor-not-allowed"
+                type="submit" disabled={loading}
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-sm flex items-center justify-center mt-6 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {loading ? (
-                  <Loader2 size={18} className="animate-spin" />
-                ) : (
-                  <>
-                    {isRecovery ? 'Salvar Nova Senha' : isLogin ? 'Entrar no Sistema' : 'Criar minha conta'}
-                    <ArrowRight size={16} className="ml-2" />
-                  </>
-                )}
+                {loading ? <Loader2 size={18} className="animate-spin" /> : <>{isRecovery ? 'Salvar Nova Senha' : isLogin ? 'Entrar no Sistema' : 'Criar minha conta'} <ArrowRight size={16} className="ml-2" /></>}
               </button>
             </form>
 
             {!isRecovery && (
-              <div className="mt-8 text-center pt-6 border-t border-slate-100">
+              <div className="mt-6 text-center pt-6 border-t border-slate-100">
                 <p className="text-xs text-slate-500 font-medium">
                   {isLogin ? "Ainda não tem uma conta?" : "Já possui uma conta?"}
                 </p>
                 <button
-                  type="button"
-                  onClick={() => {
-                    setIsLogin(!isLogin);
-                    setErrorMsg('');
-                    setSuccessMsg('');
-                  }}
+                  type="button" onClick={() => { setIsLogin(!isLogin); setErrorMsg(''); setSuccessMsg(''); }}
                   className="text-teal-600 font-black hover:text-teal-800 transition-colors mt-2 uppercase text-[11px] tracking-wider cursor-pointer"
                 >
                   {isLogin ? 'Criar nova conta agora' : 'Fazer login'}

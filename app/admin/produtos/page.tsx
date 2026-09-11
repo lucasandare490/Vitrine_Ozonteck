@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 export default function ProdutosAdmin() {
   const [produtos, setProdutos] = useState<any[]>([]);
-  const [categorias, setCategorias] = useState<any[]>([]); // Novo estado para as categorias oficiais
+  const [categorias, setCategorias] = useState<any[]>([]); 
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -37,7 +37,6 @@ export default function ProdutosAdmin() {
     type: 'soft' | 'hard' | null;
   }>({ isOpen: false, id: '', name: '', type: null });
 
-  // Busca PRODUTOS e CATEGORIAS oficiais ao mesmo tempo
   const fetchData = async () => {
     setLoading(true);
     
@@ -210,13 +209,13 @@ export default function ProdutosAdmin() {
         <div className="flex items-center gap-6 px-6 pt-4 border-b border-slate-200 dark:border-zinc-800/60 bg-slate-50/30 dark:bg-transparent">
           <button 
             onClick={() => setViewMode('ativos')} 
-            className={`pb-3 text-xs sm:text-sm font-black uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${viewMode === 'ativos' ? 'border-teal-500 text-teal-600 dark:text-teal-400' : 'border-transparent text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'}`}
+            className={`pb-3 text-xs sm:text-sm font-bold uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${viewMode === 'ativos' ? 'border-teal-500 text-teal-600 dark:text-teal-400' : 'border-transparent text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'}`}
           >
             <Package size={16} /> Vitrine Ativa ({produtos.filter(p => p.is_deleted !== true).length})
           </button>
           <button 
             onClick={() => setViewMode('lixeira')} 
-            className={`pb-3 text-xs sm:text-sm font-black uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${viewMode === 'lixeira' ? 'border-red-500 text-red-600 dark:text-red-500' : 'border-transparent text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'}`}
+            className={`pb-3 text-xs sm:text-sm font-bold uppercase tracking-widest border-b-2 transition-colors flex items-center gap-2 ${viewMode === 'lixeira' ? 'border-red-500 text-red-600 dark:text-red-500' : 'border-transparent text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'}`}
           >
             <Trash2 size={16} /> Lixeira ({produtos.filter(p => p.is_deleted === true).length})
           </button>
@@ -236,7 +235,6 @@ export default function ProdutosAdmin() {
 
           <div className="flex items-center gap-2 w-full md:w-auto">
             <Filter size={16} className="text-slate-400 dark:text-zinc-500 hidden sm:block" />
-            {/* O Filtro agora puxa da tabela oficial de Categorias */}
             <select 
               value={selectedCategory} 
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -260,11 +258,11 @@ export default function ProdutosAdmin() {
             <table className="w-full text-left text-sm whitespace-nowrap">
               <thead className="bg-slate-50 dark:bg-zinc-900/50 border-b border-slate-200 dark:border-zinc-800/60 text-slate-500 dark:text-zinc-400">
                 <tr>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Produto</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Código (SKU)</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Preço</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Estoque</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px] text-right">Ações</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Produto</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Código (SKU)</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Preço</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Estoque</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ações</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/50">
@@ -287,7 +285,7 @@ export default function ProdutosAdmin() {
                     </td>
                     <td className="px-6 py-4">
                       {viewMode === 'ativos' ? (
-                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest border
+                        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border
                           ${produto.estoque > 10 ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' 
                           : produto.estoque > 0 ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-500/20'
                           : 'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 border-red-200 dark:border-red-500/20'}`}>
@@ -295,7 +293,7 @@ export default function ProdutosAdmin() {
                           {produto.estoque} un
                         </span>
                       ) : (
-                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Excluído</span>
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Excluído</span>
                       )}
                     </td>
                     <td className="px-6 py-4 text-right">
@@ -354,27 +352,26 @@ export default function ProdutosAdmin() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">CÓDIGO DO PRODUTO (REF)</label>
+                    <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">CÓDIGO DO PRODUTO (REF)</label>
                     <input type="text" value={formData.code} onChange={e => setFormData({...formData, code: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Ex: OZO-123" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Nome do Produto</label>
+                    <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Nome do Produto</label>
                     <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Óleo de Girassol Ozonizado..." />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Preço (R$)</label>
+                    <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Preço (R$)</label>
                     <input type="text" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="99,90" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Estoque</label>
+                    <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Estoque</label>
                     <input type="number" value={formData.estoque} onChange={e => setFormData({...formData, estoque: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl text-sm font-medium text-slate-900 dark:text-white focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="50" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Categoria</label>
-                    {/* Alterado para um Select que puxa da base oficial */}
+                    <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Categoria</label>
                     <select 
                       value={formData.category} 
                       onChange={e => setFormData({...formData, category: e.target.value})} 
@@ -390,7 +387,7 @@ export default function ProdutosAdmin() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-black text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Imagem do Produto</label>
+                  <label className="block text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-1">Imagem do Produto</label>
                   <div
                     onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                     onDragLeave={() => setIsDragging(false)}

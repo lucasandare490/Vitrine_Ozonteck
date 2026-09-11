@@ -62,7 +62,7 @@ export default function VisaoGeralAdmin() {
       
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0f0f11] p-6 rounded-2xl border border-slate-200 dark:border-zinc-800/60 shadow-sm dark:shadow-none">
         <div>
-          <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white flex items-center gap-2">
+          <h1 className="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white flex items-center gap-2">
             <LayoutDashboard className="text-teal-600 dark:text-teal-500" /> Visão Geral
           </h1>
           <p className="text-slate-500 dark:text-zinc-400 mt-1 text-xs font-medium">
@@ -77,8 +77,8 @@ export default function VisaoGeralAdmin() {
             <TrendingUp size={20} className="text-teal-600 dark:text-teal-500" />
           </div>
           <div>
-            <p className="text-[10px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Faturamento Total</p>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
+            <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Faturamento Total</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
               {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(faturamentoTotal)}
             </h3>
           </div>
@@ -89,8 +89,8 @@ export default function VisaoGeralAdmin() {
             <Package size={20} className="text-amber-600 dark:text-amber-500" />
           </div>
           <div>
-            <p className="text-[10px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Fila de Despacho</p>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
+            <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Fila de Despacho</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
               {pedidosPendentes} <span className="text-sm font-medium text-slate-500">pendentes</span>
             </h3>
           </div>
@@ -101,8 +101,8 @@ export default function VisaoGeralAdmin() {
             <Truck size={20} className="text-blue-600 dark:text-blue-500" />
           </div>
           <div>
-            <p className="text-[10px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Em Trânsito / Entregue</p>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">
+            <p className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest mb-0.5">Em Trânsito / Entregue</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white">
               {pedidosEnviados} <span className="text-sm font-medium text-slate-500">pedidos</span>
             </h3>
           </div>
@@ -111,7 +111,7 @@ export default function VisaoGeralAdmin() {
 
       <div className="bg-white dark:bg-[#0f0f11] border border-slate-200 dark:border-zinc-800/60 rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-zinc-800/60 bg-slate-50/50 dark:bg-transparent">
-          <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-zinc-200 flex items-center gap-2">
+          <h2 className="text-sm font-bold uppercase tracking-widest text-slate-800 dark:text-zinc-200 flex items-center gap-2">
             <Clock size={16} className="text-amber-500" /> Fila de Despacho (Recentes)
           </h2>
         </div>
@@ -136,11 +136,11 @@ export default function VisaoGeralAdmin() {
             <table className="w-full text-left text-sm whitespace-nowrap">
               <thead className="bg-slate-50 dark:bg-zinc-900/50 border-b border-slate-200 dark:border-zinc-800/60 text-slate-500 dark:text-zinc-400">
                 <tr>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Data / ID</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Cliente</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Valor</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Status</th>
-                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px] text-right">Ação</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Data / ID</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Cliente</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Valor</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Status</th>
+                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ação</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/50">
@@ -162,17 +162,17 @@ export default function VisaoGeralAdmin() {
                         <p className="font-bold text-xs text-slate-700 dark:text-zinc-300">{nomeCliente}</p>
                         <p className="text-[10px] text-slate-500">{telefoneCliente}</p>
                       </td>
-                      <td className="px-6 py-4 font-black text-teal-600 dark:text-teal-400 text-xs">
+                      <td className="px-6 py-4 font-bold text-teal-600 dark:text-teal-400 text-xs">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedido.valor_total)}
                       </td>
                       <td className="px-6 py-4">
                         {pedido.status === 'preparando' ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-amber-50 text-amber-700 border border-amber-200">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest bg-amber-50 text-amber-700 border border-amber-200">
                             <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></div>
                             Preparando
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-emerald-50 text-emerald-700 border border-emerald-200">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest bg-emerald-50 text-emerald-700 border border-emerald-200">
                             <Truck size={10} /> {pedido.status}
                           </span>
                         )}
@@ -201,7 +201,7 @@ export default function VisaoGeralAdmin() {
             
             <div className="px-6 py-4 border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/30 flex justify-between items-center shrink-0">
               <div>
-                <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tighter">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tighter">
                   Pedido #{pedidoSelecionado.id.split('-')[0]}
                 </h3>
                 <p className="text-[10px] font-medium text-slate-500">Realizado em {new Date(pedidoSelecionado.created_at).toLocaleString('pt-BR')}</p>
@@ -214,14 +214,14 @@ export default function VisaoGeralAdmin() {
               {/* Box Cliente e Endereço */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 space-y-3">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2"><User size={14}/> Cliente</h4>
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><User size={14}/> Cliente</h4>
                   <div>
                     <p className="text-sm font-bold text-slate-900 dark:text-white">{pedidoSelecionado.endereco_entrega?.nome || 'Não informado'}</p>
                     <p className="text-xs text-slate-500 mt-1">Tel: {pedidoSelecionado.endereco_entrega?.telefone || 'Não informado'}</p>
                   </div>
                 </div>
                 <div className="p-4 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 space-y-3">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2"><MapPin size={14}/> Entrega</h4>
+                  <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2"><MapPin size={14}/> Entrega</h4>
                   <div>
                     <p className="text-sm font-bold text-slate-900 dark:text-white">{pedidoSelecionado.endereco_entrega?.rua || 'Endereço não preenchido'}</p>
                     <p className="text-xs text-slate-500 mt-1">{pedidoSelecionado.endereco_entrega?.cidade || ''} {pedidoSelecionado.endereco_entrega?.estado || ''}</p>
@@ -231,13 +231,13 @@ export default function VisaoGeralAdmin() {
 
               {/* Box Itens do Pedido */}
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2"><Package size={14}/> Itens Comprados</h4>
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2"><Package size={14}/> Itens Comprados</h4>
                 <ul className="divide-y divide-slate-100 dark:divide-zinc-800 border border-slate-200 dark:border-zinc-800 rounded-xl overflow-hidden">
                   {pedidoSelecionado.itens && Array.isArray(pedidoSelecionado.itens) ? (
                     pedidoSelecionado.itens.map((item: any, idx: number) => (
                       <li key={idx} className="p-3 bg-white dark:bg-[#0f0f11] flex justify-between items-center hover:bg-slate-50 dark:hover:bg-zinc-900/50 transition-colors">
                         <span className="text-sm font-medium text-slate-700 dark:text-zinc-300">{item.nome || 'Produto Indefinido'}</span>
-                        <span className="text-xs font-black bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded text-slate-600 dark:text-zinc-400">Qtd: {item.qtd || 1}</span>
+                        <span className="text-xs font-bold bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded text-slate-600 dark:text-zinc-400">Qtd: {item.qtd || 1}</span>
                       </li>
                     ))
                   ) : (
@@ -245,8 +245,8 @@ export default function VisaoGeralAdmin() {
                   )}
                 </ul>
                 <div className="mt-4 flex justify-between items-center p-4 bg-teal-50 dark:bg-teal-500/10 rounded-xl border border-teal-100 dark:border-teal-500/20">
-                  <span className="text-xs font-black uppercase tracking-widest text-teal-700 dark:text-teal-400">Total Pago</span>
-                  <span className="text-lg font-black text-teal-700 dark:text-teal-400">
+                  <span className="text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">Total Pago</span>
+                  <span className="text-lg font-bold text-teal-700 dark:text-teal-400">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedidoSelecionado.valor_total)}
                   </span>
                 </div>

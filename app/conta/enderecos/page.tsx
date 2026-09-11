@@ -7,22 +7,6 @@ import { ArrowLeft, Plus, Trash2, MapPin, Loader2, Home, Briefcase, Map, Buildin
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 
-// Fundo padronizado da marca
-const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-40">
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-64 h-64 bg-teal-300/60 rounded-full blur-[80px] absolute -left-20"></div>
-      </div>
-    </div>
-    <div className="absolute top-[60%] right-[-10%] sm:right-[10%] opacity-30">
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-80 h-80 bg-teal-300/60 rounded-full blur-[100px] absolute -right-20"></div>
-      </div>
-    </div>
-  </div>
-);
-
 export default function EnderecosPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -174,10 +158,7 @@ export default function EnderecosPage() {
   }
 
   return (
-    <main className="min-h-screen text-slate-900 relative overflow-hidden flex flex-col">
-      <OzoneBackground />
-
-      {/* CONTAINER GLOBAL DE 1800px: Mantém a coerência das margens */}
+    <main className="min-h-screen bg-[#FAFAFC] text-slate-900 relative overflow-hidden flex flex-col">
       <section className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-10 pb-24 relative z-10">
         
         {/* CABEÇALHO */}
@@ -187,7 +168,7 @@ export default function EnderecosPage() {
           </Link>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
                 <MapPin className="text-teal-600 w-7 h-7 sm:w-8 sm:h-8" strokeWidth={2.5} />
                 Meus Endereços
               </h1>
@@ -196,7 +177,6 @@ export default function EnderecosPage() {
               </p>
             </div>
             
-            {/* O botão principal de adicionar vai para o topo, um padrão de Web Design muito mais limpo */}
             <button 
               onClick={() => setShowModal(true)}
               className="hidden sm:flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm"
@@ -236,7 +216,7 @@ export default function EnderecosPage() {
             {/* FEATURE TEASER: Retirada em Loja */}
             <div className="relative bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
               <div className="absolute inset-0 z-20 bg-slate-50/50 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                <div className="bg-white border border-slate-200 text-slate-800 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg flex items-center gap-2">
+                <div className="bg-white border border-slate-200 text-slate-800 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
                   <ShieldAlert size={14} className="text-teal-600" />
                   Em Breve
                 </div>
@@ -255,7 +235,7 @@ export default function EnderecosPage() {
 
           </div>
 
-          {/* COLUNA DIREITA: Área de Cartões de Endereço (Limita o estiramento) */}
+          {/* COLUNA DIREITA: Área de Cartões de Endereço */}
           <div className="lg:col-span-8 xl:col-span-8 xl:col-start-5">
             
             {enderecos.length === 0 ? (
@@ -277,7 +257,6 @@ export default function EnderecosPage() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                {/* O Cartão Dashed de "Adicionar" vira parte orgânica da grade no Desktop */}
                 <button 
                   onClick={() => setShowModal(true)}
                   className="min-h-[240px] rounded-xl border-2 border-dashed border-slate-300 bg-slate-50/50 hover:bg-teal-50/50 hover:border-teal-400 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
@@ -305,7 +284,7 @@ export default function EnderecosPage() {
                         <div>
                           <h3 className="font-bold text-slate-900 text-sm tracking-tight">{end.apelido}</h3>
                           {end.principal && (
-                            <span className="text-[9px] font-black uppercase tracking-widest text-teal-600 mt-0.5 block">
+                            <span className="text-[9px] font-bold uppercase tracking-widest text-teal-600 mt-0.5 block">
                               Padrão de Entrega
                             </span>
                           )}
@@ -354,7 +333,7 @@ export default function EnderecosPage() {
           </div>
         </div>
 
-        {/* MODAL DE CADASTRO: Agora com design corporativo e estruturado */}
+        {/* MODAL DE CADASTRO */}
         {showModal && (
           <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
@@ -443,7 +422,7 @@ export default function EnderecosPage() {
           </div>
         )}
 
-        {/* MODAL DE EXCLUSÃO (Estilo Corporativo) */}
+        {/* MODAL DE EXCLUSÃO */}
         {enderecoToDelete && (
           <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">

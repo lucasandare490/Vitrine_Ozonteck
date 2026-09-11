@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef, ReactNode, Suspense } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
-import { MapPin, Phone, Heart, ArrowUp, Search, MessageCircle, X, Bot } from 'lucide-react';
+import { MapPin, Phone, Heart, Search, MessageCircle, X, Bot, CheckCircle2, ArrowUp, Send, Loader2 } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
+import LoginModal from '@/components/LoginModal';
 
 const FadeInOnLoad = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,30 +42,31 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode; delay?: 
 };
 
 const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
+  <div className="fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
+    
     <style dangerouslySetInnerHTML={{__html: `
       @keyframes float1 {
         0%, 100% { transform: translate(0px, 0px) scale(1); }
-        33% { transform: translate(150px, -100px) scale(1.05); }
-        66% { transform: translate(-100px, 120px) scale(0.95); }
+        33% { transform: translate(120px, -80px) scale(1.05); }
+        66% { transform: translate(-80px, 100px) scale(0.95); }
       }
       @keyframes float2 {
         0%, 100% { transform: translate(0px, 0px) scale(1); }
-        50% { transform: translate(-150px, 150px) scale(1.05); }
+        50% { transform: translate(-120px, 120px) scale(1.05); }
       }
     `}} />
 
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-70" style={{ animation: 'float1 25s ease-in-out infinite' }}>
+    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-60" style={{ animation: 'float1 25s ease-in-out infinite' }}>
       <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-64 h-64 bg-teal-300/60 rounded-full blur-[80px] absolute -left-20 animate-[pulse_8s_ease-in-out_infinite]"></div>
-        <div className="w-56 h-56 bg-cyan-300/60 rounded-full blur-[80px] absolute top-20 animate-[pulse_10s_ease-in-out_infinite_alternate]"></div>
+        <div className="w-80 h-80 bg-teal-300/50 rounded-full blur-[90px] absolute -left-20 animate-[pulse_8s_ease-in-out_infinite]"></div>
+        <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute top-20 animate-[pulse_10s_ease-in-out_infinite_alternate]"></div>
       </div>
     </div>
     
-    <div className="absolute top-[60%] right-[-10%] sm:right-[10%] opacity-60" style={{ animation: 'float2 30s ease-in-out infinite' }}>
+    <div className="absolute top-[55%] right-[-10%] sm:right-[10%] opacity-50" style={{ animation: 'float2 30s ease-in-out infinite' }}>
       <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute -left-10 animate-[pulse_12s_ease-in-out_infinite_alternate]"></div>
-        <div className="w-80 h-80 bg-teal-300/60 rounded-full blur-[100px] absolute -right-20 animate-[pulse_9s_ease-in-out_infinite]"></div>
+        <div className="w-[22rem] h-[22rem] bg-cyan-300/40 rounded-full blur-[100px] absolute -left-10 animate-[pulse_12s_ease-in-out_infinite_alternate]"></div>
+        <div className="w-[26rem] h-[26rem] bg-teal-400/40 rounded-full blur-[110px] absolute -right-20 animate-[pulse_9s_ease-in-out_infinite]"></div>
       </div>
     </div>
   </div>
@@ -81,7 +83,76 @@ function HomeContent() {
   const [user, setUser] = useState<any>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
   
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [loginModalMessage, setLoginModalMessage] = useState('');
+
+  // ==========================================
+  // ESTADOS DA INTELIGÊNCIA ARTIFICIAL
+  // ==========================================
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'model', text: string}[]>([
+    { role: 'model', text: 'Olá! Sou a assistente de Inteligência Artificial da Ozonteck. Qual a sua dúvida sobre ozonioterapia ou sobre os nossos produtos?' }
+  ]);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
+
+  // Faz o scroll descer automaticamente quando chega nova mensagem no chat
+  useEffect(() => {
+    if (chatScrollRef.current) {
+      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
+    }
+  }, [chatMessages, isChatLoading]);
+
+  const handleSendMessage = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!chatInput.trim() || isChatLoading) return;
+
+    const userMsg = chatInput.trim();
+    setChatInput('');
+    setChatMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setIsChatLoading(true);
+
+    try {
+      // 1. Remove a mensagem inicial de saudação do histórico
+      let recentHistory = chatMessages.filter((_, i) => i !== 0);
+      
+      // 2. Mantém apenas as últimas 4 mensagens para não pesar a memória
+      if (recentHistory.length > 4) {
+        recentHistory = recentHistory.slice(-4);
+      }
+
+      // 3. A REGRA DE OURO DO GEMINI: O histórico DEVE começar com 'user'
+      if (recentHistory.length > 0 && recentHistory[0].role === 'model') {
+        recentHistory.shift(); // Remove a mensagem se for do modelo
+      }
+
+      // 4. Formata no padrão exato que o Google exige
+      const formattedHistory = recentHistory.map(m => ({
+        role: m.role,
+        parts: [{ text: m.text }]
+      }));
+
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMsg, history: formattedHistory })
+      });
+
+      const data = await response.json();
+
+      if (data.text) {
+        setChatMessages(prev => [...prev, { role: 'model', text: data.text }]);
+      } else {
+        throw new Error('Sem resposta');
+      }
+    } catch (err) {
+      toast.error('Erro de conexão com o Assistente.');
+      setChatMessages(prev => [...prev, { role: 'model', text: 'Desculpe, estou com instabilidade na conexão agora. Por favor, chame o Rogério no WhatsApp para suporte imediato!' }]);
+    } finally {
+      setIsChatLoading(false);
+    }
+  };
 
   useEffect(() => {
     const q = searchParams.get('q');
@@ -95,7 +166,6 @@ function HomeContent() {
     }
 
     async function loadProducts() {
-      // Modificado para carregar APENAS os produtos que não estão na lixeira na hora que o site abre
       const { data, error } = await supabase.from('produtos').select('*').neq('is_deleted', true);
       if (data) {
         const sortedData = data.sort((a, b) => {
@@ -130,74 +200,37 @@ function HomeContent() {
       else setFavorites([]);
     });
 
-    // SISTEMA DE TEMPO REAL QUE AGORA ENTENDE A LIXEIRA
     const channel = supabase
       .channel('schema-db-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'produtos' }, (payload) => {
-          
           if (payload.eventType === 'INSERT') {
-            if (payload.new.is_deleted === true) return; // Se nasceu na lixeira, ignora
-            
+            if (payload.new.is_deleted === true) return; 
             setProducts((prev) => {
               const newProduct = {
-                id: payload.new.id,
-                code: payload.new.code,
-                name: payload.new.name,
-                category: payload.new.category,
-                price: Number(payload.new.price),
-                imagePlaceholder: payload.new.image_url,
-                estoque: payload.new.estoque
+                id: payload.new.id, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque
               };
               const updatedList = [...prev, newProduct];
               return updatedList.sort((a, b) => {
-                if (a.category < b.category) return -1;
-                if (a.category > b.category) return 1;
-                return a.name.localeCompare(b.name);
+                if (a.category < b.category) return -1; if (a.category > b.category) return 1; return a.name.localeCompare(b.name);
               });
             });
           } 
           else if (payload.eventType === 'UPDATE') {
             setProducts((currentProducts) => {
-              // Se foi jogado na lixeira, remove da tela instantaneamente
-              if (payload.new.is_deleted === true) {
-                return currentProducts.filter(p => p.id !== payload.new.id);
-              }
-
-              // Se não está na lixeira, verifica se ele já existe na tela
+              if (payload.new.is_deleted === true) return currentProducts.filter(p => p.id !== payload.new.id);
               const exists = currentProducts.find(p => p.id === payload.new.id);
-              
               if (exists) {
-                // Atualiza o produto que já estava na tela
                 return currentProducts.map((product) => {
                   if (product.id === payload.new.id) {
-                    return { 
-                      ...product, 
-                      code: payload.new.code,
-                      name: payload.new.name,
-                      category: payload.new.category,
-                      price: Number(payload.new.price),
-                      imagePlaceholder: payload.new.image_url,
-                      estoque: payload.new.estoque 
-                    };
+                    return { ...product, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque };
                   }
                   return product;
                 });
               } else {
-                // O produto foi Restaurado da lixeira! Precisamos adicioná-lo na tela.
-                const restoredProduct = {
-                  id: payload.new.id,
-                  code: payload.new.code,
-                  name: payload.new.name,
-                  category: payload.new.category,
-                  price: Number(payload.new.price),
-                  imagePlaceholder: payload.new.image_url,
-                  estoque: payload.new.estoque
-                };
+                const restoredProduct = { id: payload.new.id, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque };
                 const updatedList = [...currentProducts, restoredProduct];
                 return updatedList.sort((a, b) => {
-                  if (a.category < b.category) return -1;
-                  if (a.category > b.category) return 1;
-                  return a.name.localeCompare(b.name);
+                  if (a.category < b.category) return -1; if (a.category > b.category) return 1; return a.name.localeCompare(b.name);
                 });
               }
             });
@@ -221,8 +254,8 @@ function HomeContent() {
 
   const toggleFavorite = async (produtoCode: string) => {
     if (!user) {
-      toast.error('Faça login para salvar seus favoritos!');
-      setTimeout(() => router.push('/login'), 1500); 
+      setLoginModalMessage('Faça login ou crie sua conta rapidamente para favoritar produtos e facilitar suas compras.');
+      setIsLoginModalOpen(true);
       return;
     }
     const isFav = favorites.includes(produtoCode);
@@ -234,6 +267,7 @@ function HomeContent() {
       await supabase.from('favoritos').insert({ user_id: user.id, produto_code: produtoCode });
       toast.success('Produto salvo nos favoritos!'); 
     }
+    window.dispatchEvent(new Event('atualizarFavoritos'));
   };
 
   const categories = ['Todas', ...Array.from(new Set(products.map((p) => p.category)))];
@@ -255,43 +289,52 @@ function HomeContent() {
 
   return (
     <>
-      <section className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pt-10 pb-16 sm:pt-16 sm:pb-20 flex flex-col items-center text-center relative z-10">
-        <FadeInOnLoad delay={200}>
-          <div className="inline-block px-3 py-1 mb-5 rounded-full border border-teal-200/60 bg-teal-50/50 text-teal-700 text-[9px] sm:text-[10px] font-black tracking-widest uppercase backdrop-blur-md shadow-sm">
-            Distribuidor Autorizado • Rogério André
-          </div>
-        </FadeInOnLoad>
-        
-        <FadeInOnLoad delay={300}>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-4 sm:mb-6 leading-[1.05]">
-            A ciência do ozônio.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-400">
-              O seu bem-estar.
-            </span>
-          </h1>
-        </FadeInOnLoad>
+      <OzoneBackground />
+      
+      <section className="relative w-full pt-16 pb-20 z-10">
+        <div className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col items-center text-center">
+          
+          <FadeInOnLoad delay={100}>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-sm">
+              <CheckCircle2 size={14} className="text-teal-500" /> Distribuidor Autorizado • Rogério André
+            </div>
+          </FadeInOnLoad>
+          
+          <FadeInOnLoad delay={200}>
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-slate-900 mb-6 leading-[1.05]">
+              A ciência do ozônio.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-400">
+                O seu bem-estar.
+              </span>
+            </h1>
+          </FadeInOnLoad>
 
-        <FadeInOnLoad delay={400}>
-          <p className="text-sm sm:text-base text-slate-600 max-w-xl font-medium sm:font-light leading-relaxed mb-8 px-2 sm:px-0">
-            Alta performance aplicada a cosméticos, saúde capilar e suplementação. 
-            Bem-vindo à loja virtual oficial da nossa unidade na Boa Vista. A mesma excelência do nosso espaço físico, agora com a comodidade de comprar online.
-          </p>
-        </FadeInOnLoad>
+          <FadeInOnLoad delay={300}>
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl font-medium leading-relaxed mb-10 px-2 sm:px-0">
+              Alta performance aplicada a cosméticos, saúde capilar e suplementação. A mesma excelência do nosso espaço físico, agora com a comodidade de comprar online.
+            </p>
+          </FadeInOnLoad>
 
-        <FadeInOnLoad delay={500}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-5 sm:px-0">
-            <button 
-              onClick={() => scrollToObject('loja-fisica')}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm py-3 px-8 rounded-lg transition-all shadow-[0_8px_25px_rgb(13,148,136,0.3)] hover:-translate-y-0.5"
-            >
-              <MapPin size={18} className="text-white" />
-              Visitar Loja Física
-            </button>
-          </div>
-        </FadeInOnLoad>
+          <FadeInOnLoad delay={400}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-5 sm:px-0">
+              <button 
+                onClick={() => scrollToObject('catalogo')}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 text-white font-bold text-sm py-4 px-10 rounded-full transition-all shadow-[0_8px_25px_rgba(13,148,136,0.3)] hover:shadow-[0_8px_35px_rgba(13,148,136,0.4)] hover:-translate-y-1"
+              >
+                <Search size={18} /> Explorar Catálogo
+              </button>
+              <button 
+                onClick={() => scrollToObject('loja-fisica')}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-teal-700 border border-slate-200 font-bold text-sm py-3.5 px-10 rounded-full transition-all shadow-sm hover:bg-slate-50"
+              >
+                <MapPin size={18} className="text-teal-600" /> Visitar Loja Física
+              </button>
+            </div>
+          </FadeInOnLoad>
+        </div>
       </section>
 
-      <section id="catalogo" className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pb-20 relative z-10 w-full min-h-[400px] scroll-mt-28">
+      <section id="catalogo" className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pb-20 relative z-10 w-full min-h-[400px] scroll-mt-20">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-16 opacity-50">
             <div className="w-10 h-10 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin mb-4"></div>
@@ -383,48 +426,56 @@ function HomeContent() {
 
       <section id="loja-fisica" className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pb-24 relative z-10 w-full scroll-mt-32">
         <RevealOnScroll>
-          <div className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[1.5rem] overflow-hidden flex flex-col md:flex-row">
+          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 shadow-[0_8px_40px_rgba(0,0,0,0.04)] rounded-[2rem] sm:rounded-[3rem] overflow-hidden flex flex-col md:flex-row">
             
-            <div className="w-full md:w-1/2 p-6 sm:p-10 flex flex-col justify-center bg-gradient-to-br from-white/80 to-teal-50/50 relative z-10">
-              <span className="text-teal-600 font-black tracking-widest text-[9px] sm:text-[10px] uppercase mb-3 block">
-                Visite Nossa Unidade
+            <div className="w-full md:w-1/2 p-8 sm:p-14 lg:p-20 flex flex-col justify-center relative z-10">
+              <span className="inline-flex items-center justify-center w-max px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-700 font-black tracking-widest text-[9px] sm:text-[10px] uppercase mb-6">
+                Consultoria Especializada
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 leading-tight">
-                O seu ponto <span className="text-teal-600">Ozonteck</span> em Recife.
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
+                Mais do que produtos,<br/>
+                <span className="text-teal-600">acompanhamento.</span>
               </h2>
-              <p className="text-slate-600 text-sm mb-6 leading-relaxed font-medium">
-                Mais do que produtos, oferecemos acompanhamento. Visite o nosso espaço na Boa Vista e receba um atendimento consultivo presencial com <strong className="text-slate-900">Rogério André</strong>, para entender exatamente quais os produtos ideais para os seus objetivos.
+              <p className="text-slate-600 text-sm sm:text-base mb-10 leading-relaxed font-medium">
+                Visite a nossa unidade na Boa Vista e converse com <strong className="text-slate-900">Rogério André</strong>. Nós te ajudamos a entender exatamente qual o protocolo Ozonteck ideal para o seu objetivo.
               </p>
               
-              <div className="space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
-                    <MapPin className="text-teal-600" size={16} />
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                    <MapPin className="text-teal-600" size={20} />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 text-xs">Endereço</p>
-                    <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">
+                  <div className="pt-1">
+                    <p className="font-bold text-slate-900 text-sm">Onde estamos</p>
+                    <p className="text-slate-500 text-sm mt-1 leading-relaxed">
                       R. da União, 295 - Boa Vista<br />
                       Recife - PE, 50050-015
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-teal-100 flex items-center justify-center shrink-0">
-                    <Phone className="text-teal-600" size={16} />
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                    <Phone className="text-teal-600" size={20} />
                   </div>
-                  <div>
-                    <p className="font-bold text-slate-900 text-xs">Atendimento Direto</p>
-                    <p className="text-slate-600 text-xs mt-0.5 leading-relaxed">
-                      Dúvidas? Adicione os produtos à lista e fale diretamente conosco via WhatsApp.
+                  <div className="pt-1">
+                    <p className="font-bold text-slate-900 text-sm">Atendimento Rápido</p>
+                    <p className="text-slate-500 text-sm mt-1 leading-relaxed mb-4">
+                      Dúvidas sobre o estoque? Fale direto conosco.
                     </p>
+                    <a 
+                      href="https://wa.me/5581900000000" 
+                      target="_blank" 
+                      className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white text-xs font-bold py-3 px-6 rounded-xl transition-colors shadow-sm"
+                    >
+                      <MessageCircle size={16} /> Enviar Mensagem
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 min-h-[300px] md:min-h-full relative bg-slate-200">
+            <div className="w-full md:w-1/2 min-h-[350px] md:min-h-[600px] relative bg-slate-200">
               <iframe 
                 src="https://maps.google.com/maps?q=R.%20da%20Uni%C3%A3o,%20295%20-%20Boa%20Vista,%20Recife%20-%20PE,%2050050-015&t=&z=16&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
@@ -441,11 +492,11 @@ function HomeContent() {
         </RevealOnScroll>
       </section>
 
-      <footer className="w-full border-t border-slate-200/60 bg-white/40 backdrop-blur-md pt-8 pb-6 mt-auto relative z-10 flex flex-col items-center">
+      <footer className="w-full border-t border-slate-200/50 bg-white/40 backdrop-blur-md pt-8 pb-6 mt-auto relative z-10 flex flex-col items-center">
         <div className="flex justify-center mb-8">
           <button 
             onClick={scrollToTop}
-            className="group flex items-center justify-center gap-1.5 bg-slate-50 hover:bg-teal-50 text-slate-500 hover:text-teal-700 border border-slate-200 hover:border-teal-200 font-bold text-[11px] sm:text-xs py-2 px-5 rounded-full transition-all duration-300"
+            className="group flex items-center justify-center gap-1.5 bg-white hover:bg-teal-50 text-slate-500 hover:text-teal-700 border border-slate-100 hover:border-teal-200 font-bold text-[11px] sm:text-xs py-2.5 px-6 rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.03)]"
           >
             <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform duration-300" />
             <span>Voltar ao Topo</span>
@@ -458,58 +509,86 @@ function HomeContent() {
             <p className="text-slate-500 text-[10px] mt-0.5">Distribuidor Autorizado: Rogério André © {new Date().getFullYear()}</p>
           </div>
           
-          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 bg-white/60 px-3 py-1.5 rounded-full border border-slate-100">
+          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 bg-white/60 px-4 py-2 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
             <span>Desenvolvido com</span>
-            <Heart size={10} className="text-teal-500 fill-teal-500 animate-pulse" />
+            <Heart size={12} className="text-teal-500 fill-teal-500 animate-pulse" />
             <span>por</span>
             <span className="font-bold text-slate-700 tracking-wide ml-0.5">Lucas André</span>
           </div>
         </div>
       </footer>
 
-      <div className={`fixed bottom-24 right-5 sm:right-6 z-50 w-[300px] sm:w-[340px] bg-white rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.15)] border border-slate-100 overflow-hidden transition-all duration-300 origin-bottom-right ${isChatOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'}`}>
-        <div className="bg-slate-900 p-4 flex items-center justify-between">
+      {/* ==============================================
+          A INTERFACE DA INTELIGÊNCIA ARTIFICIAL ATIVA
+      =============================================== */}
+      <div className={`fixed bottom-24 right-5 sm:right-6 z-50 w-[320px] sm:w-[380px] bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-200/60 overflow-hidden transition-all duration-300 origin-bottom-right flex flex-col ${isChatOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'} max-h-[550px]`}>
+        
+        {/* Cabeçalho IA */}
+        <div className="bg-slate-900 p-4 sm:p-5 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center">
-              <Bot size={18} className="text-white" />
+            <div className="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center shadow-inner">
+              <Bot size={20} className="text-white" />
             </div>
             <div>
-              <p className="text-white text-sm font-bold leading-none">Assistente Virtual</p>
-              <p className="text-teal-400 text-[10px] mt-1 font-medium flex items-center gap-1">
+              <p className="text-white text-sm font-bold leading-none">Assistente IA</p>
+              <p className="text-teal-400 text-[10px] mt-1.5 font-bold tracking-widest flex items-center gap-1 uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> Online
               </p>
             </div>
           </div>
-          <button onClick={() => setIsChatOpen(false)} className="text-slate-400 hover:text-white transition-colors">
-            <X size={20} />
+          <button onClick={() => setIsChatOpen(false)} className="text-slate-400 hover:text-white transition-colors bg-white/10 p-1.5 rounded-lg">
+            <X size={18} />
           </button>
         </div>
         
-        <div className="p-5 bg-slate-50">
-          <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 mb-4">
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-              Olá! Sou a inteligência artificial da loja. Quer tirar uma dúvida rápida comigo ou prefere falar direto com o Rogério no WhatsApp?
-            </p>
-          </div>
-          <div className="flex flex-col gap-2">
-            <a 
-              href="https://wa.me/5581900000000" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white text-xs font-bold py-3 rounded-xl transition-colors shadow-sm"
-            >
-              <Phone size={14} /> Falar no WhatsApp
-            </a>
+        {/* Histórico de Mensagens */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 bg-slate-50 flex flex-col gap-4" ref={chatScrollRef}>
+          {chatMessages.map((msg, idx) => (
+            <div key={idx} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[85%] rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-teal-600 text-white rounded-tr-sm' : 'bg-white border border-slate-200 text-slate-700 rounded-tl-sm'}`}>
+                {msg.text}
+              </div>
+            </div>
+          ))}
+          {isChatLoading && (
+            <div className="flex w-full justify-start animate-in fade-in duration-300">
+              <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3 shadow-sm flex items-center gap-2">
+                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></span>
+                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-100"></span>
+                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-200"></span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Input de Mensagem */}
+        <div className="p-3 sm:p-4 bg-white border-t border-slate-100 shrink-0">
+          <form onSubmit={handleSendMessage} className="relative flex items-center">
+            <input
+              type="text"
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              placeholder="Digite sua dúvida aqui..."
+              disabled={isChatLoading}
+              className="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-full pl-4 pr-12 py-3 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition-all disabled:opacity-50"
+            />
             <button 
-              onClick={() => toast.success('A IA será conectada ao catálogo na Fase 2!', { icon: '🤖' })} 
-              className="w-full flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-teal-700 border border-teal-200 text-xs font-bold py-3 rounded-xl transition-colors"
+              type="submit" 
+              disabled={!chatInput.trim() || isChatLoading}
+              className="absolute right-1.5 w-9 h-9 flex items-center justify-center bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 text-white rounded-full transition-colors"
             >
-              <Bot size={14} /> Tirar Dúvida com a IA
+              {isChatLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} className="-ml-0.5" />}
             </button>
+          </form>
+          <div className="mt-2 text-center">
+            <a href="https://wa.me/5581900000000" target="_blank" className="text-[10px] text-teal-600 font-bold hover:underline">
+              Prefere atendimento humano? Fale no WhatsApp
+            </a>
           </div>
         </div>
       </div>
 
+      {/* BOTÃO FLUTUANTE */}
       <button 
         onClick={() => setIsChatOpen(!isChatOpen)}
         className="fixed bottom-6 right-5 sm:right-6 z-50 flex items-center justify-center w-14 h-14 bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-[0_10px_35px_rgba(13,148,136,0.3)] transition-transform hover:scale-110"
@@ -518,13 +597,27 @@ function HomeContent() {
         {isChatOpen ? <X size={24} /> : <MessageCircle size={24} />}
         {!isChatOpen && <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-400 border-2 border-[#FAFAFC] rounded-full animate-pulse"></span>}
       </button>
+
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        message={loginModalMessage}
+        onClose={() => setIsLoginModalOpen(false)} 
+        onSuccess={() => {
+          setIsLoginModalOpen(false);
+          supabase.auth.getSession().then(({ data: { session } }) => {
+            setUser(session?.user ?? null);
+            if (session?.user) fetchFavorites(session.user.id);
+          });
+          window.dispatchEvent(new Event('atualizarFavoritos'));
+        }} 
+      />
     </>
   );
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen text-slate-900 selection:bg-teal-600 selection:text-white relative overflow-hidden flex flex-col">
+    <main className="min-h-screen bg-[#FAFAFC] text-slate-900 selection:bg-teal-600 selection:text-white flex flex-col relative">
       <Suspense fallback={<div className="min-h-screen bg-[#FAFAFC]"></div>}>
         <HomeContent />
       </Suspense>

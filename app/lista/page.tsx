@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import toast from 'react-hot-toast';
+import LoginModal from '@/components/LoginModal';
 
 import { initMercadoPago, Payment, StatusScreen } from '@mercadopago/sdk-react';
 
@@ -46,17 +47,6 @@ const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: Rea
   );
 };
 
-const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-40">
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-96 h-96 bg-teal-300/40 rounded-full blur-[100px] absolute -left-20 animate-pulse"></div>
-        <div className="w-80 h-80 bg-cyan-300/40 rounded-full blur-[100px] absolute top-20"></div>
-      </div>
-    </div>
-  </div>
-);
-
 type CustomerData = {
   name: string; email: string; cpf: string; phone: string; zipCode: string; street: string; number: string; complement: string; neighborhood: string; city: string; state: string;
 }
@@ -74,6 +64,8 @@ export default function ListaDeInteresse() {
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success'>('idle');
   const [generatedPaymentId, setGeneratedPaymentId] = useState<string>('');
 
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
   const [customerData, setCustomerData] = useState<CustomerData>({
     name: '', email: '', cpf: '', phone: '', zipCode: '', street: '', number: '', complement: '', neighborhood: '', city: '', state: ''
   });
@@ -86,6 +78,30 @@ export default function ListaDeInteresse() {
   const clearCart = useCartStore((state) => state.clearCart);
   const getTotal = useCartStore((state) => state.getTotal);
 
+  const loadUserData = async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (session?.user) {
+      setUser(session.user);
+      const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
+      const { data: addrs } = await supabase.from('enderecos').select('*').eq('user_id', session.user.id).order('principal', { ascending: false });
+      
+      if (addrs && addrs.length > 0) {
+        setSavedAddresses(addrs);
+        handleSelectAddress(addrs[0], profile, session.user.email);
+      } else if (profile && profile.cep) {
+        const fallbackAddress = { id: 'fallback', apelido: 'Endereço Principal', cep: profile.cep, rua: profile.endereco_completo?.split(',')[0] || '', numero: 'S/N', bairro: '', cidade: '', estado: '' };
+        setSavedAddresses([fallbackAddress]);
+        handleSelectAddress(fallbackAddress, profile, session.user.email);
+      } else {
+        setCustomerData(prev => ({
+          ...prev, email: session.user.email || '', name: profile?.nome || '', cpf: profile?.cpf || '', phone: profile?.telefone || ''
+        }));
+        setSelectedAddressId('new');
+      }
+    }
+  };
+
   useEffect(() => {
     async function loadInitialData() {
       const { data: prodData } = await supabase.from('produtos').select('code, image_url');
@@ -94,28 +110,7 @@ export default function ListaDeInteresse() {
         prodData.forEach(item => { map[item.code] = item.image_url; });
         setImagesMap(map);
       }
-
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session?.user) {
-        setUser(session.user);
-        const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-        const { data: addrs } = await supabase.from('enderecos').select('*').eq('user_id', session.user.id).order('principal', { ascending: false });
-        
-        if (addrs && addrs.length > 0) {
-          setSavedAddresses(addrs);
-          handleSelectAddress(addrs[0], profile, session.user.email);
-        } else if (profile && profile.cep) {
-          const fallbackAddress = { id: 'fallback', apelido: 'Endereço Principal', cep: profile.cep, rua: profile.endereco_completo?.split(',')[0] || '', numero: 'S/N', bairro: '', cidade: '', estado: '' };
-          setSavedAddresses([fallbackAddress]);
-          handleSelectAddress(fallbackAddress, profile, session.user.email);
-        } else {
-          setCustomerData(prev => ({
-            ...prev, email: session.user.email || '', name: profile?.nome || '', cpf: profile?.cpf || '', phone: profile?.telefone || ''
-          }));
-          setSelectedAddressId('new');
-        }
-      }
+      await loadUserData();
       setIsMounted(true);
     }
     loadInitialData();
@@ -197,6 +192,14 @@ export default function ListaDeInteresse() {
     setCustomerData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleProceedToDelivery = () => {
+    if (!user) {
+      setIsLoginModalOpen(true);
+    } else {
+      setCheckoutStep('address');
+    }
+  };
+
   if (!isMounted) return null;
 
   const names = customerData.name.trim().split(' ');
@@ -232,7 +235,6 @@ export default function ListaDeInteresse() {
         ...formData,
         cart_items: items,
         description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
-        // FOI AQUI QUE INSERI O SEU LINK DO TÚNEL LOCAL PARA QUE A API RECEBA:
         notification_url: 'https://fruity-cows-listen.loca.lt/api/webhook',
         metadata: { phone: customerData.phone },
         payer: {
@@ -282,13 +284,10 @@ export default function ListaDeInteresse() {
   const isFormValid = customerData.email.length > 3 && customerData.name.length > 2 && cepClean.length === 8 && customerData.number && cpfClean.length === 11;
 
   return (
-    <main className="min-h-screen text-slate-900 relative flex flex-col overflow-hidden">
-      <OzoneBackground />
+    <main className="min-h-screen text-slate-900 bg-[#FAFAFC] relative flex flex-col overflow-hidden">
 
-      {/* CONTAINER GLOBAL DE 1800px COM GRID OFFSET */}
       <section className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-10 pb-24 relative z-10 flex-1 flex flex-col">
         
-        {/* CABEÇALHO SUPERIOR */}
         <RevealOnScroll delay={0} className="w-full mb-8">
           
           {paymentStatus !== 'success' && (
@@ -302,7 +301,7 @@ export default function ListaDeInteresse() {
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-5 border-b border-slate-200/60">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
                 <Lock className="text-teal-600 w-7 h-7 sm:w-8 sm:h-8" strokeWidth={2.5} />
                 {paymentStatus === 'success' ? 'Pedido Registrado!' : 'Checkout Seguro'}
               </h1>
@@ -311,7 +310,6 @@ export default function ListaDeInteresse() {
               </p>
             </div>
             
-            {/* INDICADOR DE PASSOS (Pílula Elegante) */}
             {paymentStatus !== 'success' && (
               <div className="relative flex items-center bg-slate-100 p-1 rounded-full w-full md:w-[360px] shadow-inner border border-slate-200">
                 <div
@@ -321,13 +319,13 @@ export default function ListaDeInteresse() {
                     left: checkoutStep === 'cart' ? '4px' : checkoutStep === 'address' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
                   }}
                 ></div>
-                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'cart' ? 'text-white' : 'text-slate-500')}>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'cart' ? 'text-white' : 'text-slate-500')}>
                   1. Carrinho
                 </div>
-                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'address' ? 'text-white' : 'text-slate-500')}>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'address' ? 'text-white' : 'text-slate-500')}>
                   2. Entrega
                 </div>
-                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-black uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'payment' ? 'text-white' : 'text-slate-500')}>
+                <div className={cn("relative z-10 flex-1 text-center py-2 text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 cursor-default", checkoutStep === 'payment' ? 'text-white' : 'text-slate-500')}>
                   3. Pagamento
                 </div>
               </div>
@@ -335,21 +333,16 @@ export default function ListaDeInteresse() {
           </div>
         </RevealOnScroll>
 
-        {/* ESTRUTURA HORIZONTAL - GRID DE 12 COLUNAS */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full relative z-20">
           
-          {/* =========================================
-              LADO ESQUERDO (Ações Principais - 8 Colunas)
-          ========================================= */}
           <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
             
-            {/* SUCESSO */}
             {paymentStatus === 'success' && (
               <div className="bg-white border border-slate-200 rounded-xl p-8 sm:p-12 shadow-sm flex flex-col justify-center items-center text-center animate-in fade-in zoom-in-95 duration-500">
                 <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mb-6 border-8 border-teal-500/10">
                   <CheckCircle2 size={40} className="text-teal-500" strokeWidth={2.5} />
                 </div>
-                <h2 className="text-2xl font-black text-slate-800 mb-3 tracking-tight">Tudo certo com os seus dados!</h2>
+                <h2 className="text-2xl font-bold text-slate-800 mb-3 tracking-tight">Tudo certo com os seus dados!</h2>
                 <p className="text-slate-500 text-sm leading-relaxed max-w-md mx-auto mb-8">
                   Seu pedido foi registrado no sistema. Verifique as instruções de pagamento no painel ao lado (se via PIX ou Boleto) para que a logística seja iniciada.
                 </p>
@@ -362,7 +355,6 @@ export default function ListaDeInteresse() {
               </div>
             )}
 
-            {/* CARRINHO VAZIO */}
             {paymentStatus !== 'success' && items.length === 0 && (
               <div className="bg-white border border-dashed border-slate-300 rounded-xl p-16 flex flex-col justify-center items-center text-center animate-in fade-in duration-500">
                 <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5">
@@ -376,7 +368,6 @@ export default function ListaDeInteresse() {
               </div>
             )}
 
-            {/* PASSO 1: CARRINHO */}
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'cart' && (
               <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden animate-in fade-in duration-500">
                 <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50/50">
@@ -397,9 +388,9 @@ export default function ListaDeInteresse() {
                             {imagesMap[item.code] ? <img src={imagesMap[item.code]} alt={item.name} className="w-full h-full object-cover" /> : <ImageIcon className="text-slate-300" size={20} />}
                           </div>
                           <div>
-                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Ref: {item.code}</p>
+                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ref: {item.code}</p>
                             <h3 className="text-sm font-bold text-slate-900 leading-snug">{item.name}</h3>
-                            <div className="text-sm font-black text-teal-700 mt-1">R$ {item.price.toFixed(2).replace('.', ',')}</div>
+                            <div className="text-sm font-bold text-teal-700 mt-1">R$ {item.price.toFixed(2).replace('.', ',')}</div>
                           </div>
                         </div>
 
@@ -410,7 +401,7 @@ export default function ListaDeInteresse() {
                             <button onClick={() => addItem(item)} className="w-10 h-full flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-r-lg transition-colors"><Plus size={14} /></button>
                           </div>
                           <div className="flex items-center gap-4">
-                            <span className="text-base font-black text-slate-900 w-24 text-right">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
+                            <span className="text-base font-bold text-slate-900 w-24 text-right">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
                             <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 p-2 transition-colors"><Trash2 size={18} /></button>
                           </div>
                         </div>
@@ -421,11 +412,9 @@ export default function ListaDeInteresse() {
               </div>
             )}
 
-            {/* PASSO 2: ENDEREÇO & DADOS */}
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'address' && (
               <div className="flex flex-col gap-6 animate-in fade-in duration-500">
                 
-                {/* DADOS DO COMPRADOR */}
                 <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
                   <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <User size={18} className="text-teal-600"/>
@@ -464,7 +453,6 @@ export default function ListaDeInteresse() {
                   </div>
                 </div>
 
-                {/* ENDEREÇO DE ENTREGA */}
                 <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
                   <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
                     <Truck size={18} className="text-teal-600"/>
@@ -540,7 +528,6 @@ export default function ListaDeInteresse() {
               </div>
             )}
 
-            {/* PASSO 3: PAGAMENTO (Wrapper do MP Brick) */}
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'payment' && (
               <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden animate-in fade-in duration-500 w-full">
                 <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
@@ -555,9 +542,6 @@ export default function ListaDeInteresse() {
             
           </div>
 
-          {/* =========================================
-              LADO DIREITO (Resumo Pegajoso / Sticky - 4 Colunas)
-          ========================================= */}
           <div className="lg:col-span-5 xl:col-span-4 shrink-0 lg:sticky lg:top-8 transition-all duration-700 w-full">
             <RevealOnScroll delay={100}>
               <div className="bg-white border border-slate-200 rounded-xl shadow-sm flex flex-col overflow-hidden">
@@ -573,20 +557,19 @@ export default function ListaDeInteresse() {
                     </div>
                     <div className="flex justify-between items-center text-slate-600 text-sm">
                       <span className="font-medium">Frete Expresso</span>
-                      <span className="text-teal-700 font-black bg-teal-50 px-2.5 py-0.5 rounded uppercase tracking-widest text-[10px] border border-teal-100">Grátis</span>
+                      <span className="text-teal-700 font-bold bg-teal-50 px-2.5 py-0.5 rounded uppercase tracking-widest text-[10px] border border-teal-100">Grátis</span>
                     </div>
                   </div>
                   <div className="pt-5 border-t border-slate-200 flex justify-between items-end">
                     <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Total a Pagar</p>
-                    <p className="text-3xl font-black text-slate-900 tracking-tighter">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
+                    <p className="text-3xl font-bold text-slate-900 tracking-tighter">R$ {getTotal().toFixed(2).replace('.', ',')}</p>
                   </div>
                 </div>
 
                 <div className="p-6 bg-white flex flex-col gap-3">
                   
-                  {/* BOTÕES DE CONTINUAR AGORA SÃO PRETO LUXO (SLATE-900) */}
                   {checkoutStep === 'cart' && paymentStatus !== 'success' && (
-                    <button onClick={() => setCheckoutStep('address')} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm">
+                    <button onClick={handleProceedToDelivery} className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm">
                       Continuar para Entrega
                     </button>
                   )}
@@ -608,7 +591,6 @@ export default function ListaDeInteresse() {
                     </button>
                   )}
 
-                  {/* Trust Badge */}
                   <div className="mt-4 bg-slate-50 border border-slate-100 rounded-lg p-4 flex items-start gap-3">
                     <Lock size={16} className="text-teal-600 mt-0.5 shrink-0" />
                     <div>
@@ -622,7 +604,6 @@ export default function ListaDeInteresse() {
 
               </div>
 
-              {/* Status Screen do Mercado Pago em Sucesso */}
               {paymentStatus === 'success' && generatedPaymentId && (
                 <div className="w-full mt-6 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm animate-in fade-in duration-500">
                   <StatusScreen initialization={{ paymentId: generatedPaymentId }} onReady={() => console.log('Status Screen Ready')} onError={(error) => console.log('Erro no Status Screen:', error)} />
@@ -633,6 +614,18 @@ export default function ListaDeInteresse() {
 
         </div>
       </section>
+
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        message="Para continuar e finalizar seu pedido de forma segura, acesse sua conta ou cadastre-se rapidamente."
+        onClose={() => setIsLoginModalOpen(false)} 
+        onSuccess={async () => {
+          setIsLoginModalOpen(false);
+          await loadUserData();
+          setCheckoutStep('address');
+        }} 
+      />
+
     </main>
   );
 }

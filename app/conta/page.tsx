@@ -7,37 +7,6 @@ import { Package, User as UserIcon, MapPin, ShieldCheck, LogOut, Loader2, Camera
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 
-// Fundo padronizado da marca
-const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
-    <style dangerouslySetInnerHTML={{__html: `
-      @keyframes float1 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        33% { transform: translate(150px, -100px) scale(1.05); }
-        66% { transform: translate(-100px, 120px) scale(0.95); }
-      }
-      @keyframes float2 {
-        0%, 100% { transform: translate(0px, 0px) scale(1); }
-        50% { transform: translate(-150px, 150px) scale(1.05); }
-      }
-    `}} />
-
-    <div className="absolute top-[5%] left-[-10%] sm:left-[5%] opacity-40" style={{ animation: 'float1 25s ease-in-out infinite' }}>
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-64 h-64 bg-teal-300/60 rounded-full blur-[80px] absolute -left-20"></div>
-        <div className="w-56 h-56 bg-cyan-300/60 rounded-full blur-[80px] absolute top-20"></div>
-      </div>
-    </div>
-    
-    <div className="absolute top-[60%] right-[-10%] sm:right-[10%] opacity-30" style={{ animation: 'float2 30s ease-in-out infinite' }}>
-      <div className="relative flex items-center justify-center scale-100 sm:scale-110">
-        <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute -left-10"></div>
-        <div className="w-80 h-80 bg-teal-300/60 rounded-full blur-[100px] absolute -right-20"></div>
-      </div>
-    </div>
-  </div>
-);
-
 export default function PainelConta() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
@@ -45,7 +14,6 @@ export default function PainelConta() {
   const [profile, setProfile] = useState<any>(null);
   const [userEmail, setUserEmail] = useState('');
   
-  // SIMULAÇÃO DO BACKEND (Fase 2)
   const [recentOrder, setRecentOrder] = useState<any>({
     id: 'OZK-98234-71',
     status: 'Em Rota'
@@ -120,22 +88,17 @@ export default function PainelConta() {
   const initials = profile?.nome && profile.nome !== 'Cliente Ozonteck' ? profile.nome.substring(0, 2).toUpperCase() : 'US';
 
   return (
-    <main className="min-h-screen relative pb-24 font-sans text-slate-900 overflow-hidden">
-      <OzoneBackground />
-      
+    <main className="min-h-screen bg-[#FAFAFC] relative pb-24 font-sans text-slate-900 overflow-hidden">
       <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-10 relative z-10">
         
         {/* CABEÇALHO */}
         <div className="mb-8 pb-5 border-b border-slate-200/60">
-          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Visão Geral</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Visão Geral</h1>
           <p className="text-slate-500 mt-1.5 text-sm font-medium">Bem-vindo(a) à sua central de controle Ozonteck.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          {/* =========================================
-              COLUNA ESQUERDA - CRACHÁ E MENU
-          ========================================= */}
           <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
             <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden flex flex-col">
               <div className="p-8 flex flex-col items-center text-center border-b border-slate-100 relative">
@@ -145,7 +108,7 @@ export default function PainelConta() {
                   ) : profile?.avatar_url ? (
                     <img src={profile.avatar_url} alt="Perfil" className="w-full h-full object-cover" />
                   ) : (
-                    <span className="text-2xl font-black text-slate-400">{initials}</span>
+                    <span className="text-2xl font-bold text-slate-400">{initials}</span>
                   )}
                   
                   <div 
@@ -158,10 +121,10 @@ export default function PainelConta() {
                 </div>
                 <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={uploadAvatar} disabled={uploading}/>
 
-                <h2 className="text-lg font-black text-slate-900 truncate w-full tracking-tight">{profile?.nome || 'Cliente Ozonteck'}</h2>
+                <h2 className="text-lg font-bold text-slate-900 truncate w-full tracking-tight">{profile?.nome || 'Cliente Ozonteck'}</h2>
                 <p className="text-xs font-medium text-slate-500 mt-1 truncate w-full">{userEmail}</p>
                 
-                <div className="mt-4 inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-teal-100">
+                <div className="mt-4 inline-flex items-center gap-1.5 bg-teal-50 text-teal-700 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest border border-teal-100">
                   <CheckCircle2 size={14} /> Verificado
                 </div>
               </div>
@@ -190,12 +153,8 @@ export default function PainelConta() {
             </div>
           </div>
 
-          {/* =========================================
-              COLUNA DIREITA - CONTEÚDO PRINCIPAL
-          ========================================= */}
           <div className="lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
             
-            {/* SESSÃO: LOGÍSTICA & PEDIDOS */}
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
               
               <div className="bg-slate-900 rounded-xl p-8 shadow-sm border border-slate-800 text-white flex flex-col justify-between relative overflow-hidden group min-h-[220px]">
@@ -205,7 +164,7 @@ export default function PainelConta() {
                   <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center border border-white/10 mb-5">
                     <Package size={24} className="text-teal-400" />
                   </div>
-                  <h3 className="text-2xl font-black tracking-tight mb-2">Painel de Pedidos</h3>
+                  <h3 className="text-2xl font-bold tracking-tight mb-2">Painel de Pedidos</h3>
                   <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
                     Acompanhe o status do seu pedido, envio via Uber/Motoboy e seu histórico de compras.
                   </p>
@@ -221,11 +180,10 @@ export default function PainelConta() {
                 </div>
               </div>
 
-              {/* LÓGICA DO ÚLTIMO PEDIDO (Atualizada para Logística Local) */}
               {recentOrder ? (
                 <div className="relative bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden min-h-[220px] flex flex-col">
                   <div className="absolute inset-0 z-20 bg-white/60 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                    <div className="bg-slate-900 text-white px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl flex items-center gap-2">
+                    <div className="bg-slate-900 text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-xl flex items-center gap-2">
                       <ShieldAlert size={14} className="text-teal-400" /> Em Desenvolvimento
                     </div>
                   </div>
@@ -243,13 +201,12 @@ export default function PainelConta() {
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-100 rounded-full"></div>
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2/3 h-1 bg-teal-500 rounded-full"></div>
                       <div className="relative z-10 w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center border-2 border-white"><CheckCircle2 size={14} /></div>
-                      {/* Trocamos o caminhão por uma entrega local expressa */}
                       <div className="relative z-10 w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center border-2 border-white ring-4 ring-teal-50"><Package size={18} /></div>
                       <div className="relative z-10 w-8 h-8 rounded-full bg-white text-slate-300 border-2 border-slate-200"><CheckCircle2 size={14} className="m-auto mt-1.5" /></div>
                     </div>
                     <div className="flex justify-between mt-3 px-1">
                       <span className="text-[9px] font-bold text-slate-500 uppercase">Aprovado</span>
-                      <span className="text-[10px] font-black text-teal-700 uppercase translate-x-1">Em Rota (Uber/Moto)</span>
+                      <span className="text-[10px] font-bold text-teal-700 uppercase translate-x-1">Em Rota (Uber/Moto)</span>
                       <span className="text-[9px] font-bold text-slate-400 uppercase">Entregue</span>
                     </div>
                   </div>
@@ -268,10 +225,8 @@ export default function PainelConta() {
                   </Link>
                 </div>
               )}
-
             </div>
 
-            {/* SESSÃO: CONFIGURAÇÕES */}
             <div>
               <h2 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-widest flex items-center gap-2">
                 <ShieldCheck size={16} className="text-slate-400" /> Configurações da Conta
@@ -320,7 +275,6 @@ export default function PainelConta() {
               </div>
             </div>
 
-            {/* SESSÃO: SUPORTE HUMANIZADO */}
             <div className="bg-teal-50/50 border border-teal-100/50 rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
               <div className="flex items-center gap-5 text-center sm:text-left flex-col sm:flex-row">
                 <div className="w-12 h-12 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center shrink-0">
