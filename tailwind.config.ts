@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: "class", // <-- AQUI ESTÁ A MÁGICA QUE LIBERA O NOSSO BOTÃO SOL/LUA
+  darkMode: "class", 
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",

@@ -1,0 +1,738 @@
+{
+  "widths": [
+    {
+      "width": 1440,
+      "homeFilter": true,
+      "accessoriesHidden": true,
+      "noOverflow": true
+    },
+    {
+      "width": 390,
+      "homeFilter": true,
+      "accessoriesHidden": true,
+      "noOverflow": true
+    },
+    {
+      "width": 320,
+      "homeFilter": true,
+      "accessoriesHidden": true,
+      "noOverflow": true
+    }
+  ],
+  "pages": [
+    {
+      "code": "BE-FRESH",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-HAY",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-HID-SB",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-HID-VG",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-LUSH",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-OX3",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-PURE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-SHII",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-SOFH",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "BE-TRIX",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-AMP-SF",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-FOR-MEN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-KIDS-CO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-KIDS-LE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-KIDS-SH",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-BL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-MC",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-OK",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-O-ACAI",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-O-CREAM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-BL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-MC",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-MEL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-OK",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "CAP-TON",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-BORYS",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-COBAL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-CREAT-CX",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-CREAT-MO-CX",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-CREAT-MO-UN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-CREAT-UN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-DREAM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-FLEX-CX",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-FLEX-UN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-GENO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-K2D3",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-LEV-UN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-LUMI",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-MELAT",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-NXCAP",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-OMEGA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-OX",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-SOFH-D",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-TRIMAG",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-VIRT",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-VITA-OZ",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "NUT-XBOOST",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-AALIYAH",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-CIND",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-MADAME",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-MAXBOSS",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-OUD",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-PRES",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-RHINO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-SCAN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-SENT",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-SOB",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-SPEED",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-SUBLIME",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-VG",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "P100-VIDA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-303-M",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-303-VIP",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-303-W",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-AALI",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-ALEM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-ANGE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-AVEN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-BLUE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-CAPA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-CIND",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-DG",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-DOCU",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-EASY",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-FAMMA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-FANT",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-FER-VE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-FERA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-GOUF-B",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-GOUF-T",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-GREC",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-LABOOM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-LUA-VE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-MAD",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-MAX-B",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-MAXIMUM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-OUD",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-PRESIDENTE",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-RHINO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SCAN",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SEDUC",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SENTIMENTO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SOBERANO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SOUL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SPEED",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SUBLI",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-SUPREMO",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-VENUM",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-VG",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-VIDA",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-VIP-GIRL",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-AMR",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-CIF",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-DEEP",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-HMS",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-LPC",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PRO-SOFT",
+      "width": 1440,
+      "passed": true
+    },
+    {
+      "code": "PERF-CIND",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "P100-CIND",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PERF-EASY",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PERF-LABOOM",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PERF-OUD",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PERF-FER-VE",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-MEL",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "BE-HID-SB",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "BE-HAY",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "BE-TRIX",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "NUT-FLEX-CX",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "NUT-LEV-UN",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "NUT-COBAL",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PRO-AMR",
+      "width": 390,
+      "passed": true
+    },
+    {
+      "code": "PERF-CIND",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "P100-CIND",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "PERF-EASY",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "PERF-LABOOM",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "PERF-OUD",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "PERF-FER-VE",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "CAP-SH-MEL",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "BE-HID-SB",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "BE-HAY",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "BE-TRIX",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "NUT-FLEX-CX",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "NUT-LEV-UN",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "NUT-COBAL",
+      "width": 320,
+      "passed": true
+    },
+    {
+      "code": "PRO-AMR",
+      "width": 320,
+      "passed": true
+    }
+  ],
+  "browserErrors": [],
+  "screenshots": [
+    "docs/product-revision-2-screenshots/CAP-SH-MEL-1440.png",
+    "docs/product-revision-2-screenshots/NUT-FLEX-CX-1440.png",
+    "docs/product-revision-2-screenshots/PERF-CIND-1440.png",
+    "docs/product-revision-2-screenshots/PERF-CIND-390.png",
+    "docs/product-revision-2-screenshots/CAP-SH-MEL-390.png",
+    "docs/product-revision-2-screenshots/NUT-FLEX-CX-390.png",
+    "docs/product-revision-2-screenshots/PERF-CIND-320.png",
+    "docs/product-revision-2-screenshots/CAP-SH-MEL-320.png",
+    "docs/product-revision-2-screenshots/NUT-FLEX-CX-320.png"
+  ],
+  "writesBlocked": [
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja",
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja",
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja",
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja",
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja",
+    "https://tnqdecfmpkmnihpctumo.supabase.co/rest/v1/rpc/listar_avaliacoes_loja"
+  ],
+  "limitations": [
+    "A leitura POST de avaliações da loja foi bloqueada preventivamente; este teste não valida seu conteúdo. Nenhuma chamada bloqueada foi executada."
+  ],
+  "passed": true
+}

@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Save, User, Phone, CreditCard, Mail, Loader2, BadgeCheck, ShieldCheck, Lock, BellRing, Trash2, ShieldAlert } from 'lucide-react';
+import { ArrowLeft, Save, User, Phone, CreditCard, Mail, Loader2, BadgeCheck, ShieldCheck, Lock } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { isValidCpf } from '@/lib/auth';
 
 export default function MeusDadosPage() {
   const router = useRouter();
@@ -45,11 +46,31 @@ export default function MeusDadosPage() {
   }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name } = e.target;
+    let { value } = e.target;
+    if (name === 'cpf') {
+      value = value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').slice(0, 14);
+    }
+    if (name === 'telefone') {
+      value = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4,5})(\d{4})/, '$1-$2').slice(0, 15);
+    }
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.nome.trim().length < 3) {
+      toast.error('Informe seu nome completo.');
+      return;
+    }
+    if (formData.cpf && !isValidCpf(formData.cpf)) {
+      toast.error('Informe um CPF válido.');
+      return;
+    }
+    if (formData.telefone && formData.telefone.replace(/\D/g, '').length < 10) {
+      toast.error('Informe um telefone válido.');
+      return;
+    }
     setSaving(true);
 
     try {
@@ -59,16 +80,16 @@ export default function MeusDadosPage() {
       const { error } = await supabase
         .from('profiles')
         .update({
-          nome: formData.nome,
-          cpf: formData.cpf,
-          telefone: formData.telefone
+          nome: formData.nome.trim(),
+          cpf: formData.cpf || null,
+          telefone: formData.telefone || null,
         })
         .eq('id', session.user.id);
 
       if (error) throw error;
       toast.success('Dados atualizados com sucesso!');
       
-    } catch (error: any) {
+    } catch {
       toast.error('Erro ao salvar os dados.');
     } finally {
       setSaving(false);
@@ -205,6 +226,8 @@ export default function MeusDadosPage() {
                           value={formData.cpf}
                           onChange={handleChange}
                           placeholder="000.000.000-00"
+                          inputMode="numeric"
+                          autoComplete="off"
                           className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800"
                         />
                       </div>
@@ -220,11 +243,13 @@ export default function MeusDadosPage() {
                           <Phone size={16} className="text-slate-400" />
                         </div>
                         <input 
-                          type="text" 
+                          type="tel" 
                           name="telefone"
                           value={formData.telefone}
                           onChange={handleChange}
                           placeholder="(00) 00000-0000"
+                          inputMode="tel"
+                          autoComplete="tel"
                           className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800"
                         />
                       </div>
@@ -243,76 +268,6 @@ export default function MeusDadosPage() {
                   </div>
                   
                 </form>
-              </div>
-            </div>
-
-            {/* BLOCO 2: PREFERÊNCIAS DE COMUNICAÇÃO (TEASER) */}
-            <div className="relative bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-              
-              {/* Máscara de Bloqueio (Em Desenvolvimento) */}
-              <div className="absolute inset-0 z-20 bg-slate-50/50 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                <div className="bg-white border border-slate-200 text-slate-800 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
-                  <ShieldAlert size={14} className="text-teal-600" />
-                  Disponível em Breve
-                </div>
-              </div>
-
-              {/* Conteúdo Abaixo da Máscara */}
-              <div className="p-6 border-b border-slate-100 flex items-center gap-3 opacity-60 grayscale-[30%] select-none">
-                <BellRing className="text-slate-400" size={20} />
-                <div>
-                  <h2 className="text-base font-bold text-slate-900">Preferências de Comunicação</h2>
-                  <p className="text-xs text-slate-500 mt-0.5">Escolha por onde deseja receber atualizações e promoções.</p>
-                </div>
-              </div>
-              
-              <div className="p-6 opacity-60 grayscale-[30%] select-none pointer-events-none">
-                <div className="flex flex-col gap-4">
-                  <div className="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-800">E-mail Promocional</h4>
-                      <p className="text-xs text-slate-500 mt-0.5">Receba cupons e novidades.</p>
-                    </div>
-                    <div className="w-10 h-5 bg-teal-500 rounded-full relative shadow-inner">
-                      <div className="w-4 h-4 bg-white rounded-full absolute right-0.5 top-0.5 shadow"></div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-800">Avisos via WhatsApp</h4>
-                      <p className="text-xs text-slate-500 mt-0.5">Rastreio de pedidos e suporte.</p>
-                    </div>
-                    <div className="w-10 h-5 bg-slate-200 rounded-full relative shadow-inner">
-                      <div className="w-4 h-4 bg-white rounded-full absolute left-0.5 top-0.5 shadow"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* BLOCO 3: ZONA DE PERIGO (TEASER) */}
-            <div className="relative bg-white border border-red-100 rounded-xl shadow-sm overflow-hidden mt-2">
-              
-              <div className="absolute inset-0 z-20 bg-slate-50/50 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                <div className="bg-white border border-slate-200 text-slate-800 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
-                  <ShieldAlert size={14} className="text-red-500" />
-                  Em Desenvolvimento
-                </div>
-              </div>
-
-              <div className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 opacity-50 grayscale select-none pointer-events-none">
-                <div>
-                  <h2 className="text-base font-bold text-red-600 flex items-center gap-2">
-                    <Trash2 size={18} />
-                    Excluir Conta
-                  </h2>
-                  <p className="text-xs text-slate-500 mt-1 max-w-md">
-                    Ao excluir sua conta, você perderá acesso ao histórico de pedidos, endereços salvos e preferências permanentemente.
-                  </p>
-                </div>
-                <button className="shrink-0 bg-red-50 text-red-600 border border-red-200 text-sm font-bold py-2.5 px-6 rounded-lg">
-                  Solicitar Exclusão
-                </button>
               </div>
             </div>
 

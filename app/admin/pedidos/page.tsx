@@ -1,47 +1,109 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
-import { ShoppingBag, Search, Filter, Loader2, AlertCircle, Eye, Package, Truck, CheckCircle, MapPin, User } from 'lucide-react';
+import { ShoppingBag, Search, Filter, Loader2, AlertCircle, Eye, Package, Truck, CheckCircle, MapPin, User, Star, MessageCircle, AlertTriangle, ArrowUpDown } from 'lucide-react';
 import toast from 'react-hot-toast';
+import ProductReviewModeration from '@/components/ProductReviewModeration';
+import StoreReviewModeration from '@/components/StoreReviewModeration';
+
+type Review = {
+  id: string;
+  pedido_id: string;
+  nome_cliente: string;
+  nota: number;
+  comentario: string;
+  created_at: string;
+};
+type AuditOrderItem = { nome: string; qtd: number };
+type AuditDeliveryAddress = {
+  nome?: string;
+  telefone?: string;
+  rua?: string;
+  cidade?: string;
+  estado?: string;
+};
+type AuditOrder = {
+  id: string;
+  status: string;
+  valor_total: number;
+  itens: AuditOrderItem[];
+  endereco_entrega: AuditDeliveryAddress | null;
+  created_at: string;
+};
+type SelectedAuditOrder = AuditOrder & { avaliacao?: Review };
 
 export default function AuditoriaPedidos() {
-  const [pedidos, setPedidos] = useState<any[]>([]);
+  const [pedidos, setPedidos] = useState<AuditOrder[]>([]);
+  const [avaliacoes, setAvaliacoes] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('Todos');
+  const [sortBy, setSortBy] = useState('data_desc');
   
-  const [pedidoSelecionado, setPedidoSelecionado] = useState<any | null>(null);
+  const [pedidoSelecionado, setPedidoSelecionado] = useState<SelectedAuditOrder | null>(null);
+  const selectedReview = pedidoSelecionado?.avaliacao;
 
-  const fetchPedidos = async () => {
+  const fetchData = async () => {
     setLoading(true);
-    const { data, error } = await supabase
+    
+    const { data: pedidosData, error: pedidosError } = await supabase
       .from('pedidos')
-      .select('*')
-      .order('created_at', { ascending: false });
+      .select('id, status, valor_total, itens, endereco_entrega, created_at');
+    const { data: avaliacoesData, error: avaliacoesError } = await supabase
+      .from('avaliacoes')
+      .select('id, pedido_id, nome_cliente, nota, comentario, created_at');
 
-    if (error) {
-      toast.error(`Erro ao carregar pedidos: ${error.message}`);
+    if (pedidosError || avaliacoesError) {
+      toast.error(`Erro ao carregar dados.`);
     } else {
-      setPedidos(data || []);
+      setPedidos(pedidosData || []);
+      setAvaliacoes(avaliacoesData || []);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchPedidos();
+    const timer = window.setTimeout(() => void fetchData(), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
-  const pedidosFiltrados = pedidos.filter((pedido) => {
-    const nomeCliente = pedido.endereco_entrega?.nome?.toLowerCase() || '';
-    const idPedido = pedido.id.toLowerCase();
-    
-    const matchBusca = nomeCliente.includes(searchTerm.toLowerCase()) || idPedido.includes(searchTerm.toLowerCase());
-    const matchStatus = statusFilter === 'Todos' || pedido.status === statusFilter.toLowerCase();
-    
-    return matchBusca && matchStatus;
-  });
+  // OTIMIZAÇÃO: Filtro pesado envelopado em useMemo para não travar a UI enquanto o usuário digita na barra de busca
+  const pedidosFiltrados = useMemo(() => {
+    const filtrados = pedidos.filter((pedido) => {
+      const nomeCliente = pedido.endereco_entrega?.nome?.toLowerCase() || '';
+      const idPedido = pedido.id.toLowerCase();
+      
+      const matchBusca = nomeCliente.includes(searchTerm.toLowerCase()) || idPedido.includes(searchTerm.toLowerCase());
+      const matchStatus = statusFilter === 'Todos' || pedido.status === statusFilter.toLowerCase();
+      
+      return matchBusca && matchStatus;
+    });
+
+    return filtrados.sort((a, b) => {
+      switch (sortBy) {
+        case 'data_asc': 
+          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        case 'data_desc': 
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        case 'valor_desc': 
+          return b.valor_total - a.valor_total;
+        case 'valor_asc': 
+          return a.valor_total - b.valor_total;
+        case 'nome_asc': 
+          const nomeA = a.endereco_entrega?.nome || '';
+          const nomeB = b.endereco_entrega?.nome || '';
+          return nomeA.localeCompare(nomeB);
+        case 'nome_desc': 
+          const nomeC = a.endereco_entrega?.nome || '';
+          const nomeD = b.endereco_entrega?.nome || '';
+          return nomeD.localeCompare(nomeC);
+        default:
+          return 0;
+      }
+    });
+  }, [pedidos, searchTerm, statusFilter, sortBy]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -66,7 +128,7 @@ export default function AuditoriaPedidos() {
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-400 border border-slate-200 dark:border-zinc-700">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-slate-100 dark:bg-[#202020] text-slate-700 dark:text-[#A1A1AA] border border-slate-200 dark:border-[#2D2D2D]">
             {status}
           </span>
         );
@@ -76,87 +138,106 @@ export default function AuditoriaPedidos() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
       
-      {/* Cabeçalho */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0f0f11] p-6 rounded-2xl border border-slate-200 dark:border-zinc-800/60 shadow-sm dark:shadow-none">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>
-          <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white flex items-center gap-2">
+          <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-[#F0F0F0] flex items-center gap-2">
             <ShoppingBag className="text-teal-600 dark:text-teal-500" /> Auditoria de Pedidos
           </h1>
-          <p className="text-slate-500 dark:text-zinc-400 mt-1 text-xs font-medium">Histórico completo e pesquisa de todas as vendas realizadas.</p>
+          <p className="text-slate-500 dark:text-[#A1A1AA] mt-1 text-xs font-medium">Histórico completo de vendas e avaliações dos clientes.</p>
         </div>
       </div>
 
-      <div className="bg-white dark:bg-[#0f0f11] border border-slate-200 dark:border-zinc-800/60 rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden">
+      <ProductReviewModeration />
+      <StoreReviewModeration />
+
+      <div className="bg-white dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden transition-colors">
         
-        {/* Barra de Pesquisa e Filtros */}
-        <div className="p-4 border-b border-slate-200 dark:border-zinc-800/60 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-transparent">
+        <div className="p-4 border-b border-slate-200 dark:border-[#2D2D2D] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-[#171717]">
           <div className="relative w-full md:w-96">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-zinc-500" />
+            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA]" />
             <input 
               type="text" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Pesquisar por nome do cliente ou ID..." 
-              className="pl-10 pr-4 py-2 text-sm font-medium border border-slate-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-zinc-900 text-slate-900 dark:text-white w-full transition-all placeholder:text-slate-400 dark:placeholder:text-zinc-600" 
+              className="pl-10 pr-4 py-2 text-sm font-medium border border-slate-200 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#202020] text-slate-900 dark:text-[#F0F0F0] w-full transition-all placeholder:text-slate-400 dark:placeholder:text-[#A1A1AA]" 
             />
           </div>
 
-          <div className="flex items-center gap-2 w-full md:w-auto">
-            <Filter size={16} className="text-slate-400 dark:text-zinc-500 hidden sm:block" />
-            <select 
-              value={statusFilter} 
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full md:w-auto px-4 py-2 bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-xl text-sm font-medium text-slate-700 dark:text-zinc-300 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer"
-            >
-              <option value="Todos">Todos os Estados</option>
-              <option value="preparando">Preparando</option>
-              <option value="enviado">Enviado</option>
-              <option value="entregue">Entregue</option>
-            </select>
+          <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <ArrowUpDown size={16} className="text-slate-400 dark:text-[#A1A1AA] hidden sm:block" />
+              <select 
+                value={sortBy} 
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full sm:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer transition-colors"
+              >
+                <option value="data_desc">Mais Recentes</option>
+                <option value="data_asc">Mais Antigos</option>
+                <option value="valor_desc">Maior Valor</option>
+                <option value="valor_asc">Menor Valor</option>
+                <option value="nome_asc">Nome (A-Z)</option>
+                <option value="nome_desc">Nome (Z-A)</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <Filter size={16} className="text-slate-400 dark:text-[#A1A1AA] hidden sm:block" />
+              <select 
+                value={statusFilter} 
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="w-full sm:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer transition-colors"
+              >
+                <option value="Todos">Todos os Estados</option>
+                <option value="preparando">Preparando</option>
+                <option value="enviado">Enviado</option>
+                <option value="entregue">Entregue</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        {/* Tabela de Histórico */}
         <div className="overflow-x-auto min-h-[400px]">
           {loading ? (
-            <div className="flex flex-col items-center justify-center h-64 text-slate-400 dark:text-zinc-600">
+            <div className="flex flex-col items-center justify-center h-64 text-slate-400 dark:text-[#A1A1AA]">
               <Loader2 size={32} className="animate-spin mb-4 text-teal-500" />
-              <p className="text-xs font-bold uppercase tracking-widest">A sincronizar dados...</p>
             </div>
           ) : pedidosFiltrados.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-64 text-center px-4">
-              <AlertCircle size={32} className="text-slate-300 dark:text-zinc-700 mb-4" />
-              <p className="text-sm font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Nenhum registo encontrado.</p>
+              <AlertCircle size={32} className="text-slate-300 dark:text-[#2D2D2D] mb-4" />
+              <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Nenhum registo encontrado.</p>
             </div>
           ) : (
             <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 dark:bg-zinc-900/50 border-b border-slate-200 dark:border-zinc-800/60 text-slate-500 dark:text-zinc-400">
+              <thead className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
                 <tr>
                   <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Data / ID</th>
                   <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Cliente</th>
                   <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Valor Total</th>
                   <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Estado</th>
+                  <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Avaliação da loja</th>
                   <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px] text-right">Detalhes</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-zinc-800/50">
+              <tbody className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
                 {pedidosFiltrados.map((pedido) => {
                   const nomeCliente = pedido.endereco_entrega?.nome || 'Cliente não identificado';
                   const telefoneCliente = pedido.endereco_entrega?.telefone || 'Sem contacto';
+                  const avaliacaoDoPedido = avaliacoes.find((avaliacao) => avaliacao.pedido_id === pedido.id);
                   
                   return (
-                    <tr key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-zinc-800/20 transition-colors group">
+                    <tr key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group">
                       <td className="px-6 py-4">
-                        <p className="font-bold text-xs text-slate-900 dark:text-white">
-                          {new Date(pedido.created_at).toLocaleDateString('pt-BR')} às {new Date(pedido.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                        <p className="font-bold text-xs text-slate-900 dark:text-[#F0F0F0]">
+                          {new Date(pedido.created_at).toLocaleDateString('pt-BR')}
                         </p>
-                        <p className="text-[10px] font-mono text-slate-400 mt-0.5">
+                        <p className="text-[10px] font-mono text-slate-400 dark:text-[#A1A1AA] mt-0.5">
                           #{pedido.id.split('-')[0]}
                         </p>
                       </td>
                       <td className="px-6 py-4">
-                        <p className="font-bold text-xs text-slate-700 dark:text-zinc-300">{nomeCliente}</p>
-                        <p className="text-[10px] text-slate-500">{telefoneCliente}</p>
+                        <p className="font-bold text-xs text-slate-700 dark:text-[#E5E5E5]">{nomeCliente}</p>
+                        <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA]">{telefoneCliente}</p>
                       </td>
                       <td className="px-6 py-4 font-black text-teal-600 dark:text-teal-400 text-xs">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedido.valor_total)}
@@ -164,11 +245,24 @@ export default function AuditoriaPedidos() {
                       <td className="px-6 py-4">
                         {getStatusBadge(pedido.status)}
                       </td>
+                      <td className="px-6 py-4">
+                        {avaliacaoDoPedido ? (
+                          <div className="flex items-center gap-0.5">
+                            {[...Array(5)].map((_, i) => (
+                              <Star 
+                                key={i} size={12} 
+                                fill={i < avaliacaoDoPedido.nota ? (avaliacaoDoPedido.nota <= 3 ? "#EF4444" : "#F59E0B") : "transparent"} 
+                                strokeWidth={i < avaliacaoDoPedido.nota ? 0 : 2}
+                                className={i < avaliacaoDoPedido.nota ? (avaliacaoDoPedido.nota <= 3 ? "text-red-500" : "text-[#F59E0B]") : "text-slate-300 dark:text-[#A1A1AA]"}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <span className="text-[10px] text-slate-400 dark:text-[#A1A1AA] italic">Pendente</span>
+                        )}
+                      </td>
                       <td className="px-6 py-4 text-right">
-                        <button 
-                          onClick={() => setPedidoSelecionado(pedido)}
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-zinc-800 hover:bg-teal-600 hover:text-white text-slate-700 dark:text-zinc-300 transition-colors text-[10px] font-bold uppercase tracking-widest cursor-pointer"
-                        >
+                        <button onClick={() => setPedidoSelecionado({ ...pedido, avaliacao: avaliacaoDoPedido })} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#333333] hover:bg-teal-600 dark:hover:bg-teal-500 hover:text-white dark:hover:text-white text-slate-700 dark:text-[#F0F0F0] transition-colors text-[10px] font-bold uppercase tracking-widest cursor-pointer">
                           <Eye size={12} /> Ver Resumo
                         </button>
                       </td>
@@ -181,52 +275,47 @@ export default function AuditoriaPedidos() {
         </div>
       </div>
 
-      {/* MODAL DE RESUMO DO PEDIDO */}
       {pedidoSelecionado && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#0f0f11] w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-zinc-800 overflow-hidden flex flex-col max-h-[90vh]">
-            
-            <div className="px-6 py-4 border-b border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/30 flex justify-between items-center shrink-0">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-[#171717] w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-[#2D2D2D] overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex justify-between items-center shrink-0">
               <div>
-                <h3 className="text-lg font-black text-slate-900 dark:text-white uppercase tracking-tighter flex items-center gap-2">
-                  Pedido #{pedidoSelecionado.id.split('-')[0]}
-                  {getStatusBadge(pedidoSelecionado.status)}
+                <h3 className="text-lg font-black text-slate-900 dark:text-[#F0F0F0] uppercase tracking-tighter flex items-center gap-2">
+                  Pedido #{pedidoSelecionado.id.split('-')[0]} {getStatusBadge(pedidoSelecionado.status)}
                 </h3>
-                <p className="text-[10px] font-medium text-slate-500 mt-1">Realizado a {new Date(pedidoSelecionado.created_at).toLocaleString('pt-BR')}</p>
               </div>
-              <button onClick={() => setPedidoSelecionado(null)} className="text-slate-400 hover:text-red-500 transition-colors font-bold text-xl cursor-pointer p-2">&times;</button>
             </div>
 
             <div className="p-6 overflow-y-auto scrollbar-thin space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 space-y-3">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2"><User size={14}/> Cliente</h4>
+                <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#202020] space-y-3">
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] flex items-center gap-2"><User size={14}/> Cliente</h4>
                   <div>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">{pedidoSelecionado.endereco_entrega?.nome || 'Não informado'}</p>
-                    <p className="text-xs text-slate-500 mt-1">Tel: {pedidoSelecionado.endereco_entrega?.telefone || 'Não informado'}</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-[#F0F0F0]">{pedidoSelecionado.endereco_entrega?.nome || 'Não informado'}</p>
+                    <p className="text-xs text-slate-500 dark:text-[#A1A1AA] mt-1">Tel: {pedidoSelecionado.endereco_entrega?.telefone}</p>
                   </div>
                 </div>
-                <div className="p-4 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50/50 dark:bg-zinc-900/50 space-y-3">
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-2"><MapPin size={14}/> Local de Entrega</h4>
+                <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#202020] space-y-3">
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] flex items-center gap-2"><MapPin size={14}/> Local de Entrega</h4>
                   <div>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">{pedidoSelecionado.endereco_entrega?.rua || 'Endereço não preenchido'}</p>
-                    <p className="text-xs text-slate-500 mt-1">{pedidoSelecionado.endereco_entrega?.cidade || ''} {pedidoSelecionado.endereco_entrega?.estado || ''}</p>
+                    <p className="text-sm font-bold text-slate-900 dark:text-[#F0F0F0]">{pedidoSelecionado.endereco_entrega?.rua}</p>
+                    <p className="text-xs text-slate-500 dark:text-[#A1A1AA] mt-1">{pedidoSelecionado.endereco_entrega?.cidade} {pedidoSelecionado.endereco_entrega?.estado}</p>
                   </div>
                 </div>
               </div>
 
               <div>
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-2"><Package size={14}/> Lista de Artigos</h4>
-                <ul className="divide-y divide-slate-100 dark:divide-zinc-800 border border-slate-200 dark:border-zinc-800 rounded-xl overflow-hidden">
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] mb-3 flex items-center gap-2"><Package size={14}/> Lista de Artigos</h4>
+                <ul className="divide-y divide-slate-100 dark:divide-[#2D2D2D] border border-slate-200 dark:border-[#2D2D2D] rounded-xl overflow-hidden">
                   {pedidoSelecionado.itens && Array.isArray(pedidoSelecionado.itens) ? (
-                    pedidoSelecionado.itens.map((item: any, idx: number) => (
-                      <li key={idx} className="p-3 bg-white dark:bg-[#0f0f11] flex justify-between items-center">
-                        <span className="text-sm font-medium text-slate-700 dark:text-zinc-300">{item.nome || 'Produto Indefinido'}</span>
-                        <span className="text-xs font-black bg-slate-100 dark:bg-zinc-800 px-2 py-1 rounded text-slate-600 dark:text-zinc-400">Qtd: {item.qtd || 1}</span>
+                    pedidoSelecionado.itens.map((item, idx) => (
+                      <li key={idx} className="p-3 bg-white dark:bg-[#171717] flex justify-between items-center hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors">
+                        <span className="text-sm font-medium text-slate-700 dark:text-[#E5E5E5]">{item.nome || 'Produto Indefinido'}</span>
+                        <span className="text-xs font-black bg-slate-100 dark:bg-[#262626] px-2 py-1 rounded text-slate-600 dark:text-[#A1A1AA]">Qtd: {item.qtd || 1}</span>
                       </li>
                     ))
                   ) : (
-                    <li className="p-4 text-sm text-slate-500 text-center">Nenhum artigo listado.</li>
+                    <li className="p-4 text-sm text-slate-500 dark:text-[#A1A1AA] text-center">Nenhum artigo listado.</li>
                   )}
                 </ul>
                 <div className="mt-4 flex justify-between items-center p-4 bg-teal-50 dark:bg-teal-500/10 rounded-xl border border-teal-100 dark:border-teal-500/20">
@@ -236,18 +325,35 @@ export default function AuditoriaPedidos() {
                   </span>
                 </div>
               </div>
-            </div>
 
-            <div className="px-6 py-4 border-t border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900/30 flex justify-end shrink-0">
-              <button onClick={() => setPedidoSelecionado(null)} className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-zinc-400 hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer">
-                Fechar Resumo
-              </button>
+              {selectedReview && (
+                <div className={`p-5 rounded-xl border ${selectedReview.nota <= 3 ? 'bg-red-50/50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30' : 'bg-slate-50 dark:bg-[#202020] border-slate-200 dark:border-[#2D2D2D]'}`}>
+                  <h4 className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 mb-3 text-slate-400 dark:text-[#A1A1AA]">
+                    <Star size={14}/> Avaliação da loja neste site
+                    {selectedReview.nota <= 3 && <span className="bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 px-2 py-0.5 rounded ml-2 flex items-center gap-1 border border-red-200 dark:border-red-500/30"><AlertTriangle size={10} /> Atenção</span>}
+                  </h4>
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                    <div>
+                      <div className="flex items-center gap-1 mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} size={16} fill={i < selectedReview.nota ? (selectedReview.nota <= 3 ? "#EF4444" : "#F59E0B") : "transparent"} strokeWidth={i < selectedReview.nota ? 0 : 2} className={i < selectedReview.nota ? (selectedReview.nota <= 3 ? "text-red-500" : "text-[#F59E0B]") : "text-slate-300 dark:text-[#A1A1AA]"} />
+                        ))}
+                      </div>
+                      <p className="text-sm text-slate-700 dark:text-[#E5E5E5] italic">&quot;{selectedReview.comentario}&quot;</p>
+                    </div>
+                    {selectedReview.nota <= 3 && (
+                      <a href={`https://wa.me/55${pedidoSelecionado.endereco_entrega?.telefone?.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer" className="shrink-0 inline-flex items-center gap-2 px-4 py-2 bg-[#25D366] hover:bg-[#1da851] text-white text-xs font-bold rounded-lg transition-all"><MessageCircle size={14} /> WhatsApp</a>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-
+            <div className="px-6 py-4 border-t border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex justify-end shrink-0">
+              <button onClick={() => setPedidoSelecionado(null)} className="px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-[#A1A1AA] hover:bg-slate-200 dark:hover:bg-[#333333] transition-colors cursor-pointer">Fechar Resumo</button>
+            </div>
           </div>
         </div>
       )}
-
     </div>
   );
 }

@@ -1,0 +1,21 @@
+{
+  "mockedCatalog": true,
+  "results": [
+    {
+      "width": 1440,
+      "elevenCards": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 390,
+      "elevenCards": true,
+      "noHorizontalOverflow": true
+    },
+    {
+      "width": 320,
+      "elevenCards": true,
+      "noHorizontalOverflow": true
+    }
+  ],
+  "errors": []
+}

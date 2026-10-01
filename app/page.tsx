@@ -1,12 +1,52 @@
 'use client';
 
-import { useState, useEffect, useRef, ReactNode, Suspense } from 'react';
+import GoogleStoreReviewsLink from '@/components/GoogleStoreReviewsLink';
+import { isRetiredProduct } from '@/lib/catalog-availability';
+import { matchesPerfumeryVolume, type PerfumeryVolume } from '@/lib/perfumery-filter';
+
+import { useState, useEffect, useRef, ReactNode, Suspense, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
-import { MapPin, Phone, Heart, Search, MessageCircle, X, Bot, CheckCircle2, ArrowUp, Send, Loader2 } from 'lucide-react';
+import { MapPin, Phone, Heart, Search, MessageCircle, CheckCircle2, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
 import LoginModal from '@/components/LoginModal';
+import type { User } from '@supabase/supabase-js';
+import type { Product } from '@/lib/data';
+
+type PublicReview = {
+  verificado?: boolean;
+  id: string;
+  nome_cliente: string;
+  nota: number;
+  comentario: string;
+  created_at: string;
+};
+
+type DatabaseProduct = {
+  id: string;
+  code: string;
+  name: string;
+  description: string | null;
+  category: string;
+  price: number | string;
+  image_url: string | null;
+  estoque: number | null;
+  is_deleted?: boolean | null;
+};
+
+function toProduct(item: DatabaseProduct): Product {
+  return {
+    id: item.id,
+    code: item.code,
+    name: item.name,
+    description: item.description || '',
+    category: item.category,
+    price: Number(item.price),
+    imagePlaceholder: item.image_url || '',
+    estoque: item.estoque ?? 0,
+  };
+}
 
 const FadeInOnLoad = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +83,6 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode; delay?: 
 
 const OzoneBackground = () => (
   <div className="fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
-    
     <style dangerouslySetInnerHTML={{__html: `
       @keyframes float1 {
         0%, 100% { transform: translate(0px, 0px) scale(1); }
@@ -62,7 +101,7 @@ const OzoneBackground = () => (
         <div className="w-72 h-72 bg-cyan-300/50 rounded-full blur-[90px] absolute top-20 animate-[pulse_10s_ease-in-out_infinite_alternate]"></div>
       </div>
     </div>
-    
+
     <div className="absolute top-[55%] right-[-10%] sm:right-[10%] opacity-50" style={{ animation: 'float2 30s ease-in-out infinite' }}>
       <div className="relative flex items-center justify-center scale-100 sm:scale-110">
         <div className="w-[22rem] h-[22rem] bg-cyan-300/40 rounded-full blur-[100px] absolute -left-10 animate-[pulse_12s_ease-in-out_infinite_alternate]"></div>
@@ -72,131 +111,193 @@ const OzoneBackground = () => (
   </div>
 );
 
-function HomeContent() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [products, setProducts] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('Todas');
-  const [searchQuery, setSearchQuery] = useState('');
-  
-  const [user, setUser] = useState<any>(null);
-  const [favorites, setFavorites] = useState<string[]>([]);
-  
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [loginModalMessage, setLoginModalMessage] = useState('');
+const AvaliacoesDaLoja = () => {
+  const [page, setPage] = useState(1);
+  const [legacy, setLegacy] = useState(false);
+  const [avaliacoes, setAvaliacoes] = useState<PublicReview[]>([]);
+  const [estatisticas, setEstatisticas] = useState({ media: 0, total: 0 });
+  const [loading, setLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  // ==========================================
-  // ESTADOS DA INTELIGÊNCIA ARTIFICIAL
-  // ==========================================
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [chatInput, setChatInput] = useState('');
-  const [isChatLoading, setIsChatLoading] = useState(false);
-  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'model', text: string}[]>([
-    { role: 'model', text: 'Olá! Sou a assistente de Inteligência Artificial da Ozonteck. Qual a sua dúvida sobre ozonioterapia ou sobre os nossos produtos?' }
-  ]);
-  const chatScrollRef = useRef<HTMLDivElement>(null);
-
-  // Faz o scroll descer automaticamente quando chega nova mensagem no chat
   useEffect(() => {
-    if (chatScrollRef.current) {
-      chatScrollRef.current.scrollTop = chatScrollRef.current.scrollHeight;
-    }
-  }, [chatMessages, isChatLoading]);
-
-  const handleSendMessage = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-    if (!chatInput.trim() || isChatLoading) return;
-
-    const userMsg = chatInput.trim();
-    setChatInput('');
-    setChatMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setIsChatLoading(true);
-
-    try {
-      // 1. Remove a mensagem inicial de saudação do histórico
-      let recentHistory = chatMessages.filter((_, i) => i !== 0);
+    async function buscarAvaliacoes() {
+      const { data: summary, error } = await supabase.rpc('listar_avaliacoes_loja', { p_pagina: page });
+      if (!error && summary) {
+        setAvaliacoes(summary.items);
+        setEstatisticas({ total: summary.total, media: Number(Number(summary.average || 0).toFixed(1)) });
+        setLegacy(false);
+        setLoading(false);
+        return;
+      }
+      // Keep the previous public selection available until the incremental SQL is installed.
+      setLegacy(true);
+      const { data } = await supabase
+        .from('public_reviews')
+        .select('id, nome_cliente, nota, comentario, created_at')
+        .gte('nota', 4) 
+        .order('created_at', { ascending: false });
       
-      // 2. Mantém apenas as últimas 4 mensagens para não pesar a memória
-      if (recentHistory.length > 4) {
-        recentHistory = recentHistory.slice(-4);
+      if (data && data.length > 0) {
+        setAvaliacoes(data);
+        const total = data.length;
+        const soma = data.reduce((acc, curr) => acc + curr.nota, 0);
+        const media = (soma / total).toFixed(1);
+        setEstatisticas({ media: Number(media), total }); 
       }
+      setLoading(false);
+    }
+    void buscarAvaliacoes();
+  }, [page]);
 
-      // 3. A REGRA DE OURO DO GEMINI: O histórico DEVE começar com 'user'
-      if (recentHistory.length > 0 && recentHistory[0].role === 'model') {
-        recentHistory.shift(); // Remove a mensagem se for do modelo
-      }
-
-      // 4. Formata no padrão exato que o Google exige
-      const formattedHistory = recentHistory.map(m => ({
-        role: m.role,
-        parts: [{ text: m.text }]
-      }));
-
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMsg, history: formattedHistory })
-      });
-
-      const data = await response.json();
-
-      if (data.text) {
-        setChatMessages(prev => [...prev, { role: 'model', text: data.text }]);
-      } else {
-        throw new Error('Sem resposta');
-      }
-    } catch (err) {
-      toast.error('Erro de conexão com o Assistente.');
-      setChatMessages(prev => [...prev, { role: 'model', text: 'Desculpe, estou com instabilidade na conexão agora. Por favor, chame o Rogério no WhatsApp para suporte imediato!' }]);
-    } finally {
-      setIsChatLoading(false);
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = 340; 
+      current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
 
+  if (loading || estatisticas.total === 0) return null; 
+
+  return (
+    <section className="w-full py-16 sm:py-24 relative z-10">
+      <RevealOnScroll>
+        <div className="max-w-[1600px] mx-auto px-5 sm:px-10 lg:px-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Experiências de compra no site</h2>
+              <p className="text-slate-500 text-sm mt-1">{legacy ? 'Seleção de depoimentos com notas 4 e 5 sobre a experiência de compra.' : 'Opiniões sobre atendimento, entrega e embalagem, publicadas neste site.'}</p>
+            </div>
+            
+            <div className="flex items-center gap-4 bg-white px-5 py-3 rounded-xl border border-slate-200 shadow-sm shrink-0">
+              <div className="text-3xl font-black text-slate-900 leading-none">{estatisticas.media}</div>
+              <div>
+                <div className="flex text-[#F59E0B] mb-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} fill={i < Math.round(estatisticas.media) ? "#F59E0B" : "transparent"} strokeWidth={i < Math.round(estatisticas.media) ? 0 : 2} />
+                  ))}
+                </div>
+                <div className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">{legacy ? 'Média desta seleção' : 'Média das avaliações publicadas'} · {estatisticas.total} avaliações</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative group">
+            <button 
+              onClick={() => scroll('left')} 
+              className="absolute -left-3 sm:-left-5 md:-left-6 lg:-left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_8px_30px_rgba(0,0,0,0.1)] flex items-center justify-center text-slate-600 hover:text-teal-600 hover:border-teal-300 transition-all hover:scale-110 hidden md:flex"
+              title="Anterior"
+            >
+              <ChevronLeft size={24} strokeWidth={2.5} />
+            </button>
+
+            <div ref={scrollRef} className="flex overflow-x-auto gap-4 sm:gap-6 py-4 px-1 -mx-1 pb-8 snap-x no-scrollbar scroll-smooth">
+              {avaliacoes.map((av) => (
+                <div key={av.id} className="w-[280px] md:w-[320px] shrink-0 bg-white border border-slate-200 rounded-2xl p-5 md:p-6 flex flex-col snap-start shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300">
+                  <div className="flex justify-between items-start mb-5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-700 flex items-center justify-center font-bold text-sm border border-teal-100 shrink-0">
+                        {av.nome_cliente.substring(0, 1).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-slate-900">{av.nome_cliente}</p>
+                        <p className="text-[10px] text-teal-600 font-bold flex items-center gap-1 uppercase tracking-widest mt-0.5">
+                          {av.verificado && <><CheckCircle2 size={10} strokeWidth={3} /> Compra verificada</>}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-0.5 text-[#F59E0B] mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={14} fill={i < av.nota ? "#F59E0B" : "transparent"} strokeWidth={i < av.nota ? 0 : 2} />
+                    ))}
+                  </div>
+
+                  <p className="text-sm text-slate-600 leading-relaxed">
+                    &quot;{av.comentario}&quot;
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <button 
+              onClick={() => scroll('right')} 
+              className="absolute -right-3 sm:-right-5 md:-right-6 lg:-right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white border border-slate-200 shadow-[0_8px_30px_rgba(0,0,0,0.1)] flex items-center justify-center text-slate-600 hover:text-teal-600 hover:border-teal-300 transition-all hover:scale-110 hidden md:flex"
+              title="Próximo"
+            >
+              <ChevronRight size={24} strokeWidth={2.5} />
+            </button>
+          </div>
+          {!legacy && estatisticas.total > 12 && <nav aria-label="Páginas de experiências de compra" className="mt-5 flex flex-wrap items-center gap-5"><button type="button" disabled={page===1} onClick={() => setPage(page-1)} className="min-h-11 text-teal-800 disabled:opacity-40">Anteriores</button><span>{page} de {Math.ceil(estatisticas.total/12)}</span><button type="button" disabled={page*12>=estatisticas.total} onClick={() => setPage(page+1)} className="min-h-11 text-teal-800 disabled:opacity-40">Próximas</button></nav>}
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
+};
+
+function HomeContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('Todas');
+  const [perfumeryVolume, setPerfumeryVolume] = useState<PerfumeryVolume>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const [user, setUser] = useState<User | null>(null);
+  const [favorites, setFavorites] = useState<string[]>([]);
+
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [loginModalMessage, setLoginModalMessage] = useState('');
+
+  async function fetchFavorites(userId: string) {
+    const { data } = await supabase.from('favoritos').select('produto_code').eq('user_id', userId);
+    if (data) setFavorites(data.map((favorite) => favorite.produto_code));
+  }
+
   useEffect(() => {
     const q = searchParams.get('q');
-    if (q) {
-      setSearchQuery(q);
-      setTimeout(() => {
-        document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
-    } else {
-      setSearchQuery('');
-    }
+    const timer = window.setTimeout(() => {
+      setSearchQuery(q ?? '');
+      if (q) document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [searchParams]);
 
+  useEffect(() => {
     async function loadProducts() {
-      const { data, error } = await supabase.from('produtos').select('*').neq('is_deleted', true);
+      const { data, error } = await supabase
+        .from('produtos')
+        .select('id, code, name, description, category, price, image_url, estoque')
+        .neq('is_deleted', true);
+      if (error) {
+        toast.error('Não foi possível carregar o catálogo.');
+        setIsLoading(false);
+        return;
+      }
       if (data) {
         const sortedData = data.sort((a, b) => {
            if (a.category < b.category) return -1;
            if (a.category > b.category) return 1;
            return a.name.localeCompare(b.name);
         });
-        const formattedProducts = sortedData.map((item) => ({
-          id: item.id,
-          code: item.code,
-          name: item.name,
-          category: item.category,
-          price: Number(item.price),
-          imagePlaceholder: item.image_url,
-          estoque: item.estoque
-        }));
+        const formattedProducts = sortedData.filter((item) => !isRetiredProduct(item)).map(toProduct);
         setProducts(formattedProducts);
       }
       setIsLoading(false);
     }
-    
-    loadProducts();
+
+    void loadProducts();
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
-      if (session?.user) fetchFavorites(session.user.id);
+      if (session?.user) void fetchFavorites(session.user.id);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
-      if (session?.user) fetchFavorites(session.user.id);
+      if (session?.user) void fetchFavorites(session.user.id);
       else setFavorites([]);
     });
 
@@ -204,32 +305,28 @@ function HomeContent() {
       .channel('schema-db-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'produtos' }, (payload) => {
           if (payload.eventType === 'INSERT') {
-            if (payload.new.is_deleted === true) return; 
+            if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct)) return;
             setProducts((prev) => {
-              const newProduct = {
-                id: payload.new.id, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque
-              };
-              const updatedList = [...prev, newProduct];
-              return updatedList.sort((a, b) => {
+              const newProduct = toProduct(payload.new as DatabaseProduct);
+              return [...prev, newProduct].sort((a, b) => {
                 if (a.category < b.category) return -1; if (a.category > b.category) return 1; return a.name.localeCompare(b.name);
               });
             });
           } 
           else if (payload.eventType === 'UPDATE') {
             setProducts((currentProducts) => {
-              if (payload.new.is_deleted === true) return currentProducts.filter(p => p.id !== payload.new.id);
+              if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct)) return currentProducts.filter(p => p.id !== payload.new.id);
               const exists = currentProducts.find(p => p.id === payload.new.id);
               if (exists) {
                 return currentProducts.map((product) => {
                   if (product.id === payload.new.id) {
-                    return { ...product, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque };
+                    return toProduct(payload.new as DatabaseProduct);
                   }
                   return product;
                 });
               } else {
-                const restoredProduct = { id: payload.new.id, code: payload.new.code, name: payload.new.name, category: payload.new.category, price: Number(payload.new.price), imagePlaceholder: payload.new.image_url, estoque: payload.new.estoque };
-                const updatedList = [...currentProducts, restoredProduct];
-                return updatedList.sort((a, b) => {
+                const restoredProduct = toProduct(payload.new as DatabaseProduct);
+                return [...currentProducts, restoredProduct].sort((a, b) => {
                   if (a.category < b.category) return -1; if (a.category > b.category) return 1; return a.name.localeCompare(b.name);
                 });
               }
@@ -245,12 +342,7 @@ function HomeContent() {
       supabase.removeChannel(channel);
       subscription.unsubscribe();
     };
-  }, [searchParams]);
-
-  const fetchFavorites = async (userId: string) => {
-    const { data } = await supabase.from('favoritos').select('produto_code').eq('user_id', userId);
-    if (data) setFavorites(data.map(f => f.produto_code));
-  };
+  }, []);
 
   const toggleFavorite = async (produtoCode: string) => {
     if (!user) {
@@ -270,36 +362,35 @@ function HomeContent() {
     window.dispatchEvent(new Event('atualizarFavoritos'));
   };
 
-  const categories = ['Todas', ...Array.from(new Set(products.map((p) => p.category)))];
-  
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          product.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const categories = useMemo(() => ['Todas', ...Array.from(new Set(products.map((p) => p.category)))], [products]);
+
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
+      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            product.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesVolume = selectedCategory !== 'Perfumaria' || matchesPerfumeryVolume(product.code, perfumeryVolume);
+      return matchesCategory && matchesSearch && matchesVolume;
+    });
+  }, [products, selectedCategory, searchQuery, perfumeryVolume]);
 
   const scrollToObject = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <>
       <OzoneBackground />
-      
+
       <section className="relative w-full pt-16 pb-20 z-10">
         <div className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col items-center text-center">
-          
+
           <FadeInOnLoad delay={100}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-sm">
               <CheckCircle2 size={14} className="text-teal-500" /> Distribuidor Autorizado • Rogério André
             </div>
           </FadeInOnLoad>
-          
+
           <FadeInOnLoad delay={200}>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-slate-900 mb-6 leading-[1.05]">
               A ciência do ozônio.<br />
@@ -319,7 +410,7 @@ function HomeContent() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-5 sm:px-0">
               <button 
                 onClick={() => scrollToObject('catalogo')}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 text-white font-bold text-sm py-4 px-10 rounded-full transition-all shadow-[0_8px_25px_rgba(13,148,136,0.3)] hover:shadow-[0_8px_35px_rgba(13,148,136,0.4)] hover:-translate-y-1"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 text-white font-bold text-sm py-4 px-10 rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
               >
                 <Search size={18} /> Explorar Catálogo
               </button>
@@ -343,12 +434,12 @@ function HomeContent() {
         ) : (
           <>
             <RevealOnScroll delay={50}>
-              
+
               {searchQuery && (
                 <div className="mb-8 bg-teal-50 border border-teal-100 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm max-w-4xl mx-auto">
                   <div className="flex items-center gap-2">
                     <Search size={18} className="text-teal-600" />
-                    <p className="text-sm font-bold text-teal-800">Resultados para: <span className="text-teal-600">"{searchQuery}"</span></p>
+                    <p className="text-sm font-bold text-teal-800">Resultados para: <span className="text-teal-600">&quot;{searchQuery}&quot;</span></p>
                   </div>
                   <button onClick={() => {setSearchQuery(''); router.push('/');}} className="text-xs font-bold text-teal-600 hover:text-teal-800 underline uppercase tracking-widest">
                     Limpar Filtro
@@ -364,6 +455,7 @@ function HomeContent() {
                       key={category}
                       onClick={() => {
                         setSelectedCategory(category);
+                        setPerfumeryVolume('all');
                         if(searchQuery) { setSearchQuery(''); router.push('/'); }
                       }}
                       className={`text-xs sm:text-[13px] font-bold transition-all relative pb-3 -mb-[13px] whitespace-nowrap snap-start shrink-0 ${
@@ -378,6 +470,27 @@ function HomeContent() {
                 </div>
               </div>
 
+              {selectedCategory === 'Perfumaria' && (
+                <fieldset className="mx-auto mb-8 w-fit max-w-full text-center">
+                  <legend className="mb-2 text-sm font-semibold text-slate-700">Volume</legend>
+                  <div className="inline-flex max-w-full rounded-lg border border-slate-200 bg-white p-1">
+                    {(['all', '17', '100'] as const).map(volume => (
+                      <label key={volume} className="relative cursor-pointer">
+                        <input type="radio" name="perfumery-volume" value={volume}
+                          checked={perfumeryVolume === volume}
+                          onChange={() => setPerfumeryVolume(volume)}
+                          className="peer sr-only" />
+                        <span className="flex min-h-11 items-center justify-center rounded-md px-4 text-sm font-semibold text-slate-600 peer-checked:bg-teal-700 peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-teal-700">
+                          {volume === 'all' ? 'Todos' : `${volume} ml`}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  <p role="status" className="mt-2 text-xs text-slate-500">
+                    {filteredProducts.length} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
+                  </p>
+                </fieldset>
+              )}
             </RevealOnScroll>
 
             {filteredProducts.length === 0 ? (
@@ -386,7 +499,7 @@ function HomeContent() {
                   <Search size={20} className="text-slate-400" />
                 </div>
                 <h3 className="text-lg font-bold text-slate-800 mb-1">Nenhum produto encontrado</h3>
-                <p className="text-sm text-slate-500">Não conseguimos encontrar "{searchQuery}". Tente navegar pelas categorias.</p>
+                <p className="text-sm text-slate-500">Não conseguimos encontrar &quot;{searchQuery}&quot;. Tente navegar pelas categorias.</p>
                 <button 
                   onClick={() => {setSearchQuery(''); setSelectedCategory('Todas'); router.push('/');}}
                   className="mt-4 text-teal-600 font-bold text-xs hover:underline uppercase tracking-widest"
@@ -413,7 +526,7 @@ function HomeContent() {
                           className={`transition-colors duration-300 ${favorites.includes(product.code) ? 'fill-red-500 text-red-500' : 'text-slate-300 hover:text-red-400'}`} 
                         />
                       </button>
-                      
+
                       <ProductCard product={product} />
                     </div>
                   </RevealOnScroll>
@@ -424,25 +537,25 @@ function HomeContent() {
         )}
       </section>
 
-      <section id="loja-fisica" className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pb-24 relative z-10 w-full scroll-mt-32">
+      <section id="loja-fisica" className="w-full bg-white border-y border-slate-200 py-16 sm:py-24 relative z-10 scroll-mt-20">
         <RevealOnScroll>
-          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 shadow-[0_8px_40px_rgba(0,0,0,0.04)] rounded-[2rem] sm:rounded-[3rem] overflow-hidden flex flex-col md:flex-row">
+          <div className="max-w-[1400px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             
-            <div className="w-full md:w-1/2 p-8 sm:p-14 lg:p-20 flex flex-col justify-center relative z-10">
-              <span className="inline-flex items-center justify-center w-max px-4 py-1.5 rounded-full bg-teal-50 border border-teal-100 text-teal-700 font-black tracking-widest text-[9px] sm:text-[10px] uppercase mb-6">
+            <div className="w-full lg:w-5/12 flex flex-col justify-center text-left">
+              <span className="inline-flex items-center justify-center w-max px-3 py-1.5 rounded-md bg-teal-50 border border-teal-100 text-teal-700 font-bold tracking-widest text-[10px] uppercase mb-5">
                 Consultoria Especializada
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-6 leading-tight tracking-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-5 leading-[1.1] tracking-tight">
                 Mais do que produtos,<br/>
                 <span className="text-teal-600">acompanhamento.</span>
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base mb-10 leading-relaxed font-medium">
+              <p className="text-slate-600 text-sm sm:text-base mb-10 leading-relaxed">
                 Visite a nossa unidade na Boa Vista e converse com <strong className="text-slate-900">Rogério André</strong>. Nós te ajudamos a entender exatamente qual o protocolo Ozonteck ideal para o seu objetivo.
               </p>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                  <div className="w-12 h-12 rounded-lg bg-slate-50 flex items-center justify-center shrink-0 border border-slate-200">
                     <MapPin className="text-teal-600" size={20} />
                   </div>
                   <div className="pt-1">
@@ -455,7 +568,7 @@ function HomeContent() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                  <div className="w-12 h-12 rounded-lg bg-slate-50 flex items-center justify-center shrink-0 border border-slate-200">
                     <Phone className="text-teal-600" size={20} />
                   </div>
                   <div className="pt-1">
@@ -464,18 +577,19 @@ function HomeContent() {
                       Dúvidas sobre o estoque? Fale direto conosco.
                     </p>
                     <a 
-                      href="https://wa.me/5581900000000" 
+                      href="https://wa.me/5581981472684" 
                       target="_blank" 
-                      className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white text-xs font-bold py-3 px-6 rounded-xl transition-colors shadow-sm"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1da851] text-white text-sm font-bold py-3 px-6 rounded-md transition-colors shadow-sm"
                     >
-                      <MessageCircle size={16} /> Enviar Mensagem
+                      <MessageCircle size={18} /> Enviar Mensagem
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 min-h-[350px] md:min-h-[600px] relative bg-slate-200">
+            <div className="w-full lg:w-7/12 h-[350px] sm:h-[450px] relative bg-slate-200 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
               <iframe 
                 src="https://maps.google.com/maps?q=R.%20da%20Uni%C3%A3o,%20295%20-%20Boa%20Vista,%20Recife%20-%20PE,%2050050-015&t=&z=16&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
@@ -492,112 +606,8 @@ function HomeContent() {
         </RevealOnScroll>
       </section>
 
-      <footer className="w-full border-t border-slate-200/50 bg-white/40 backdrop-blur-md pt-8 pb-6 mt-auto relative z-10 flex flex-col items-center">
-        <div className="flex justify-center mb-8">
-          <button 
-            onClick={scrollToTop}
-            className="group flex items-center justify-center gap-1.5 bg-white hover:bg-teal-50 text-slate-500 hover:text-teal-700 border border-slate-100 hover:border-teal-200 font-bold text-[11px] sm:text-xs py-2.5 px-6 rounded-full transition-all duration-300 shadow-[0_4px_15px_rgba(0,0,0,0.03)]"
-          >
-            <ArrowUp size={14} className="group-hover:-translate-y-1 transition-transform duration-300" />
-            <span>Voltar ao Topo</span>
-          </button>
-        </div>
-
-        <div className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-center md:text-left">
-            <p className="text-slate-900 font-bold text-xs">Ozonteck Unidade Recife</p>
-            <p className="text-slate-500 text-[10px] mt-0.5">Distribuidor Autorizado: Rogério André © {new Date().getFullYear()}</p>
-          </div>
-          
-          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 bg-white/60 px-4 py-2 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
-            <span>Desenvolvido com</span>
-            <Heart size={12} className="text-teal-500 fill-teal-500 animate-pulse" />
-            <span>por</span>
-            <span className="font-bold text-slate-700 tracking-wide ml-0.5">Lucas André</span>
-          </div>
-        </div>
-      </footer>
-
-      {/* ==============================================
-          A INTERFACE DA INTELIGÊNCIA ARTIFICIAL ATIVA
-      =============================================== */}
-      <div className={`fixed bottom-24 right-5 sm:right-6 z-50 w-[320px] sm:w-[380px] bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-200/60 overflow-hidden transition-all duration-300 origin-bottom-right flex flex-col ${isChatOpen ? 'scale-100 opacity-100' : 'scale-0 opacity-0 pointer-events-none'} max-h-[550px]`}>
-        
-        {/* Cabeçalho IA */}
-        <div className="bg-slate-900 p-4 sm:p-5 flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-teal-500 rounded-xl flex items-center justify-center shadow-inner">
-              <Bot size={20} className="text-white" />
-            </div>
-            <div>
-              <p className="text-white text-sm font-bold leading-none">Assistente IA</p>
-              <p className="text-teal-400 text-[10px] mt-1.5 font-bold tracking-widest flex items-center gap-1 uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span> Online
-              </p>
-            </div>
-          </div>
-          <button onClick={() => setIsChatOpen(false)} className="text-slate-400 hover:text-white transition-colors bg-white/10 p-1.5 rounded-lg">
-            <X size={18} />
-          </button>
-        </div>
-        
-        {/* Histórico de Mensagens */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 bg-slate-50 flex flex-col gap-4" ref={chatScrollRef}>
-          {chatMessages.map((msg, idx) => (
-            <div key={idx} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[85%] rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed shadow-sm ${msg.role === 'user' ? 'bg-teal-600 text-white rounded-tr-sm' : 'bg-white border border-slate-200 text-slate-700 rounded-tl-sm'}`}>
-                {msg.text}
-              </div>
-            </div>
-          ))}
-          {isChatLoading && (
-            <div className="flex w-full justify-start animate-in fade-in duration-300">
-              <div className="bg-white border border-slate-200 rounded-2xl rounded-tl-sm p-3 shadow-sm flex items-center gap-2">
-                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce"></span>
-                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-100"></span>
-                <span className="w-2 h-2 bg-slate-300 rounded-full animate-bounce delay-200"></span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Input de Mensagem */}
-        <div className="p-3 sm:p-4 bg-white border-t border-slate-100 shrink-0">
-          <form onSubmit={handleSendMessage} className="relative flex items-center">
-            <input
-              type="text"
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              placeholder="Digite sua dúvida aqui..."
-              disabled={isChatLoading}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-full pl-4 pr-12 py-3 focus:outline-none focus:border-teal-400 focus:ring-1 focus:ring-teal-400 transition-all disabled:opacity-50"
-            />
-            <button 
-              type="submit" 
-              disabled={!chatInput.trim() || isChatLoading}
-              className="absolute right-1.5 w-9 h-9 flex items-center justify-center bg-teal-600 hover:bg-teal-700 disabled:bg-slate-300 text-white rounded-full transition-colors"
-            >
-              {isChatLoading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} className="-ml-0.5" />}
-            </button>
-          </form>
-          <div className="mt-2 text-center">
-            <a href="https://wa.me/5581900000000" target="_blank" className="text-[10px] text-teal-600 font-bold hover:underline">
-              Prefere atendimento humano? Fale no WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* BOTÃO FLUTUANTE */}
-      <button 
-        onClick={() => setIsChatOpen(!isChatOpen)}
-        className="fixed bottom-6 right-5 sm:right-6 z-50 flex items-center justify-center w-14 h-14 bg-teal-600 hover:bg-teal-700 text-white rounded-full shadow-[0_10px_35px_rgba(13,148,136,0.3)] transition-transform hover:scale-110"
-        title="Ajuda ou Dúvidas?"
-      >
-        {isChatOpen ? <X size={24} /> : <MessageCircle size={24} />}
-        {!isChatOpen && <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-400 border-2 border-[#FAFAFC] rounded-full animate-pulse"></span>}
-      </button>
-
+      <AvaliacoesDaLoja />
+      <GoogleStoreReviewsLink />
       <LoginModal 
         isOpen={isLoginModalOpen} 
         message={loginModalMessage}
@@ -617,6 +627,7 @@ function HomeContent() {
 
 export default function Home() {
   return (
+    // ATENÇÃO AQUI: Removemos o overflow-hidden maldito que estava estragando o botão!
     <main className="min-h-screen bg-[#FAFAFC] text-slate-900 selection:bg-teal-600 selection:text-white flex flex-col relative">
       <Suspense fallback={<div className="min-h-screen bg-[#FAFAFC]"></div>}>
         <HomeContent />

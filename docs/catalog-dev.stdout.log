@@ -1,0 +1,11 @@
+▲ Next.js 16.3.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.100.8:3000
+- Environments: .env
+✓ Ready in 1921ms
+✓ Running next.config.ts took 442ms
+
+ GET /produto/PERF-CAPA 200 in 6.2s (next.js: 4.0s, application-code: 2.2s)
+ GET /produto/PERF-CAPA 200 in 1667ms (next.js: 28ms, application-code: 1639ms)
+ GET /produto/CAP-SH-OK 200 in 301ms (next.js: 21ms, application-code: 280ms)
+ GET /produto/PERF-LUA-VE 200 in 416ms (next.js: 4ms, application-code: 412ms)

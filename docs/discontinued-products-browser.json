@@ -1,0 +1,63 @@
+{
+  "retired": [
+    {
+      "code": "NUT-AMYNO-CX",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "NUT-AMYNO-UN",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "NUT-POWER-UN",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "NUT-MUNITY-UN",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "BE-SER-LUM",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "CAP-CO-KES",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "CAP-PRO-KES",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "CAP-AT-MC",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "BE-TOQUE-LUM",
+      "status": 200,
+      "noindex": true
+    },
+    {
+      "code": "BE-XBOOST-269",
+      "status": 200,
+      "noindex": true
+    }
+  ],
+  "homeProductLinks": 113,
+  "sitemapChecked": true,
+  "persistedCartVisibleCodes": [
+    "CAP-CO-MEL"
+  ],
+  "retainedConditionerScreenshots": [
+    390,
+    1440
+  ]
+}

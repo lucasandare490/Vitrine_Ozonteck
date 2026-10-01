@@ -5,9 +5,15 @@
   --background: #FAFAFC;
   --foreground: #0f172a;
   color-scheme: light;
+  
+  --a11y-text-scale: 1;
+  --a11y-line-height: 1.5;
+  --a11y-letter-spacing: 0px;
+  --a11y-word-spacing: 0px;
+  --a11y-saturation: 100%;
+  --a11y-brightness: 100%;
 }
 
-/* Quando a classe .dark estiver ativa, inverte as variáveis globais */
 .dark {
   --background: #09090b;
   --foreground: #f4f4f5;
@@ -19,19 +25,136 @@
   --color-foreground: var(--foreground);
 }
 
-html, body {
+html {
   background-color: var(--background);
+  font-size: calc(16px * var(--a11y-text-scale));
+}
+
+html, body {
   color: var(--foreground);
   margin: 0;
   padding: 0;
   transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: var(--a11y-line-height) !important;
+  letter-spacing: var(--a11y-letter-spacing) !important;
+  word-spacing: var(--a11y-word-spacing) !important;
 }
 
-/* Ocultar barra de rolagem horizontal em áreas específicas */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ========================================================= */
+/* REFORÇO ESTRUTURAL WCAG 1.4.1 E NOVOS RECURSOS AAA        */
+/* ========================================================= */
+
+/* Links ganham sublinhado grosso */
+html[class*="a11y-daltonism-"]:not(.a11y-daltonism-none) a[href]:not(#a11y-widget-root *) {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 3px !important;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Botões ganham uma borda inferior sólida */
+html[class*="a11y-daltonism-"]:not(.a11y-daltonism-none) button:not(#a11y-widget-root *),
+html[class*="a11y-daltonism-"]:not(.a11y-daltonism-none) [role="button"]:not(#a11y-widget-root *) {
+  border-bottom: 3px solid currentColor !important; 
+}
+
+/* TEXTURAS INTELIGENTES PARA ALERTAS/ERROS */
+html[class*="a11y-daltonism-"]:not(.a11y-daltonism-none) [class*="bg-red"]:not(#a11y-widget-root *) {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.08),
+    rgba(0, 0, 0, 0.08) 10px,
+    transparent 10px,
+    transparent 20px
+  ) !important;
+}
+
+/* 🟢 NOVO: OCULTAR IMAGENS E FUNDOS (Foco Extremo) */
+html.a11y-hide-images img,
+html.a11y-hide-images video,
+html.a11y-hide-images [style*="background-image"],
+html.a11y-hide-images [class*="bg-[url"] {
+  display: none !important;
+}
+
+/* 🟢 NOVO: FORÇAR ALINHAMENTO À ESQUERDA (Anti-Dislexia) */
+html.a11y-align-left *:not(#a11y-widget-root *) {
+  text-align: left !important;
+}
+
+/* ========================================================= */
+/* OUTRAS REGRAS DE ACESSIBILIDADE ESTRUTURAL                */
+/* ========================================================= */
+
+.a11y-dyslexia * { font-family: 'Comic Sans MS', 'OpenDyslexic', sans-serif !important; }
+.a11y-legible * { font-family: 'Arial', 'Helvetica', sans-serif !important; }
+
+/* MODO LEITURA */
+html.a11y-reading-mode body,
+html.a11y-reading-mode main,
+html.a11y-reading-mode section,
+html.a11y-reading-mode article {
+  background-color: #FDF6E3 !important;
+  color: #1A1A1A !important;
+  background-image: none !important;
+}
+html.a11y-reading-mode a:not(#a11y-widget-root *) {
+  color: #0369A1 !important; 
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+}
+
+/* DESTAQUES SEMÂNTICOS DE FOCO */
+html.a11y-highlight-links a[href]:not(#a11y-widget-root *) {
+  outline: 4px solid #F59E0B !important; 
+  outline-offset: 4px !important; 
+}
+
+html.a11y-highlight-buttons button:not(#a11y-widget-root *) {
+  outline: 4px solid #E11D48 !important; 
+  outline-offset: 4px !important; 
+}
+
+html.a11y-highlight-titles h1:not(#a11y-widget-root *), 
+html.a11y-highlight-titles h2:not(#a11y-widget-root *), 
+html.a11y-highlight-titles h3:not(#a11y-widget-root *) {
+  outline: 3px dashed #0D9488 !important; 
+  outline-offset: 6px !important;
+}
+
+html.a11y-hover-focus a:hover:not(#a11y-widget-root *),
+html.a11y-hover-focus button:not(:disabled):hover:not(#a11y-widget-root *),
+html.a11y-hover-focus input:not(:disabled):hover:not(#a11y-widget-root *),
+html.a11y-hover-focus select:not(:disabled):hover:not(#a11y-widget-root *),
+html.a11y-hover-focus textarea:not(:disabled):hover:not(#a11y-widget-root *),
+html.a11y-hover-focus [tabindex]:not([tabindex="-1"]):hover:not(#a11y-widget-root *) {
+  outline: 3px dashed #0D9488 !important;
+  outline-offset: 4px !important;
+  background-color: rgba(13, 148, 136, 0.1) !important;
+}
+
+html.a11y-keyboard-tips *:focus-visible:not(#a11y-widget-root *) { 
+  outline: 4px solid #F59E0B !important; 
+  outline-offset: 4px !important; 
+}
+
+/* CONTROLE DE ANIMAÇÕES */
+html.a11y-pause-animations *, html.a11y-pause-animations *::before, html.a11y-pause-animations *::after {
+  animation-play-state: paused !important;
+}
+
+html.a11y-reduce-motion *, html.a11y-reduce-motion *::before, html.a11y-reduce-motion *::after { 
+  transition-duration: 0.001ms !important; 
+  animation-duration: 0.001ms !important; 
+  scroll-behavior: auto !important; 
+}
+
+/* PROTEÇÃO DE INVERSÃO */
+body.a11y-invert > *:not(#a11y-widget-root):not([vw]) {
+  filter: invert(100%) hue-rotate(180deg);
+}
+body.a11y-invert img, body.a11y-invert video, body.a11y-invert iframe {
+  filter: invert(100%) hue-rotate(180deg);
 }

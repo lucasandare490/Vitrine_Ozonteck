@@ -1,0 +1,438 @@
+{
+  "BE-SOFH": {
+    "dimensions": "3.00 × 3.00 × 10.00 cm",
+    "weight": "62 g"
+  },
+  "BE-OX3": {
+    "dimensions": "7.00 × 7.00 × 19.00 cm",
+    "weight": "442 g"
+  },
+  "BE-LUSH": {
+    "dimensions": "7.00 × 7.00 × 5.00 cm",
+    "weight": "124 g"
+  },
+  "BE-SHII": {
+    "dimensions": "5.00 × 5.00 × 18.00 cm",
+    "weight": "234 g"
+  },
+  "BE-PURE": {
+    "dimensions": "3.00 × 3.00 × 10.00 cm",
+    "weight": "45 g"
+  },
+  "BE-FRESH": {
+    "dimensions": "4.00 × 5.00 × 18.00 cm",
+    "weight": "90 g"
+  },
+  "BE-HID-SB": {
+    "dimensions": "8.00 × 8.00 × 19.00 cm",
+    "weight": "120 g"
+  },
+  "BE-HID-VG": {
+    "dimensions": "8.00 × 8.00 × 19.00 cm",
+    "weight": "120 g"
+  },
+  "BE-HAY": {
+    "dimensions": "4.00 × 4.00 × 15.00 cm",
+    "weight": "149 g"
+  },
+  "BE-TRIX": {
+    "dimensions": "3.00 × 3.00 × 10.00 cm",
+    "weight": "42 g"
+  },
+  "CAP-AMP-SF": {
+    "dimensions": "1.00 × 1.00 × 6.00 cm",
+    "weight": "50 g"
+  },
+  "CAP-SH-OK": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "339 g"
+  },
+  "CAP-MAS-OK": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "323 g"
+  },
+  "CAP-SH-MC": {
+    "dimensions": "5.00 × 6.00 × 17.00 cm",
+    "weight": "344 g"
+  },
+  "CAP-MAS-MC": {
+    "dimensions": "10.00 × 10.00 × 6.00 cm",
+    "weight": "330 g"
+  },
+  "CAP-SH-BL": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "339 g"
+  },
+  "CAP-MAS-BL": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "317 g"
+  },
+  "CAP-KIDS-SH": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "340 g"
+  },
+  "CAP-KIDS-CO": {
+    "dimensions": "6.00 × 6.00 × 18.00 cm",
+    "weight": "311 g"
+  },
+  "CAP-KIDS-LE": {
+    "dimensions": "6.00 × 6.00 × 18.00 cm",
+    "weight": "318 g"
+  },
+  "CAP-O-ACAI": {
+    "dimensions": "3.00 × 3.00 × 10.00 cm",
+    "weight": "42 g"
+  },
+  "CAP-O-CREAM": {
+    "dimensions": "5.00 × 5.00 × 17.00 cm",
+    "weight": "179 g"
+  },
+  "CAP-FOR-MEN": {
+    "dimensions": "5.00 × 5.00 × 17.00 cm",
+    "weight": "179 g"
+  },
+  "CAP-TON": {
+    "dimensions": "3.00 × 3.00 × 10.00 cm",
+    "weight": "121 g"
+  },
+  "CAP-MAS-MEL": {
+    "dimensions": "10.00 × 10.00 × 6.00 cm",
+    "weight": "331 g"
+  },
+  "CAP-SH-MEL": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "342 g"
+  },
+  "PRO-AMR": {
+    "dimensions": "7.30 × 30.00 × 7.30 cm",
+    "weight": "1110 g"
+  },
+  "PRO-CIF": {
+    "dimensions": "7.30 × 30.00 × 7.30 cm",
+    "weight": "1110 g"
+  },
+  "PRO-HMS": {
+    "dimensions": "7.50 × 30.00 × 7.50 cm",
+    "weight": "1110 g"
+  },
+  "PRO-LPC": {
+    "dimensions": "7.50 × 30.00 × 7.50 cm",
+    "weight": "1110 g"
+  },
+  "PRO-DEEP": {
+    "dimensions": "7.50 × 30.00 × 7.50 cm",
+    "weight": "1110 g"
+  },
+  "PRO-SOFT": {
+    "dimensions": "7.50 × 30.00 × 7.50 cm",
+    "weight": "1110 g"
+  },
+  "NUT-NXCAP": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "82 g"
+  },
+  "NUT-OMEGA": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "110 g"
+  },
+  "NUT-XBOOST": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "75 g"
+  },
+  "NUT-TRIMAG": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "70 g"
+  },
+  "NUT-CREAT-CX": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "343 g"
+  },
+  "NUT-CREAT-UN": {
+    "dimensions": "14.00 × 3.50 × 14.00 cm",
+    "weight": "9 g"
+  },
+  "NUT-CREAT-MO-CX": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "343 g"
+  },
+  "NUT-CREAT-MO-UN": {
+    "dimensions": "3.50 × 3.50 × 14.00 cm",
+    "weight": "9 g"
+  },
+  "NUT-BORYS": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "64 g"
+  },
+  "NUT-DREAM": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "57 g"
+  },
+  "NUT-K2D3": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "76 g"
+  },
+  "NUT-LUMI": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "80 g"
+  },
+  "NUT-LEV-UN": {
+    "dimensions": "14.00 × 3.50 × 14.00 cm",
+    "weight": "9 g"
+  },
+  "NUT-VIRT": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "79 g"
+  },
+  "NUT-VITA-OZ": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "78 g"
+  },
+  "NUT-FLEX-CX": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "343 g"
+  },
+  "NUT-FLEX-UN": {
+    "dimensions": "14.00 × 3.50 × 14.00 cm",
+    "weight": "9 g"
+  },
+  "NUT-COBAL": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "72 g"
+  },
+  "NUT-GENO": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "65 g"
+  },
+  "NUT-MELAT": {
+    "dimensions": "3.00 × 10.00 × 3.00 cm",
+    "weight": "62 g"
+  },
+  "NUT-OX": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "77 g"
+  },
+  "NUT-SOFH-D": {
+    "dimensions": "5.00 × 11.00 × 5.00 cm",
+    "weight": "62 g"
+  },
+  "PERF-303-W": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-303-M": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-303-VIP": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-ALEM": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-ANGE": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-AVEN": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-BLUE": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-CAPA": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-CIND": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-CIND": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-DG": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-DOCU": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-FAMMA": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-FANT": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-FERA": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-GOUF-B": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-GOUF-T": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-GREC": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-MAD": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-MADAME": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-MAX-B": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-MAXBOSS": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-MAXIMUM": {
+    "dimensions": "3.00 × 9.00 × 10.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-PRESIDENTE": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-PRES": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-SCAN": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "38 g"
+  },
+  "P100-SCAN": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-SEDUC": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-SENTIMENTO": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-SENT": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-SOBERANO": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-SOB": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-SOUL": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-SPEED": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-SPEED": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-VENUM": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-VG": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-VG": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-VIDA": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "P100-VIDA": {
+    "dimensions": "5.50 × 5.50 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-VIP-GIRL": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-AALI": {
+    "dimensions": "10.00 × 10.00 × 10.00 cm",
+    "weight": "58 g"
+  },
+  "P100-AALIYAH": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-OUD": {
+    "dimensions": "10.00 × 10.00 × 10.00 cm",
+    "weight": "58 g"
+  },
+  "P100-OUD": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-RHINO": {
+    "dimensions": "10.00 × 10.00 × 10.00 cm",
+    "weight": "58 g"
+  },
+  "P100-RHINO": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-SUBLI": {
+    "dimensions": "10.00 × 10.00 × 10.00 cm",
+    "weight": "58 g"
+  },
+  "P100-SUBLIME": {
+    "dimensions": "5.50 × 11.00 × 5.50 cm",
+    "weight": "330 g"
+  },
+  "PERF-LABOOM": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-SUPREMO": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "PERF-FER-VE": {
+    "dimensions": "4.50 × 17.00 × 4.50 cm",
+    "weight": "271 g"
+  },
+  "PERF-LUA-VE": {
+    "dimensions": "4.50 × 17.00 × 4.50 cm",
+    "weight": "271 g"
+  },
+  "PERF-EASY": {
+    "dimensions": "3.00 × 9.00 × 1.00 cm",
+    "weight": "58 g"
+  },
+  "CAP-CO-MEL": {
+    "dimensions": "5.00 × 5.00 × 22.00 cm",
+    "weight": "330 g"
+  }
+}

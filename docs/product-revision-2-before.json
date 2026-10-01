@@ -1,0 +1,4950 @@
+{
+  "AC-CAM-P": {
+    "checkedAt": "2026-09-26",
+    "level": "official",
+    "summary": "Camiseta da linha de acessórios Ozonteck, na cor preta. O tamanho G corresponde ao cadastro desta loja.",
+    "details": [
+      {
+        "label": "Cor",
+        "value": "Preta"
+      },
+      {
+        "label": "Tamanho",
+        "value": "G (cadastro da loja)"
+      },
+      {
+        "label": "Tecido informado pela marca",
+        "value": "Dry Fit; composição em fibras não informada"
+      },
+      {
+        "label": "Cuidados publicados",
+        "value": "Lavar à mão, não lavar em máquina e secar à sombra. Confira também a etiqueta."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/camiseta-preta"
+      }
+    ],
+    "missing": [
+      "Composição do tecido",
+      "Tabela de medidas"
+    ],
+    "note": "A página da marca descreve tamanho P. Os tamanhos G e GG são do cadastro desta loja; confirme medidas e etiqueta da peça."
+  },
+  "AC-CAM-R": {
+    "checkedAt": "2026-09-26",
+    "level": "official",
+    "summary": "Camiseta da linha de acessórios Ozonteck, na cor rosa. O tamanho GG corresponde ao cadastro desta loja.",
+    "details": [
+      {
+        "label": "Cor",
+        "value": "Rosa"
+      },
+      {
+        "label": "Tamanho",
+        "value": "GG (cadastro da loja)"
+      },
+      {
+        "label": "Tecido informado pela marca",
+        "value": "Dry Fit; composição em fibras não informada"
+      },
+      {
+        "label": "Cuidados publicados",
+        "value": "Lavar à mão, não lavar em máquina e secar à sombra. Confira também a etiqueta."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/camiseta-rosa"
+      }
+    ],
+    "missing": [
+      "Composição do tecido",
+      "Tabela de medidas"
+    ],
+    "note": "A página da marca descreve tamanho P. Os tamanhos G e GG são do cadastro desta loja; confirme medidas e etiqueta da peça."
+  },
+  "AC-SQUEEZE": {
+    "checkedAt": "2026-09-26",
+    "level": "official",
+    "summary": "Garrafa squeeze turquesa para transportar água, com capacidade de 500 ml informada pela marca.",
+    "details": [
+      {
+        "label": "Capacidade",
+        "value": "500 ml"
+      },
+      {
+        "label": "Cor",
+        "value": "Turquesa"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/squeeze-turquesa-500ml"
+      }
+    ],
+    "missing": [
+      "Material",
+      "Temperatura máxima",
+      "Cuidados de limpeza"
+    ]
+  },
+  "AC-CXMEM": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "Não foi localizada uma ficha técnica confiável para Caixa Memórias. Materiais e dimensões precisam de confirmação."
+  },
+  "BE-SOFH": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Sofh é um óleo de girassol ozonizado para cuidado externo da pele, apresentado em frasco conta-gotas. Sua proposta cosmética é hidratar e ajudar a manter a pele macia, especialmente nas áreas ressecadas.",
+    "details": [
+      {
+        "label": "Finalidade",
+        "value": "Cuidado cosmético da pele"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/oleo-sofh"
+      },
+      {
+        "label": "Informação complementar: revenda Produtos Ozonteck",
+        "url": "https://produtosozonteck.com/produto/oleo-sofh-oleo-de-girassol-ozonizado-ozonteck/"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Características",
+        "items": [
+          "Textura oleosa para cuidado da pele e proposta de hidratação informada pela marca.",
+          "Frasco de 20 ml na apresentação ilustrada pelo fabricante. Confirme o volume da unidade adquirida."
+        ]
+      },
+      {
+        "title": "Uso e cuidados",
+        "items": [
+          "Uso externo. Siga as instruções do rótulo; a página consultada não confirma quantidade nem frequência para a apresentação vendida.",
+          "Não substitui medicamento ou avaliação profissional. Não foram incorporadas promessas de cicatrização, tratamento de feridas ou combate a infecções."
+        ]
+      },
+      {
+        "title": "O que é a ozonização",
+        "items": [
+          "A marca descreve um processo de ozonização do óleo que forma compostos como ozonídeos e peróxidos. Essa descrição do processo não comprova eficácia no tratamento de doenças.",
+          "Sua aplicação aqui é o cuidado cosmético externo: hidratação, maciez e conforto da pele ressecada."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Não ingerir e evitar contato com os olhos; se ocorrer, enxaguar com água.",
+          "Conservar em local arejado, longe de calor excessivo e luz solar, fora do alcance de crianças e animais domésticos.",
+          "Em caso de ingestão acidental, procurar assistência médica e levar a embalagem. Não é medicamento."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-OX3": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Sabonete ozonizado para higiene das mãos e do corpo. A marca descreve textura leve e proposta de limpeza suave da pele.",
+    "details": [
+      {
+        "label": "Aplicação",
+        "value": "Mãos e corpo"
+      },
+      {
+        "label": "Componentes destacados pela marca",
+        "value": "Extrato de bardana e micropartículas à base de mica natural; não representa a lista completa de ingredientes"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/sabonete-ox3"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Extrato de bardana e micropartículas à base de mica natural são citados pela Ozonteck.",
+          "A fonte descreve uma fórmula ozonizada, mas não disponibiliza a lista completa de ingredientes."
+        ]
+      },
+      {
+        "title": "Limpeza e acabamento",
+        "items": [
+          "Sabonete para mãos e corpo, com textura leve e proposta de limpeza suave associada à hidratação.",
+          "O extrato de bardana integra a formulação descrita; as micropartículas de mica natural conferem o aspecto perolado. Esses destaques não substituem a lista completa de ingredientes."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-LUSH": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Oxylush é um esfoliante facial voltado à remoção de células mortas e impurezas superficiais. A proposta é deixar a textura da pele mais uniforme ao toque e preparar a rotina de cuidados, sem substituir a limpeza e a hidratação adequadas.",
+    "details": [
+      {
+        "label": "Aplicação",
+        "value": "Facial"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/esfoliante-oxylush"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "O que faz",
+        "items": [
+          "Esfoliação facial para remover células mortas e impurezas da superfície da pele.",
+          "A marca destaca melhora da suavidade e da uniformidade da textura, além de preparar a rotina de cuidados seguinte."
+        ]
+      },
+      {
+        "title": "Fórmula e utilização",
+        "items": [
+          "A fonte consultada não identifica o material das partículas esfoliantes nem apresenta a lista integral de ingredientes.",
+          "A frequência e o tempo de aplicação precisam ser confirmados no rótulo."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-SHII": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Life Shii é um gel ozonizado de massagem corporal, de textura leve e deslizante, com sensação refrescante. Combina componentes vegetais, mentol e cânfora em uma proposta de cuidado e conforto durante a massagem.",
+    "details": [
+      {
+        "label": "Textura",
+        "value": "Gel de massagem"
+      },
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Mentol e cânfora (não é a composição completa)"
+      },
+      {
+        "label": "Cuidados",
+        "value": "A fonte orienta não usar na gravidez, em menores de 7 anos ou sobre pele irritada ou lesionada. Uso externo; evitar os olhos."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/life-shii"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Arnica, pimenta, gengibre, camélia, alecrim, salicilato de metila, cânfora e mentol, conforme o texto da marca. A composição integral e as concentrações não foram fornecidas."
+        ]
+      },
+      {
+        "title": "Massagem corporal",
+        "items": [
+          "A textura favorece o deslizamento sobre a pele e uma sensação de frescor, com proposta emoliente.",
+          "Não substitui avaliação ou tratamento de dor, inflamações ou problemas circulatórios."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Não utilizar durante a gravidez, em menores de 7 anos ou sobre pele irritada ou lesionada.",
+          "Evitar os olhos e interromper o uso em caso de reação. Manter fechado, em local fresco e seco, protegido do calor e da luz, fora do alcance de crianças.",
+          "Em caso de ingestão acidental, procurar assistência médica com a embalagem."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-PURE": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Pure Hot é um gel corporal de massagem à base de água, com proposta de sensação de aquecimento. A marca descreve polímeros condicionantes, fácil deslizamento e absorção rápida, associados à hidratação e ao toque macio da pele.",
+    "details": [
+      {
+        "label": "Base",
+        "value": "Aquosa"
+      },
+      {
+        "label": "Característica sensorial",
+        "value": "Aquecimento, conforme a marca"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/pure-hot"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Característica sensorial",
+        "items": [
+          "Proposta de sensação de aquecimento durante a massagem, descrita pela Ozonteck.",
+          "A fonte não informa temperatura, duração do efeito nem composição integral. Não foi inferida indicação de uso íntimo."
+        ]
+      },
+      {
+        "title": "Textura e componentes",
+        "items": [
+          "Base aquosa, polímeros condicionantes e formulação apresentada como ozonizada. O material não identifica todos os ingredientes.",
+          "A sensação de aquecimento é uma característica sensorial; não representa indicação de tratamento."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Não ingerir, não aplicar sobre pele lesionada e interromper o uso se houver reação.",
+          "Evitar os olhos; em caso de contato, enxaguar. Conservar à temperatura ambiente, protegido da luz e do calor, fora do alcance de crianças.",
+          "Não utilizar se a embalagem estiver violada."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-FRESH": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Ozon Fresh é um creme dental ozonizado para a rotina de higiene bucal. Deve ser utilizado na escovação conforme as orientações da embalagem e do dentista; a descrição recebida não informa o teor de flúor nem a composição integral.",
+    "details": [
+      {
+        "label": "Tipo",
+        "value": "Creme dental"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-fresh"
+      }
+    ],
+    "missing": [
+      "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+    ],
+    "sections": [
+      {
+        "title": "Como usar",
+        "items": [
+          "O fabricante orienta escovar os dentes após as refeições, três vezes ao dia, ou conforme orientação do dentista, e enxaguar."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Não ingerir. A fonte informa que não deve ser utilizado por menores de 6 anos.",
+          "Manter fora do alcance de crianças, evitar os olhos e enxaguar com água em caso de contato.",
+          "Interromper o uso em caso de reação e procurar orientação do dentista."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-HID-SB": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Loção corporal perfumada Speed Black. A fonte da marca descreve uma proposta de hidratação com perfil amadeirado fresco.",
+    "line": "speed-black",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Ácido hialurônico e vitamina E"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/hidratante-speed-black"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "note": "A fonte descreve a loção, mas não confirma a equivalência da fórmula com a apresentação de 120 g cadastrada. Confira o rótulo.",
+    "sections": [
+      {
+        "title": "Ativos e hidratação",
+        "items": [
+          "Ácido hialurônico de alto peso molecular e vitamina E são os ativos destacados pela marca.",
+          "A proposta da loção é auxiliar a retenção de umidade e proporcionar maciez e suavidade à pele. Não é uma lista integral de ingredientes."
+        ]
+      },
+      {
+        "title": "Fragrância",
+        "items": [
+          "Perfil amadeirado fresco, com referências a maçã, bergamota, ameixa, âmbar, cedro e musk."
+        ]
+      },
+      {
+        "title": "Indicação e apresentação",
+        "items": [
+          "A página oficial indica a loção para adultos e diferentes tipos de pele.",
+          "O catálogo desta loja informa 120 g. A equivalência da formulação com a loção descrita na fonte deve ser confirmada na embalagem."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-HID-VG": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Loção corporal perfumada VG Sexy, descrita pela marca com perfil floral frutado e levemente adocicado.",
+    "line": "vg-sexy",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Ácido hialurônico e vitamina E"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/hidratante-vg-sexy"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "note": "A fonte descreve a loção, mas não confirma a equivalência da fórmula com a apresentação de 120 g cadastrada. Confira o rótulo.",
+    "sections": [
+      {
+        "title": "Ativos e hidratação",
+        "items": [
+          "Ácido hialurônico de alto peso molecular e vitamina E são os ativos destacados pela marca.",
+          "A proposta da loção é auxiliar a retenção de umidade e proporcionar maciez e suavidade à pele. Não é uma lista integral de ingredientes."
+        ]
+      },
+      {
+        "title": "Fragrância",
+        "items": [
+          "Perfil floral frutado levemente adocicado, com referências a champanhe rosé, pimenta rosa, flor de pêssego, rosas, musk branco e madeiras."
+        ]
+      },
+      {
+        "title": "Indicação e apresentação",
+        "items": [
+          "A página oficial indica a loção para adultos e diferentes tipos de pele.",
+          "O catálogo desta loja informa 120 g. A equivalência da formulação com a loção descrita na fonte deve ser confirmada na embalagem."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "BE-HAY": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonteckgirua.lojavirtualnuvem.com.br/produtos/haydek/"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/haydek.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Modo de uso e advertências completos"
+    ],
+    "note": "Informações da face legível da embalagem fotografada. A composição completa e as instruções do lote adquirido precisam do rótulo integral.",
+    "summary": "Haydek é um creme ozonizado para os pés, em embalagem com válvula dosadora de 120 g.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Manteiga de karité e hydroxyethyl urea são legíveis na frente do rótulo. A marca também cita a tecnologia comercial Matrix 3D."
+        ]
+      },
+      {
+        "title": "Cuidado dos pés",
+        "items": [
+          "A embalagem apresenta uma proposta de hidratação, prevenção do ressecamento e controle do mau odor.",
+          "A foto não informa frequência de aplicação nem permite confirmar a composição integral."
+        ]
+      }
+    ]
+  },
+  "BE-TRIX": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://loja-ozonteck.lojaintegrada.com.br/ozon-trix"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozontrix.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Modo de uso e advertências completos"
+    ],
+    "note": "Informações da face legível da embalagem fotografada. A composição completa e as instruções do lote adquirido precisam do rótulo integral.",
+    "summary": "Ozon Trix é um desodorante ozonizado para as axilas, apresentado em spray de 30 ml.",
+    "sections": [
+      {
+        "title": "Componente destacado",
+        "items": [
+          "Extrato de alcaçuz é legível na frente da embalagem, que também cita a tecnologia comercial Matrix 3D."
+        ]
+      },
+      {
+        "title": "Finalidade",
+        "items": [
+          "Controle do odor das axilas. Não foi atribuída duração de proteção nem ação antitranspirante sem confirmação.",
+          "Confira no rótulo completo as orientações de aplicação e os cuidados após depilação."
+        ]
+      }
+    ]
+  },
+  "CAP-AMP-SF": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Ampola capilar Soft Hair para o cuidado de fios danificados. A marca destaca hidratação, maciez e brilho como benefícios cosméticos.",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Nanoaminoácidos e queratina de baixo peso molecular"
+      },
+      {
+        "label": "Indicação",
+        "value": "Todos os tipos de cabelo, especialmente danificados"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ampola-soft-hair"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos",
+        "items": [
+          "Nanoaminoácidos e queratina de baixo peso molecular são os componentes destacados pela marca.",
+          "A fórmula é apresentada como reconstrutora, emoliente e hidratante; não foi disponibilizada composição integral."
+        ]
+      },
+      {
+        "title": "Para quais cabelos",
+        "items": [
+          "Todos os tipos, com destaque para fios muito danificados, ressecados ou opacos."
+        ]
+      },
+      {
+        "title": "Benefícios cosméticos descritos",
+        "items": [
+          "Maciez, brilho e melhora da resistência dos fios.",
+          "Redução do aspecto de frizz e porosidade. Resultados variam conforme o estado do cabelo."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-SH-OK": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Shampoo Ozon-Kesen é um shampoo pós-química para cabelos que passaram por coloração, alisamento ou relaxamento, e para fios ressecados. A fórmula descrita pela marca reúne queratina e manteiga de cupuaçu em uma proposta de limpeza suave e cuidado da fibra.",
+    "line": "ozon-kesen",
+    "details": [
+      {
+        "label": "Indicação",
+        "value": "Cabelos pós-química"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/shampoo-ozon-kesen"
+      }
+    ],
+    "missing": [
+      "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+    ],
+    "sections": [
+      {
+        "title": "Ativos destacados",
+        "items": [
+          "Queratina e manteiga de cupuaçu, em uma formulação apresentada como ozonizada. Não é a composição integral."
+        ]
+      },
+      {
+        "title": "Como usar",
+        "items": [
+          "Aplicar nos cabelos molhados, massagear suavemente o couro cabeludo e distribuir pelos fios. Enxaguar completamente.",
+          "A marca propõe continuar o cuidado com a máscara da linha. Confira as instruções da apresentação adquirida."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Evitar os olhos, manter fora do alcance de crianças e conservar em local fresco e seco, protegido da luz solar.",
+          "O fabricante recomenda teste de sensibilidade antes do uso."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-MAS-OK": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Máscara pós-química para hidratar e condicionar os fios. A marca cita manteiga de cupuaçu e queratina.",
+    "line": "ozon-kesen",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Manteiga de cupuaçu e queratina"
+      },
+      {
+        "label": "Modo de uso publicado",
+        "value": "Após lavar, distribuir pelos fios, massagear e enxaguar. A fonte indica pausa de 20 a 40 minutos; confira a instrução da sua embalagem."
+      },
+      {
+        "label": "Cuidados",
+        "value": "Uso externo. Evitar os olhos e manter fora do alcance de crianças."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/mascara-ozon-kesen"
+      }
+    ],
+    "missing": [
+      "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e indicação",
+        "items": [
+          "Manteiga de cupuaçu e queratina são os componentes destacados.",
+          "Voltada aos fios após coloração, alisamento ou relaxamento, e também aos cabelos ressecados."
+        ]
+      },
+      {
+        "title": "Benefícios cosméticos",
+        "items": [
+          "A manteiga de cupuaçu integra a proposta de retenção de umidade; a queratina, a de reconstrução da fibra.",
+          "A marca destaca maciez, maleabilidade e brilho."
+        ]
+      },
+      {
+        "title": "Como usar",
+        "items": [
+          "Depois de lavar, aplicar mecha a mecha por todo o comprimento e massagear.",
+          "A fonte indica pausa de 20 a 40 minutos, enxágue e aplicação de condicionador. Confira o tempo no rótulo adquirido."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Evitar os olhos e manter fora do alcance de crianças.",
+          "Armazenar em local fresco e seco, protegido da luz solar."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-SH-MC": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Shampoo Master Curls é indicado para cabelos ondulados, cacheados e crespos. A descrição fornecida destaca óleos de argan e macadâmia, combinando limpeza com uma proposta de hidratação, maciez e facilidade para pentear.",
+    "line": "master-curls",
+    "details": [
+      {
+        "label": "Indicação",
+        "value": "Curvaturas 2A a 4C, conforme a marca"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/shampoo-master-curls"
+      }
+    ],
+    "missing": [
+      "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+    ],
+    "sections": [
+      {
+        "title": "Ativos destacados",
+        "items": [
+          "Óleos de argan e macadâmia, segundo o material da marca. A composição completa deve ser conferida no rótulo."
+        ]
+      },
+      {
+        "title": "Como usar",
+        "items": [
+          "Aplicar nos cabelos úmidos, massagear até formar espuma e enxaguar. Repetir se necessário, conforme a orientação publicada."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Evitar contato com os olhos, manter fora do alcance de crianças e conservar em local fresco, seco e protegido da luz.",
+          "Confira a versão do rótulo: a pesquisa anterior descrevia Master Curls Pro, enquanto o texto fornecido identifica Master Curls. Não foi presumida igualdade de formulação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-MAS-MC": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Máscara Master Curls para hidratação e condicionamento de cabelos cacheados, crespos e ondulados.",
+    "line": "master-curls",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Óleo de argan e proteínas hidrolisadas"
+      },
+      {
+        "label": "Modo de uso publicado",
+        "value": "Aplicar após o shampoo, nos fios úmidos, e enxaguar. A fonte indica pausa de 20 a 30 minutos; confirme na embalagem."
+      },
+      {
+        "label": "Cuidados",
+        "value": "Uso externo. Evitar contato com os olhos."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/mascara-master-curls"
+      }
+    ],
+    "missing": [
+      "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e indicação",
+        "items": [
+          "Óleo de argan e proteínas hidrolisadas, destacados pela marca para nutrir e condicionar.",
+          "Indicada para cabelos ondulados, cacheados e crespos."
+        ]
+      },
+      {
+        "title": "Benefícios cosméticos",
+        "items": [
+          "Hidratação, maciez e brilho, com proposta de definição dos cachos e controle do frizz."
+        ]
+      },
+      {
+        "title": "Como usar",
+        "items": [
+          "Após o shampoo, distribuir nos cabelos úmidos, mecha a mecha.",
+          "A página oficial indica pausa de 20 a 30 minutos e enxágue completo. Priorize as instruções da sua embalagem."
+        ]
+      },
+      {
+        "title": "Cuidados",
+        "items": [
+          "Uso externo. Evitar os olhos; em caso de contato, enxaguar com água.",
+          "Manter fora do alcance de crianças e guardar em local fresco, seco e protegido da luz solar."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-SH-BL": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Shampoo matizador Ozon Blond para a limpeza de cabelos claros. A marca informa ação cosmética de neutralização de tons amarelados e alaranjados.",
+    "line": "ozon-blond",
+    "details": [
+      {
+        "label": "Tipo",
+        "value": "Shampoo matizador"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/shampoo-ozon-blond"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e indicação",
+        "items": [
+          "Extratos de violeta e camomila e agentes matizadores, conforme o material fornecido.",
+          "Para cabelos loiros, descoloridos e grisalhos: limpeza e neutralização cosmética de tons amarelados e alaranjados."
+        ]
+      },
+      {
+        "title": "Limpeza e matização",
+        "items": [
+          "Proposta de remover resíduos com suavidade, favorecer a maciez e facilitar o desembaraço.",
+          "A fonte não informa o tempo de contato: utilize as instruções do shampoo adquirido, não as de uma máscara matizadora."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-MAS-BL": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Máscara matizadora Ozon Blond para cabelos loiros, descoloridos e grisalhos, com proposta de condicionamento e neutralização de tons indesejados.",
+    "line": "ozon-blond",
+    "details": [
+      {
+        "label": "Indicação",
+        "value": "Loiros, descoloridos e grisalhos"
+      },
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Extratos de violeta e camomila"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/mascara-ozon-blond"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e indicação",
+        "items": [
+          "Extratos de violeta e camomila e agentes matizadores, conforme a marca.",
+          "Indicada para cabelos loiros, descoloridos e grisalhos."
+        ]
+      },
+      {
+        "title": "Matização e condicionamento",
+        "items": [
+          "Proposta de neutralização dos tons amarelados e alaranjados.",
+          "Auxilia no condicionamento dos fios descoloridos, com maciez, maleabilidade e facilidade para pentear.",
+          "A marca declara fórmula livre de parabenos."
+        ]
+      },
+      {
+        "title": "Antes de aplicar",
+        "items": [
+          "O tempo de pausa não foi informado na página consultada. Confira a embalagem, sem adotar o tempo de outra máscara."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-KIDS-SH": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Shampoo infantil Kids Ozon Splash para limpeza suave dos fios. A descrição oficial informa fórmula sem parabenos e silicones.",
+    "line": "kids",
+    "details": [
+      {
+        "label": "Linha",
+        "value": "Kids Ozon Splash"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/shampoo-kids"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Fórmula",
+        "items": [
+          "Surfactantes descritos pela marca como de baixa irritabilidade.",
+          "A página informa ausência de parabenos, silicones e sal. A composição integral não foi publicada."
+        ]
+      },
+      {
+        "title": "Limpeza infantil",
+        "items": [
+          "Limpeza suave dos fios, com proposta de brilho e perfume.",
+          "A marca descreve uso diário para cabelos infantis. Confira a faixa etária e as instruções do rótulo."
+        ]
+      },
+      {
+        "title": "Extratos destacados",
+        "items": [
+          "Frutas vermelhas e banana são os extratos apresentados para a linha Kids Ozon Splash.",
+          "A descrição de baixa irritabilidade não garante ausência de alergias. Confira a faixa etária e as instruções específicas da embalagem."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-KIDS-CO": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Condicionador infantil Kids Ozon Splash para maciez e condicionamento dos cabelos. A fonte destaca extratos de frutas vermelhas e banana.",
+    "line": "kids",
+    "details": [
+      {
+        "label": "Linha",
+        "value": "Kids Ozon Splash"
+      },
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Extratos de frutas vermelhas e banana"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/condicionador-kids"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e fórmula",
+        "items": [
+          "Extratos de frutas vermelhas e banana são destacados pela marca.",
+          "A página informa fórmula sem parabenos e silicones, de textura leve e hidratante."
+        ]
+      },
+      {
+        "title": "Cuidado dos fios",
+        "items": [
+          "Condicionamento após a limpeza, para maciez, sedosidade e maleabilidade dos cabelos infantis.",
+          "A marca descreve uso diário. A idade e a aplicação da apresentação adquirida devem ser conferidas no rótulo."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-KIDS-LE": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Finalizador infantil Kids Ozon Splash para pentear, desembaraçar e auxiliar na definição dos cachos.",
+    "line": "kids",
+    "details": [
+      {
+        "label": "Linha",
+        "value": "Kids Ozon Splash"
+      },
+      {
+        "label": "Faixa etária publicada",
+        "value": "A partir de 3 anos; confirmar no rótulo"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/leave-in-kids"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e textura",
+        "items": [
+          "A linha destaca extratos de frutas vermelhas e banana.",
+          "Creme finalizador de textura leve; a marca declara ausência de parabenos."
+        ]
+      },
+      {
+        "title": "Finalização",
+        "items": [
+          "Pode ser utilizado como creme para pentear e ativador de cachos, conforme a marca.",
+          "Propõe facilitar o desembaraço e deixar os fios disciplinados, macios, brilhantes e perfumados."
+        ]
+      },
+      {
+        "title": "Faixa etária",
+        "items": [
+          "A fonte informa uso diário a partir de 3 anos. Confirme as instruções da embalagem."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-O-ACAI": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Açaí Fusion é um óleo finalizador capilar com açaí e silicones, apresentado pela marca para dar brilho, maciez e controlar o frizz. Forma um acabamento de sensação leve, voltado também à aparência das pontas e à facilidade para pentear.",
+    "details": [
+      {
+        "label": "Tipo",
+        "value": "Óleo capilar"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/oleo-de-acai"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e acabamento",
+        "items": [
+          "Açaí e silicones voláteis de diferentes pesos moleculares são citados no texto da marca; não constituem a lista integral de ingredientes.",
+          "A proposta inclui alinhamento dos fios e redução do aspecto de pontas duplas. Não repara permanentemente uma ponta já dividida."
+        ]
+      },
+      {
+        "title": "Aplicação e proteção",
+        "items": [
+          "A marca indica diferentes tipos de cabelo e menciona uso antes da escova ou do modelador. Ajuste a quantidade e a frequência às instruções da embalagem.",
+          "A fonte declara proteção térmica e frente à radiação UV, sem informar temperatura-limite ou fator de proteção. Não foram atribuídos valores."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-O-CREAM": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Ozon Cream é um fluido capilar multifuncional 20 em 1 com extrato de baobá, silicones e estrutura de gel lamelar descritos pela marca. Reúne condicionamento, maciez e alinhamento em uma proposta de cuidado para diferentes tipos de cabelo, especialmente os lisos.",
+    "details": [
+      {
+        "label": "Tipo",
+        "value": "Fluido capilar"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-cream"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Ativos e textura",
+        "items": [
+          "Extrato de baobá, silicones e gel lamelar são os destaques do material. A lista INCI completa e as concentrações não foram disponibilizadas."
+        ]
+      },
+      {
+        "title": "Benefícios cosméticos",
+        "items": [
+          "Hidratação, nutrição e condicionamento; maciez, brilho e facilidade para pentear.",
+          "Controle do frizz e do volume, alinhamento, melhora do aspecto das pontas e cuidado da elasticidade e resistência dos fios.",
+          "A marca cita proteção térmica, UV e frente à umidade, sem informar temperatura máxima ou fator de proteção."
+        ]
+      },
+      {
+        "title": "Antes de aplicar",
+        "items": [
+          "Consulte no rótulo a quantidade e a forma de aplicação da sua versão. O nome 20 em 1 não permite deduzir ingredientes ou instruções ausentes."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-FOR-MEN": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Shampoo 2 em 1 Ozon For Men para limpeza e condicionamento diário, com proposta de sensação refrescante no couro cabeludo.",
+    "details": [
+      {
+        "label": "Tipo",
+        "value": "Shampoo 2 em 1"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-for-men"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Funções e sensação",
+        "items": [
+          "Shampoo 2 em 1 que reúne limpeza e condicionamento diário.",
+          "A marca descreve sensação refrescante no couro cabeludo e cuidado da oleosidade.",
+          "Não foi publicado um ativo anticaspa específico na fonte; o produto não é apresentado aqui como tratamento dermatológico."
+        ]
+      },
+      {
+        "title": "Ativos destacados",
+        "items": [
+          "Mentol e óleo de macadâmia, conforme a descrição recebida. Matrix 3D é o nome comercial de uma tecnologia citada pela marca, não uma lista de ingredientes."
+        ]
+      },
+      {
+        "title": "Rotina de cuidado",
+        "items": [
+          "Limpeza e condicionamento em um só produto, com proposta de frescor, brilho e maciez.",
+          "A marca descreve uso diário e informa que cabelos curtos e saudáveis podem dispensar condicionador. Confira as necessidades dos fios e as instruções da embalagem.",
+          "Não foi adotada promessa de tratar dermatite, psoríase ou outras condições do couro cabeludo."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-TON": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Tônico capilar Revita Tonic. A marca informa a presença de blends vegetais e mentol na apresentação do produto.",
+    "details": [
+      {
+        "label": "Ativos citados pela marca",
+        "value": "Blends vegetais e mentol"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/tonico-capilar"
+      }
+    ],
+    "missing": [
+      "Composição integral e instruções da apresentação vendida"
+    ],
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Blends vegetais e mentol, segundo a Ozonteck. A página não identifica as plantas nem suas concentrações."
+        ]
+      },
+      {
+        "title": "Proposta cosmética",
+        "items": [
+          "Cuidado capilar com sensação refrescante e proposta de fortalecimento e redução da quebra.",
+          "Não foram adotadas promessas de crescimento capilar ou tratamento de queda sem comprovação específica."
+        ]
+      },
+      {
+        "title": "Apresentação e indicação",
+        "items": [
+          "Aplicação em spray, conforme o material da marca, para cuidado de diferentes tipos de cabelo, especialmente fios fragilizados e ressecados.",
+          "A proposta cosmética combina frescor e cuidado da resistência à quebra. Frequência, quantidade e lista integral de componentes não foram informadas."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "CAP-MAS-MEL": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.app-ozonteck.com/mascara-mel-ozonio/"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/mascaramelozonio.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Modo de uso e advertências completos"
+    ],
+    "note": "Informações da face legível da embalagem fotografada. A composição completa e as instruções do lote adquirido precisam do rótulo integral.",
+    "summary": "Máscara capilar da linha Mel & Ozônio da Ozonteck.",
+    "sections": [
+      {
+        "title": "Identificação da linha",
+        "items": [
+          "A embalagem fotografada identifica o produto como máscara Mel & Ozônio.",
+          "O nome da linha não permite determinar a concentração de mel, a lista de ingredientes ou o processo de formulação."
+        ]
+      },
+      {
+        "title": "Aplicação",
+        "items": [
+          "O tempo de pausa e a quantidade não estão legíveis na foto. Não utilize automaticamente as instruções de outras máscaras da marca."
+        ]
+      }
+    ]
+  },
+  "CAP-SH-MEL": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/cabelos-ozonizados/ozon-mel-nutricao/"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/shampooozonmel.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Modo de uso e advertências completos"
+    ],
+    "note": "Informações da face legível da embalagem fotografada. A composição completa e as instruções do lote adquirido precisam do rótulo integral.",
+    "summary": "Shampoo da linha Mel & Ozônio, em frasco de 300 ml, com proposta de limpeza suave e nutritiva indicada na embalagem.",
+    "sections": [
+      {
+        "title": "Limpeza dos fios",
+        "items": [
+          "O rótulo frontal destaca limpeza suave e nutritiva.",
+          "Não foram confirmados tipo de cabelo, composição integral ou ausência de sulfatos e parabenos."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Frasco de 300 ml. Consulte o verso da embalagem para modo de uso e cuidados."
+        ]
+      }
+    ]
+  },
+  "PRO-AMR": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteckloja.lojavirtualnuvem.com.br/produtos/wo3-mascara-amr/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "AMR (Amino Matrix Reset) é uma máscara da linha profissional Ozone Hair System, voltada ao cuidado intensivo de fios sensibilizados por química e descoloração.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Blend de aminoácidos associado ao complexo comercial WO3 Quantic Complex. A ficha não identifica cada aminoácido ou sua concentração."
+        ]
+      },
+      {
+        "title": "Função no tratamento",
+        "items": [
+          "Proposta de dar corpo, disciplina e aparência de resistência aos cabelos sensibilizados.",
+          "Os tempos e as etapas de aplicação precisam do protocolo profissional da apresentação adquirida."
+        ]
+      }
+    ]
+  },
+  "PRO-CIF": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteckloja.lojavirtualnuvem.com.br/produtos/wo3-mascara-cif/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "CIF (Carbon Ion Forge) é uma máscara profissional para fios fragilizados, afinados ou danificados por procedimentos químicos.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Complexo de proteínas e peptídeos, associado ao WO3 Quantic Complex. A ficha não apresenta os ingredientes completos."
+        ]
+      },
+      {
+        "title": "Condicionamento",
+        "items": [
+          "Proposta de melhorar o alinhamento e a aparência de força e resistência da fibra capilar.",
+          "Consulte o protocolo profissional para frequência, tempo de pausa e sequência de aplicação."
+        ]
+      }
+    ]
+  },
+  "PRO-HMS": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteck.lojavirtualnuvem.com.br/produtos/wo3-mascara-hms/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "HMS (Hydro Mesh Sync) é a máscara de hidratação da linha Ozone Hair System, direcionada a cabelos secos, opacos, cacheados ou crespos.",
+    "sections": [
+      {
+        "title": "Fórmula e proposta",
+        "items": [
+          "A ficha cita agentes umectantes e WO3 Quantic Complex, sem detalhar a composição integral.",
+          "A proposta é favorecer a hidratação e o condicionamento, com toque sedoso, maciez e brilho."
+        ]
+      },
+      {
+        "title": "Aplicação profissional",
+        "items": [
+          "Não foi confirmado o tempo de pausa. Utilize o protocolo e o rótulo da máscara HMS, sem transferir instruções das outras máscaras."
+        ]
+      }
+    ]
+  },
+  "PRO-LPC": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteckloja.lojavirtualnuvem.com.br/produtos/wo3-mascara-lpc/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "LPC (Lipid Phase Control) é uma máscara de nutrição profissional para cabelos com frizz, pontas secas e aspecto áspero.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Blend de lipídios nutritivos e WO3 Quantic Complex; a ficha não identifica todos os lipídios."
+        ]
+      },
+      {
+        "title": "Acabamento",
+        "items": [
+          "Proposta de condicionamento, alinhamento e controle do frizz com acabamento leve.",
+          "Consulte o protocolo profissional para a quantidade e o tempo de pausa."
+        ]
+      }
+    ]
+  },
+  "PRO-DEEP": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteckloja.lojavirtualnuvem.com.br/produtos/wo3-shampoo-deep-cleanse/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "Deep Cleanse é um shampoo técnico da linha Ozone Hair System para limpeza intensa antes das etapas de tratamento.",
+    "sections": [
+      {
+        "title": "Limpeza preparatória",
+        "items": [
+          "A ficha descreve remoção de resíduos e impurezas acumuladas na fibra capilar.",
+          "O WO3 Quantic Complex é citado na fórmula, mas seus ingredientes não são detalhados."
+        ]
+      },
+      {
+        "title": "Uso no protocolo",
+        "items": [
+          "Voltado à preparação dos cabelos para os próximos produtos da linha. Não foi inferido uso diário nem tempo de pausa."
+        ]
+      }
+    ]
+  },
+  "PRO-SOFT": {
+    "checkedAt": "2026-09-27",
+    "level": "complementary",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonvidas.com/produtos-ozonizados/cabelos/"
+      },
+      {
+        "label": "Ficha complementar de revenda Ozonteck",
+        "url": "https://grupoozonteckloja.lojavirtualnuvem.com.br/produtos/wo3-shampoo-soft-cleanse/"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes",
+      "Instruções e apresentação do rótulo atual"
+    ],
+    "note": "Resumo da ficha individual de revenda. A composição integral, a apresentação e as instruções devem ser conferidas no rótulo atual.",
+    "line": "wo3",
+    "summary": "Soft Cleanse é um shampoo da linha Ozone Hair System para limpeza suave e frequente, especialmente em fios quimicamente tratados, cacheados ou crespos.",
+    "sections": [
+      {
+        "title": "Limpeza e acabamento",
+        "items": [
+          "Proposta de remover a sujeira cotidiana e o excesso de oleosidade da raiz, mantendo a leveza dos fios.",
+          "A ficha descreve cuidado da camada lipídica e manutenção da aparência da cor e do brilho."
+        ]
+      },
+      {
+        "title": "Fórmula",
+        "items": [
+          "A fonte cita WO3 Quantic Complex, sem publicar a composição integral ou o pH. Esses dados precisam do rótulo."
+        ]
+      }
+    ]
+  },
+  "NUT-NXCAP": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "NX Cap Ozon é um suplemento alimentar em cápsulas softgel; o frasco destaca vitamina E.",
+    "details": [
+      {
+        "label": "Componentes citados",
+        "value": "Mix de óleos e vitamina E"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/nxcap-ozon"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/nxcapozon.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitamina E. A frente não permite confirmar a lista completa de óleos e outros ingredientes."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas softgel de 700 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      },
+      {
+        "title": "Informações da marca",
+        "items": [
+          "O texto oficial complementa a frente do frasco ao descrever um mix de óleos associado à vitamina E. Não identifica todos os óleos nem suas quantidades.",
+          "A vitamina E integra a proposta antioxidante do suplemento. Isso não representa prevenção ou tratamento de doenças."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "NUT-OMEGA": {
+    "checkedAt": "2026-09-27",
+    "level": "official",
+    "summary": "Ômega 3 é um suplemento alimentar em cápsulas softgel.",
+    "details": [
+      {
+        "label": "Apresentação",
+        "value": "Cápsulas"
+      },
+      {
+        "label": "Componente citado",
+        "value": "Óleo de peixe"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/omega-3"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/omega3.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Ômega 3; as quantidades de EPA e DHA não aparecem na frente fotografada."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas softgel de 1.400 mg. Esse peso não corresponde necessariamente ao conteúdo de ômega 3."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-XBOOST": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Xbooster é um suplemento alimentar em cápsulas com cafeína, taurina e arginina.",
+    "details": [
+      {
+        "label": "Componentes citados",
+        "value": "Arginina, taurina e cafeína"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/xbooster"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/xbooster.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Cafeína, taurina e arginina, destacadas na embalagem. As quantidades individuais não estão visíveis."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 590 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      },
+      {
+        "title": "Qual apresentação é esta?",
+        "items": [
+          "Esta ficha é do suplemento em cápsulas cadastrado na loja. O energético pronto para beber de 269 ml citado no material é outro produto e não foi combinado com esta fórmula.",
+          "A descrição cita cafeína, taurina e arginina. A quantidade diária e o teor de cafeína devem ser conferidos no rótulo; não foi inferida dose pré-treino."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "NUT-TRIMAG": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Power Tri-Magnésio é um suplemento em cápsulas que reúne três formas de magnésio e extrato de cúrcuma.",
+    "details": [
+      {
+        "label": "Componente citado",
+        "value": "Magnésio"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/tri-magnesio"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/trimagnesio.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Magnésio quelato, dimagnésio malato, taurato de magnésio e extrato de cúrcuma, conforme a frente do frasco."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 590 mg. Esse peso não corresponde ao teor de magnésio elementar."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      },
+      {
+        "title": "Proposta nutricional",
+        "items": [
+          "O material apresenta o magnésio para suporte às funções musculares e ao metabolismo energético. O rótulo fotografado detalha as três formas de magnésio e o extrato de cúrcuma.",
+          "Não foram adotadas alegações de tratamento de ansiedade, depressão, arritmias ou doenças articulares. A composição não substitui orientação individual nem permite deduzir a dose."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "NUT-CREAT-CX": {
+    "checkedAt": "2026-09-27",
+    "level": "official",
+    "summary": "Ozon Creat é um suplemento alimentar em pó com creatina e glutamina, acondicionado em sticks individuais.",
+    "line": "ozon-creat",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-creat"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozoncreatcaixa.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Creatina e glutamina são destacadas na caixa. As quantidades de cada uma não estão visíveis."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Caixa com 30 sticks de 8 g; peso líquido de 240 g."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-CREAT-UN": {
+    "checkedAt": "2026-09-27",
+    "level": "official",
+    "summary": "Ozon Creat é um suplemento alimentar em pó na apresentação individual.",
+    "line": "ozon-creat",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-creat"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozoncreatunidade.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "A embalagem individual destaca creatina; não informa sua quantidade na face fotografada."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Um stick de 8 g. Não equivale a 8 g de creatina."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-CREAT-MO-CX": {
+    "checkedAt": "2026-09-27",
+    "level": "official",
+    "summary": "Ozon Creat Morango é um suplemento alimentar em pó, sabor morango, em sachês individuais.",
+    "line": "ozon-creat-morango",
+    "details": [
+      {
+        "label": "Sabor",
+        "value": "Morango"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-creat-morango"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozoncreatmorangocaixa.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "A embalagem destaca creatina e informa aromatizante sintético idêntico ao natural."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Caixa com 30 sachês de 8,5 g; peso líquido de 255 g."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-CREAT-MO-UN": {
+    "checkedAt": "2026-09-27",
+    "level": "official",
+    "summary": "Ozon Creat Morango é a apresentação individual do suplemento alimentar em pó com sabor morango.",
+    "line": "ozon-creat-morango",
+    "details": [
+      {
+        "label": "Sabor",
+        "value": "Morango"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-creat-morango"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozoncreatmorangounidade.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "A foto informa aromatizante sintético idêntico ao natural; não permite ler a lista completa de ingredientes."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Um sachê de 8,5 g. Esse peso é do produto, não uma dose de creatina."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-BORYS": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Boryslim é um suplemento alimentar em cápsulas cujo rótulo destaca cromo.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/boryslim"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/boryslim.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Cromo; a frente da embalagem não discrimina os demais ingredientes."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 500 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-DREAM": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Dream Bliss combina melatonina e coenzima Q10 em cápsulas softgel.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/dreambliss"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/dreamblis.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Melatonina e coenzima Q10. A frente informa 100 mg de coenzima Q10 por cápsula, sem informar a quantidade de melatonina."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "30 cápsulas softgel de 700 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-K2D3": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Suplemento que associa vitamina K2 na forma MK-7 e vitamina D3 em cápsulas softgel.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/k2mk7-e-d3"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/k2mk7ed3.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitamina D3 e MK-7, conforme a frente do frasco. As quantidades individuais não estão visíveis."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas softgel de 700 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-LUMI": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Luminous Vita é um suplemento alimentar em cápsulas com vitaminas A, C e E.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/luminous-vita"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/luminousvita.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitaminas A, C e E, identificadas na embalagem fotografada."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 590 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-LEV-UN": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Ozon Lev é um suplemento alimentar em pó, sabor abacaxi com hortelã, apresentado como fonte de fibra.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-lev"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozonlevunidade.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "A embalagem destaca hortelã e fibra, sem identificar o tipo ou a quantidade de fibra na face visível."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Um sachê de 8 g; contém aromatizante sintético idêntico ao natural."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-VIRT": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Virtuous Caps é um suplemento alimentar em cápsulas com biotina, silício e zinco.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/virtuous-caps"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/virtuouscaps.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Biotina, silício e zinco. A embalagem também informa que o produto é colorido artificialmente."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas; conteúdo líquido de 42 g."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-VITA-OZ": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "summary": "Vita Ozon Plus é um suplemento em cápsulas apresentado como polivitamínico com ômega 3.",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vita-ozon-plus"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/vitaozonplus.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "A frente destaca ômega 3, EPA e DHA. Sem a tabela nutricional, não foi atribuída porção aos valores impressos."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 700 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-FLEX-CX": {
+    "checkedAt": "2026-09-28",
+    "level": "label",
+    "summary": "Ozon Flex é um suplemento alimentar em pó, sabor pêssego, com colágeno tipo II e outros componentes destacados na caixa.",
+    "line": "ozon-flex",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-flex"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozonflexcaixa.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo. O material recebido e a página oficial de Ozon Flex descrevem Amyno Ozon. Essa descrição não foi transferida: foram preservadas as informações legíveis da embalagem de Ozon Flex.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Colágeno tipo II, ácido hialurônico e vitaminas C, D, E e K2. A caixa identifica o colágeno como não desnaturado."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Caixa com 30 sachês de 8 g; peso líquido de 240 g."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "NUT-FLEX-UN": {
+    "checkedAt": "2026-09-28",
+    "level": "label",
+    "summary": "Ozon Flex é um suplemento alimentar em pó, sabor pêssego, na apresentação individual.",
+    "line": "ozon-flex",
+    "details": [],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/ozon-flex"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ozonflexunidade.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo. O material recebido e a página oficial de Ozon Flex descrevem Amyno Ozon. Essa descrição não foi transferida: foram preservadas as informações legíveis da embalagem de Ozon Flex.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Colágeno tipo II, ácido hialurônico e vitaminas C, D, E e K2, conforme a embalagem."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Um sachê de 8 g."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "NUT-COBAL": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://bemestarcomozonio.com.br/cobalactin-ozonteck-vitamina-b12/"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/cobalactin.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "summary": "Cobalactin é um suplemento de metilcobalamina em comprimidos mastigáveis, sabor mousse de limão.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Metilcobalamina, destacada na embalagem."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "30 comprimidos mastigáveis de 1.000 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-GENO": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonio-shop.lojaintegrada.com.br/genolife-kids"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/genolifekids.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "summary": "Genolife Kids é um suplemento em comprimidos mastigáveis com sabor tutti-frutti.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitaminas C e D e selênio são os componentes destacados na frente do frasco."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "30 comprimidos mastigáveis de 1.000 mg. A faixa etária não está legível nesta foto."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-MELAT": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://ozonio-shop.lojaintegrada.com.br/melatozon"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/melatozon.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "summary": "Melatozon é um suplemento de melatonina em gotas, sabor tutti-frutti, com frasco conta-gotas.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Melatonina. A concentração por gota não está legível na imagem."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Frasco de 20 ml."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-OX": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonteckstore.com.br/ox-ozonteck"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/ox.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "summary": "OX é um suplemento alimentar em cápsulas com vitamina C e minerais.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitamina C, selênio, manganês e zinco, conforme o rótulo fotografado."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "60 cápsulas de 590 mg."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "NUT-SOFH-D": {
+    "checkedAt": "2026-09-27",
+    "level": "label",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonteckloja.com.br/sofh-d-suplemento-de-vitamina-d-em-gotas-20ml/p"
+      },
+      {
+        "label": "Embalagem fotografada no catálogo desta loja",
+        "url": "/produtos/sofhD.webp"
+      }
+    ],
+    "missing": [
+      "Lista integral de ingredientes e alergênicos",
+      "Tabela nutricional, modo de uso e advertências completos"
+    ],
+    "note": "Dados lidos na imagem fornecida pela loja. Confira a correspondência com a embalagem do lote adquirido; a foto frontal não substitui o rótulo completo.",
+    "summary": "Sofh D é um suplemento de vitamina D em gotas, em frasco conta-gotas.",
+    "sections": [
+      {
+        "title": "Componentes destacados",
+        "items": [
+          "Vitamina D. A concentração por gota não está legível na foto."
+        ]
+      },
+      {
+        "title": "Apresentação",
+        "items": [
+          "Frasco de 20 ml."
+        ]
+      },
+      {
+        "title": "Antes de consumir",
+        "items": [
+          "Consulte o modo de uso e as advertências da embalagem. A foto não permite definir quantidade diária, duração de uso ou adequação individual."
+        ]
+      }
+    ]
+  },
+  "PERF-303-W": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "303 For Woman é uma fragrância Ozonteck da família floral amadeirado. Cítricos, flor de laranjeira e flor de cactos abrem um buquê floral variado. Sândalo e almíscar dão suavidade e uma base amadeirada à composição.",
+    "line": "303-for-woman",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/303-for-woman"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Flor de laranjeira, flor de cactos, bergamota e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Lírio, frésia, gardênia, jasmim, lírio-do-vale, camélia branca, rosa e peônia"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Sândalo e almíscar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-303-M": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "303 Men é uma fragrância Ozonteck da família amadeirado aromático. Notas verdes, cítricos e lavanda criam uma abertura fresca. Gengibre e flores dão contraste ao coração, com um fundo de almíscar, sândalo e vetiver de perfil clássico.",
+    "line": "303-men",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado aromático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/303-men"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado aromático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Notas verdes, toranja, bergamota e lavanda; a lista publicada está incompleta"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Gengibre, violeta, gardênia e sálvia"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Almíscar, sândalo, vetiver e ládano"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-303-VIP": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "303 VIP Men é uma fragrância Ozonteck da família âmbar amadeirado. Maracujá, lima e pimenta-preta dão um início frutado e picante. Acordes de vodca e gim, hortelã e especiarias formam o coração, com âmbar e couro no fundo.",
+    "line": "303-vip-men",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/303-vip-men"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maracujá, lima e pimenta-preta"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Acordes de vodca e gim, hortelã e especiarias"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Âmbar e couro; a lista publicada pela marca está incompleta"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-ALEM": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Alem é uma fragrância Ozonteck da família âmbar amadeirado. Cítricos e mandarina iluminam um coração de jasmim marroquino e flores brancas. Âmbar branco e cashmeran completam a composição com um fundo quente e amadeirado.",
+    "line": "alem",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/alem"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Cítricos e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Jasmim marroquino e flores brancas"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Âmbar branco e cashmeran"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-ANGE": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Angelical é uma fragrância Ozonteck da família âmbar baunilha. Algodão-doce, frutas e bergamota apresentam o lado gourmand da fragrância. Mel e especiarias aparecem no coração, com caramelo, baunilha e patchouli no fundo.",
+    "line": "angelical",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar baunilha"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/angelical"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar baunilha"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Algodão-doce, cassis, melão, jasmim, bergamota e abacaxi"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Mel, amora, ameixa, damasco, noz-moscada e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Patchouli, caramelo, baunilha, fava tonka e âmbar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-AVEN": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Aventura é uma fragrância Ozonteck da família cítrico aromático. Limão e abacaxi encontram lavanda, hortelã e cardamomo na abertura. Flores e notas verdes conduzem a uma base de sândalo, cedro, baunilha e musgo.",
+    "line": "aventura",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Cítrico aromático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/aventura"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Cítrico aromático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Limão, abacaxi, cardamomo, lavanda e hortelã"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Jasmim, magnólia, grama verde e junípero"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Sândalo, cedro, baunilha e musgo de carvalho"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-BLUE": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Blue Sky é uma fragrância Ozonteck da família floral frutado. Limão siciliano e maçã trazem um frescor frutado à abertura. Bambu e flores dão leveza ao coração, com cedro, almíscar e âmbar no acabamento.",
+    "line": "blue-sky",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/blue-sky"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Limão siciliano, maçã e cedro"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Bambu, jasmim e rosa branca"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Cedro, almíscar e âmbar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-CAPA": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Capadócia é uma fragrância Ozonteck da família fougère aromático. Lavanda e cítricos abrem uma composição aromática, com especiarias e madeiras no coração. Couro, âmbar e fava tonka dão profundidade ao perfil clássico.",
+    "line": "capadocia",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Fougère aromático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/capadocia"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Fougère aromático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Lavanda, limão, manjericão, bergamota e sálvia-esclareia"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Anis-estrelado, sândalo, vetiver, cardamomo, zimbro e cedro"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Musgo de carvalho, couro, âmbar, almíscar e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-CIND": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Cinderela é uma fragrância Ozonteck da família âmbar floral. Café e amêndoa encontram flores brancas e uma base doce, especiada e amadeirada. É uma composição de contrastes, para quem aprecia perfumes florais com presença gourmand.",
+    "line": "cinderela",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/cinderela"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Amêndoa, café, bergamota e limão"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Tuberosa, jasmim sambac, flor de laranjeira, raiz de orris e rosa búlgara"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Fava tonka, cacau, baunilha, pralinê, sândalo, almíscar, âmbar, madeira de cashmere, canela, patchouli e cedro"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-CIND": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Cinderela é uma fragrância Ozonteck da família âmbar floral. Café e amêndoa encontram flores brancas e uma base doce, especiada e amadeirada. É uma composição de contrastes, para quem aprecia perfumes florais com presença gourmand.",
+    "line": "cinderela",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/cinderela"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Amêndoa, café, bergamota e limão"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Tuberosa, jasmim sambac, flor de laranjeira, raiz de orris e rosa búlgara"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Fava tonka, cacau, baunilha, pralinê, sândalo, almíscar, âmbar, madeira de cashmere, canela, patchouli e cedro"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-DG": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "DG Red é uma fragrância Ozonteck da família floral frutado, conforme a marca. Uma abertura cítrica, verde e aldeídica conduz a um coração floral com especiarias. Sândalo, baunilha e almíscar equilibram o acabamento com calor e suavidade.",
+    "line": "dg-red",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado, conforme a marca"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/dg-red"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado, conforme a marca"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Aldeídos, manjericão, cítricos, hera, mandarina, frésia e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Cravo, cravo-de-defunto, coentro, flor de laranjeira, lírio, jasmim, rosa búlgara e lírio-do-vale"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Sândalo, baunilha, almíscar e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-DOCU": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Doçurinha é uma fragrância Ozonteck da família floral frutado. Sorbet de morango e cítricos criam uma abertura doce e vibrante. O coração combina um acorde de chiclete e flores, com baunilha, almíscar e âmbar na base.",
+    "line": "docurinha",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/docurinha"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Sorbet de morango, mandarina e laranja"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Acorde de chiclete Bubbaloo, notas sparkling e buquê de flores"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Almíscar, baunilha e âmbar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-FAMMA": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Famma é uma fragrância Ozonteck da família chipre floral frutado. Manga e bergamota criam um início frutado e luminoso. Jasmim e olíbano se encontram no coração, sobre uma base cremosa de baunilha e sândalo.",
+    "line": "famma",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Chipre floral frutado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/famma"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Chipre floral frutado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Manga e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Jasmim e olíbano"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha e sândalo"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-FANT": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Fantástica Bry é uma fragrância Ozonteck da família floral frutado gourmand. Kiwi, lichia e marmelo introduzem uma fragrância doce e frutada. Chocolate branco e cupcake se misturam às flores, apoiados por almíscar, orris e madeiras.",
+    "line": "fantastica-bry",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado gourmand"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/fantastica-bry"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado gourmand"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Kiwi, lichia vermelha e marmelo"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Chocolate branco, cupcake, orquídea e jasmim"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Almíscar, raiz de orris e notas amadeiradas"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-FERA": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Fera é uma fragrância Ozonteck da família âmbar amadeirado. Lavanda e limão abrem um perfume que combina abacaxi, mel e flores. A base de baunilha e madeiras acentua seu lado quente e envolvente.",
+    "line": "fera",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/fera"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Lavanda, limão e gálbano"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Abacaxi, mel, lírio-do-vale, rosa, ylang-ylang e jasmim"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, sândalo, almíscar e cedro"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-GOUF-B": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Gouf Blue é uma fragrância Ozonteck da família aromático fougère. Pepino, melão e mandarina definem a abertura fresca. Ervas aromáticas e gerânio conduzem a um fundo de camurça, madeiras e almíscar.",
+    "line": "gouf-blue",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Aromático fougère"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/gouf-blue"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Aromático fougère"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Pepino, melão e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Manjericão, sálvia e gerânio"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Camurça, notas amadeiradas e almíscar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-GOUF-T": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Gouf Tradicional é uma fragrância Ozonteck da família chipre amadeirado. Zimbro, ervas e bergamota abrem uma composição aromática complexa. Couro, pinheiro e especiarias formam o coração, seguido por tabaco, musgo e madeiras.",
+    "line": "gouf-tradicional",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Chipre amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/gouf-tradicional"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Chipre amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Bagas de zimbro, manjericão, artemísia, alcarávia, coentro e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Agulhas de pinheiro, couro, camomila, pimenta, cravo, gerânio, jasmim e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Tabaco, musgo de carvalho, patchouli, cedro, vetiver, almíscar e âmbar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-GREC": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Grécia é uma fragrância Ozonteck da família âmbar floral. Jasmim aquático e mandarina verde trazem frescor à abertura. O contraste entre baunilha e sal dá personalidade ao coração, apoiado por um fundo ambarado e amadeirado.",
+    "line": "grecia",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/grecia"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Jasmim aquático, mandarina verde e flor de gengibre"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Baunilha e sal"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Âmbar cinzento, madeira de cashmere e sândalo"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-MAD": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Madame VI é uma fragrância Ozonteck da família âmbar floral. Cítricos e flor de laranjeira abrem um coração de rosa turca, jasmim, mimosa e ylang-ylang. Patchouli e vetiver equilibram a doçura da baunilha e da fava tonka.",
+    "line": "madame-vi",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/madame-vi"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Laranja, mandarina, bergamota e flor de laranjeira"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Rosa turca, jasmim, mimosa e ylang-ylang"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Patchouli, almíscar branco, baunilha, vetiver e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-MADAME": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Madame VI é uma fragrância Ozonteck da família âmbar floral. Cítricos e flor de laranjeira abrem um coração de rosa turca, jasmim, mimosa e ylang-ylang. Patchouli e vetiver equilibram a doçura da baunilha e da fava tonka.",
+    "line": "madame-vi",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/madame-vi"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Laranja, mandarina, bergamota e flor de laranjeira"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Rosa turca, jasmim, mimosa e ylang-ylang"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Patchouli, almíscar branco, baunilha, vetiver e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-MAX-B": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Max Boss é uma fragrância Ozonteck da família âmbar amadeirado. Maçã e cítricos antecedem um coração quente de canela, açafrão e cravo. Oud, sândalo e cipriol constroem a base amadeirada, para quem aprecia especiarias e perfumes encorpados.",
+    "line": "max-boss",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/max-boss"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maçã e cítricos"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Canela, açafrão, cravo-da-índia e ládano"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Agarwood (oud), sândalo e nagarmota (óleo de cipriol)"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-MAXBOSS": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Max Boss é uma fragrância Ozonteck da família âmbar amadeirado. Maçã e cítricos antecedem um coração quente de canela, açafrão e cravo. Oud, sândalo e cipriol constroem a base amadeirada, para quem aprecia especiarias e perfumes encorpados.",
+    "line": "max-boss",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/max-boss"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maçã e cítricos"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Canela, açafrão, cravo-da-índia e ládano"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Agarwood (oud), sândalo e nagarmota (óleo de cipriol)"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-MAXIMUM": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Maximum é uma fragrância Ozonteck da família amadeirado especiado. Frutas e cítricos se encontram com canela, mogno e cravo. A base combina baunilha, madeiras e vetiver, formando um perfil clássico que equilibra frescor e calor.",
+    "line": "maximum",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado especiado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/maximum"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado especiado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maçã, ameixa, limão, bergamota, musgo de carvalho e gerânio"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Canela, mogno e cravo"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, sândalo, cedro, vetiver e oliveira"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-PRESIDENTE": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Presidente é uma fragrância Ozonteck da família amadeirado especiado. Toranja, hortelã e tangerina sanguínea trazem uma abertura fresca. Rosa e canela acrescentam contraste, enquanto couro, âmbar e patchouli definem o fundo quente e amadeirado.",
+    "line": "presidente",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado especiado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/presidente"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado especiado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Toranja, hortelã e tangerina sanguínea"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Rosa, canela e notas especiadas"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Couro, notas amadeiradas, âmbar e patchouli indiano"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-PRES": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Presidente é uma fragrância Ozonteck da família amadeirado especiado. Toranja, hortelã e tangerina sanguínea trazem uma abertura fresca. Rosa e canela acrescentam contraste, enquanto couro, âmbar e patchouli definem o fundo quente e amadeirado.",
+    "line": "presidente",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado especiado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/presidente"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado especiado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Toranja, hortelã e tangerina sanguínea"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Rosa, canela e notas especiadas"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Couro, notas amadeiradas, âmbar e patchouli indiano"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SCAN": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Scandaloza é uma fragrância Ozonteck da família oriental floral. Laranja sanguínea e mandarina dão um início cítrico ao perfume. Mel e flores compõem o coração, com um fundo doce de cera de abelha, caramelo e alcaçuz, contrastado pelo patchouli.",
+    "line": "scandaloza",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Oriental floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/scandaloza"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Oriental floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Laranja sanguínea e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Mel, gardênia, flor de laranjeira, jasmim e pêssego"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Cera de abelha, caramelo, patchouli e alcaçuz"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-SCAN": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Scandaloza é uma fragrância Ozonteck da família oriental floral. Laranja sanguínea e mandarina dão um início cítrico ao perfume. Mel e flores compõem o coração, com um fundo doce de cera de abelha, caramelo e alcaçuz, contrastado pelo patchouli.",
+    "line": "scandaloza",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Oriental floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/scandaloza"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Oriental floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Laranja sanguínea e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Mel, gardênia, flor de laranjeira, jasmim e pêssego"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Cera de abelha, caramelo, patchouli e alcaçuz"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SEDUC": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Seduction é uma fragrância Ozonteck da família floral frutado. Framboesa, néroli e limão abrem uma composição de flores brancas. Mel branco, patchouli e âmbar acrescentam doçura e calor à base.",
+    "line": "seduction",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/seduction"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Framboesa, néroli e limão de Amalfi"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Jasmim, flor de laranjeira africana e gardênia"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Mel branco, patchouli e âmbar"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SENTIMENTO": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Sentimento é uma fragrância Ozonteck da família âmbar amadeirado. Cítricos e flor de laranjeira antecedem um coração aromático de lavanda, ervas e especiarias. Fava tonka e madeiras dão profundidade à proposta marcante da fragrância.",
+    "line": "sentimento",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/sentimento"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Flor de laranjeira africana, laranja amarga e limão de Amalfi"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Lavanda, gerânio, cardamomo, noz-moscada, alecrim e coentro"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Fava tonka, agarwood (oud), madeira de teca, musgo de carvalho e vetiver"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-SENT": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Sentimento é uma fragrância Ozonteck da família âmbar amadeirado. Cítricos e flor de laranjeira antecedem um coração aromático de lavanda, ervas e especiarias. Fava tonka e madeiras dão profundidade à proposta marcante da fragrância.",
+    "line": "sentimento",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar amadeirado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/sentimento"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar amadeirado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Flor de laranjeira africana, laranja amarga e limão de Amalfi"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Lavanda, gerânio, cardamomo, noz-moscada, alecrim e coentro"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Fava tonka, agarwood (oud), madeira de teca, musgo de carvalho e vetiver"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SOBERANO": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Soberano é uma fragrância Ozonteck da família amadeirado aquático. Notas oceânicas e cítricas criam uma abertura fresca. Louro e jasmim compõem o coração, enquanto âmbar cinzento, madeira guaiac e patchouli dão corpo ao fundo.",
+    "line": "soberano",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado aquático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/soberano"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado aquático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Notas oceânicas, toranja e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Folha de louro e jasmim"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Âmbar cinzento, madeira guaiac, musgo de carvalho e patchouli"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-SOB": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Soberano é uma fragrância Ozonteck da família amadeirado aquático. Notas oceânicas e cítricas criam uma abertura fresca. Louro e jasmim compõem o coração, enquanto âmbar cinzento, madeira guaiac e patchouli dão corpo ao fundo.",
+    "line": "soberano",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado aquático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/soberano"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado aquático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Notas oceânicas, toranja e mandarina"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Folha de louro e jasmim"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Âmbar cinzento, madeira guaiac, musgo de carvalho e patchouli"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SOUL": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Soul é uma fragrância Ozonteck da família aromático fougère. Bergamota e pimenta-preta abrem uma composição fresca e especiada. Lavanda, gerânio e resinas se encontram com vetiver e patchouli, sobre ambroxan, cedro e ládano.",
+    "line": "soul",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Aromático fougère"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/soul"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes. A lista de notas e o parágrafo descritivo da fonte divergem. Foi mantida a lista explícita, sem unir as versões; a divergência ainda depende de confirmação do fabricante.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Aromático fougère"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Bergamota da Calábria e pimenta-preta"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Lavanda, pimenta rosa, vetiver, patchouli, gerânio e elemi"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Ambroxan, cedro e ládano"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-SPEED": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Speed Black é uma fragrância Ozonteck da família aromático fougère. Maçã, ameixa e cítricos abrem uma composição de flores e especiarias. O fundo de baunilha, âmbar e cedro equilibra frescor e calor em uma proposta versátil.",
+    "line": "speed-black",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Aromático fougère"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/speed-black"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Aromático fougère"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maçã vermelha, ameixa, lima e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Canela, jasmim, cardamomo e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, âmbar, almíscar e cedro"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-SPEED": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Speed Black é uma fragrância Ozonteck da família aromático fougère. Maçã, ameixa e cítricos abrem uma composição de flores e especiarias. O fundo de baunilha, âmbar e cedro equilibra frescor e calor em uma proposta versátil.",
+    "line": "speed-black",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Aromático fougère"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/speed-black"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Aromático fougère"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Maçã vermelha, ameixa, lima e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Canela, jasmim, cardamomo e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, âmbar, almíscar e cedro"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-VENUM": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Venum é uma fragrância Ozonteck da família amadeirado aromático. Lavanda e limão marcam a abertura. Maçã, nuances terrosas e esfumaçadas e patchouli dão contraste ao coração; baunilha e vetiver fecham a proposta aromática.",
+    "line": "venum",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Amadeirado aromático"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/venum"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Amadeirado aromático"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Lavanda, raspas de limão e limão de Amalfi"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Lavanda, notas terrosas, fumaça, maçã e patchouli"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, lavanda e vetiver"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-VG": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "VG Sexy é uma fragrância Ozonteck da família âmbar floral. Pimenta rosa e cítricos se combinam a flores e algodão-doce. Baunilha, caramelo e madeiras reforçam o perfil adocicado e envolvente, diferente da descrição publicada para o hidratante homônimo.",
+    "line": "vg-sexy",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vg-sexy"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Pimenta rosa, mandarina e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Algodão-doce, gardênia, flores, sardinheira e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, almíscar, sândalo, caramelo, patchouli e violeta"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-VG": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "VG Sexy é uma fragrância Ozonteck da família âmbar floral. Pimenta rosa e cítricos se combinam a flores e algodão-doce. Baunilha, caramelo e madeiras reforçam o perfil adocicado e envolvente, diferente da descrição publicada para o hidratante homônimo.",
+    "line": "vg-sexy",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Âmbar floral"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vg-sexy"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Âmbar floral"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Pimenta rosa, mandarina e bergamota"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Algodão-doce, gardênia, flores, sardinheira e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Baunilha, almíscar, sândalo, caramelo, patchouli e violeta"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-VIDA": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Vida Bella é uma fragrância Ozonteck da família floral frutado gourmand. Groselha-negra e pera dão frescor ao início, seguidas por íris, jasmim e flor de laranjeira. Pralinê, baunilha e fava tonka formam um fundo doce com a profundidade do patchouli.",
+    "line": "vida-bella",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado gourmand"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vida-bella"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado gourmand"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Groselha-negra e pera"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Íris, jasmim e flor de laranjeira"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Pralinê, baunilha, patchouli e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "P100-VIDA": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "Vida Bella é uma fragrância Ozonteck da família floral frutado gourmand. Groselha-negra e pera dão frescor ao início, seguidas por íris, jasmim e flor de laranjeira. Pralinê, baunilha e fava tonka formam um fundo doce com a profundidade do patchouli.",
+    "line": "vida-bella",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado gourmand"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vida-bella"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado gourmand"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Groselha-negra e pera"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Íris, jasmim e flor de laranjeira"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Pralinê, baunilha, patchouli e fava tonka"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-VIP-GIRL": {
+    "checkedAt": "2026-09-28",
+    "level": "official",
+    "summary": "VIP Girl VIP é uma fragrância Ozonteck da família floral frutado. O acorde de champanhe rosé e a pimenta rosa dão um início vibrante. Flor de pêssego e rosa trazem delicadeza, sobre uma base de almíscar branco e madeiras.",
+    "line": "vip-girl-vip",
+    "details": [
+      {
+        "label": "Família olfativa",
+        "value": "Floral frutado"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Grupo Ozonteck",
+        "url": "https://grupoozonteck.com/produtos/vip-girl-vip"
+      }
+    ],
+    "missing": [
+      "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+    ],
+    "note": "Pirâmide transcrita da lista de notas fornecida pela marca. Não foram acrescentadas notas de perfumes de outras marcas, promessas de duração ou equivalência de fórmulas entre volumes.",
+    "sections": [
+      {
+        "title": "Família olfativa",
+        "items": [
+          "Floral frutado"
+        ]
+      },
+      {
+        "title": "Notas de saída",
+        "items": [
+          "Champanhe rosé e pimenta rosa"
+        ]
+      },
+      {
+        "title": "Notas de coração",
+        "items": [
+          "Flor de pêssego e rosa"
+        ]
+      },
+      {
+        "title": "Notas de fundo",
+        "items": [
+          "Almíscar branco e notas amadeiradas"
+        ]
+      },
+      {
+        "title": "Sobre a apresentação",
+        "items": [
+          "Consulte o nome e a imagem desta página para identificar o volume cadastrado. As versões permanecem separadas no catálogo.",
+          "Notas olfativas descrevem o aroma; não correspondem à composição de ingredientes nem indicam concentração ou tempo de fixação."
+        ]
+      }
+    ],
+    "editorialReviewed": true
+  },
+  "PERF-AALI": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "P100-AALIYAH": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-OUD": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "P100-OUD": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-RHINO": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "P100-RHINO": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-SUBLI": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "P100-SUBLIME": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-LABOOM": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-SUPREMO": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-FER-VE": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-LUA-VE": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://www.ozonioterapia.online/"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação foi localizada em catálogo de revenda. A ficha da fragrância ainda precisa de fonte validada; não foram inferidas notas, concentração ou duração."
+  },
+  "PERF-EASY": {
+    "checkedAt": "2026-09-26",
+    "level": "pending",
+    "details": [],
+    "sources": [
+      {
+        "label": "Referência complementar consultada",
+        "url": "https://themcompany.com.br/products/easy-line-perfume-ozonteck-17-ml"
+      }
+    ],
+    "missing": [
+      "Descrição técnica validada",
+      "Composição, modo de uso e especificações"
+    ],
+    "note": "A apresentação de 17 ml foi localizada em revenda. Pirâmide olfativa e ingredientes não foram confirmados."
+  }
+}

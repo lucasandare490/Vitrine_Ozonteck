@@ -9,9 +9,9 @@ interface ThemeState {
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set) => ({
-      theme: 'light', // Por padrão, a loja vai abrir no modo claro
+      theme: 'light',
       toggleTheme: () => set((state) => ({ theme: state.theme === 'light' ? 'dark' : 'light' })),
     }),
-    { name: 'ozonteck-theme' } // Salva a preferência do usuário no navegador
+    { name: 'ozonteck-theme' }
   )
 );

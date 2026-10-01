@@ -1,14 +1,17 @@
 'use client';
 
 import { useCartStore } from '@/store/useCartStore';
-import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, MapPin, Truck, CheckCircle2, MessageCircle, Home, Briefcase, User, CreditCard, Phone, Mail, Package, ShieldCheck, Lock } from 'lucide-react';
+import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, Truck, CheckCircle2, MessageCircle, Home, Briefcase, User, CreditCard, Phone, Mail, Package, ShieldCheck, Lock, Loader2 } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef, ReactNode } from 'react';
+import { useCallback, useEffect, useState, useRef, ReactNode, useMemo, type ComponentProps } from 'react';
 import { supabase } from '@/lib/supabase';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import toast from 'react-hot-toast';
 import LoginModal from '@/components/LoginModal';
+import { isValidCpf } from '@/lib/auth';
 
 import { initMercadoPago, Payment, StatusScreen } from '@mercadopago/sdk-react';
 
@@ -51,18 +54,43 @@ type CustomerData = {
   name: string; email: string; cpf: string; phone: string; zipCode: string; street: string; number: string; complement: string; neighborhood: string; city: string; state: string;
 }
 
+type SavedAddress = {
+  id: string;
+  apelido?: string | null;
+  cep?: string | null;
+  rua?: string | null;
+  numero?: string | null;
+  bairro?: string | null;
+  cidade?: string | null;
+  estado?: string | null;
+  principal?: boolean | null;
+};
+
+type CustomerProfile = {
+  nome?: string | null;
+  cpf?: string | null;
+  telefone?: string | null;
+  cep?: string | null;
+  endereco_completo?: string | null;
+};
+
+type PaymentProps = ComponentProps<typeof Payment>;
+
 export default function ListaDeInteresse() {
   const router = useRouter(); 
   const [isMounted, setIsMounted] = useState(false);
-  const [user, setUser] = useState<any>(null); 
+  const [user, setUser] = useState<SupabaseUser | null>(null); 
   
-  const [savedAddresses, setSavedAddresses] = useState<any[]>([]);
+  const [savedAddresses, setSavedAddresses] = useState<SavedAddress[]>([]);
   const [selectedAddressId, setSelectedAddressId] = useState<string | null>('new');
 
   const [imagesMap, setImagesMap] = useState<Record<string, string>>({}); 
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'payment'>('cart');
   const [paymentStatus, setPaymentStatus] = useState<'idle' | 'success'>('idle');
   const [generatedPaymentId, setGeneratedPaymentId] = useState<string>('');
+  
+  // Estado para o salvamento "fantasma" no banco
+  const [isSavingData, setIsSavingData] = useState(false);
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
@@ -70,6 +98,7 @@ export default function ListaDeInteresse() {
     name: '', email: '', cpf: '', phone: '', zipCode: '', street: '', number: '', complement: '', neighborhood: '', city: '', state: ''
   });
   const [isFetchingCep, setIsFetchingCep] = useState(false);
+  const checkoutAttemptKey = useRef<string | null>(null);
 
   const items = useCartStore((state) => state.items);
   const addItem = useCartStore((state) => state.addItem);
@@ -77,14 +106,48 @@ export default function ListaDeInteresse() {
   const removeItem = useCartStore((state) => state.removeItem);
   const clearCart = useCartStore((state) => state.clearCart);
   const getTotal = useCartStore((state) => state.getTotal);
+  const cartSignature = useMemo(
+    () => items.map((item) => `${item.code}:${item.quantity}`).sort().join('|'),
+    [items],
+  );
 
-  const loadUserData = async () => {
+  useEffect(() => {
+    checkoutAttemptKey.current = null;
+  }, [cartSignature]);
+
+  const handleSelectAddress = useCallback((addr: SavedAddress, profile?: CustomerProfile | null, email?: string) => {
+    setSelectedAddressId(addr.id);
+    setCustomerData(prev => ({
+      ...prev,
+      email: email || prev.email,
+      name: profile?.nome || prev.name,
+      cpf: profile?.cpf || prev.cpf,
+      phone: profile?.telefone || prev.phone,
+      zipCode: addr.cep || '',
+      street: addr.rua || '',
+      number: addr.numero || '',
+      neighborhood: addr.bairro || '',
+      city: addr.cidade || '',
+      state: addr.estado || '',
+      complement: '',
+    }));
+  }, []);
+
+  const loadUserData = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
     
     if (session?.user) {
       setUser(session.user);
-      const { data: profile } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-      const { data: addrs } = await supabase.from('enderecos').select('*').eq('user_id', session.user.id).order('principal', { ascending: false });
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('nome, cpf, telefone, cep, endereco_completo')
+        .eq('id', session.user.id)
+        .single();
+      const { data: addrs } = await supabase
+        .from('enderecos')
+        .select('id, apelido, cep, rua, numero, bairro, cidade, estado, principal')
+        .eq('user_id', session.user.id)
+        .order('principal', { ascending: false });
       
       if (addrs && addrs.length > 0) {
         setSavedAddresses(addrs);
@@ -100,11 +163,11 @@ export default function ListaDeInteresse() {
         setSelectedAddressId('new');
       }
     }
-  };
+  }, [handleSelectAddress]);
 
   useEffect(() => {
     async function loadInitialData() {
-      const { data: prodData } = await supabase.from('produtos').select('code, image_url');
+      const { data: prodData } = await supabase.from('produtos').select('code, image_url').eq('is_deleted', false);
       if (prodData) {
         const map: Record<string, string> = {};
         prodData.forEach(item => { map[item.code] = item.image_url; });
@@ -114,25 +177,7 @@ export default function ListaDeInteresse() {
       setIsMounted(true);
     }
     loadInitialData();
-  }, []);
-
-  const handleSelectAddress = (addr: any, profile?: any, email?: string) => {
-    setSelectedAddressId(addr.id);
-    setCustomerData(prev => ({
-      ...prev,
-      email: email || prev.email,
-      name: profile?.nome || prev.name,
-      cpf: profile?.cpf || prev.cpf,
-      phone: profile?.telefone || prev.phone,
-      zipCode: addr.cep || '',
-      street: addr.rua || '',
-      number: addr.numero || '',
-      neighborhood: addr.bairro || '',
-      city: addr.cidade || '',
-      state: addr.estado || '',
-      complement: ''
-    }));
-  };
+  }, [loadUserData]);
 
   const handleSelectNewAddress = () => {
     setSelectedAddressId('new');
@@ -163,7 +208,7 @@ export default function ListaDeInteresse() {
             state: data.uf || '' 
           }));
         }
-      } catch (error) {
+      } catch {
         toast.error("Erro ao buscar CEP");
       } finally {
         setIsFetchingCep(false);
@@ -172,7 +217,8 @@ export default function ListaDeInteresse() {
   };
 
   const handleCustomerDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
     
     if (name === 'cpf') {
       value = value.replace(/\D/g, '');
@@ -200,21 +246,79 @@ export default function ListaDeInteresse() {
     }
   };
 
-  if (!isMounted) return null;
+  // ==========================================
+  // O GRANDE TRUQUE DE UX/UI: SALVAMENTO FANTASMA
+  // ==========================================
+  const handleProceedToPayment = async () => {
+    if (!user) {
+      setCheckoutStep('payment');
+      return;
+    }
+
+    setIsSavingData(true);
+    try {
+      // 1. Vincula o CPF e o WhatsApp definitivamente ao perfil do usuário no Banco
+      await supabase.from('profiles').update({
+        cpf: customerData.cpf,
+        telefone: customerData.phone,
+      }).eq('id', user.id);
+
+      // 2. Se for um endereço novo, salva ele na agenda de endereços do usuário
+      if (selectedAddressId === 'new') {
+        const { data: newAddr, error } = await supabase.from('enderecos').insert({
+          user_id: user.id,
+          apelido: 'Meu Endereço',
+          cep: customerData.zipCode,
+          rua: customerData.street,
+          numero: customerData.number,
+          complemento: customerData.complement,
+          bairro: customerData.neighborhood,
+          cidade: customerData.city,
+          estado: customerData.state,
+          principal: savedAddresses.length === 0 // Se for o primeiro, vira principal
+        }).select('id, apelido, cep, rua, numero, bairro, cidade, estado, principal').single();
+
+        if (!error && newAddr) {
+          setSavedAddresses(prev => [newAddr, ...prev]);
+          setSelectedAddressId(newAddr.id);
+        }
+      }
+
+      // Tudo salvo no banco! Libera para o Mercado Pago
+      setCheckoutStep('payment');
+    } catch (error) {
+      console.error('Erro ao atualizar dados:', error);
+      // Mesmo com erro, deixamos o cliente pagar para não perder a venda
+      setCheckoutStep('payment'); 
+    } finally {
+      setIsSavingData(false);
+    }
+  };
+
+  const cpfClean = customerData.cpf.replace(/\D/g, '');
+  const cepClean = customerData.zipCode.replace(/\D/g, '');
+  
+  const isFormValid = useMemo(() =>
+    customerData.email.length > 3
+      && customerData.name.length > 2
+      && cepClean.length === 8
+      && Boolean(customerData.number)
+      && isValidCpf(cpfClean),
+  [customerData.email, customerData.name, cepClean, customerData.number, cpfClean]);
 
   const names = customerData.name.trim().split(' ');
   const firstName = names[0] || '';
   const lastName = names.slice(1).join(' ') || '';
 
-  const initialization = {
+  const initialization = useMemo(() => ({
     amount: Number(getTotal().toFixed(2)),
     payer: {
       email: customerData.email,
       firstName: firstName,
       lastName: lastName,
-      identification: { type: "CPF", number: customerData.cpf.replace(/\D/g, '') },
+      identification: { type: "CPF", number: cpfClean },
       address: {
-        zipCode: customerData.zipCode.replace(/\D/g, ''),
+        zipCode: cepClean,
         streetName: customerData.street,
         streetNumber: customerData.number,
         neighborhood: customerData.neighborhood,
@@ -222,66 +326,80 @@ export default function ListaDeInteresse() {
         federalUnit: customerData.state,
       }
     }
-  };
-  
-  const customization = {
-    visual: { style: { theme: "default" }, texts: { formTitle: "Pagamento Protegido" } },
+  }), [getTotal, customerData, firstName, lastName, cpfClean, cepClean]);
+
+  if (!isMounted) return null;
+
+  const customization: PaymentProps['customization'] = {
+    visual: { style: { theme: "default" } },
     paymentMethods: { ticket: "all", bankTransfer: "all", creditCard: "all", mercadoPago: "all" },
-  } as any;
+  };
 
-  const onSubmit = async ({ formData }: any) => {
-    return new Promise((resolve, reject) => {
-      const enhancedFormData = {
-        ...formData,
-        cart_items: items,
-        description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
-        notification_url: 'https://fruity-cows-listen.loca.lt/api/webhook',
-        metadata: { phone: customerData.phone },
-        payer: {
-          ...formData.payer,
-          email: customerData.email,
-          first_name: firstName || 'Cliente',
-          last_name: lastName || 'Sem Sobrenome',
-          identification: { type: "CPF", number: customerData.cpf.replace(/\D/g, '') },
-          address: {
-            zip_code: customerData.zipCode.replace(/\D/g, ''),
-            street_name: customerData.street || 'Não informado',
-            street_number: customerData.number || 'S/N',
-            neighborhood: customerData.neighborhood || 'Não informado',
-            city: customerData.city || 'Não informado',
-            federal_unit: customerData.state || 'PE'
-          }
-        }
-      };
+  const onSubmit: PaymentProps['onSubmit'] = async ({ formData }) => {
+    const { data: { session } } = await supabase.auth.getSession();
+    const idempotencyKey = checkoutAttemptKey.current ?? crypto.randomUUID();
+    checkoutAttemptKey.current = idempotencyKey;
+    const enhancedFormData = {
+      ...formData,
+      cart_items: items.map(i => ({ code: i.code, quantity: i.quantity })),
+      description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
+      metadata: {
+        phone: customerData.phone,
+        user_id: session?.user.id || null,
+      },
+      payer: {
+        ...formData.payer,
+        email: customerData.email,
+        first_name: firstName || 'Cliente',
+        last_name: lastName || 'Sem Sobrenome',
+        identification: { type: 'CPF', number: cpfClean },
+        address: {
+          zip_code: cepClean,
+          street_name: customerData.street || 'Não informado',
+          street_number: customerData.number || 'S/N',
+          neighborhood: customerData.neighborhood || 'Não informado',
+          city: customerData.city || 'Não informado',
+          federal_unit: customerData.state || 'PE',
+        },
+      },
+    };
 
-      fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(enhancedFormData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === 'approved' || data.status === 'in_process' || data.status === 'pending') {
-            setGeneratedPaymentId(String(data.id));
-            setPaymentStatus('success');
-            resolve(data); 
-          } else {
-            reject(data);
-          }
-        })
-        .catch((error) => reject(error));
+    const headers: HeadersInit = {
+      'Content-Type': 'application/json',
+      'X-Idempotency-Key': idempotencyKey,
+    };
+
+    if (session?.access_token) {
+      headers.Authorization = `Bearer ${session.access_token}`;
+    }
+
+    const response = await fetch('/api/checkout', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(enhancedFormData),
     });
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (!data.id) checkoutAttemptKey.current = null;
+      throw new Error(data.error || 'Não foi possível processar o pagamento.');
+    }
+
+    if (data.status === 'approved' || data.status === 'in_process' || data.status === 'pending') {
+      setGeneratedPaymentId(String(data.id));
+      setPaymentStatus('success');
+      return data;
+    }
+
+    checkoutAttemptKey.current = null;
+    throw new Error(data.status_detail || 'Pagamento não aprovado.');
   };
 
   const onReady = async () => { console.log('Brick Carregado'); };
-  const onError = async (error: any) => { console.log(error); };
+  const onError: NonNullable<PaymentProps['onError']> = async (error) => { console.error(error); };
 
   const whatsappText = `Olá! Acabei de registrar um pedido na Vitrine Ozonteck.\n\n*Resumo do Pedido:*\n${items.map(i => `${i.quantity}x ${i.name}`).join('\n')}\n*Total:* R$ ${getTotal().toFixed(2).replace('.', ',')}\n\n*Entregar para:*\n${customerData.name}\n${customerData.phone}\n${customerData.street}, ${customerData.number} - ${customerData.neighborhood}\n${customerData.city}/${customerData.state} - CEP: ${customerData.zipCode}\n\nAguardando confirmação de pagamento!`;
-  const whatsappLink = `https://wa.me/5581900000000?text=${encodeURIComponent(whatsappText)}`;
-
-  const cpfClean = customerData.cpf.replace(/\D/g, '');
-  const cepClean = customerData.zipCode.replace(/\D/g, '');
-  const isFormValid = customerData.email.length > 3 && customerData.name.length > 2 && cepClean.length === 8 && customerData.number && cpfClean.length === 11;
+  const whatsappLink = `https://wa.me/5581981472684?text=${encodeURIComponent(whatsappText)}`;
 
   return (
     <main className="min-h-screen text-slate-900 bg-[#FAFAFC] relative flex flex-col overflow-hidden">
@@ -370,7 +488,7 @@ export default function ListaDeInteresse() {
 
             {paymentStatus !== 'success' && items.length > 0 && checkoutStep === 'cart' && (
               <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden animate-in fade-in duration-500">
-                <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50/50">
+                <div className="flex flex-wrap gap-3 justify-between items-center p-4 sm:p-6 border-b border-slate-100 bg-slate-50/50">
                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
                     <Package size={18} className="text-teal-600" /> Produtos Selecionados
                   </h2>
@@ -384,8 +502,8 @@ export default function ListaDeInteresse() {
                     <RevealOnScroll key={item.id} delay={index * 50}>
                       <div className="flex flex-col sm:flex-row items-center gap-6 py-6">
                         <div className="flex items-center gap-4 flex-1 w-full">
-                          <div className="w-20 h-20 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 overflow-hidden shrink-0">
-                            {imagesMap[item.code] ? <img src={imagesMap[item.code]} alt={item.name} className="w-full h-full object-cover" /> : <ImageIcon className="text-slate-300" size={20} />}
+                          <div className="relative w-20 h-20 bg-slate-50 rounded-lg flex items-center justify-center border border-slate-200 overflow-hidden shrink-0">
+                            {imagesMap[item.code] ? <Image src={imagesMap[item.code]} alt={item.name} fill sizes="80px" className="object-cover" /> : <ImageIcon className="text-slate-300" size={20} />}
                           </div>
                           <div>
                             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Ref: {item.code}</p>
@@ -394,15 +512,15 @@ export default function ListaDeInteresse() {
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between w-full sm:w-auto gap-8">
-                          <div className="flex items-center bg-white border border-slate-200 rounded-lg shadow-sm h-10">
-                            <button onClick={() => decreaseItem(item.id)} className="w-10 h-full flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-l-lg transition-colors"><Minus size={14} /></button>
+                        <div className="flex flex-wrap items-center justify-between w-full sm:w-auto gap-3 sm:gap-8">
+                          <div className="flex shrink-0 items-center bg-white border border-slate-200 rounded-lg shadow-sm h-11">
+                            <button aria-label={`Diminuir quantidade de ${item.name}`} onClick={() => decreaseItem(item.id)} className="w-11 h-full flex items-center justify-center text-slate-500 hover:bg-slate-50 rounded-l-lg transition-colors"><Minus size={14} /></button>
                             <span className="w-10 text-center text-sm font-bold text-slate-800">{item.quantity}</span>
-                            <button onClick={() => addItem(item)} className="w-10 h-full flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-r-lg transition-colors"><Plus size={14} /></button>
+                            <button aria-label={`Aumentar quantidade de ${item.name}`} onClick={() => addItem(item)} className="w-11 h-full flex items-center justify-center text-teal-600 hover:bg-teal-50 rounded-r-lg transition-colors"><Plus size={14} /></button>
                           </div>
                           <div className="flex items-center gap-4">
                             <span className="text-base font-bold text-slate-900 w-24 text-right">R$ {(item.quantity * item.price).toFixed(2).replace('.', ',')}</span>
-                            <button onClick={() => removeItem(item.id)} className="text-slate-300 hover:text-red-500 p-2 transition-colors"><Trash2 size={18} /></button>
+                            <button aria-label={`Remover ${item.name} da lista`} onClick={() => removeItem(item.id)} className="min-h-11 min-w-11 text-slate-500 hover:text-red-500 p-2 transition-colors"><Trash2 size={18} /></button>
                           </div>
                         </div>
                       </div>
@@ -472,10 +590,10 @@ export default function ListaDeInteresse() {
                             )}
                           >
                             <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center shrink-0", selectedAddressId === addr.id ? 'bg-teal-600 text-white' : 'bg-slate-100 text-slate-500')}>
-                              {addr.apelido.toLowerCase() === 'trabalho' ? <Briefcase size={18} /> : <Home size={18} />}
+                              {addr.apelido?.toLowerCase() === 'trabalho' ? <Briefcase size={18} /> : <Home size={18} />}
                             </div>
                             <div>
-                              <h4 className="text-sm font-bold text-slate-900">{addr.apelido}</h4>
+                              <h4 className="text-sm font-bold text-slate-900">{addr.apelido || 'Endereço'}</h4>
                               <p className="text-xs text-slate-600 mt-1 leading-relaxed">{addr.rua}, {addr.numero}</p>
                               <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">CEP {addr.cep}</p>
                             </div>
@@ -576,8 +694,13 @@ export default function ListaDeInteresse() {
                   
                   {checkoutStep === 'address' && paymentStatus !== 'success' && (
                     <>
-                      <button onClick={() => setCheckoutStep('payment')} disabled={!isFormValid} className="w-full bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm">
-                        Ir para Pagamento
+                      {/* O BOTÃO MÁGICO QUE SALVA OS DADOS NO BANCO EM SEGUNDO PLANO */}
+                      <button 
+                        onClick={handleProceedToPayment} 
+                        disabled={!isFormValid || isSavingData} 
+                        className="w-full flex items-center justify-center bg-slate-900 hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-lg transition-colors text-sm uppercase tracking-wider shadow-sm"
+                      >
+                        {isSavingData ? <Loader2 className="animate-spin text-teal-600" size={18} /> : 'Ir para Pagamento'}
                       </button>
                       <button onClick={() => setCheckoutStep('cart')} className="w-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-600 font-bold py-3 rounded-lg transition-colors text-xs uppercase tracking-widest">
                         Voltar ao Carrinho
@@ -594,9 +717,9 @@ export default function ListaDeInteresse() {
                   <div className="mt-4 bg-slate-50 border border-slate-100 rounded-lg p-4 flex items-start gap-3">
                     <Lock size={16} className="text-teal-600 mt-0.5 shrink-0" />
                     <div>
-                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-widest">Ambiente 100% Seguro</h4>
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-widest">Pagamento Protegido</h4>
                       <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">
-                        Seus dados são protegidos com criptografia de ponta a ponta. A Ozonteck não armazena os dados do seu cartão.
+                        Os dados do cartão são enviados ao Mercado Pago e não são armazenados pela Ozonteck.
                       </p>
                     </div>
                   </div>

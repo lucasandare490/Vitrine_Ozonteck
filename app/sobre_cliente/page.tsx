@@ -1,9 +1,25 @@
 'use client';
 
-import { ArrowLeft, Award, Heart, CheckCircle2, ExternalLink } from 'lucide-react';
+import {
+  ArrowLeft,
+  Award,
+  Camera,
+  CheckCircle2,
+  ExternalLink,
+  Heart,
+  Music2,
+  Quote,
+  Users,
+} from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState, useRef, ReactNode } from 'react';
+import { useEffect, useState, useRef, useSyncExternalStore, ReactNode } from 'react';
+// IMPORTADO O STORE DE ACESSIBILIDADE PARA LER O ESTADO DE PAUSAR ANIMAÇÕES
+import { useAccessibilityStore } from '@/store/useAccessibilityStore';
+import badgeStyles from './badge.module.css';
+import JaspeCoin from './JaspeCoin';
+
+const subscribeToHydration = () => () => undefined;
 
 const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -68,15 +84,22 @@ const OzoneBackground = () => (
   </div>
 );
 
-const conquistas = [
+type Achievement = {
+  id: number;
+  fotos: string[];
+  titulo: string;
+  descricao: string;
+};
+
+const conquistas: Achievement[] = [
   { 
     id: 1, 
     fotos: [
-      "/diretoria3.jpg", 
-      "/diretoria2.jpg", 
-      "/diretoria1.jpg",
-      "/diretoria4.jpg",
-      "/diretoria5.jpg"  
+      "/diretoria3.webp",
+      "/diretoria2.webp",
+      "/diretoria1.webp",
+      "/diretoria4.webp",
+      "/diretoria5.webp"
     ], 
     titulo: "Reconhecimento da Diretoria", 
     descricao: "Lado a lado com os fundadores e diretores da Ozonteck, colhendo os frutos de um trabalho construído com transparência." 
@@ -84,12 +107,12 @@ const conquistas = [
   { 
     id: 2, 
     fotos: [
-      "/argentina.jpg",
-      "/argentina2.png", 
-      "/argentina3.jpg", 
-      "/argentina5.jpg", 
-      "/argentina4.jpg", 
-      "/argentina6.jpg"  
+      "/argentina.webp",
+      "/argentina2.webp",
+      "/argentina3.webp",
+      "/argentina5.webp",
+      "/argentina4.webp",
+      "/argentina6.webp"
     ], 
     titulo: "Destinos Internacionais", 
     descricao: "O resultado de muita dedicação levou-o a conquistar a sua primeira viagem internacional com destino à Argentina, uma experiência inesquecível." 
@@ -97,14 +120,14 @@ const conquistas = [
   { 
     id: 3, 
     fotos: [
-      "/cruzeiro1.jpg", 
-      "/cruzeiro5.jpg", 
-      "/cruzeiro7.jpg",
-      "/cruzeiro4.jpg", 
-      "/cruzeiro2.jpg", 
-      "/cruzeiro9.jpg",
-      "/cruzeiro6.jpg", 
-      "/cruzeiro8.jpg"  
+      "/cruzeiro1.webp",
+      "/cruzeiro5.webp",
+      "/cruzeiro7.webp",
+      "/cruzeiro4.webp",
+      "/cruzeiro2.webp",
+      "/cruzeiro9.webp",
+      "/cruzeiro6.webp",
+      "/cruzeiro8.webp"
     ], 
     titulo: "Cruzeiro de Sucesso", 
     descricao: "Reconhecimento a bordo de um cruzeiro exclusivo. Uma conquista marcante por ser a sua primeira vez em alto mar e por ter a alegria de proporcionar essa primeira experiência também ao seu filho." 
@@ -112,31 +135,31 @@ const conquistas = [
   { 
     id: 4, 
     fotos: [
-      "/lideranca.jpg", 
-      "/lideranca2.jpg",
-      "/lideranca0.jpg",
-      "/lideranca1.jpg",
-      "/lideranca3.jpg",
-      "/lideranca6.jpg",
-      "/lideranca7.jpg",
-      "/lideranca4.jpg"
+      "/lideranca.webp",
+      "/lideranca2.webp",
+      "/lideranca0.webp",
+      "/lideranca1.webp",
+      "/lideranca3.webp",
+      "/lideranca6.webp",
+      "/lideranca7.webp",
+      "/lideranca4.webp"
     ], 
     titulo: "Liderança pelo Brasil", 
     descricao: "Participação em eventos nacionais, levando sempre a sua alegria e partilhando muito conhecimento." 
   },
 ];
 
-const GalleryCard = ({ item, delay }: { item: any, delay: number }) => {
+const GalleryCard = ({ item, delay, pauseAnimations }: { item: Achievement; delay: number; pauseAnimations: boolean }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    if (item.fotos.length <= 1 || !isHovered) return;
+    if (item.fotos.length <= 1 || !isHovered || pauseAnimations) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % item.fotos.length);
     }, 2000); 
     return () => clearInterval(interval);
-  }, [item.fotos.length, isHovered]);
+  }, [item.fotos.length, isHovered, pauseAnimations]);
 
   const handleInteraction = () => {
     if (item.fotos.length <= 1) return;
@@ -145,26 +168,26 @@ const GalleryCard = ({ item, delay }: { item: any, delay: number }) => {
 
   return (
     <RevealOnScroll delay={delay} className="w-[75vw] sm:w-[280px] lg:w-full shrink-0 snap-center">
-      <div 
-        className="group bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-xl lg:rounded-2xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col cursor-pointer"
+      {/* CORREÇÃO: Transformado a div interativa em um botão semântico (button) */}
+      <button 
+        className="group w-full text-left bg-white/60 backdrop-blur-xl border border-slate-200/60 rounded-xl lg:rounded-2xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 h-full flex flex-col cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-emerald-500/70"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleInteraction}
+        aria-label={`Ver próximas fotos de ${item.titulo}`}
       >
         
-        <div className="aspect-[4/3] bg-slate-100 overflow-hidden relative">
+        <div className="aspect-[4/3] bg-slate-100 overflow-hidden relative w-full">
           <div className="w-full h-full relative transition-transform duration-700 group-hover:scale-105">
-            {item.fotos.map((foto: string, i: number) => (
-              <Image 
-                key={i}
-                src={foto} 
-                alt={`${item.titulo} - Foto ${i + 1}`} 
-                fill
-                sizes="(max-width: 640px) 75vw, (max-width: 1024px) 280px, 300px"
-                quality={90}
-                className={`object-cover object-center transition-opacity duration-1000 ${i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-              />
-            ))}
+            <Image
+              key={item.fotos[currentIndex]}
+              src={item.fotos[currentIndex]}
+              alt={`${item.titulo} - Foto ${currentIndex + 1}`}
+              fill
+              sizes="(max-width: 640px) 75vw, (max-width: 1024px) 280px, 300px"
+              quality={75}
+              className="object-cover object-center"
+            />
           </div>
 
           {item.fotos.length > 1 && (
@@ -179,20 +202,21 @@ const GalleryCard = ({ item, delay }: { item: any, delay: number }) => {
           )}
         </div>
 
-        <div className="p-4 lg:p-5 flex-1 flex flex-col justify-center">
+        <div className="p-4 lg:p-5 flex-1 flex flex-col justify-center w-full">
           <h4 className="font-bold text-slate-900 text-xs lg:text-sm mb-1">{item.titulo}</h4>
           <p className="text-slate-500 text-[10px] lg:text-xs font-medium leading-relaxed">
             {item.descricao}
           </p>
         </div>
-      </div>
+      </button>
     </RevealOnScroll>
   );
 };
 
 export default function SobreCliente() {
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => setIsMounted(true), []);
+  const isMounted = useSyncExternalStore(subscribeToHydration, () => true, () => false);
+  const { pauseAnimations } = useAccessibilityStore(); // Lendo a variável de acessibilidade
+
   if (!isMounted) return null;
 
   return (
@@ -245,33 +269,92 @@ export default function SobreCliente() {
                     <span>Reconhecido na empresa com diversas viagens pelo Brasil e exterior</span>
                   </div>
                 </div>
+
+                <nav aria-label="Redes sociais de Rogério André" className="pt-7">
+                  <p className="mb-3 text-xs font-bold uppercase text-slate-500">Acompanhe o Rogério</p>
+                  <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+                    <a
+                      href="https://www.instagram.com/rogerioandreozonteck/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Abrir Instagram de Rogério André em nova aba"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition-colors hover:border-teal-300 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                    >
+                      <Camera size={18} aria-hidden="true" /> Instagram
+                      <ExternalLink size={13} className="text-slate-400" aria-hidden="true" />
+                    </a>
+                    <a
+                      href="https://www.facebook.com/share/1HfPtPLK5s/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Abrir Facebook de Rogério André em nova aba"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition-colors hover:border-teal-300 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                    >
+                      <Users size={18} aria-hidden="true" /> Facebook
+                      <ExternalLink size={13} className="text-slate-400" aria-hidden="true" />
+                    </a>
+                    <a
+                      href="https://www.tiktok.com/@rogerioandredelima"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Abrir TikTok de Rogério André em nova aba"
+                      className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition-colors hover:border-teal-300 hover:bg-teal-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2"
+                    >
+                      <Music2 size={18} aria-hidden="true" /> TikTok
+                      <ExternalLink size={13} className="text-slate-400" aria-hidden="true" />
+                    </a>
+                  </div>
+                </nav>
               </div>
             </RevealOnScroll>
 
             <RevealOnScroll delay={400} className="w-full max-w-sm lg:max-w-md xl:max-w-[450px] order-1 lg:order-2 lg:sticky lg:top-24">
               <div className="relative w-full aspect-[3/4] flex items-end justify-center">
                 <div className="absolute inset-0 bg-gradient-to-t from-teal-100/40 to-transparent rounded-[3rem] -z-10 blur-xl"></div>
-                <img 
+                <Image
                   src="/foto-pai-sem-fundo.png" 
                   alt="Rogério André - Distribuidor Ozonteck" 
-                  className="w-full h-auto max-h-full object-contain object-bottom drop-shadow-[0_20px_40px_rgb(13,148,136,0.15)]"
+                  fill
+                  sizes="(max-width: 1024px) 384px, 450px"
+                  className="object-contain object-bottom drop-shadow-[0_20px_40px_rgb(13,148,136,0.15)]"
                 />
                 
                 <div 
-                  className="absolute top-[5%] right-[-5%] sm:right-[-10%] lg:right-[-15%] z-20 flex justify-center items-center pointer-events-none"
-                  style={{ animation: 'floatBadge 4.5s ease-in-out infinite' }}
+                  className={`absolute top-[5%] right-[-5%] sm:right-[-10%] lg:right-[-15%] z-20 pointer-events-none w-40 h-40 sm:w-48 sm:h-48 lg:w-[220px] lg:h-[220px] ${badgeStyles.badge} ${pauseAnimations ? badgeStyles.paused : ''}`}
+                  role="img"
+                  aria-label="Nível Jaspe"
                 >
-                  <img 
-                    src="/jaspe.gif" 
-                    alt="Nível Jaspe 3D" 
-                    className="w-40 h-40 sm:w-48 sm:h-48 lg:w-[220px] lg:h-[220px] object-contain drop-shadow-[0_20px_40px_rgba(217,119,6,0.5)]"
-                  />
+                  <JaspeCoin paused={pauseAnimations} />
                 </div>
                 
               </div>
             </RevealOnScroll>
             
           </div>
+        </section>
+
+        <section aria-labelledby="rogerio-quote-title" className="mx-auto mb-20 max-w-6xl lg:mb-24">
+          <RevealOnScroll delay={150}>
+            <div className="grid gap-8 border-y border-slate-200/80 py-10 sm:py-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.6fr)] lg:items-start lg:gap-14">
+              <div>
+                <Quote size={34} strokeWidth={1.5} className="mb-5 text-teal-600" aria-hidden="true" />
+                <p className="mb-2 text-xs font-bold uppercase text-teal-700">Relato pessoal</p>
+                <h2 id="rogerio-quote-title" className="text-2xl font-extrabold leading-tight text-slate-900 sm:text-3xl">
+                  Nas palavras de Rogério
+                </h2>
+              </div>
+
+              <blockquote className="border-l-4 border-teal-500 pl-5 sm:pl-7">
+                <p className="text-lg font-medium leading-relaxed text-slate-700 sm:text-xl">
+                  “Quando assisti aos depoimentos de pessoas que estavam sem esperança e vi os relatos sobre os resultados percebidos depois que começaram a usar os suplementos ozonizados, entendi o impacto que esse trabalho poderia ter. Para mim, uma conquista diferente de tudo o que vivi em outras empresas foi alcançar a graduação Diamante em apenas 75 dias e participar, pela primeira vez, de uma viagem de cruzeiro promovida pela empresa.”
+                </p>
+                <footer className="mt-5">
+                  <cite className="text-sm font-bold not-italic text-slate-900">Rogério André</cite>
+                  <p className="mt-1 text-xs text-slate-500">Distribuidor autorizado Ozonteck</p>
+                </footer>
+              </blockquote>
+            </div>
+          </RevealOnScroll>
         </section>
 
         <section className="mb-20 lg:mb-24">
@@ -287,10 +370,17 @@ export default function SobreCliente() {
           <div className="relative w-screen -ml-5 sm:-ml-10 lg:w-full lg:ml-0 px-5 sm:px-10 lg:px-0">
             <div className="flex overflow-x-auto lg:grid lg:grid-cols-4 gap-4 sm:gap-5 xl:gap-6 pb-6 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {conquistas.map((item, index) => (
-                <GalleryCard key={item.id} item={item} delay={300 + (index * 100)} />
+                <GalleryCard key={item.id} item={item} delay={300 + (index * 100)} pauseAnimations={pauseAnimations} />
               ))}
             </div>
           </div>
+        </section>
+
+        <section aria-labelledby="about-join-title" className="mb-16 border-y border-teal-200 py-10">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-teal-800">Faça parte desta história</p>
+          <h2 id="about-join-title" className="text-2xl font-extrabold text-slate-900 sm:text-3xl">Construa seu negócio na rede de Rogério</h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-600">Você também pode fazer parte dessa trajetória como distribuidor independente na rede de Rogério André. Conheça a atuação com venda direta de produtos e desenvolvimento de equipe, entenda a proposta e converse com ele sobre os próximos passos para entrar na rede.</p>
+          <Link href="/junte-se-a-nos" className="mt-5 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade com Rogério</Link>
         </section>
 
         <section>
@@ -300,10 +390,12 @@ export default function SobreCliente() {
               
               <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-center md:items-start relative z-10">
                 <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 shrink-0 rounded-full overflow-hidden border-4 border-white shadow-lg bg-slate-100 flex items-center justify-center relative">
-                  <img 
+                  <Image
                     src="/foto-lucas.jpg" 
                     alt="Lucas André - Desenvolvedor" 
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="160px"
+                    className="object-cover"
                   />
                 </div>
 
@@ -329,7 +421,7 @@ export default function SobreCliente() {
                       href="https://linktr.ee/Lucas_andre490" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs lg:text-sm font-bold text-slate-700 bg-slate-100/80 hover:bg-teal-600 hover:text-white border border-slate-200 hover:border-teal-600 px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md"
+                      className="inline-flex items-center gap-2 text-xs lg:text-sm font-bold text-slate-700 bg-slate-100/80 hover:bg-teal-600 hover:text-white border border-slate-200 hover:border-teal-600 px-5 py-2.5 rounded-full transition-all duration-300 shadow-sm hover:shadow-md focus:outline-none focus:ring-4 focus:ring-emerald-500/50"
                     >
                       Conecte-se comigo <ExternalLink size={16} />
                     </a>

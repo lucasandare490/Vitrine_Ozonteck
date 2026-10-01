@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { isRetiredProduct } from '@/lib/catalog-availability';
+
+import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
 import { Heart, ShoppingBag, ArrowLeft, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import type { User } from '@supabase/supabase-js';
+import type { Product } from '@/lib/data';
 
 const OzoneBackground = () => (
   <div className="fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
@@ -40,8 +44,8 @@ const OzoneBackground = () => (
 );
 
 export default function FavoritosPage() {
-  const [user, setUser] = useState<any>(null);
-  const [favoriteProducts, setFavoriteProducts] = useState<any[]>([]);
+  const [user, setUser] = useState<User | null>(null);
+  const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
@@ -67,14 +71,15 @@ export default function FavoritosPage() {
         
         const { data: prods } = await supabase
           .from('produtos')
-          .select('*')
-          .in('code', codes);
+          .select('id, code, name, description, category, price, image_url, estoque')
+          .in('code', codes).eq('is_deleted', false);
 
         if (prods) {
-          const formattedProducts = prods.map((item) => ({
+          const formattedProducts = prods.filter((item) => !isRetiredProduct(item)).map((item) => ({
             id: item.id,
             code: item.code,
             name: item.name,
+            description: item.description || '',
             category: item.category,
             price: Number(item.price),
             imagePlaceholder: item.image_url,
@@ -98,10 +103,13 @@ export default function FavoritosPage() {
     window.dispatchEvent(new Event('atualizarFavoritos'));
   };
 
-  const filteredFavorites = favoriteProducts.filter(product => 
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    product.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // OTIMIZAÇÃO SÊNIOR: Memoização do filtro. Impede o React de recalcular o array em qualquer outra re-renderização da página.
+  const filteredFavorites = useMemo(() => {
+    return favoriteProducts.filter(product => 
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      product.category.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [favoriteProducts, searchQuery]);
 
   return (
     <main className="min-h-screen bg-[#FAFAFC] text-slate-900 relative overflow-hidden flex flex-col">
@@ -179,7 +187,7 @@ export default function FavoritosPage() {
               <Search size={24} className="text-slate-300" />
             </div>
             <h3 className="text-lg font-bold text-slate-800 mb-1">Nenhum favorito encontrado</h3>
-            <p className="text-sm text-slate-500">Não achamos nada com o termo "{searchQuery}".</p>
+            <p className="text-sm text-slate-500">Não achamos nada com o termo &quot;{searchQuery}&quot;.</p>
             <button 
               onClick={() => setSearchQuery('')}
               className="mt-4 text-teal-600 font-bold text-xs uppercase tracking-widest hover:underline"

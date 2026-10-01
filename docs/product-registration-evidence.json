@@ -1,0 +1,282 @@
+[
+  {
+    "code": "NUT-AMYNO-CX",
+    "name": "Amyno Ozon Caixa",
+    "category": "Nutracêuticos",
+    "codigoOriginal": "IMP-189",
+    "ean": "",
+    "price": 299.9,
+    "image": "amynoozoncaixa.webp",
+    "sourcePosition": 52,
+    "description": "",
+    "presentation": "Caixa",
+    "missing": [
+      "O material apresenta apenas um ponto no lugar da descrição.",
+      "Quantidade de unidades por caixa, composição, modo de uso e advertências não confirmados."
+    ],
+    "source": {
+      "position": 52,
+      "body": "amnyo ozon caixa: .",
+      "codigoOriginal": "IMP-189",
+      "ean": "",
+      "dimensions": "5.00 × 11.00 × 5.00 cm",
+      "weight": "1 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "NUT-AMYNO-UN",
+    "name": "Amyno Ozon Unidade",
+    "category": "Nutracêuticos",
+    "codigoOriginal": "IMP-197",
+    "ean": "",
+    "price": 10,
+    "image": "amynoozonunidade.webp",
+    "sourcePosition": 56,
+    "description": "",
+    "presentation": "Unidade",
+    "missing": [
+      "O material apresenta apenas um ponto no lugar da descrição.",
+      "Composição, quantidade líquida, modo de uso e advertências não confirmados."
+    ],
+    "source": {
+      "position": 56,
+      "body": "amnyo ozon unidade: .",
+      "codigoOriginal": "IMP-197",
+      "ean": "",
+      "dimensions": "3.50 × 3.50 × 14.00 cm",
+      "weight": "9 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "NUT-POWER-UN",
+    "name": "Ozon Power Unidade",
+    "category": "Nutracêuticos",
+    "codigoOriginal": "IMP-49",
+    "ean": "",
+    "price": 10,
+    "image": "ozonpowerunidade.webp",
+    "sourcePosition": 59,
+    "description": "Ozon Power é um suplemento da Ozonteck apresentado em unidade individual, destinado ao público adulto. O material fornecido descreve uma combinação de vitaminas, minerais, aminoácidos e compostos bioativos, incluindo cafeína. As quantidades por porção e a composição integral não foram informadas.",
+    "presentation": "Unidade",
+    "components": "Vitaminas B1, B2, B5, B6, B12 e C; coenzima Q10; taurina; tirosina; arginina; cafeína; trans-resveratrol. Relação parcial informada no catálogo, sem quantidades por porção.",
+    "missing": [
+      "Composição integral, minerais específicos, dosagem, modo de uso e advertências do rótulo."
+    ],
+    "source": {
+      "position": 59,
+      "body": "Ozon Power é uma exclusividade Ozonteck, formulado para oferecer uma combinação poderosa de Vitaminas, Minerais, Aminoácidos e Compostos Bioativos que apoiam o metabolismo e a função cognitiva. Sua fórmula abrangente também oferece suporte ao sistema cardiovascular, imunológico e ao metabolismo energético, sendo ideal para pessoas com ro nas exigentes e que buscam otimizar a saúde e o bem-estar. Com uma composição rica em ingredientes a vos, como as Vitaminas do Complexo B (B1, B2, B5, B6 e B12), que atuam diretamente no metabolismo e no sistema nervoso, o Ozon Power também conta com antioxidantes potentes, como a Vitamina C e a Coenzima Q10, que protegem as células contra danos oxida vos e promovem a produção de energia celular. Aminoácidos como taurina, tirosina e arginina trabalham em sinergia para melhorar a função cognitiva, promover a saúde cardiovascular e aumentar o desempenho físico. Além disso, a Cafeína e o Trans-Resveratrol auxiliam no aumento do estado de alerta, foco e longevidade, tornando o Ozon Power um suplemento completo para quem busca mais energia e desempenho mental. Indicado para adultos, Ozon Power Ozonteck é projetado para melhorar o desempenho mental, ajudando no foco, memória e concentração, além de fornecer nutrientes essenciais para manter o corpo equilibrado e saudável. ◦ Auxilia no metabolismo de carboidratos, gorduras e proteínas, fornecendo energia e suportando a função metabólica; ◦ Ajuda na manutenção da função cognitiva e saúde mental; ◦ Fortalece o sistema imunológico e promove a proteção contra infecções; ◦ Auxilia na saúde cardiovascular e pode melhorar o desempenho físico e a circulação sanguínea; ◦ Atua como antioxidantes, protegendo as células do estresse oxidativo e contribuindo para a longevidade. PRODUTO DISPENSADO DE REGISTRO NO MINISTÉRIO DA SAÚDE CONFORME RDC ANVISA 240/18 E SUAS ATUALIZAÇÕES.",
+      "codigoOriginal": "IMP-49",
+      "ean": "",
+      "dimensions": "14.00 × 3.50 × 14.00 cm",
+      "weight": "9 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "NUT-MUNITY-UN",
+    "name": "Ozon Munity Unidade",
+    "category": "Nutracêuticos",
+    "codigoOriginal": "IMP-48",
+    "ean": "",
+    "price": 10,
+    "image": "ozonmunityunidade.webp",
+    "sourcePosition": 61,
+    "description": "Ozon Munity é um suplemento da Ozonteck na apresentação individual. O catálogo descreve uma combinação de carboidratos, vitaminas, minerais e fibras solúveis, com maltodextrina entre os componentes citados. Não foram informadas as quantidades por porção nem a composição integral.",
+    "presentation": "Unidade",
+    "components": "Maltodextrina; mix de vitaminas e minerais; fibras solúveis. O catálogo não discrimina as vitaminas, minerais e fibras nem suas quantidades.",
+    "missing": [
+      "Composição integral, dosagem, modo de uso e advertências do rótulo."
+    ],
+    "source": {
+      "position": 61,
+      "body": "Ozon Munity é uma exclusividade Ozonteck formulado para fornecer uma combinação de Carboidratos, Vitaminas, Minerais e Fibras Solúveis, uma composição equilibrada que garante uma fonte prática de nutrientes essenciais, proporcionando energia rápida e fortalecendo o sistema imunológico. Com uma fórmula que inclui ingredientes como Maltodextrina, um carboidrato de fácil digestão, o suplemento promove a reposição de energia e glicogênio muscular, tornando-o ideal para atividades físicas intensas. O Mix de Vitaminas e Minerais atua sinergicamente contribuindo para a saúde da pele, dos ossos e da imunidade. Ozon Munity Ozonteck é ideal para quem busca mais vitalidade no dia a dia, o suplemento oferece suporte integral ao corpo, desde o metabolismo até a função celular. ◦ Promove saúde intestinal, óssea e cardiovascular, além de auxiliar no processo de emagrecimento; ◦ Fornece energia de rápida absorção, importante para a recuperação após o exercício; ◦ Promove a saúde do sistema digestivo e ajuda a regular a função intestinal; ◦ Vitaminas e minerais presentes no mix são essenciais para a saúde dos ossos e do sistema imunológico; ◦ Contribui para o metabolismo energético e a formação de células sanguíneas; ◦ Oferece propriedades antioxidantes que ajudam a combater o estresse oxidativo; ◦ Melhora o metabolismo energético e o funcionamento do sistema nervoso; ◦ Ajuda na circulação sanguínea; ◦ Oferece bene cios à saúde intestinal e cardiovascular, reforçando o equilíbrio geral do corpo. PRODUTO DISPENSADO DE REGISTRO NO MINISTÉRIO DA SAÚDE CONFORME RDC ANVISA 240/18 E SUAS ATUALIZAÇÕES.",
+      "codigoOriginal": "IMP-48",
+      "ean": "",
+      "dimensions": "14.00 × 3.50 × 14.00 cm",
+      "weight": "9 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "BE-SER-LUM",
+    "name": "Sérum Facial Lumino3",
+    "category": "Bem Estar",
+    "codigoOriginal": "40566",
+    "ean": "7898760210585",
+    "price": 175.9,
+    "image": "serumfaciallumino3.webp",
+    "sourcePosition": 73,
+    "description": "O Sérum Facial Ozonizado Lumino3 da Ozonteck é destinado aos cuidados da pele do rosto. O catálogo apresenta uma proposta de hidratação e cuidado da aparência da pele, com vitamina C e ácido hialurônico entre os ativos destacados, e o indica para todos os tipos de pele.",
+    "actives": "Vitamina C e ácido hialurônico; o catálogo também descreve tecnologia ozonizada, sem especificar a composição integral.",
+    "missing": [
+      "Modo de uso, precauções, concentrações e lista integral de ingredientes."
+    ],
+    "source": {
+      "position": 73,
+      "body": "O Sérum Facial Ozonizado Lumino3 é a solução perfeita para quem deseja uma pele radiante, hidratada e com aparência rejuvenescida. Com uma fórmula inovadora que combina os benefícios da Vitamina C, do Ácido Hialurônico e do poder do ozônio, esse sérum oferece cuidados completos para todos os tipos de pele. O diferencial do Lumino3 está na sua tecnologia ozonizada, que potencializa os efeitos antioxidantes e estimula a renovação celular. Essa ação ajuda a reduzir os sinais do envelhecimento, como linhas finas e perda de elasticidade, promovendo uma pele visivelmente mais jovem e firme. O Sérum Facial Ozonizado Lumino3 é o toque de cuidado que sua pele merece. Experimente e sinta a transformação em cada gota!",
+      "codigoOriginal": "40566",
+      "ean": "7898760210585",
+      "dimensions": "3.00 × 3.00 × 10.00 cm",
+      "weight": "45 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "CAP-CO-KES",
+    "name": "Condicionador Ozon-Kesen",
+    "category": "Cuidados Capilares",
+    "codigoOriginal": "40548",
+    "ean": "7898996428235",
+    "price": 109.9,
+    "image": "condicionadorozonkesen.webp",
+    "sourcePosition": 83,
+    "line": "ozon-kesen",
+    "description": "O Condicionador Ozon-Kesen Pós-Química é destinado a cabelos submetidos a coloração, alisamento ou relaxamento e a fios ressecados por fatores como uso de chapinha e exposição ao sol. A fórmula descrita no catálogo combina manteiga de cupuaçu ozonizada e queratina para condicionar os fios, proporcionar maciez e brilho e ajudar a preservar a umidade.",
+    "actives": "Manteiga de cupuaçu ozonizada e queratina.",
+    "usage": [
+      "Após lavar os cabelos com o Shampoo Ozon-Kesen e aplicar a Máscara Ozon-Kesen, distribua o condicionador por todo o comprimento.",
+      "Deixe agir por alguns minutos e enxágue abundantemente. O catálogo não informa um tempo exato."
+    ],
+    "precautions": [
+      "Uso externo. Evite contato com os olhos; em caso de contato, enxágue abundantemente com água.",
+      "Mantenha fora do alcance de crianças. Faça um teste de alergia antes do primeiro uso.",
+      "Armazene em local fresco e seco, longe da luz solar direta. Siga as instruções do rótulo."
+    ],
+    "missing": [
+      "Composição integral e tempo exato de pausa."
+    ],
+    "source": {
+      "position": 83,
+      "body": "\"Condicionador Ozon-Kesen: nutre e protege cabelos pós-química, com brilho intenso.\" Condicionador Ozon-Kesen Ozonizado Descrição: O Condicionador Ozon-Kesen Pós-Química é especialmente formulado para cabelos que passaram por procedimentos químicos, como coloração, alisamento ou relaxamento, além de tratar fios ressecados por outros fatores, como chapinha e exposição ao sol. Com uma combinação exclusiva de ingredientes, como Manteiga de Cupuaçu Ozonizada e Queratina, este condicionador proporciona sedosidade, maciez e brilho excepcionais, formando uma película protetora nos fios. Benefícios: - Sedosidade e Maciez: Proporciona uma textura suave e sedosa aos cabelos. - Brilho Intenso: Deixa os fios brilhantes e revitalizados. - Proteção: Forma uma película protetora que ajuda a reter a umidade e proteger contra danos futuros. Modo de Uso: 1. Após lavar os cabelos com o Shampoo Ozon-Kesen e aplicar a Máscara Ozon-Kesen, aplique o Condicionador Ozon-Kesen em todo o comprimento dos fios. 2. Deixe agir por alguns minutos. 3. Enxágue abundantemente para resultados impressionantes. Precauções: - Evite o contato com os olhos. Em caso de contato, enxágue abundantemente com água. - Mantenha fora do alcance de crianças. - Faça um teste de alergia antes do primeiro uso. - Armazene em local fresco e seco, longe da luz solar direta. - Siga as instruções de uso. - Uso externo. Nota: Este produto foi formulado para minimizar o risco de alergias.",
+      "codigoOriginal": "40548",
+      "ean": "7898996428235",
+      "dimensions": "5.00 × 5.00 × 22.00 cm",
+      "weight": "321 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "CAP-PRO-KES",
+    "name": "Pro Kesen",
+    "category": "Cuidados Capilares",
+    "codigoOriginal": "40544",
+    "ean": "7898760210097",
+    "price": 499.9,
+    "image": "prokesen.webp",
+    "sourcePosition": 90,
+    "description": "O Reestruturador Ozonizado Pro Kesen é uma máscara capilar da Ozonteck voltada à redução e ao controle do volume e do frizz. O catálogo descreve a combinação da tecnologia ozonizada com ácidos hialurônico e lático, óleos e silicone, com proposta de alinhamento, maciez, brilho e melhora do aspecto dos fios danificados. A marca menciona diferentes formas de aplicação para alinhar os fios ou soltar os cachos, mas o material não apresenta o protocolo de cada procedimento.",
+    "actives": "Ácidos hialurônico e lático; óleos e silicone não discriminados. Não corresponde à composição integral.",
+    "precautions": [
+      "Realize teste de mecha antes da aplicação em todo o cabelo e teste de sensibilidade antes do uso.",
+      "Use luvas na aplicação. Uso externo. Não aplique sobre pele irritada ou lesionada.",
+      "Em caso de irritação, suspenda imediatamente o uso. Evite contato com os olhos.",
+      "Mantenha fora do alcance de crianças. Conserve em temperatura ambiente, longe do calor e da luz.",
+      "Para uso durante a gravidez, consulte um médico."
+    ],
+    "missing": [
+      "Protocolo de aplicação, tempo de pausa, eventual uso de calor e composição integral. O peso logístico de 1963 g não comprova volume líquido."
+    ],
+    "source": {
+      "position": 90,
+      "body": "O Reestruturador Ozonizado Pro Kesen é uma máscara capilar redutora de volume, exclusiva da Ozonteck, que promove um tratamento intensivo na fibra capilar, através do poder do Ozônio combinado aos Ácidos Hialurônico e Lático, juntamente com Óleos Extraordinários e Silicone de estrutura molecular diferenciada. Repara visivelmente cabelos danificados, envolvendo-os em um filme de proteção, melhorando o aspecto das cutículas e corrigindo a porosidade dos fios. Promove intensa sedosidade fio a fio, deixando-os com um incrível sensorial aveludado. O Ozônio presente em sua composição potencializa os bene cios dos a vos presentes, preservando a umidade dos fios durante o alinhamento da fibra, impedindo o ressecamento, controlando o volume, restaurando o brilho e a maleabilidade dos fios. O Reestruturador Ozonizado Pro Kesen Ozonteck é indicado para redução e controle de volume, podendo ser u lizado de formas diferentes para promover resultados múltiplos. É indicado para alinhar os fios, promovendo efeito liso e também para soltar os cachos, reduzindo o frizz. ◦ Ajuda a controlar o frizz e o volume excessivo, proporcionando um cabelo mais liso e gerenciável. ◦ Promove um alinhamento natural dos fios, facilitando o penteado e deixando o cabelo com um aspecto mais saudável e ordenado. ◦ Proporciona hidratação intensa e restauração, melhorando a saúde geral do cabelo. ◦ Contribui para aumentar o brilho, deixando os cabelos mais radiantes e com um aspecto vívido. ◦ Proporciona uma suavidade incrível ao toque, tornando os fios sedosos e fáceis de manusear. ◦ Efeito duradouro, proporcionando pra cidade no dia a dia. ◦ Pode ser u lizado em diversos pos de cabelo*, desde os mais finos até os mais grossos, adaptando-se às necessidades específicas de cada um. *É sempre recomendado realizar o teste de mecha antes da aplicação do produto em todo o cabelo. RECOMENDAÇÕES E PRECAUÇÕES: Use luvas na aplicação. Uso externo. Não u lizar sobre a pele irritada ou lesionada. Em caso de irritação, suspender imediatamente o uso. Evitar contato com os olhos. Manter fora do alcance de crianças. Conservar o produto em temperatura ambiente, longe do calor e da luz. Para uso durante a gravidez, consulte um médico. Antes de u lizar o produto, faça o teste de sensibilidade. Este produto foi formulado de maneira a minimizar possível surgimento de alergia.",
+      "codigoOriginal": "40544",
+      "ean": "7898760210097",
+      "dimensions": "7.00 × 7.00 × 30.00 cm",
+      "weight": "1963 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "CAP-AT-MC",
+    "name": "Ativador Master Curls",
+    "category": "Cuidados Capilares",
+    "codigoOriginal": "40559",
+    "ean": "7898996428228",
+    "price": 119.9,
+    "image": "ativadormastercurls.webp",
+    "sourcePosition": 93,
+    "line": "master-curls",
+    "description": "O Ativador de Cachos Ozonizado da linha Master Curls da Ozonteck é destinado à finalização dos cabelos cacheados. O catálogo apresenta uma proposta de hidratação e definição dos cachos, para aplicação mecha a mecha após o uso do shampoo e da máscara da linha.",
+    "usage": [
+      "Após lavar com o Shampoo Master Curls e aplicar a Máscara Master Curls, respeite a pausa da máscara e enxágue.",
+      "Distribua uma pequena quantidade do ativador mecha a mecha por toda a extensão dos fios.",
+      "Finalize como desejar, deixando secar naturalmente ou utilizando um método de secagem."
+    ],
+    "precautions": [
+      "Uso externo. Evite contato com os olhos e mantenha fora do alcance das crianças.",
+      "Em caso de dúvida, faça um teste de alergia antes do primeiro uso.",
+      "Armazene em local fresco e seco, longe da luz solar direta. Siga as instruções do rótulo."
+    ],
+    "missing": [
+      "Composição integral. O catálogo não especifica proteção térmica nem protocolo de secagem."
+    ],
+    "source": {
+      "position": 93,
+      "body": "\"Ativador de Cachos Ozonizado: define, hidrata e protege seus cachos naturais. Ativador de Cachos Ozonizado – Ozonteck Descubra a revolução no cuidado dos cabelos cacheados com o nosso exclusivo Ativador de Cachos Ozonizado, formulado com tecnologia de ponta em. Desenvolvido pela Ozonteck, líder em inovação capilar, este ativador é a combinação perfeita de ciência e natureza para proporcionar cachos vibrantes, definidos e saudáveis. Benefícios: - Cachos Definidos e Hidratados: A tecnologia de ozônio proporciona uma hidratação profunda, resultando em cachos mais definidos e com aparência saudável. - Proteção Contra Danos Ambientais: O ozônio possui propriedades antioxidantes que protegem os cabelos dos danos causados pelos raios UV e poluentes, mantendo os cachos protegidos e radiantes. Transforme sua rotina de cuidados capilares com a tecnologia de ozônio e descubra a diferença com nosso Ativador de Cachos. Experimente e realce a beleza natural dos seus cachos! Modo de Uso: 1. Após lavar os cabelos com o Shampoo Master Curls e aplicar a Máscara Master Curls, deixe o tempo de pausa e enxágue. 2. Aplique uma pequena quantidade do Ativador de Cachos da Ozonteck mecha a mecha por toda a extensão dos fios. 3. Finalize como desejar, deixando os cabelos secarem naturalmente ou utilizando um método de secagem. Precauções: - Evite contato com os olhos. - Mantenha fora do alcance das crianças. - Formulado para minimizar o risco de alergias. Faça um teste de alergia antes do primeiro uso se tiver dúvidas. - Armazene em local fresco e seco, longe da luz solar direta. - Siga as instruções de uso. - Uso externo.",
+      "codigoOriginal": "40559",
+      "ean": "7898996428228",
+      "dimensions": "5.00 × 6.00 × 22.00 cm",
+      "weight": "461 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "CAP-CO-MEL",
+    "name": "Condicionador Mel & Ozônio",
+    "category": "Cuidados Capilares",
+    "codigoOriginal": "40551",
+    "ean": "7898996428266",
+    "price": 109.9,
+    "image": "condicionadormelozonio.webp",
+    "sourcePosition": 95,
+    "line": "mel-ozonio",
+    "description": "O Condicionador Mel & Ozônio da Ozonteck é destinado ao cuidado de cabelos fragilizados e sem vida. O catálogo descreve uma proposta de hidratação, maciez, sedosidade e brilho, com óleo de girassol ozonizado, extrato de mel, geleia real e vitaminas A, D e E entre os componentes destacados.",
+    "actives": "Óleo de girassol ozonizado; extrato de mel; geleia real; vitaminas A, D e E.",
+    "missing": [
+      "Composição integral, modo de uso e precauções específicos deste condicionador."
+    ],
+    "source": {
+      "position": 95,
+      "body": "Condicionador MEL & OZÔNIO: hidratação intensa e revitalização para cabelos radiantes. Transforme seus cabelos fragilizados e sem vida com a linha MEL & OZÔNIO da Ozonteck. Aproveite a combinação inovadora de ozônio e ingredientes naturais para uma revitalização capilar incomparável! O Condicionador MEL & OZÔNIO oferece mais do que apenas maciez e sedosidade; ele trata os fios, proporcionando brilho e vitalidade excepcionais. O Poder do Ozônio para Revitalização Profunda: - Óleo de Girassol Ozonizado: Potencializa os benefícios do ozônio para fortalecer e revitalizar os cabelos desde a raiz até as pontas, promovendo purificação e renovação a cada aplicação. Ingredientes Nutritivos da Natureza: - Extrato de Mel e Geleia Real: Proporcionam nutrição e hidratação, restaurando a vitalidade e o brilho dos cabelos. - Vitaminas A, D e E: Com propriedades antioxidantes e umectantes, garantem uma aparência saudável e radiante.",
+      "codigoOriginal": "40551",
+      "ean": "7898996428266",
+      "dimensions": "5.00 × 5.00 × 22.00 cm",
+      "weight": "330 g"
+    },
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "BE-TOQUE-LUM",
+    "name": "Toque Luminoso",
+    "category": "Bem Estar",
+    "codigoOriginal": "IMP-206",
+    "ean": "",
+    "price": 565.6,
+    "image": "toqueluminoso.webp",
+    "description": "",
+    "presentation": "Kit",
+    "missing": [
+      "Somente imagem fornecida; descrição, composição do kit e EAN não confirmados."
+    ],
+    "source": null,
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  },
+  {
+    "code": "BE-XBOOST-269",
+    "name": "Energético Xbooster 269 ml",
+    "category": "Bem Estar",
+    "codigoOriginal": "IMP-99",
+    "ean": "",
+    "price": 27.8,
+    "image": "energeticoxbooster269ml.webp",
+    "description": "",
+    "presentation": "Lata de 269 ml",
+    "missing": [
+      "Somente imagem fornecida; ingredientes, informação nutricional, advertências e EAN não confirmados. Não confundir com Xbooster em cápsulas."
+    ],
+    "source": null,
+    "logisticsNote": "Dimensoes e peso sao transcricoes do catalogo, nao volume/conteudo liquido confirmado. Nao usados para calculo de frete."
+  }
+]

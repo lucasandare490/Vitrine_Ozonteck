@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Mail, Lock, User, ArrowRight, Loader2, X, Phone, CreditCard, MapPin, ShieldCheck, Info } from 'lucide-react';
+import { Mail, Lock, User, Loader2, X, Phone, CreditCard, MapPin, ShieldCheck, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { getPasswordValidationError, isValidCpf } from '@/lib/auth';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -21,15 +22,28 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
 
   useEffect(() => {
     if (!isOpen) {
-      setTimeout(() => setIsLogin(true), 300);
-      setFormData({ nome: '', email: '', password: '', telefone: '', cpf: '', cep: '', endereco: '' });
+      const resetTimer = window.setTimeout(() => {
+        setIsLogin(true);
+        setFormData({ nome: '', email: '', password: '', telefone: '', cpf: '', cep: '', endereco: '' });
+      }, 300);
+      return () => window.clearTimeout(resetTimer);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
     if (name === 'email') value = value.toLowerCase().trim();
     if (name === 'cpf') value = value.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})/, '$1-$2').slice(0, 14);
     if (name === 'telefone') value = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '($1) $2').replace(/(\d{4,5})(\d{4})/, '$1-$2').slice(0, 15);
@@ -72,39 +86,40 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
         onSuccess();
 
       } else {
-        if (formData.password.length < 6) throw new Error('A senha deve ter pelo menos 6 caracteres.');
+        const passwordError = getPasswordValidationError(formData.password);
+        if (passwordError) throw new Error(passwordError);
         if (formData.nome.trim().length < 3) throw new Error('Insira o seu nome completo.');
         if (!formData.telefone || !formData.cpf || !formData.cep || !formData.endereco) {
           throw new Error('Preencha todos os campos do endereço.');
         }
+        if (!isValidCpf(formData.cpf)) throw new Error('Informe um CPF válido.');
+        if (formData.cep.replace(/\D/g, '').length !== 8) throw new Error('Informe um CEP válido.');
+        if (formData.telefone.replace(/\D/g, '').length < 10) throw new Error('Informe um telefone válido.');
 
         const { data: authData, error: signUpError } = await supabase.auth.signUp({
           email: formData.email,
           password: formData.password,
-          options: { data: { nome: formData.nome } }
+          options: {
+            data: {
+              nome: formData.nome,
+              telefone: formData.telefone,
+              cpf: formData.cpf,
+              cep: formData.cep,
+              endereco_completo: formData.endereco,
+            },
+          },
         });
 
         if (signUpError) throw new Error(signUpError.message);
         if (!authData.user) throw new Error('Erro ao criar conta.');
 
-        const { error: profileError } = await supabase.from("profiles").upsert({
-            id: authData.user.id,
-            nome: formData.nome,
-            email: formData.email,
-            telefone: formData.telefone,
-            cpf: formData.cpf,
-            cep: formData.cep,
-            endereco_completo: formData.endereco,
-            role: "cliente", 
-          });
-
-        if (profileError) throw new Error('Erro ao salvar os dados.');
-
-        toast.success('Conta criada com sucesso!');
+        toast.success(authData.session
+          ? 'Conta criada com sucesso!'
+          : 'Conta criada! Confirme seu e-mail para entrar.');
         onSuccess();
       }
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : 'Não foi possível concluir a autenticação.');
     } finally {
       setLoading(false);
     }
@@ -112,8 +127,8 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={onClose}></div>
-      <div className="relative w-full max-w-md bg-white/90 backdrop-blur-xl border border-white/60 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
+      <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity" onClick={onClose} aria-hidden="true"></div>
+      <div role="dialog" aria-modal="true" aria-labelledby="login-modal-title" className="relative w-full max-w-md bg-white/90 backdrop-blur-xl border border-white/60 rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.15)] overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200">
         
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-slate-200/50">
           <div className="flex items-center gap-3">
@@ -121,13 +136,13 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
               <ShieldCheck size={20} className="text-teal-600" />
             </div>
             <div>
-              <h3 className="text-lg font-black text-slate-800 uppercase tracking-tight leading-none">
+              <h3 id="login-modal-title" className="text-lg font-black text-slate-800 uppercase tracking-tight leading-none">
                 {isLogin ? 'Acesso Rápido' : 'Criar Conta'}
               </h3>
               <p className="text-[10px] text-teal-600 font-bold tracking-widest uppercase mt-1">Ambiente Seguro</p>
             </div>
           </div>
-          <button onClick={onClose} className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors">
+          <button onClick={onClose} aria-label="Fechar janela de autenticação" className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors">
             <X size={18} />
           </button>
         </div>
@@ -147,23 +162,23 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><User size={16} className="text-slate-400" /></div>
-                    <input type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin} className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Seu nome" />
+                    <input type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin} autoComplete="name" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Seu nome" />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><Phone size={16} className="text-slate-400" /></div>
-                      <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} required={!isLogin} className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="(81) 99999-9999" />
+                      <input type="tel" name="telefone" value={formData.telefone} onChange={handleChange} required={!isLogin} autoComplete="tel" inputMode="tel" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="(81) 99999-9999" />
                     </div>
                   </div>
                   <div>
                     <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CPF</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><CreditCard size={16} className="text-slate-400" /></div>
-                      <input type="text" name="cpf" value={formData.cpf} onChange={handleChange} required={!isLogin} className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="000.000.000-00" />
+                      <input type="text" name="cpf" value={formData.cpf} onChange={handleChange} required={!isLogin} inputMode="numeric" autoComplete="off" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="000.000.000-00" />
                     </div>
                   </div>
                 </div>
@@ -172,7 +187,7 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CEP</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPin size={16} className="text-slate-400" /></div>
-                    <input type="text" name="cep" value={formData.cep} onChange={handleChange} onBlur={(e) => buscarCep(e.target.value)} required={!isLogin} className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="00000-000" />
+                    <input type="text" name="cep" value={formData.cep} onChange={handleChange} onBlur={(e) => buscarCep(e.target.value)} required={!isLogin} inputMode="numeric" autoComplete="postal-code" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="00000-000" />
                   </div>
                 </div>
 
@@ -180,7 +195,7 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Endereço</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPin size={16} className="text-slate-400" /></div>
-                    <input type="text" name="endereco" value={formData.endereco} onChange={handleChange} required={!isLogin} className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Logradouro, número, bairro..." />
+                    <input type="text" name="endereco" value={formData.endereco} onChange={handleChange} required={!isLogin} autoComplete="street-address" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Logradouro, número, bairro..." />
                   </div>
                 </div>
               </div>
@@ -193,7 +208,7 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <Mail size={16} className="text-slate-400" />
                 </div>
                 <input
-                  type="email" name="email" value={formData.email} onChange={handleChange} required
+                  type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="email"
                   className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                   placeholder="seu.email@dominio.com"
                 />
@@ -207,7 +222,7 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <Lock size={16} className="text-slate-400" />
                 </div>
                 <input
-                  type="password" name="password" value={formData.password} onChange={handleChange} required
+                  type="password" name="password" value={formData.password} onChange={handleChange} required autoComplete={isLogin ? 'current-password' : 'new-password'}
                   className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
@@ -215,7 +230,7 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
             </div>
 
             <button type="submit" disabled={loading} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-sm flex items-center justify-center mt-6 disabled:opacity-70">
-              {loading ? <Loader2 size={18} className="animate-spin" /> : <>{isLogin ? 'Entrar e Continuar' : 'Criar Conta e Continuar'} <ArrowRight size={16} className="ml-2" /></>}
+              {loading ? <Loader2 size={18} className="animate-spin" /> : isLogin ? 'Entrar e Continuar' : 'Criar Conta e Continuar'}
             </button>
           </form>
 

@@ -1,0 +1,1037 @@
+{
+  "checkedAt": "2026-10-01",
+  "sourceDocxSha256": "7CA8229B9B1B432688E6D146A6AA4DCAD4C0AB1164B0B11F00F4B2DC80D32379",
+  "checked": 109,
+  "changed": 13,
+  "preserved": 96,
+  "newExternalResearch": 0,
+  "withExistingLabelGaps": 109,
+  "scope": "Conteúdo editorial local. DOCX conferido por assinatura e leitura; fonte integral dos JSONs comparada com a projeção pública atual. Pesquisas anteriores reutilizadas. Sem escrita no banco ou publicação.",
+  "limitations": "Rotulagem integral não confirmada. Divergências anteriores e alegações terapêuticas não comprovadas não foram republicadas. Validação da projeção de conteúdo; Validação no navegador registrada separadamente; não equivale a certificação de rotulagem.",
+  "products": [
+    {
+      "code": "BE-SOFH",
+      "name": "Óleo Sofh",
+      "sourceCode": "40568",
+      "result": "tecnologia de ozonização, cuidado antioxidante, ação calmante cosmética e hidratação prolongada recuperados.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "BE-OX3",
+      "name": "Sabonete OX3",
+      "sourceCode": "40569",
+      "result": "característica da mica natural recuperada.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "BE-LUSH",
+      "name": "Esfoliante Oxylush",
+      "sourceCode": "40567",
+      "result": "característica ozonizada recuperada na descrição.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "BE-SHII",
+      "name": "Life Shii",
+      "sourceCode": "40570",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "BE-PURE",
+      "name": "Pure Hot",
+      "sourceCode": "40797",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "BE-FRESH",
+      "name": "Ozon Fresh",
+      "sourceCode": "369845",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "BE-HID-SB",
+      "name": "Hidratante Speed Black 120g",
+      "sourceCode": "44988",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição, perfil da fragrância, público, modo de uso e precauções da nova fórmula de 120 g"
+      ]
+    },
+    {
+      "code": "BE-HID-VG",
+      "name": "Hidratante VG Sexy 120g",
+      "sourceCode": "40564",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição, perfil da fragrância, público, modo de uso e precauções da nova fórmula de 120 g"
+      ]
+    },
+    {
+      "code": "BE-HAY",
+      "name": "Haydek",
+      "sourceCode": "IMP-199",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "BE-TRIX",
+      "name": "Ozon Trix",
+      "sourceCode": "IMP-198",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "CAP-AMP-SF",
+      "name": "Ampola Soft Hair",
+      "sourceCode": "40561",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-SH-OK",
+      "name": "Shampoo Ozon-Kesen",
+      "sourceCode": "40546",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "CAP-MAS-OK",
+      "name": "Máscara Ozon-Kesen",
+      "sourceCode": "40547",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "CAP-SH-MC",
+      "name": "Shampoo Master Curls",
+      "sourceCode": "40557",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "CAP-MAS-MC",
+      "name": "Máscara Master Curls",
+      "sourceCode": "40558",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência das instruções com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "CAP-SH-BL",
+      "name": "Shampoo Ozon-Blond",
+      "sourceCode": "40555",
+      "result": "remoção de resíduos e poluição recuperada.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-MAS-BL",
+      "name": "Máscara Ozon-Blond",
+      "sourceCode": "40556",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-KIDS-SH",
+      "name": "Shampoo Kids",
+      "sourceCode": "40552",
+      "result": "características da fórmula consolidadas, sem duplicação entre seções.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-KIDS-CO",
+      "name": "Condicionador Kids",
+      "sourceCode": "40553",
+      "result": "características da fórmula consolidadas, sem duplicação entre seções.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-KIDS-LE",
+      "name": "Leave in Kids",
+      "sourceCode": "40554",
+      "result": "características da fórmula consolidadas, sem duplicação entre seções.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-O-ACAI",
+      "name": "Óleo de Açaí",
+      "sourceCode": "40562",
+      "result": "característica ozonizada e cuidado antioxidante do açaí recuperados.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-O-CREAM",
+      "name": "Ozon Cream",
+      "sourceCode": "40563",
+      "result": "característica ozonizada recuperada e benefícios repetidos consolidados.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-FOR-MEN",
+      "name": "Ozon-For Men",
+      "sourceCode": "40560",
+      "result": "característica ozonizada e origem europeia da tecnologia recuperadas; duplicação consolidada.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-TON",
+      "name": "Tônico Capilar",
+      "sourceCode": "40545",
+      "result": "característica ozonizada recuperada; vitaminas e nutrientes separados dos ativos.",
+      "pending": [
+        "Composição integral e instruções da apresentação vendida"
+      ]
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "name": "Máscara Mel & Ozônio",
+      "sourceCode": "40550",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "CAP-SH-MEL",
+      "name": "Shampoo Ozon Mel",
+      "sourceCode": "40549",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência com o rótulo do lote adquirido"
+      ]
+    },
+    {
+      "code": "PRO-AMR",
+      "name": "WO3 Máscara AMR",
+      "sourceCode": "40903",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "PRO-CIF",
+      "name": "WO3 Máscara CIF",
+      "sourceCode": "40905",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "PRO-HMS",
+      "name": "WO3 Máscara HMS",
+      "sourceCode": "40906",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "PRO-LPC",
+      "name": "WO3 Máscara LPC",
+      "sourceCode": "40907",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "PRO-DEEP",
+      "name": "WO3 Shampoo Deep Cleanse",
+      "sourceCode": "40902",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "PRO-SOFT",
+      "name": "WO3 Shampoo Soft Cleanse",
+      "sourceCode": "40901",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes",
+        "Instruções e apresentação do rótulo atual"
+      ]
+    },
+    {
+      "code": "NUT-NXCAP",
+      "name": "NX Cap Ozon",
+      "sourceCode": "IMP-88",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-OMEGA",
+      "name": "Ômega 3",
+      "sourceCode": "IMP-90",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-XBOOST",
+      "name": "Xbooster",
+      "sourceCode": "IMP-33",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-TRIMAG",
+      "name": "Tri Magnésio",
+      "sourceCode": "IMP-98",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-CREAT-CX",
+      "name": "Ozon Creat Caixa",
+      "sourceCode": "IMP-184",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-CREAT-UN",
+      "name": "Ozon Creat Unidade",
+      "sourceCode": "IMP-45",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-CREAT-MO-CX",
+      "name": "Ozon Creat Morango Caixa",
+      "sourceCode": "IMP-187",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-CREAT-MO-UN",
+      "name": "Ozon Creat Morango Unidade",
+      "sourceCode": "IMP-44",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-BORYS",
+      "name": "Boryslim",
+      "sourceCode": "IMP-34",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-DREAM",
+      "name": "Dream Bliss",
+      "sourceCode": "IMP-91",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-K2D3",
+      "name": "K2MK7 e D3",
+      "sourceCode": "IMP-35",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-LUMI",
+      "name": "Luminous Vita",
+      "sourceCode": "IMP-201",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-LEV-UN",
+      "name": "Ozon Lev Unidade",
+      "sourceCode": "IMP-47",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-VIRT",
+      "name": "Virtuous Caps",
+      "sourceCode": "IMP-125",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-VITA-OZ",
+      "name": "Vita Ozon Plus",
+      "sourceCode": "IMP-124",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-FLEX-CX",
+      "name": "Ozon Flex Caixa",
+      "sourceCode": "IMP-190",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-FLEX-UN",
+      "name": "Ozon Flex Unidade",
+      "sourceCode": "IMP-46",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-COBAL",
+      "name": "Cobalactin",
+      "sourceCode": "IMP-204",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-GENO",
+      "name": "Genolife Kids",
+      "sourceCode": "IMP-207",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-MELAT",
+      "name": "Melatozon",
+      "sourceCode": "IMP-203",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-OX",
+      "name": "Ox",
+      "sourceCode": "IMP-209",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "NUT-SOFH-D",
+      "name": "Sofh D",
+      "sourceCode": "IMP-202",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista integral de ingredientes e alergênicos",
+        "Tabela nutricional, modo de uso e advertências completos"
+      ]
+    },
+    {
+      "code": "PERF-303-W",
+      "name": "303 For Woman 17 ml",
+      "sourceCode": "40709",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-303-M",
+      "name": "303 Men 17 ml",
+      "sourceCode": "40704",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-303-VIP",
+      "name": "303 VIP Men 17 ml",
+      "sourceCode": "40702",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-ALEM",
+      "name": "Alem 17 ml",
+      "sourceCode": "40726",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-ANGE",
+      "name": "Angelical 17 ml",
+      "sourceCode": "40710",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-AVEN",
+      "name": "Aventura 17 ml",
+      "sourceCode": "40798",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-BLUE",
+      "name": "Blue Sky 17 ml",
+      "sourceCode": "40715",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-CAPA",
+      "name": "Capadócia 17 ml",
+      "sourceCode": "40716",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-CIND",
+      "name": "Cinderela 17 ml",
+      "sourceCode": "40724",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-CIND",
+      "name": "Cinderela 100 ml",
+      "sourceCode": "40724 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-DG",
+      "name": "DG Red 17 ml",
+      "sourceCode": "40723",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-DOCU",
+      "name": "Doçurinha 17 ml",
+      "sourceCode": "40799",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-FAMMA",
+      "name": "Famma 17 ml",
+      "sourceCode": "40725",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-FANT",
+      "name": "Fantastica Bry 17 ml",
+      "sourceCode": "40705",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-FERA",
+      "name": "Fera 17 ml",
+      "sourceCode": "40721",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-GOUF-B",
+      "name": "Gouf Blue 17 ml",
+      "sourceCode": "40708",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-GOUF-T",
+      "name": "Gouf Tradicional 17 ml",
+      "sourceCode": "40712",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-GREC",
+      "name": "Grécia 17 ml",
+      "sourceCode": "40722",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-MAD",
+      "name": "Madame VI 17 ml",
+      "sourceCode": "40714",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-MADAME",
+      "name": "Madame VI 100 ml",
+      "sourceCode": "40714 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-MAX-B",
+      "name": "Max Boss 17 ml",
+      "sourceCode": "40703",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-MAXBOSS",
+      "name": "Max Boss 100 ml",
+      "sourceCode": "40703 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-MAXIMUM",
+      "name": "Maximum 17 ml",
+      "sourceCode": "40701",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-PRESIDENTE",
+      "name": "Presidente 17 ml",
+      "sourceCode": "40720",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-PRES",
+      "name": "Presidente 100 ml",
+      "sourceCode": "40720 -B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SCAN",
+      "name": "Scandaloza 17 ml",
+      "sourceCode": "40730",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-SCAN",
+      "name": "Scandaloza 100 ml",
+      "sourceCode": "40730-B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SEDUC",
+      "name": "Seduction 17 ml",
+      "sourceCode": "40707",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SENTIMENTO",
+      "name": "Sentimento 17 ml",
+      "sourceCode": "40728",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-SENT",
+      "name": "Sentimento 100 ml",
+      "sourceCode": "40728-B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SOBERANO",
+      "name": "Soberano 17 ml",
+      "sourceCode": "40718",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-SOB",
+      "name": "Soberano 100 ml",
+      "sourceCode": "40718 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SOUL",
+      "name": "Soul 17 ml",
+      "sourceCode": "40713",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-SPEED",
+      "name": "Speed Black 17 ml",
+      "sourceCode": "40727",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-SPEED",
+      "name": "Speed Black 100 ml",
+      "sourceCode": "40727 -B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-VENUM",
+      "name": "Venum 17 ml",
+      "sourceCode": "40729",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-VG",
+      "name": "VG Sexy 17 ml",
+      "sourceCode": "40717",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-VG",
+      "name": "VG Sexy 100 ml",
+      "sourceCode": "40717 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-VIDA",
+      "name": "Vida Bella 17 ml",
+      "sourceCode": "40706",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "P100-VIDA",
+      "name": "Vida Bella 100 ml",
+      "sourceCode": "40706 - B",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-VIP-GIRL",
+      "name": "VIP Girl VIP 17 ml",
+      "sourceCode": "40719",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Lista de ingredientes, concentração e instruções do rótulo da apresentação"
+      ]
+    },
+    {
+      "code": "PERF-AALI",
+      "name": "Aaliyah 17 ml",
+      "sourceCode": "41727",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "P100-AALIYAH",
+      "name": "Aaliyah 100 ml",
+      "sourceCode": "41732",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "PERF-OUD",
+      "name": "Oud Royale 17 ml",
+      "sourceCode": "41730",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "P100-OUD",
+      "name": "Oud Royale 100 ml",
+      "sourceCode": "41731",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "PERF-RHINO",
+      "name": "Rhino Royale 17 ml",
+      "sourceCode": "41729",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "P100-RHINO",
+      "name": "Rhino Royale 100 ml",
+      "sourceCode": "41733",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "PERF-SUBLI",
+      "name": "Sublime 17 ml",
+      "sourceCode": "41728",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "P100-SUBLIME",
+      "name": "Sublime 100 ml",
+      "sourceCode": "41734",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante"
+      ]
+    },
+    {
+      "code": "PERF-LABOOM",
+      "name": "Laboom 17 ml",
+      "sourceCode": "46496",
+      "result": "notas de frutas, flores e baunilha organizadas por etapa, preservando a descrição.",
+      "pending": [
+        "Ingredientes, concentração e instruções completas do rótulo"
+      ]
+    },
+    {
+      "code": "PERF-SUPREMO",
+      "name": "Supremo Elixir 17 ml",
+      "sourceCode": "41726",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante",
+        "Pirâmide olfativa confirmada pelo fabricante"
+      ]
+    },
+    {
+      "code": "PERF-FER-VE",
+      "name": "Férias no Caribe by Virgínia Esquivel",
+      "sourceCode": "45171",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e alergênicos",
+        "Concentração e instruções do fabricante",
+        "Volume e notas olfativas da apresentação vendida"
+      ]
+    },
+    {
+      "code": "PERF-LUA-VE",
+      "name": "Lua de Mel em Paris by Virgínia Esquivel",
+      "sourceCode": "45170",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral, alergênicos, concentração e notas olfativas; volume de 200 ml e uso já incorporados da pesquisa registrada."
+      ]
+    },
+    {
+      "code": "PERF-EASY",
+      "name": "Easy Line 17 ml",
+      "sourceCode": "40711",
+      "result": "perfil comercial de presença elegante, sem intensidade excessiva, recuperado.",
+      "pending": [
+        "Ingredientes, concentração e instruções completas do rótulo"
+      ]
+    },
+    {
+      "code": "CAP-CO-MEL",
+      "name": "Condicionador Mel & Ozônio",
+      "sourceCode": "40551",
+      "result": "Conteúdo atual preservado após confronto com a fonte e a revisão anterior.",
+      "pending": [
+        "Composição integral e correspondência com o rótulo do lote; uso e precauções já incorporados da pesquisa registrada."
+      ]
+    }
+  ]
+}

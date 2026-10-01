@@ -1,23 +1,32 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-import { Package, User as UserIcon, MapPin, ShieldCheck, LogOut, Loader2, Camera, CheckCircle2, MessageCircle, ChevronRight, Heart, ExternalLink, ShieldAlert, Truck, Clock, ArrowRight, Lock, ShoppingBag, Motorbike } from 'lucide-react';
+import { Package, User as UserIcon, MapPin, ShieldCheck, LogOut, Loader2, Camera, CheckCircle2, MessageCircle, ChevronRight, Heart, ExternalLink, ArrowRight, Lock, ShoppingBag } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { signOutWithCart } from '@/lib/cart-session';
 import Link from 'next/link';
+import { useAccountOrders } from '@/lib/use-account-orders';
+import { getOrderStatus } from '@/lib/order-status';
+import { AVATAR_IMAGE_POLICY, validateImageUpload } from '@/lib/uploads';
+
+type AccountProfile = {
+  nome: string | null;
+  avatar_url: string | null;
+  role: string | null;
+};
 
 export default function PainelConta() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<AccountProfile | null>(null);
   const [userEmail, setUserEmail] = useState('');
   
-  const [recentOrder, setRecentOrder] = useState<any>({
-    id: 'OZK-98234-71',
-    status: 'Em Rota'
-  });
+  const { orders, loading: ordersLoading, error: ordersError, refresh: refreshOrders } = useAccountOrders(true);
+  const recentOrder = orders[0] ?? null;
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -28,15 +37,16 @@ export default function PainelConta() {
 
       setUserEmail(session.user.email || '');
 
-      const { data } = await supabase.from('profiles').select('*').eq('id', session.user.id).single();
-      if (data) setProfile(data);
+      const profileResult = await supabase.from('profiles').select('nome, avatar_url, role').eq('id', session.user.id).single();
+      if (profileResult.data) setProfile(profileResult.data);
       setLoading(false);
     };
     fetchUserData();
   }, [router]);
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    try { await signOutWithCart(); }
+    catch (error) { toast.error(error instanceof Error ? error.message : 'Não foi possível sair. Tente novamente.'); return; }
     router.push('/');
   };
 
@@ -50,28 +60,33 @@ export default function PainelConta() {
       
       const userId = session.user.id;
       const file = event.target.files[0];
-      const filePath = `${userId}-${Math.random()}.${file.name.split('.').pop()}`;
+      const validatedImage = await validateImageUpload(file, AVATAR_IMAGE_POLICY);
+      const filePath = `${userId}/${crypto.randomUUID()}.${validatedImage.extension}`;
 
-      const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, { upsert: true });
+      const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, {
+        contentType: validatedImage.contentType,
+        cacheControl: '31536000',
+        upsert: false,
+      });
       if (uploadError) throw uploadError;
 
       const { data: { publicUrl } } = supabase.storage.from('avatars').getPublicUrl(filePath);
 
-      const { error: updateError } = await supabase.from('profiles').upsert({ 
-          id: userId, 
-          avatar_url: publicUrl,
-          nome: profile?.nome || 'Cliente Ozonteck',
-          role: profile?.role || 'cliente',
-          email: userEmail
-        });
+      const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: publicUrl })
+        .eq('id', userId);
 
-      if (updateError) throw updateError;
+      if (updateError) {
+        await supabase.storage.from('avatars').remove([filePath]);
+        throw updateError;
+      }
 
-      setProfile((prev: any) => ({ ...prev, avatar_url: publicUrl }));
+      setProfile((previous) => previous ? { ...previous, avatar_url: publicUrl } : previous);
       toast.success('Foto atualizada com sucesso.');
       
-    } catch (error: any) {
-      toast.error(error.message || 'Erro ao carregar a imagem.');
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : 'Erro ao carregar a imagem.');
     } finally {
       setUploading(false);
     }
@@ -86,6 +101,8 @@ export default function PainelConta() {
   }
 
   const initials = profile?.nome && profile.nome !== 'Cliente Ozonteck' ? profile.nome.substring(0, 2).toUpperCase() : 'US';
+  const orderStatus = getOrderStatus(recentOrder?.status ?? 'pending');
+  const orderStage = orderStatus.stage;
 
   return (
     <main className="min-h-screen bg-[#FAFAFC] relative pb-24 font-sans text-slate-900 overflow-hidden">
@@ -106,7 +123,7 @@ export default function PainelConta() {
                   {uploading ? (
                     <Loader2 className="animate-spin text-teal-600" size={24} />
                   ) : profile?.avatar_url ? (
-                    <img src={profile.avatar_url} alt="Perfil" className="w-full h-full object-cover" />
+                    <Image src={profile.avatar_url} alt="Perfil" fill sizes="96px" className="object-cover" />
                   ) : (
                     <span className="text-2xl font-bold text-slate-400">{initials}</span>
                   )}
@@ -119,7 +136,7 @@ export default function PainelConta() {
                     <Camera size={20} className="text-white" />
                   </div>
                 </div>
-                <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={uploadAvatar} disabled={uploading}/>
+                <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" ref={fileInputRef} onChange={uploadAvatar} disabled={uploading}/>
 
                 <h2 className="text-lg font-bold text-slate-900 truncate w-full tracking-tight">{profile?.nome || 'Cliente Ozonteck'}</h2>
                 <p className="text-xs font-medium text-slate-500 mt-1 truncate w-full">{userEmail}</p>
@@ -180,36 +197,33 @@ export default function PainelConta() {
                 </div>
               </div>
 
-              {recentOrder ? (
+              {ordersLoading ? <div className="flex min-h-[220px] items-center justify-center" role="status"><Loader2 className="animate-spin text-teal-600" aria-label="Carregando pedidos" /></div> : ordersError ? <div role="alert" className="rounded-xl border border-amber-200 bg-amber-50 p-6"><p>{ordersError}</p><button onClick={() => void refreshOrders()} className="mt-4 min-h-11 rounded-lg bg-slate-900 px-4 text-sm font-bold text-white">Tentar novamente</button></div> : recentOrder ? (
                 <div className="relative bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden min-h-[220px] flex flex-col">
-                  <div className="absolute inset-0 z-20 bg-white/60 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                    <div className="bg-slate-900 text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-xl flex items-center gap-2">
-                      <ShieldAlert size={14} className="text-teal-400" /> Em Desenvolvimento
-                    </div>
-                  </div>
-
-                  <div className="p-6 border-b border-slate-100 flex items-center justify-between opacity-50 grayscale select-none">
+                  <div className="p-6 border-b border-slate-100 flex items-center justify-between">
                     <div>
                       <h3 className="font-bold text-slate-900">Último Pedido</h3>
-                      <p className="text-[10px] text-slate-500 font-mono mt-0.5">{recentOrder.id}</p>
+                      <p className="text-[10px] text-slate-500 font-mono mt-0.5">#{recentOrder.id.slice(0, 8)}</p>
                     </div>
-                    <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">{recentOrder.status}</span>
+                    <span className="text-xs font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md">
+                      {orderStatus.label}
+                    </span>
                   </div>
                   
-                  <div className="p-6 flex-1 flex flex-col justify-center opacity-50 grayscale select-none">
+                  <div className="p-6 flex-1 flex flex-col justify-center">
                     <div className="relative flex items-center justify-between px-2">
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-100 rounded-full"></div>
-                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2/3 h-1 bg-teal-500 rounded-full"></div>
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-teal-500 rounded-full" style={{ width: orderStage === 3 ? '100%' : orderStage === 2 ? '50%' : '0%' }}></div>
                       <div className="relative z-10 w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center border-2 border-white"><CheckCircle2 size={14} /></div>
-                      <div className="relative z-10 w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center border-2 border-white ring-4 ring-teal-50"><Package size={18} /></div>
-                      <div className="relative z-10 w-8 h-8 rounded-full bg-white text-slate-300 border-2 border-slate-200"><CheckCircle2 size={14} className="m-auto mt-1.5" /></div>
+                      <div className={`relative z-10 w-10 h-10 rounded-full flex items-center justify-center border-2 border-white ring-4 ring-teal-50 ${orderStage >= 2 ? 'bg-teal-600 text-white' : 'bg-white text-slate-300'}`}><Package size={18} /></div>
+                      <div className={`relative z-10 w-8 h-8 rounded-full border-2 flex items-center justify-center ${orderStage >= 3 ? 'bg-teal-500 text-white border-white' : 'bg-white text-slate-300 border-slate-200'}`}><CheckCircle2 size={14} /></div>
                     </div>
                     <div className="flex justify-between mt-3 px-1">
-                      <span className="text-[9px] font-bold text-slate-500 uppercase">Aprovado</span>
-                      <span className="text-[10px] font-bold text-teal-700 uppercase translate-x-1">Em Rota (Uber/Moto)</span>
+                      <span className="text-[9px] font-bold text-slate-500 uppercase">Recebido</span>
+                      <span className="text-[10px] font-bold text-teal-700 uppercase translate-x-1">Em Rota</span>
                       <span className="text-[9px] font-bold text-slate-400 uppercase">Entregue</span>
                     </div>
                   </div>
+                  <Link href="/conta/pedidos" className="min-h-11 border-t border-slate-100 px-6 py-3 text-sm font-bold text-teal-700 hover:bg-teal-50">Ver detalhes do pedido</Link>
                 </div>
               ) : (
                 <div className="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-center min-h-[220px]">
@@ -265,7 +279,7 @@ export default function PainelConta() {
                       <Lock size={20} strokeWidth={2} />
                     </div>
                     <h4 className="text-sm font-bold text-slate-900">Segurança</h4>
-                    <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">Altere senhas, ative 2FA e blinde sua conta.</p>
+                    <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">Altere sua senha e revise as configurações de proteção da conta.</p>
                   </div>
                   <div className="mt-4 flex items-center text-[11px] font-bold text-teal-600 opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">
                     Central de Segurança <ArrowRight size={14} className="ml-1" />
@@ -286,8 +300,9 @@ export default function PainelConta() {
                 </div>
               </div>
               <a 
-                href="https://wa.me/5581900000000" 
+                href="https://wa.me/5581981472684" 
                 target="_blank"
+                rel="noopener noreferrer"
                 className="shrink-0 bg-white border border-slate-200 hover:border-teal-500 hover:text-teal-600 text-slate-700 text-sm font-bold py-3 px-6 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
               >
                 Falar com Rogério

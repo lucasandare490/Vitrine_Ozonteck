@@ -2,30 +2,26 @@
 
 import { useCartStore } from '@/store/useCartStore';
 import { ShoppingBag } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'; 
 
 export default function FloatingCart() {
-  const [isMounted, setIsMounted] = useState(false);
-  const items = useCartStore((state) => state.items);
+  const isMounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const pathname = usePathname(); 
+  
+  // OTIMIZAÇÃO SÊNIOR: Calcula o total diretamente no seletor do Zustand.
+  // Evita carregar o array de itens na memória deste componente apenas para saber se está vazio.
+  const totalItems = useCartStore((state) => 
+    state.items.reduce((acc, item) => acc + item.quantity, 0)
+  );
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Esconde o botão flutuante se o usuário já estiver na tela de revisar o carrinho
   if (pathname === '/lista') return null;
-
   if (!isMounted) return null;
-
-  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
-
   if (totalItems === 0) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 md:hidden animate-[bounce_3s_ease-in-out_infinite]">
+    <div className="fixed bottom-[calc(6rem+env(safe-area-inset-bottom))] right-4 z-50 md:hidden">
       <Link
         href="/lista"
         className="bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgb(13,148,136,0.15)] text-teal-900 p-3 rounded-xl flex items-center gap-2.5 transition-all hover:scale-105 hover:bg-white focus:outline-none focus:ring-2 focus:ring-teal-100 group"

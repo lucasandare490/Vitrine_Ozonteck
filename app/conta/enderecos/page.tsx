@@ -1,16 +1,35 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Plus, Trash2, MapPin, Loader2, Home, Briefcase, Map, Building, AlertTriangle, Truck, Store, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, MapPin, Loader2, Home, Briefcase, Map, Building, AlertTriangle, Truck, CheckCircle2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import PickupPoint from '@/components/PickupPoint';
+
+// OTIMIZAÇÃO: Constante estática extraída para fora da renderização para evitar recriação de arrays na RAM a cada digitação do usuário.
+const TIPOS_ENDERECO = ['Casa', 'Trabalho', 'Outro'] as const;
+
+type Address = {
+  id: string;
+  user_id: string;
+  apelido: string | null;
+  cep: string | null;
+  rua: string | null;
+  numero: string | null;
+  complemento: string | null;
+  bairro: string | null;
+  cidade: string | null;
+  estado: string | null;
+  principal: boolean | null;
+  created_at: string | null;
+};
 
 export default function EnderecosPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [enderecos, setEnderecos] = useState<any[]>([]);
+  const [enderecos, setEnderecos] = useState<Address[]>([]);
   
   // Modais
   const [showModal, setShowModal] = useState(false);
@@ -34,23 +53,19 @@ export default function EnderecosPage() {
     estado: ''
   });
 
-  useEffect(() => {
-    fetchEnderecos();
-  }, []);
-
-  const fetchEnderecos = async () => {
+  const fetchEnderecos = useCallback(async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return router.push('/login');
 
     const { data } = await supabase
       .from('enderecos')
-      .select('*')
+      .select('id, user_id, apelido, cep, rua, numero, complemento, bairro, cidade, estado, principal, created_at')
       .eq('user_id', session.user.id)
       .order('principal', { ascending: false });
 
     if (data) setEnderecos(data);
     setLoading(false);
-  };
+  }, [router]);
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -73,7 +88,7 @@ export default function EnderecosPage() {
             estado: data.uf || '' 
           }));
         }
-      } catch (error) {
+      } catch {
         toast.error("Não foi possível buscar o CEP.");
       } finally {
         setIsFetchingCep(false);
@@ -102,6 +117,7 @@ export default function EnderecosPage() {
         cep: novoEnd.cep,
         rua: novoEnd.rua,
         numero: novoEnd.numero,
+        complemento: novoEnd.complemento || null,
         bairro: novoEnd.bairro,
         cidade: novoEnd.cidade,
         estado: novoEnd.estado,
@@ -115,8 +131,8 @@ export default function EnderecosPage() {
       setNovoEnd({ cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' });
       setTipoEndereco('Casa');
       setNomePersonalizado('');
-      fetchEnderecos();
-    } catch (err: any) {
+      void fetchEnderecos();
+    } catch {
       toast.error('Erro ao adicionar endereço.');
     } finally {
       setSaving(false);
@@ -143,11 +159,19 @@ export default function EnderecosPage() {
   const handleSetPrincipal = async (id: string) => {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return;
-    await supabase.from('enderecos').update({ principal: false }).eq('user_id', session.user.id);
-    await supabase.from('enderecos').update({ principal: true }).eq('id', id);
+    const { error } = await supabase.rpc('set_primary_address', { p_address_id: id });
+    if (error) {
+      toast.error('Não foi possível atualizar o endereço principal.');
+      return;
+    }
     toast.success('Endereço principal atualizado!');
     fetchEnderecos();
   };
+
+  useEffect(() => {
+    const loadTimer = window.setTimeout(() => void fetchEnderecos(), 0);
+    return () => window.clearTimeout(loadTimer);
+  }, [fetchEnderecos]);
 
   if (loading) {
     return (
@@ -199,39 +223,21 @@ export default function EnderecosPage() {
               </div>
               <h3 className="text-lg font-bold mb-2 tracking-tight">Logística Ozonteck</h3>
               <p className="text-slate-400 text-xs leading-relaxed mb-6">
-                O endereço marcado como "Principal" será selecionado automaticamente na hora do seu Checkout. Mantenha os dados precisos para evitar devoluções.
+                O endereço marcado como &quot;Principal&quot; será selecionado automaticamente na hora do seu Checkout. Mantenha os dados precisos para evitar devoluções.
               </p>
               <div className="pt-4 border-t border-slate-800 space-y-3">
                 <div className="flex items-center gap-2.5 text-xs font-medium text-slate-300">
                   <CheckCircle2 size={16} className="text-teal-500 shrink-0" />
-                  Entrega Nacional Garantida
+                  Entrega combinada com o atendimento
                 </div>
                 <div className="flex items-center gap-2.5 text-xs font-medium text-slate-300">
                   <CheckCircle2 size={16} className="text-teal-500 shrink-0" />
-                  Rastreamento em Tempo Real
+                  Acompanhamento pelo painel de pedidos
                 </div>
               </div>
             </div>
 
-            {/* FEATURE TEASER: Retirada em Loja */}
-            <div className="relative bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
-              <div className="absolute inset-0 z-20 bg-slate-50/50 backdrop-blur-[2px] flex flex-col items-center justify-center">
-                <div className="bg-white border border-slate-200 text-slate-800 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg flex items-center gap-2">
-                  <ShieldAlert size={14} className="text-teal-600" />
-                  Em Breve
-                </div>
-              </div>
-
-              <div className="p-6 opacity-60 grayscale-[30%] select-none pointer-events-none">
-                <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center mb-4">
-                  <Store size={20} strokeWidth={2} />
-                </div>
-                <h3 className="text-base font-bold mb-2 tracking-tight text-slate-900">Pontos de Retirada</h3>
-                <p className="text-slate-500 text-xs leading-relaxed">
-                  Em breve você poderá selecionar pontos de coleta autorizados para retirar seus pedidos de forma mais rápida e com frete reduzido.
-                </p>
-              </div>
-            </div>
+            <PickupPoint />
 
           </div>
 
@@ -279,10 +285,10 @@ export default function EnderecosPage() {
                     <div className="flex justify-between items-start mb-4 mt-1">
                       <div className="flex items-center gap-3">
                         <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${end.principal ? 'bg-teal-50 text-teal-600 border border-teal-100' : 'bg-slate-50 text-slate-500 border border-slate-100'}`}>
-                          {end.apelido.toLowerCase().includes('trabalho') ? <Briefcase size={18} /> : end.apelido.toLowerCase().includes('casa') ? <Home size={18} /> : <Map size={18} />}
+                          {(end.apelido ?? '').toLowerCase().includes('trabalho') ? <Briefcase size={18} /> : (end.apelido ?? '').toLowerCase().includes('casa') ? <Home size={18} /> : <Map size={18} />}
                         </div>
                         <div>
-                          <h3 className="font-bold text-slate-900 text-sm tracking-tight">{end.apelido}</h3>
+                          <h3 className="font-bold text-slate-900 text-sm tracking-tight">{end.apelido || 'Endereço'}</h3>
                           {end.principal && (
                             <span className="text-[9px] font-bold uppercase tracking-widest text-teal-600 mt-0.5 block">
                               Padrão de Entrega
@@ -349,9 +355,9 @@ export default function EnderecosPage() {
                 <div className="mb-6">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3">Identificação do Local</label>
                   <div className="flex flex-wrap gap-3">
-                    {['Casa', 'Trabalho', 'Outro'].map((tipo) => (
+                    {TIPOS_ENDERECO.map((tipo) => (
                       <button
-                        key={tipo} type="button" onClick={() => setTipoEndereco(tipo as any)}
+                        key={tipo} type="button" onClick={() => setTipoEndereco(tipo)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
                           tipoEndereco === tipo ? 'border-teal-500 bg-teal-50 text-teal-700' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
                         }`}
