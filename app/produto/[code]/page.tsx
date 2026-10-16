@@ -7,7 +7,8 @@ import ProductActions from '@/components/ProductActions';
 import ProductGallery from '@/components/ProductGallery';
 import ProductCard from '@/components/ProductCard';
 import { getProduct, getRelatedProducts } from '@/lib/server/products';
-import { formatPrice, isTestProduct, productPath, serializeStructuredData } from '@/lib/products';
+import { isTestProduct, productPath, serializeStructuredData } from '@/lib/products';
+import { StorePrice } from '@/components/StorePricing';
 import { getSiteUrl } from '@/lib/site';
 import { getPublicProductContent, getPublicProductDescription, getPublicProductSpecifications } from '@/lib/product-public-content';
 import ProductReviews from '@/components/ProductReviews';
@@ -51,15 +52,15 @@ export default async function ProductPage({ params }: Props) {
   ] };
   return <main className="min-h-screen bg-[#FAFAFC] text-slate-900">
     {!isTestProduct(product) && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />}
-    <div className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-8 lg:px-12">
+    <div className="mx-auto w-full max-w-[1200px] px-4 py-5 sm:px-6 lg:px-8">
       <nav aria-label="Caminho de navegação" className="mb-6 text-sm text-slate-600"><ol className="flex flex-wrap gap-2"><li><Link href="/" className="underline underline-offset-4">Vitrine</Link></li><li aria-hidden="true">/</li><li className="break-words" aria-current="page">{product.name}</li></ol></nav>
-      <div className="grid min-w-0 gap-8 md:grid-cols-2 lg:gap-14">
+      <div className="grid min-w-0 items-start gap-5 sm:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] sm:gap-6 lg:gap-10">
         <ProductGallery src={product.imagePlaceholder} name={product.name} />
         <section className="min-w-0" aria-labelledby="product-title">
           <p className="mb-2 text-sm font-semibold text-teal-800">{product.category}</p>
-          <h1 id="product-title" className="break-words text-3xl font-bold leading-tight lg:text-4xl">{product.name}</h1>
+          <h1 id="product-title" className="break-words text-2xl font-bold leading-tight lg:text-3xl">{product.name}</h1>
           <p className="mt-3 break-all text-sm text-slate-500">Código: {product.code}</p>
-          <p className="my-6 text-3xl font-bold">{formatPrice(product.price)}</p>
+          <p className="my-4 text-2xl font-bold"><StorePrice code={product.code} price={product.price} /></p>
           <ProductActions product={product} />
         </section>
       </div>

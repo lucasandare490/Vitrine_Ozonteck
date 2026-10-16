@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 const {chromium}=await import(pathToFileURL(process.argv[2]).href);
+const site = process.env.TEST_BASE_URL || 'http://localhost:3002';
 const env=await fs.readFile('.env.local','utf8').catch(()=>fs.readFile('.env','utf8'));
 const base=new URL(env.match(/^NEXT_PUBLIC_SUPABASE_URL\s*=\s*["']?([^\s"']+)/m)[1]);
 const user={id:'20000000-0000-0000-0000-000000000001',email:'qa@example.invalid',aud:'authenticated',role:'authenticated',user_metadata:{nome:'Cliente QA'}};
@@ -35,7 +36,7 @@ try {
       await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(value)});
     });
     const page=await context.newPage();
-    await page.goto('http://localhost:3000/conta/pedidos');
+    await page.goto(`${site}/conta/pedidos`);
     await page.getByRole('button',{name:'Avaliar produto: Produto A',exact:true}).click();
     await page.getByRole('combobox',{name:/Nota do produto/}).selectOption('1');
     await page.getByRole('button',{name:'Enviar avaliação deste produto',exact:true}).click();
@@ -56,7 +57,7 @@ try {
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await page.getByRole('list',{name:'Produtos deste pedido'}).screenshot({path:`${process.env.TEMP}/journey-client-${width}.png`});
     admin=true;
-    await page.goto('http://localhost:3000/admin/pedidos');
+    await page.goto(`${site}/admin/pedidos`);
     await page.getByRole('button',{name:'Avaliações dos produtos',exact:true}).click();
     await page.getByRole('button',{name:'Publicar avaliação',exact:true}).click();
     await page.getByRole('button',{name:'Ocultar avaliação',exact:true}).waitFor();
@@ -64,7 +65,7 @@ try {
     await page.getByRole('button',{name:'Publicar',exact:true}).click();
     await page.getByRole('button',{name:'Ocultar',exact:true}).waitFor();
     assert.deepEqual(publications,['produto','loja']);
-    await page.goto('http://localhost:3000/');
+    await page.goto(`${site}/`);
     await page.getByRole('heading',{name:'Experiências de compra no site',exact:true}).waitFor();
     await page.getByText('Média das avaliações publicadas · 3 avaliações',{exact:true}).waitFor();
     await page.getByText('Critica publicada de teste',{exact:false}).waitFor();

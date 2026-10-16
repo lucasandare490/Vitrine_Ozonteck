@@ -8,6 +8,7 @@ import { PRODUCT_IMAGE_POLICY, validateImageUpload } from '@/lib/uploads';
 import NextImage from 'next/image';
 import Link from 'next/link';
 import { productPath } from '@/lib/products';
+import { isRetiredProduct } from '@/lib/catalog-availability';
 
 type AdminProduct = {
   id: string;
@@ -59,7 +60,7 @@ export default function ProdutosAdmin() {
         .from('produtos')
         .select('id, code, name, category, price, image_url, estoque, description, is_deleted, created_at')
         .order('created_at', { ascending: false }),
-      supabase.from('categorias').select('name').order('name', { ascending: true })
+      supabase.from('categorias').select('name').is('archived_at', null).order('name', { ascending: true })
     ]);
 
     if (resProdutos.error) toast.error(`Erro produtos: ${resProdutos.error.message}`);
@@ -72,9 +73,12 @@ export default function ProdutosAdmin() {
   };
 
   useEffect(() => {
-    const timer = window.setTimeout(() => void fetchData(), 0);
+    const category = new URLSearchParams(window.location.search).get('categoria');
+    const timer = window.setTimeout(() => { if (category) setSelectedCategory(category); void fetchData(); }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  const filterCategories = [...new Set([...categorias.map(category => category.name), ...produtos.map(product => product.category)].filter(Boolean))].sort((a, b) => a.localeCompare(b, 'pt-BR'));
 
   // OTIMIZAÇÃO: Isolando cálculos pesados de filtragem e busca para não bloquear o React durante a digitação
   const baseProducts = useMemo(() => {
@@ -197,9 +201,15 @@ export default function ProdutosAdmin() {
   };
 
   const handleRestore = async (id: string, name: string) => {
+    const product = produtos.find((item) => item.id === id);
+    if (!product || isRetiredProduct(product)) {
+      toast.error('Este produto não pode ser restaurado: confira o cadastro e a lista de descontinuados.');
+      return;
+    }
     try {
-      const { error } = await supabase.from('produtos').update({ is_deleted: false }).eq('id', id);
+      const { data, error } = await supabase.from('produtos').update({ is_deleted: false }).eq('id', id).select('id');
       if (error) throw error;
+      if (!data?.length) throw new Error('Produto não restaurado. Atualize a página e confira suas permissões.');
       toast.success(`"${name}" foi restaurado para a vitrine!`);
       fetchData();
     } catch (error: unknown) { toast.error(`Falha ao restaurar: ${getErrorMessage(error)}`); }
@@ -269,8 +279,8 @@ export default function ProdutosAdmin() {
               className="w-full md:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer"
             >
               <option value="Todas">Todas as Categorias</option>
-              {categorias.map((cat, idx) => (
-                <option key={idx} value={cat.name}>{cat.name}</option>
+              {filterCategories.map(name => (
+                <option key={name} value={name}>{name}</option>
               ))}
             </select>
           </div>
@@ -408,6 +418,7 @@ export default function ProdutosAdmin() {
                       className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer"
                     >
                       <option value="" disabled>Selecione...</option>
+                      {formData.category && !categorias.some(category => category.name === formData.category) && <option value={formData.category}>{formData.category} (categoria atual)</option>}
                       {categorias.map((cat, idx) => (
                         <option key={idx} value={cat.name}>{cat.name}</option>
                       ))}

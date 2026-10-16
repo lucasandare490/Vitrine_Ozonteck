@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-10-12T15:26:08.404Z",
+  "scope": "Actual route handlers, real Mercado Pago sandbox and local SQL. Auth/PostgREST adapted; no browser, public webhook or distributed limiter.",
+  "results": [
+    {
+      "paymentId": 1328413292,
+      "status": "approved",
+      "liveMode": false,
+      "signedWebhookReplays": 2,
+      "stockBefore": 10,
+      "stockAfter": 9
+    },
+    {
+      "paymentId": 1353460145,
+      "status": "rejected",
+      "liveMode": false,
+      "signedWebhookReplays": 2,
+      "stockBefore": 9,
+      "stockAfter": 9
+    },
+    {
+      "paymentId": 1328413296,
+      "status": "in_process",
+      "liveMode": false,
+      "signedWebhookReplays": 2,
+      "stockBefore": 9,
+      "stockAfter": 8
+    }
+  ],
+  "mode": "existing-payment-webhook-only"
+}

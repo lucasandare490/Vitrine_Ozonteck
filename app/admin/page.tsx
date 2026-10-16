@@ -4,6 +4,9 @@ import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { LayoutDashboard, TrendingUp, Package, Truck, Clock, AlertCircle, Eye, MapPin, User, CheckCircle2, Loader2, ArrowUpDown } from 'lucide-react';
 import toast from 'react-hot-toast';
+import AdminOrderContact from '@/components/AdminOrderContact';
+import AdminOrderSummary from '@/components/AdminOrderSummary';
+import { orderAddressText } from '@/lib/order-contact';
 
 type AdminOrderItem = { nome: string; qtd: number };
 type AdminDeliveryAddress = {
@@ -32,7 +35,6 @@ export default function VisaoGeralAdmin() {
   const [ordemFila, setOrdemFila] = useState<'antigos' | 'recentes'>('antigos');
 
   async function fetchDashboardData() {
-    setLoading(true);
     const { data, error } = await supabase
       .from('pedidos')
       .select('id, status, valor_total, itens, endereco_entrega, created_at');
@@ -47,7 +49,10 @@ export default function VisaoGeralAdmin() {
 
   useEffect(() => {
     const timer = window.setTimeout(() => void fetchDashboardData(), 0);
-    return () => window.clearTimeout(timer);
+    const refresh = () => { if (document.visibilityState === 'visible') void fetchDashboardData(); };
+    const interval = window.setInterval(refresh, 30000);
+    window.addEventListener('focus', refresh);
+    return () => { window.clearTimeout(timer); window.clearInterval(interval); window.removeEventListener('focus', refresh); };
   }, []);
 
   const handleAtualizarStatus = async (id: string, novoStatus: string) => {
@@ -67,12 +72,12 @@ export default function VisaoGeralAdmin() {
   };
 
   // OTIMIZAÇÃO: Cálculos pesados memorizados para evitar re-renderizações desnecessárias
-  const faturamentoTotal = useMemo(() => pedidos.reduce((acc, curr) => acc + Number(curr.valor_total), 0), [pedidos]);
-  const pedidosPendentes = useMemo(() => pedidos.filter(p => p.status === 'preparando' || p.status === 'pending').length, [pedidos]);
+  const faturamentoTotal = useMemo(() => pedidos.filter(p => ['preparando', 'enviado', 'entregue'].includes(p.status)).reduce((acc, curr) => acc + Number(curr.valor_total), 0), [pedidos]);
+  const pedidosPendentes = useMemo(() => pedidos.filter(p => p.status === 'preparando').length, [pedidos]);
   const pedidosEnviados = useMemo(() => pedidos.filter(p => p.status === 'enviado').length, [pedidos]);
 
   const filaDespacho = useMemo(() => {
-    const fila = pedidos.filter(p => p.status !== 'entregue');
+    const fila = pedidos.filter(p => ['preparando', 'enviado'].includes(p.status));
     return fila.sort((a, b) => {
       if (ordemFila === 'antigos') {
         return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
@@ -85,7 +90,6 @@ export default function VisaoGeralAdmin() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'preparando':
-      case 'pending':
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
             <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></div> Preparando
@@ -114,6 +118,7 @@ export default function VisaoGeralAdmin() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500 relative">
+      <AdminOrderSummary orders={pedidos} ready={!loading} />
       
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>
@@ -282,8 +287,7 @@ export default function VisaoGeralAdmin() {
                 <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#202020] space-y-3">
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] flex items-center gap-2"><MapPin size={14}/> Entrega</h4>
                   <div>
-                    <p className="text-sm font-bold text-slate-900 dark:text-[#F0F0F0]">{pedidoSelecionado.endereco_entrega?.rua || 'Endereço não preenchido'}</p>
-                    <p className="text-xs text-slate-500 dark:text-[#A1A1AA] mt-1">{pedidoSelecionado.endereco_entrega?.cidade || ''} {pedidoSelecionado.endereco_entrega?.estado || ''}</p>
+                    <p className="text-sm break-words font-bold text-slate-900 dark:text-[#F0F0F0]">{orderAddressText(pedidoSelecionado.endereco_entrega) || 'Endereço não preenchido'}</p>
                   </div>
                 </div>
               </div>
@@ -303,13 +307,13 @@ export default function VisaoGeralAdmin() {
                   )}
                 </ul>
                 <div className="mt-4 flex justify-between items-center p-4 bg-teal-50 dark:bg-teal-500/10 rounded-xl border border-teal-100 dark:border-teal-500/20">
-                  <span className="text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">Total Pago</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-teal-700 dark:text-teal-400">Total do pedido</span>
                   <span className="text-lg font-bold text-teal-700 dark:text-teal-400">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedidoSelecionado.valor_total)}
                   </span>
                 </div>
               </div>
-
+              <AdminOrderContact id={pedidoSelecionado.id} address={pedidoSelecionado.endereco_entrega} />
             </div>
 
             <div className="px-6 py-4 border-t border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex items-center justify-between shrink-0">

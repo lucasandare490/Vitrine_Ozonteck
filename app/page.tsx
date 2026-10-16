@@ -2,11 +2,14 @@
 
 import GoogleStoreReviewsLink from '@/components/GoogleStoreReviewsLink';
 import { isRetiredProduct } from '@/lib/catalog-availability';
+import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
 import { matchesPerfumeryVolume, type PerfumeryVolume } from '@/lib/perfumery-filter';
 
 import { useState, useEffect, useRef, ReactNode, Suspense, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
+import Link from 'next/link';
+import PaginatedGrid from '@/components/PaginatedGrid';
 import { MapPin, Phone, Heart, Search, MessageCircle, CheckCircle2, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -282,7 +285,7 @@ function HomeContent() {
            if (a.category > b.category) return 1;
            return a.name.localeCompare(b.name);
         });
-        const formattedProducts = sortedData.filter((item) => !isRetiredProduct(item)).map(toProduct);
+        const formattedProducts = sortedData.filter((item) => !isRetiredProduct(item) && !isTestProduct(item)).map(toProduct);
         setProducts(formattedProducts);
       }
       setIsLoading(false);
@@ -305,7 +308,7 @@ function HomeContent() {
       .channel('schema-db-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'produtos' }, (payload) => {
           if (payload.eventType === 'INSERT') {
-            if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct)) return;
+            if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct) || isTestProduct(payload.new as DatabaseProduct)) return;
             setProducts((prev) => {
               const newProduct = toProduct(payload.new as DatabaseProduct);
               return [...prev, newProduct].sort((a, b) => {
@@ -315,7 +318,7 @@ function HomeContent() {
           } 
           else if (payload.eventType === 'UPDATE') {
             setProducts((currentProducts) => {
-              if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct)) return currentProducts.filter(p => p.id !== payload.new.id);
+              if (payload.new.is_deleted === true || isRetiredProduct(payload.new as DatabaseProduct) || isTestProduct(payload.new as DatabaseProduct)) return currentProducts.filter(p => p.id !== payload.new.id);
               const exists = currentProducts.find(p => p.id === payload.new.id);
               if (exists) {
                 return currentProducts.map((product) => {
@@ -366,10 +369,10 @@ function HomeContent() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesCategory = selectedCategory === 'Todas' || product.category === selectedCategory;
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            product.category.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesVolume = selectedCategory !== 'Perfumaria' || matchesPerfumeryVolume(product.code, perfumeryVolume);
+      const matchesCategory = Boolean(searchQuery.trim()) || selectedCategory === 'Todas' || product.category === selectedCategory;
+      const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+      const matchesSearch = normalize(`${product.name} ${product.category} ${product.code}`).includes(normalize(searchQuery));
+      const matchesVolume = Boolean(searchQuery.trim()) || selectedCategory !== 'Perfumaria' || matchesPerfumeryVolume(product.code, perfumeryVolume);
       return matchesCategory && matchesSearch && matchesVolume;
     });
   }, [products, selectedCategory, searchQuery, perfumeryVolume]);
@@ -382,7 +385,7 @@ function HomeContent() {
     <>
       <OzoneBackground />
 
-      <section className="relative w-full pt-16 pb-20 z-10">
+      <section className="relative w-full pt-6 pb-8 sm:pt-16 sm:pb-20 z-10">
         <div className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col items-center text-center">
 
           <FadeInOnLoad delay={100}>
@@ -392,7 +395,7 @@ function HomeContent() {
           </FadeInOnLoad>
 
           <FadeInOnLoad delay={200}>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-slate-900 mb-6 leading-[1.05]">
+            <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black tracking-tight text-slate-900 mb-4 sm:mb-6 leading-[1.05]">
               A ciência do ozônio.<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-cyan-400">
                 O seu bem-estar.
@@ -401,24 +404,24 @@ function HomeContent() {
           </FadeInOnLoad>
 
           <FadeInOnLoad delay={300}>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl font-medium leading-relaxed mb-10 px-2 sm:px-0">
+            <p className="text-sm sm:text-base lg:text-lg text-slate-600 max-w-2xl font-medium leading-relaxed mb-5 sm:mb-10 px-2 sm:px-0">
               Alta performance aplicada a cosméticos, saúde capilar e suplementação. A mesma excelência do nosso espaço físico, agora com a comodidade de comprar online.
             </p>
           </FadeInOnLoad>
 
           <FadeInOnLoad delay={400}>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto px-5 sm:px-0">
+            <div className="grid grid-cols-2 sm:flex items-center justify-center gap-2 sm:gap-4 w-full sm:w-auto">
               <button 
                 onClick={() => scrollToObject('catalogo')}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 text-white font-bold text-sm py-4 px-10 rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
+                className="min-h-11 w-full sm:w-auto flex items-center justify-center gap-2 bg-teal-600 text-white font-bold text-sm py-3 px-3 sm:py-4 sm:px-10 rounded-lg sm:rounded-full transition-all shadow-md hover:shadow-lg hover:-translate-y-1"
               >
-                <Search size={18} /> Explorar Catálogo
+                <Search size={18} className="shrink-0" /> <span><span className="hidden sm:inline">Explorar </span>Catálogo</span>
               </button>
               <button 
                 onClick={() => scrollToObject('loja-fisica')}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-teal-700 border border-slate-200 font-bold text-sm py-3.5 px-10 rounded-full transition-all shadow-sm hover:bg-slate-50"
+                className="min-h-11 w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-teal-700 border border-slate-200 font-bold text-sm py-3 px-3 sm:py-3.5 sm:px-10 rounded-lg sm:rounded-full transition-all shadow-sm hover:bg-slate-50"
               >
-                <MapPin size={18} className="text-teal-600" /> Visitar Loja Física
+                <MapPin size={18} className="text-teal-600 shrink-0" /> <span><span className="hidden sm:inline">Visitar </span>Loja Física</span>
               </button>
             </div>
           </FadeInOnLoad>
@@ -458,7 +461,7 @@ function HomeContent() {
                         setPerfumeryVolume('all');
                         if(searchQuery) { setSearchQuery(''); router.push('/'); }
                       }}
-                      className={`text-xs sm:text-[13px] font-bold transition-all relative pb-3 -mb-[13px] whitespace-nowrap snap-start shrink-0 ${
+                      className={`min-h-11 text-xs sm:text-[13px] font-bold transition-all relative pb-3 -mb-[13px] whitespace-nowrap snap-start shrink-0 ${
                         selectedCategory === category && !searchQuery
                           ? 'text-teal-700 border-b-2 border-teal-600'
                           : 'text-slate-400 hover:text-slate-800'
@@ -508,7 +511,7 @@ function HomeContent() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 gap-y-10 sm:gap-y-12">
+              <PaginatedGrid key={`${selectedCategory}:${perfumeryVolume}:${searchQuery}`} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-3 sm:gap-x-4 gap-y-6 sm:gap-y-12">
                 {filteredProducts.map((product, index) => (
                   <RevealOnScroll key={product.id} delay={index < 4 ? index * 100 : 0}>
                     <div className="relative group">
@@ -531,10 +534,20 @@ function HomeContent() {
                     </div>
                   </RevealOnScroll>
                 ))}
-              </div>
+              </PaginatedGrid>
             )}
           </>
         )}
+      </section>
+
+      <section aria-labelledby="team-invitation-title" className="relative z-10 w-full border-t border-slate-200 bg-white px-5 py-8 sm:px-10 lg:px-16">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-2xl">
+            <h2 id="team-invitation-title" className="text-xl font-bold text-slate-900">Conheça a equipe de Rogério André</h2>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">Compre para consumo ou conheça a atuação como distribuidor independente. O preço de afiliado depende da aprovação de Rogério; criar uma conta não libera o benefício automaticamente.</p>
+          </div>
+          <Link href="/junte-se-a-nos" className="inline-flex min-h-11 shrink-0 items-center gap-2 font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a equipe <ChevronRight size={18} aria-hidden="true" /></Link>
+        </div>
       </section>
 
       <section id="loja-fisica" className="w-full bg-white border-y border-slate-200 py-16 sm:py-24 relative z-10 scroll-mt-20">

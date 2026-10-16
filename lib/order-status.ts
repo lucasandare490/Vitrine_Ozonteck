@@ -1,3 +1,7 @@
+export function isOpenPayment(status: string) {
+  return ['pending', 'aguardando_pagamento', 'in_process', 'authorized', 'falha_pagamento', 'pagamento_recusado'].includes(status);
+}
+
 export function getOrderStatus(status: string) {
   const labels: Record<string, string> = {
     pending: 'Aguardando pagamento', preparando: 'Preparando', enviado: 'Em rota',

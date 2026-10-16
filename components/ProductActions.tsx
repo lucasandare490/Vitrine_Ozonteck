@@ -6,8 +6,11 @@ import { Minus, Plus, ShoppingBag, MessageCircle } from 'lucide-react';
 import type { Product } from '@/lib/data';
 import { formatPrice } from '@/lib/products';
 import { useCartStore } from '@/store/useCartStore';
+import { useProductPrice } from '@/components/StorePricing';
 
-export default function ProductActions({ product }: { product: Product }) {
+export default function ProductActions({ product: original }: { product: Product }) {
+  const pricing = useProductPrice(original.code, original.price);
+  const product = { ...original, price: pricing.price };
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const count = useCartStore((state) => state.items.find((item) => item.id === product.id)?.quantity || 0);
   const [quantity, setQuantity] = useState(1);
@@ -18,7 +21,7 @@ export default function ProductActions({ product }: { product: Product }) {
   const selected = Math.min(quantity, Math.max(1, limit));
   const contact = `Olá! Tenho interesse em ${product.name} (código ${product.code}). Quantidade: ${selected}. Preço unitário no catálogo: ${formatPrice(product.price)}.${note.trim() ? ` Observação: ${note.trim()}` : ''}`;
   function add() {
-    if (!mounted || limit === 0) return;
+    if (!mounted || limit === 0 || !pricing.ready) return;
     const store = useCartStore.getState();
     if (store.items.length >= 50 && !store.items.some((item) => item.id === product.id)) {
       setMessage('Sua lista atingiu 50 produtos. Revise a seleção antes de adicionar outro.');
@@ -39,9 +42,9 @@ export default function ProductActions({ product }: { product: Product }) {
           <button type="button" aria-label="Aumentar quantidade" disabled={selected >= limit} onClick={() => setQuantity(selected + 1)} className="flex h-11 w-11 shrink-0 items-center justify-center disabled:opacity-40"><Plus size={18} /></button>
         </div>
       </div>
-      <p className="text-sm text-slate-600">Subtotal <strong className="block text-lg text-slate-900">{formatPrice(product.price * selected)}</strong></p>
+      <p className="text-sm text-slate-600">Subtotal <strong className="block text-lg text-slate-900">{pricing.ready ? formatPrice(product.price * selected) : 'Consultando preço…'}</strong></p>
     </div>
-    <button type="button" disabled={!mounted || limit === 0} onClick={add} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-3 font-bold text-white hover:bg-teal-800 disabled:opacity-50"><ShoppingBag size={20} />{limit === 0 && stock > 0 ? 'Limite da lista atingido' : 'Adicionar à lista'}</button>
+    <button type="button" disabled={!mounted || limit === 0 || !pricing.ready} onClick={add} className="flex min-h-12 w-full items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-3 font-bold text-white hover:bg-teal-800 disabled:opacity-50"><ShoppingBag size={20} />{limit === 0 && stock > 0 ? 'Limite da lista atingido' : 'Adicionar à lista'}</button>
     <p role="status" className="text-sm text-teal-800">{message}</p>
     <Link href="/lista" className="inline-flex min-h-11 items-center font-semibold text-teal-800 underline underline-offset-4">Revisar minha lista</Link>
     <details className="border-t border-slate-200 pt-4"><summary className="cursor-pointer py-2 font-semibold">Falar com o consultor</summary>

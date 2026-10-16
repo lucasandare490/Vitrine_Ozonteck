@@ -28,6 +28,24 @@
 html {
   background-color: var(--background);
   font-size: calc(16px * var(--a11y-text-scale));
+  scroll-padding-top: 8rem;
+}
+
+/* Keep form controls readable without triggering mobile browser zoom. */
+@media (max-width: 767px) {
+  main input:not([type="checkbox"]):not([type="radio"]),
+  main select, main textarea { font-size: 1rem; min-width: 0; max-width: 100%; }
+  .account-workspace > :first-child { order: 2; }
+  .account-workspace > :last-child { order: 1; min-width: 0; }
+  .admin-table, .admin-table tbody { display: block; width: 100%; }
+  .admin-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .admin-table tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 1rem; gap: 1rem; }
+  .admin-table td { display: block; padding: 0; min-width: 0; white-space: normal; overflow-wrap: anywhere; text-align: left; }
+  .admin-table td:first-child, .admin-table td:last-child { grid-column: 1 / -1; }
+  .admin-table td[data-label]::before { content: attr(data-label); display: block; margin-bottom: .375rem; font-size: .75rem; font-weight: 500; color: #64748b; }
+  .dark .admin-table td[data-label]::before { color: #a1a1aa; }
+  .admin-table td:last-child > div { flex-wrap: wrap; justify-content: flex-start; }
+  .admin-table button, .admin-table a { min-height: 2.75rem; }
 }
 
 html, body {

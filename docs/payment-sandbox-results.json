@@ -1,0 +1,9 @@
+{
+  "checkedAt": "2026-10-10T12:12:28.179Z",
+  "scope": "Provider sandbox and temporary SQL only; no public webhook or storefront checkout",
+  "results": [
+    {"scenario":"APRO","status":"approved","liveMode":false,"paymentId":1328413292,"stockBefore":10,"stockAfter":9},
+    {"scenario":"OTHE","status":"rejected","liveMode":false,"paymentId":1353460145,"stockBefore":9,"stockAfter":9},
+    {"scenario":"CONT","status":"in_process","liveMode":false,"paymentId":1328413296,"stockBefore":9,"stockAfter":8}
+  ]
+}

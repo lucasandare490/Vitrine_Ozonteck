@@ -8,6 +8,7 @@ const db = new PGlite();
 try {
   await db.exec(`
     create role anon; create role authenticated; create role service_role;
+    alter default privileges in schema public revoke all on tables from public, anon, authenticated, service_role;
     create schema auth; create schema storage;
     create table auth.users (id uuid primary key);
     create function auth.uid() returns uuid language sql stable as $$ select nullif(current_setting('test.uid', true), '')::uuid $$;
@@ -23,6 +24,18 @@ try {
   const sql = await fs.readFile('supabase/migrations/202609260001_product_reviews.sql', 'utf8');
   await db.exec(sql);
   await db.exec(sql);
+  // Model the new Supabase default: creating a table alone grants no API access.
+  await db.exec('create table public.qa_ungranted(id uuid)');
+  for (const role of ['anon', 'authenticated', 'service_role']) {
+    const result = await db.query("select has_table_privilege($1, 'public.qa_ungranted', 'SELECT') as allowed", [role]);
+    assert.equal(result.rows[0].allowed, false);
+  }
+  await db.exec('drop table public.qa_ungranted');
+  for (const privilege of ['SELECT', 'INSERT', 'UPDATE', 'DELETE']) {
+    assert.equal((await db.query("select has_table_privilege('service_role', 'public.avaliacoes_produtos', $1) as allowed", [privilege])).rows[0].allowed, true);
+    assert.equal((await db.query("select has_table_privilege('anon', 'public.avaliacoes_produtos', $1) as allowed", [privilege])).rows[0].allowed, false);
+  }
+  console.log('PASS: no automatic table grants; explicit server grants preserved; anonymous table access denied.');
   const product = '10000000-0000-0000-0000-000000000001';
   const user = '20000000-0000-0000-0000-000000000001';
   await db.query('insert into produtos (id,code) values ($1,$2)', [product,'QA']);

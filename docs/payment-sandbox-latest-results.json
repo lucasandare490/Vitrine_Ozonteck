@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-12T15:37:22.000Z",
+  "scope": "Provider sandbox and temporary SQL only; no public webhook or storefront checkout",
+  "options": [
+    "--probe",
+    "--public-tokenization"
+  ],
+  "failure": "{\"path\":\"/v1/payments\",\"http\":500,\"requestId\":\"f1a7e4f7-fe05-4f44-8e4d-b1596bd42253\",\"error\":null,\"message\":\"internal_error\",\"causes\":[]}",
+  "results": []
+}

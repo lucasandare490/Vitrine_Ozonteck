@@ -1,10 +1,12 @@
 'use client';
 
 import { isRetiredProduct } from '@/lib/catalog-availability';
+import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
 
 import { useEffect, useState, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
+import PaginatedGrid from '@/components/PaginatedGrid';
 import { Heart, ShoppingBag, ArrowLeft, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
@@ -75,7 +77,7 @@ export default function FavoritosPage() {
           .in('code', codes).eq('is_deleted', false);
 
         if (prods) {
-          const formattedProducts = prods.filter((item) => !isRetiredProduct(item)).map((item) => ({
+          const formattedProducts = prods.filter((item) => !isRetiredProduct(item) && !isTestProduct(item)).map((item) => ({
             id: item.id,
             code: item.code,
             name: item.name,
@@ -196,7 +198,7 @@ export default function FavoritosPage() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 gap-y-10 sm:gap-y-12">
+          <PaginatedGrid key={searchQuery} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-3 sm:gap-x-4 gap-y-6 sm:gap-y-12">
             {filteredFavorites.map((product) => (
               <div key={product.id} className="relative group animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <button
@@ -213,7 +215,7 @@ export default function FavoritosPage() {
                 <ProductCard product={product} />
               </div>
             ))}
-          </div>
+          </PaginatedGrid>
         )}
       </section>
     </main>

@@ -7,8 +7,10 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { productPath } from '@/lib/products';
+import { useProductPrice, StorePrice } from '@/components/StorePricing';
 
 export default function ProductCard({ product }: { product: Product }) {
+  const pricing = useProductPrice(product.code, product.price);
   const addItem = useCartStore((state) => state.addItem);
   
   // OTIMIZAÇÃO SÊNIOR: Selecionando apenas a quantidade deste produto específico.
@@ -25,13 +27,13 @@ export default function ProductCard({ product }: { product: Product }) {
   const isLimitReached = currentQuantity >= estoqueAtual && !isOutOfStock;
 
   const handleAdd = () => {
-    if (isOutOfStock || isLimitReached) return;
+    if (isOutOfStock || isLimitReached || !pricing.ready) return;
 
     addItem({
       id: product.id,
       code: product.code,
       name: product.name,
-      price: product.price,
+      price: pricing.price,
       estoque: estoqueAtual, 
     });
     
@@ -73,16 +75,17 @@ export default function ProductCard({ product }: { product: Product }) {
           <Link href={productPath(product.code)} className="hover:underline">{product.name}</Link>
         </h3>
         
-        <div className="mt-auto pt-1.5 border-t border-slate-100 sm:border-none flex flex-col xl:flex-row items-start xl:items-center justify-between gap-2 xl:gap-0">
+        <div className="mt-auto pt-1.5 border-t border-slate-100 sm:border-none flex flex-wrap items-center justify-between gap-1">
           <p className="text-sm sm:text-[15px] font-black text-slate-900 tracking-tight">
-            R$ {product.price.toFixed(2).replace('.', ',')}
+            <StorePrice code={product.code} price={product.price} />
           </p>
           
           <button 
             onClick={handleAdd}
-            disabled={isOutOfStock || isLimitReached}
-            title={isLimitReached ? "Você adicionou todas as unidades disponíveis deste produto." : ""}
-            className={`flex min-h-11 items-center justify-center gap-1.5 text-xs font-bold w-full xl:w-auto px-3 sm:px-4 py-1.5 sm:py-2 rounded-full transition-all duration-300 ${
+            disabled={isOutOfStock || isLimitReached || !pricing.ready}
+            aria-label={isOutOfStock ? `${product.name} esgotado` : isLimitReached ? `Limite de estoque de ${product.name} atingido` : isAdded ? `${product.name} adicionado` : `Adicionar ${product.name} à lista`}
+            title={isOutOfStock ? 'Esgotado' : isLimitReached ? 'Você adicionou todas as unidades disponíveis deste produto.' : 'Adicionar à lista'}
+            className={`flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 text-xs font-bold px-2 py-2 rounded-lg transition-all duration-300 ${
               isOutOfStock 
                 ? 'bg-slate-100 text-slate-400 lg:opacity-100 lg:translate-x-0'
                 : isLimitReached
@@ -93,18 +96,16 @@ export default function ProductCard({ product }: { product: Product }) {
             }`}
           >
             {isOutOfStock ? (
-              <span>Esgotado</span>
+              <Package size={18} aria-hidden="true" />
             ) : isLimitReached ? (
-              <span>Máx. do Estoque</span>
+              <Check size={18} aria-hidden="true" />
             ) : isAdded ? (
               <>
-                <Check size={12} strokeWidth={2.5} />
-                <span>Adicionado</span>
+                <Check size={18} strokeWidth={2.5} aria-hidden="true" />
               </>
             ) : (
               <>
-                <Plus size={12} strokeWidth={2.5} />
-                <span>Adicionar</span>
+                <Plus size={18} strokeWidth={2.5} aria-hidden="true" />
               </>
             )}
           </button>

@@ -1,0 +1,81 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+const { chromium } = await import(pathToFileURL(process.argv[2]).href);
+const env = await fs.readFile('.env','utf8');
+const base = new URL(env.match(/^NEXT_PUBLIC_SUPABASE_URL\s*=\s*["']?([^\s"']+)/m)[1]);
+const site = process.env.TEST_BASE_URL || 'http://localhost:3002';
+const user = { id:'20000000-0000-0000-0000-000000000001',email:'qa@example.invalid',factors:[],aud:'authenticated',role:'authenticated',user_metadata:{} };
+const exp = Math.floor(Date.now()/1000)+3600;
+const token = [{alg:'HS256',typ:'JWT'},{sub:user.id,exp,role:'authenticated',aal:'aal1',amr:[]}].map(v=>Buffer.from(JSON.stringify(v)).toString('base64url')).join('.')+'.fixture';
+const products = [{id:'10000000-0000-0000-0000-000000000001',code:'NUT-NXCAP',name:'NXCAP',category:'Nutracêuticos',price:159.92,estoque:10,image_url:'/produtos/303men17ml.webp',is_deleted:false}];
+const output = 'C:/Users/lucas/.codex/visualizations/2026/09/24/01a0d1c8-61e2-7863-ac3e-8baedff93789';
+const browser = await chromium.launch({channel:'msedge',headless:true});
+try {
+  for (const width of [320,390,1440]) {
+    let enabled=false, standard=79.96, custom=null, cart=[];
+    const context = await browser.newContext({viewport:{width,height:900}});
+    await context.addInitScript(({key,session})=>localStorage.setItem(key,JSON.stringify(session)),{key:`sb-${base.hostname.split('.')[0]}-auth-token`,session:{access_token:token,refresh_token:'fixture',expires_at:exp,expires_in:3600,token_type:'bearer',user}});
+    await context.route(`${base.origin}/**`,async route=>{
+      const request=route.request(), url=new URL(request.url()); let data=[];
+      if(url.pathname.startsWith('/auth/')) data=user;
+      else if(url.pathname.endsWith('/rpc/my_store_prices')) data={enabled,prices:{'NUT-NXCAP':enabled?(custom??standard):159.92}};
+      else if(url.pathname.endsWith('/rpc/admin_pricing')) data={enabled,products:products.map(p=>({...p,affiliate_price:standard,customer_price:custom})),audit:[]};
+      else if(url.pathname.endsWith('/rpc/admin_set_pricing')) {
+        const b=request.postDataJSON();
+        if(b.p_action==='access') enabled=b.p_enabled;
+        else if(b.p_action==='affiliate') standard=b.p_price;
+        else custom=b.p_price;
+        data=null;
+      } else if(url.pathname.endsWith('/profiles')) {
+        if(request.method()==='PATCH') cart=request.postDataJSON().carrinho??cart;
+        data=url.searchParams.has('role')?[{id:user.id,nome:'Cliente QA',email:user.email,created_at:'2026-01-01'}]:{nome:'QA',role:'admin',carrinho:cart};
+      } else if(url.pathname.endsWith('/produtos')) data=products;
+      else if(url.pathname.endsWith('/favoritos')) data=[{produto_code:'NUT-NXCAP'}];
+      else if(url.pathname.endsWith('/rpc/listar_avaliacoes_loja')) data={total:0,average:0,items:[]};
+      await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
+    });
+    const page=await context.newPage();
+    page.setDefaultNavigationTimeout(120000);
+    await page.route('**/api/produtos/*/avaliacoes*', route => route.fulfill({contentType:'application/json',body:JSON.stringify({total:0,filtered:0,average:0,stars:[0,0,0,0,0],items:[]})}));
+    page.on('dialog',d=>d.accept());
+    await page.goto(`${site}/admin/clientes/${user.id}/precos`);
+    const checkbox=page.getByRole('checkbox',{name:/Desconto de afiliado/});
+    await checkbox.waitFor();
+    assert.equal(await checkbox.isChecked(),false);
+    await checkbox.click(); await page.getByRole('button',{name:'Autorizar benefício',exact:true}).click(); await page.getByText('Alteração salva.',{exact:true}).waitFor();
+    assert.equal(await checkbox.isChecked(),true);
+    await page.getByLabel('Exceção deste cliente (R$)').fill('70,00');
+    await page.getByRole('button',{name:'Salvar preço de NXCAP',exact:true}).click();
+    await page.waitForFunction(()=>document.body.textContent.includes('Preço deste cliente: R$ 70,00'));
+    assert.equal(custom,70);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    await page.screenshot({path:`${output}/affiliate-admin-${width}.png`,fullPage:true});
+    await page.getByRole('button',{name:'Remover preço especial de NXCAP',exact:true}).click();
+    await page.waitForFunction(()=>document.body.textContent.includes('Preço deste cliente: R$ 79,96'));
+    await page.goto(`${site}/conta/favoritos`);
+    await page.getByText('R$ 79,96',{exact:true}).first().waitFor();
+    await page.goto(`${site}/produto/NUT-NXCAP`);
+    await page.getByText('R$ 79,96',{exact:true}).first().waitFor();
+    await page.getByRole('button',{name:'Adicionar à lista',exact:true}).waitFor();
+    await page.goto(site);
+    await page.getByText('R$ 79,96',{exact:true}).first().waitFor();
+    await page.getByRole('button',{name:'Adicionar NXCAP à lista',exact:true}).click();
+    await page.waitForTimeout(1200);
+    await page.goto(`${site}/lista`);
+    await page.getByText('R$ 79,96',{exact:true}).first().waitFor();
+    assert.equal(await page.getByRole('button',{name:'Continuar para Entrega'}).isEnabled(),true);
+    enabled=false;
+    await page.evaluate(()=>window.dispatchEvent(new Event('store-pricing-changed')));
+    await page.getByText('R$ 159,92',{exact:true}).first().waitFor();
+    await page.screenshot({path:`${output}/affiliate-cart-revoked-${width}.png`,fullPage:true});
+    await page.goto(`${site}/admin/precos`);
+    await page.getByLabel('Preço de afiliado (R$)',{exact:true}).fill('75,00');
+    await page.getByRole('button',{name:'Salvar preço de NXCAP',exact:true}).click();
+    await page.waitForFunction(()=>document.body.textContent.includes('Afiliado: R$ 75,00'));
+    assert.equal(standard,75);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+    console.log(`PASS ${width}: approval, exception save/remove, table edit, favorites/catalog/detail/cart prices and revocation; mocked customer requests, no payments.`);
+    await context.close();
+  }
+} finally { await browser.close(); }

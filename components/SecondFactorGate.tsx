@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { needsSecondFactor } from '@/lib/mfa';
 import { usePathname } from 'next/navigation';
+import { LoaderCircle, ShieldCheck } from 'lucide-react';
 
 export default function SecondFactorGate({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -39,9 +40,25 @@ export default function SecondFactorGate({ children }: { children: React.ReactNo
   const accountRoute = /^\/(conta|admin|login|lista)(\/|$)/.test(pathname);
   // Preserve the server-rendered storefront while the browser checks its session.
   if (state === 'allowed' || (state === 'loading' && !accountRoute)) return children;
+  if (state === 'loading') return <main aria-busy="true" className="flex min-h-dvh flex-col bg-slate-50 text-slate-900">
+    <header className="flex h-20 shrink-0 items-center border-b border-teal-900/10 bg-teal-950 px-6 sm:px-10">
+      <span className="text-xl font-extrabold text-white">OZONTECK<span className="text-teal-400">.</span></span>
+      <span className="ml-5 border-l border-white/20 pl-5 text-xs font-semibold text-teal-200">UNIDADE RECIFE</span>
+    </header>
+    <section className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
+      <div aria-hidden="true" className="relative mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-teal-200 bg-teal-50">
+        <ShieldCheck size={34} strokeWidth={1.5} className="text-teal-800" />
+        <span className="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full border border-slate-200 bg-white"><LoaderCircle size={18} className="animate-spin text-teal-700 motion-reduce:animate-none" /></span>
+      </div>
+      <h1 className="text-2xl font-bold">Só um instante</h1>
+      <p role="status" className="mt-3 text-sm text-slate-600">Verificando sua sessão…</p>
+      <div aria-hidden="true" className="mt-8 h-1 w-32 overflow-hidden rounded-full bg-teal-100"><div className="h-full w-full animate-pulse rounded-full bg-teal-600 motion-reduce:animate-none" /></div>
+    </section>
+    <footer className="px-6 pb-8 text-center text-xs text-slate-500">OZONTECK Recife</footer>
+  </main>;
   return <main className="flex min-h-screen items-center justify-center bg-slate-50 px-5 py-12 text-slate-900">
     <section className="w-full max-w-md rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      {state === 'loading' ? <p role="status">Verificando sua sessão…</p> : state === 'error' ? <>
+      {state === 'error' ? <>
         <p role="alert">Não foi possível verificar sua sessão.</p>
         <button onClick={() => void check()} className="mt-4 min-h-11 rounded-lg bg-teal-700 px-4 text-white">Tentar novamente</button>
       </> : <>
@@ -63,7 +80,7 @@ export default function SecondFactorGate({ children }: { children: React.ReactNo
           <button disabled={busy || !factorId} className="min-h-11 w-full rounded-lg bg-teal-700 px-4 font-bold text-white disabled:opacity-50">{busy ? 'Verificando…' : 'Confirmar código'}</button>
         </form>
       </>}
-      {state !== 'loading' && <button className="mt-4 min-h-11 text-sm font-semibold text-slate-600" onClick={async () => {
+      {<button className="mt-4 min-h-11 text-sm font-semibold text-slate-600" onClick={async () => {
         // AAL1 cannot access the account cart. Do not overwrite its saved state on cancellation.
         const { error: signOutError } = await supabase.auth.signOut({ scope: 'local' });
         if (signOutError) { setError('Não foi possível sair. Tente novamente.'); return; }

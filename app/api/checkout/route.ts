@@ -4,6 +4,7 @@ import { createClient } from '@supabase/supabase-js';
 import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { NextResponse } from 'next/server';
 import { isRetiredProduct } from '@/lib/catalog-availability';
+import { isTestProduct } from '@/lib/products';
 import { z } from 'zod';
 import {
   createRateLimitGuard,
@@ -14,6 +15,8 @@ import {
 import { isValidCpf } from '@/lib/auth';
 
 const checkoutSchema = z.object({
+  change_id: z.string().uuid().optional(),
+  expected_total: z.number().positive().finite(),
   cart_items: z.array(
     z.object({
       code: z.string().trim().min(1, 'Código inválido').max(100),
@@ -43,7 +46,9 @@ const checkoutSchema = z.object({
   installments: z.number().int().min(1).max(24).optional().default(1),
   issuer_id: z.number().int().positive().optional(),
   metadata: z.object({
-    phone: z.string().trim().min(10).max(20),
+    phone: z.string().trim().min(10).max(20).refine(value => /^(?:55)?\d{10,11}$/.test(value.replace(/\D/g, '')), 'Telefone inválido'),
+    complement: z.string().trim().max(200).optional(),
+    delivery_mode: z.enum(['entrega', 'retirada']).optional().default('entrega'),
     user_id: z.string().uuid().optional().nullable(),
   }),
 });
@@ -131,6 +136,10 @@ function asRecord(value: unknown): Record<string, unknown> | null {
 
 export async function POST(request: Request) {
   try {
+    const sandbox = process.env.PAYMENT_SANDBOX === 'true';
+    if (sandbox && (!process.env.MP_ACCESS_TOKEN?.startsWith('TEST-') || !process.env.NEXT_PUBLIC_MP_PUBLIC_KEY?.startsWith('TEST-'))) {
+      return NextResponse.json({ error: 'Credenciais de teste não configuradas.' }, { status: 503 });
+    }
     const ip = getClientIp(request);
     const rateLimitDecision = await checkCheckoutRateLimit(ip);
     if (rateLimitDecision === 'denied') {
@@ -160,6 +169,9 @@ export async function POST(request: Request) {
     }
 
     const body = validation.data;
+    if (sandbox && (body.cart_items.some(item => item.code !== 'TESTE-001') || !body.token || !['master', 'visa', 'amex', 'elo', 'hipercard'].includes(body.payment_method_id))) {
+      return NextResponse.json({ error: 'Ambiente de teste: use somente o produto TESTE-001 e cartão de teste.' }, { status: 400 });
+    }
     let cartItems: CartItem[];
 
     try {
@@ -198,7 +210,7 @@ export async function POST(request: Request) {
     }
 
     const itemCodes = cartItems.map((item) => item.code);
-    const { error: releaseExpiredError } = await supabaseAdmin.rpc('liberar_reservas_expiradas');
+    const { error: releaseExpiredError } = sandbox ? { error: null } : await supabaseAdmin.rpc('liberar_reservas_expiradas');
     if (releaseExpiredError) {
       console.error('Erro ao liberar reservas vencidas:', releaseExpiredError);
       return NextResponse.json({ error: 'Não foi possível validar o estoque.' }, { status: 500 });
@@ -215,15 +227,19 @@ export async function POST(request: Request) {
     }
 
     const productsByCode = new Map((products ?? []).map((product) => [String(product.code), product]));
+    const { data: priceSnapshot, error: priceError } = await supabaseAdmin.rpc('resolve_customer_prices', { p_user_id: verifiedUserId });
+    if (priceError || !priceSnapshot?.prices) {
+      return NextResponse.json({ error: 'Não foi possível confirmar os preços. Nenhum pagamento foi iniciado.' }, { status: 503 });
+    }
     const orderItems: OrderItem[] = [];
     let totalInCents = 0;
 
     for (const cartItem of cartItems) {
       const product = productsByCode.get(cartItem.code);
       const stock = Number(product?.estoque);
-      const unitPriceInCents = Math.round(Number(product?.price) * 100);
+      const unitPriceInCents = Math.round(Number(priceSnapshot.prices[cartItem.code]) * 100);
 
-      if (!product || product.is_deleted === true || isRetiredProduct(product) || !Number.isFinite(unitPriceInCents) || unitPriceInCents <= 0) {
+      if (!product || product.is_deleted === true || isRetiredProduct(product) || (isTestProduct(product) && !((sandbox || process.env.LIVE_TEST_PRODUCT === 'TESTE-001') && product.code === 'TESTE-001')) || !Number.isFinite(unitPriceInCents) || unitPriceInCents <= 0) {
         return NextResponse.json({ error: `O produto ${cartItem.code} não está disponível.` }, { status: 400 });
       }
 
@@ -245,16 +261,22 @@ export async function POST(request: Request) {
     }
 
     const idempotencyHeader = request.headers.get('x-idempotency-key')?.trim();
-    const idempotencyKey = idempotencyHeader && /^[A-Za-z0-9_-]{16,128}$/.test(idempotencyHeader)
+    const attemptKey = idempotencyHeader && /^[A-Za-z0-9_-]{16,120}$/.test(idempotencyHeader)
       ? idempotencyHeader
       : crypto.randomUUID();
+    const idempotencyKey = sandbox ? `sandbox-${attemptKey}` : attemptKey;
     const total = totalInCents / 100;
+    if (Math.round(body.expected_total * 100) !== totalInCents) {
+      return NextResponse.json({ error: 'Os preços ou o benefício mudaram. Revise o total antes de pagar.' }, { status: 409 });
+    }
     const address = body.payer.address;
     const deliveryAddress = {
+      modalidade: body.metadata.delivery_mode,
       nome: sanitize(`${body.payer.first_name || ''} ${body.payer.last_name || ''}`.trim()),
       telefone: sanitize(body.metadata?.phone || 'Não informado'),
       rua: sanitize(address?.street_name),
       numero: sanitize(address?.street_number),
+      complemento: sanitize(body.metadata.complement),
       bairro: sanitize(address?.neighborhood),
       cidade: sanitize(address?.city),
       estado: sanitize(address?.federal_unit),
@@ -262,7 +284,7 @@ export async function POST(request: Request) {
     };
 
     const { data: reservationData, error: reservationError } = await supabaseAdmin.rpc(
-      'reservar_pedido_checkout',
+      'reserve_priced_order',
       {
         p_checkout_id: idempotencyKey,
         p_user_id: verifiedUserId,
@@ -277,6 +299,9 @@ export async function POST(request: Request) {
     const order = asRecord(reservationValue);
 
     if (reservationError || !order || typeof order.id !== 'string') {
+      if (reservationError?.message?.includes('PRICE_CHANGED')) {
+        return NextResponse.json({ error: 'Os preços mudaram. Revise o total antes de pagar.' }, { status: 409 });
+      }
       console.error('O pedido não pôde ser reservado no Supabase:', {
         checkoutId: idempotencyKey,
         error: reservationError,
@@ -301,6 +326,10 @@ export async function POST(request: Request) {
     }
 
     const paymentClient = getPaymentClient();
+    if (body.change_id) {
+      const { error: changeError } = await supabaseAdmin.rpc('vincular_compra_alterada', { p_change: body.change_id, p_order: order.id, p_user: verifiedUserId });
+      if (changeError) return NextResponse.json({ error: 'Esta alteração já foi utilizada ou não pertence à sua conta. Consulte Meus pedidos.' }, { status: 409 });
+    }
     let response: Awaited<ReturnType<Payment['get']>>;
 
     try {
@@ -337,6 +366,10 @@ export async function POST(request: Request) {
 
     if (!response.id || !response.status) {
       throw new Error('O Mercado Pago não retornou os dados completos do pagamento.');
+    }
+
+    if (sandbox && response.live_mode !== false) {
+      throw new Error('Resposta incompatível com ambiente de teste.');
     }
 
     const { data: processingResult, error: processingError } = await supabaseAdmin.rpc(
@@ -380,6 +413,8 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       id: response.id,
+      order_id: order.id,
+      total,
       status: response.status,
       status_detail: response.status_detail,
       point_of_interaction: response.point_of_interaction,

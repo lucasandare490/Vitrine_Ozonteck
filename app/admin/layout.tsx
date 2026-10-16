@@ -5,13 +5,14 @@ import { ReactNode, useEffect, useState, useSyncExternalStore } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, Package, ArrowLeft, ShieldAlert, LogOut, 
-  Users, ShoppingCart, Tags, Bell, Sun, Moon, Activity
+  Users, ShoppingCart, Tags, Sun, Moon, Activity
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import toast from 'react-hot-toast';
 import { signOutWithCart } from '@/lib/cart-session';
 import { useThemeStore } from '@/store/useThemeStore';
 import Image from 'next/image';
+import AdminNotifications from '@/components/AdminNotifications';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -80,7 +81,7 @@ const { theme, toggleTheme } = useThemeStore();
     <div className={`${theme} flex min-h-screen bg-[#FAFAFC] dark:bg-[#121212] text-slate-900 dark:text-[#F0F0F0] transition-colors duration-300`}>
       
       {/* MENU LATERAL */}
-      <aside className="w-64 bg-white dark:bg-[#171717] border-r border-slate-200 dark:border-[#2D2D2D] flex flex-col hidden md:flex z-20 transition-colors">
+      <aside className="w-64 shrink-0 bg-white dark:bg-[#171717] border-r border-slate-200 dark:border-[#2D2D2D] flex flex-col hidden lg:flex z-20 transition-colors">
         <div className="h-[72px] px-6 border-b border-slate-200 dark:border-[#2D2D2D] flex items-center shrink-0">
           <h2 className="text-xl font-black tracking-tighter text-slate-900 dark:text-white flex items-center gap-2">
             Ozonteck<span className="text-teal-600 dark:text-teal-500">PRO</span>
@@ -143,9 +144,7 @@ const { theme, toggleTheme } = useThemeStore();
               </span>
             </button>
 
-            <button type="button" aria-label="Notificações" title="Nenhuma notificação" className="text-slate-400 dark:text-[#A1A1AA] relative cursor-default" disabled>
-              <Bell size={20} />
-            </button>
+            <AdminNotifications />
             
             <div className="flex items-center gap-3 pl-4 sm:pl-6 border-l border-slate-200 dark:border-[#2D2D2D]">
               <div className="text-right hidden sm:block">
@@ -160,7 +159,7 @@ const { theme, toggleTheme } = useThemeStore();
           </div>
         </header>
 
-        <nav aria-label="Navegação administrativa" className="grid grid-cols-2 gap-1 border-b border-slate-200 bg-white p-3 dark:bg-[#171717] md:hidden">
+        <nav aria-label="Navegação administrativa" className="flex overflow-x-auto gap-1 border-b border-slate-200 bg-white p-3 dark:bg-[#171717] lg:hidden [&>a]:shrink-0">
           {[
             ['/admin', 'Visão geral'], ['/admin/pedidos', 'Pedidos'],
             ['/admin/clientes', 'Clientes'], ['/admin/produtos', 'Produtos'],

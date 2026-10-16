@@ -6,7 +6,7 @@ import { supabase } from './supabase';
 export type AccountOrder = {
   id: string; status: string; valor_total: number; created_at: string;
   itens: { code?: string; price?: number; nome: string; qtd: number }[];
-  endereco_entrega: { nome?: string; telefone?: string; rua?: string; numero?: string; bairro?: string; cidade?: string; estado?: string; cep?: string } | null;
+  endereco_entrega: { nome?: string; telefone?: string; rua?: string; numero?: string; complemento?: string; bairro?: string; cidade?: string; estado?: string; cep?: string; modalidade?: 'entrega' | 'retirada' } | null;
 };
 
 export function useAccountOrders(latestOnly = false) {
@@ -46,6 +46,7 @@ export function useAccountOrders(latestOnly = false) {
     const initial = window.setTimeout(() => void refresh(), 0);
     const timer = window.setInterval(update, 30000);
     window.addEventListener('focus', update);
+    window.addEventListener('order-payment-updated', update);
     document.addEventListener('visibilitychange', update);
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_OUT' || event === 'SIGNED_IN') {
@@ -59,6 +60,7 @@ export function useAccountOrders(latestOnly = false) {
       ++requestVersion.current;
       clearTimeout(initial); clearInterval(timer); subscription.unsubscribe();
       window.removeEventListener('focus', update);
+      window.removeEventListener('order-payment-updated', update);
       document.removeEventListener('visibilitychange', update);
     };
   }, [refresh]);

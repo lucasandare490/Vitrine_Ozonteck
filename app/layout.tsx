@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import SecondFactorGate from '@/components/SecondFactorGate';
 import CartSync from "@/components/CartSync";
+import { StorePricing } from '@/components/StorePricing';
 import FloatingCart from "@/components/FloatingCart";
 import Footer from "@/components/Footer";
 
@@ -51,8 +52,14 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
         <SecondFactorGate>
+        <StorePricing>
         <CartSync />
         <Navbar />
+        {process.env.NEXT_PUBLIC_PAYMENT_SANDBOX === 'true' && (
+          <div role="status" className="border-b border-amber-300 bg-amber-50 px-5 py-3 text-center text-sm font-semibold text-amber-950">
+            Ambiente de teste. Sem compra ou entrega real. Use apenas cartão e dados fictícios de teste. Somente o produto TESTE-001 pode ser pago.
+          </div>
+        )}
         
         {children}
 
@@ -85,6 +92,7 @@ export default function RootLayout({
           <span className="absolute top-0 right-0 w-3.5 h-3.5 bg-green-200 border-2 border-white rounded-full animate-pulse"></span>
         </a>
 
+        </StorePricing>
         </SecondFactorGate>
         <Toaster 
           position="top-center" 

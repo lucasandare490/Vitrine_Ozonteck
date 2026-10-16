@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { Tag, Plus, Trash2, Loader2, AlertCircle } from 'lucide-react';
+import { Tag, Plus, Archive, ArchiveRestore, Loader2, AlertCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import Link from 'next/link';
+import ConfirmDialog from '@/components/ConfirmDialog';
 
 type Categoria = {
   id: string;
   name: string;
   created_at: string;
+  archived_at: string | null;
 };
 
 export default function CategoriasAdmin() {
@@ -16,12 +19,14 @@ export default function CategoriasAdmin() {
   const [loading, setLoading] = useState(true);
   const [novaCategoria, setNovaCategoria] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [archived, setArchived] = useState(false);
+  const [pending, setPending] = useState<Categoria | null>(null);
 
   const fetchCategorias = async () => {
     setLoading(true);
     const { data, error } = await supabase
       .from('categorias')
-      .select('id, name, created_at')
+      .select('id, name, created_at, archived_at')
       .order('name', { ascending: true });
     if (error) {
       toast.error(`Erro ao carregar categorias: ${error.message}`);
@@ -56,20 +61,24 @@ export default function CategoriasAdmin() {
     }
   };
 
-  const handleDeleteCategoria = async (id: string, name: string) => {
-    if (!confirm(`Tem certeza que deseja excluir a categoria "${name}"?`)) return;
-
+  const handleArchiveCategoria = async (category: Categoria) => {
+    if (isSaving) return;
+    setIsSaving(true);
     try {
-      const { error } = await supabase.from('categorias').delete().eq('id', id);
+      const { data, error } = await supabase.from('categorias').update({ archived_at: category.archived_at ? null : new Date().toISOString() }).eq('id', category.id).select('id');
       if (error) throw error;
+      if (!data?.length) throw new Error('Categoria não alterada. Atualize a página e confira suas permissões.');
 
-      toast.success('Categoria excluída!');
-      fetchCategorias();
+      toast.success(category.archived_at ? 'Categoria restaurada!' : 'Categoria arquivada!');
+      setPending(null);
+      await fetchCategorias();
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Não foi possível excluir a categoria.';
-      toast.error(`Erro ao excluir: ${message}`);
-    }
+      const message = error instanceof Error ? error.message : 'Não foi possível alterar a categoria.';
+      toast.error(message);
+    } finally { setIsSaving(false); }
   };
+
+  const visibleCategories = categorias.filter(category => !!category.archived_at === archived);
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
@@ -89,8 +98,9 @@ export default function CategoriasAdmin() {
           <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-[#F0F0F0]">Nova Categoria</h2>
           <form onSubmit={handleAddCategoria} className="space-y-4">
             <div>
-              <label className="block text-[10px] font-black text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Nome da Categoria</label>
+              <label htmlFor="category-name" className="block text-[10px] font-black text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Nome da Categoria</label>
               <input 
+                id="category-name"
                 type="text" 
                 value={novaCategoria} 
                 onChange={(e) => setNovaCategoria(e.target.value)} 
@@ -113,6 +123,7 @@ export default function CategoriasAdmin() {
         <div className="lg:col-span-2 bg-white dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden transition-colors">
           <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-transparent">
             <h2 className="text-sm font-black uppercase tracking-widest text-slate-800 dark:text-[#F0F0F0]">Categorias Cadastradas</h2>
+            <div className="mt-3 flex gap-2" role="group" aria-label="Situação das categorias">{[false, true].map(value => <button key={String(value)} type="button" aria-pressed={archived === value} onClick={() => setArchived(value)} className={`min-h-11 border-b-2 px-3 ${archived === value ? 'border-teal-600 text-teal-700 font-bold' : 'border-transparent'}`}>{value ? 'Arquivadas' : 'Ativas'} ({categorias.filter(category => !!category.archived_at === value).length})</button>)}</div>
           </div>
           <div className="overflow-x-auto min-h-[300px]">
             {loading ? (
@@ -120,7 +131,7 @@ export default function CategoriasAdmin() {
                 <Loader2 size={32} className="animate-spin mb-4 text-teal-500" />
                 <p className="text-xs font-bold uppercase tracking-widest">Carregando categorias...</p>
               </div>
-            ) : categorias.length === 0 ? (
+            ) : visibleCategories.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-64 text-center px-4">
                 <AlertCircle size={32} className="text-slate-300 dark:text-[#2D2D2D] mb-2" />
                 <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Nenhuma categoria cadastrada.</p>
@@ -134,15 +145,17 @@ export default function CategoriasAdmin() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
-                  {categorias.map((cat) => (
+                  {visibleCategories.map((cat) => (
                     <tr key={cat.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors">
                       <td className="px-6 py-4 font-bold text-slate-900 dark:text-[#F0F0F0] text-xs">{cat.name}</td>
                       <td className="px-6 py-4 text-right">
+                        <Link className="mr-3 inline-flex min-h-11 items-center text-teal-700 underline" href={`/admin/produtos?categoria=${encodeURIComponent(cat.name)}`}>Gerenciar produtos</Link>
                         <button 
-                          onClick={() => handleDeleteCategoria(cat.id, cat.name)}
+                          disabled={isSaving}
+                          onClick={() => cat.archived_at ? void handleArchiveCategoria(cat) : setPending(cat)}
                           className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-red-50 dark:bg-red-500/10 hover:bg-red-100 dark:hover:bg-red-500/20 text-red-600 dark:text-red-400 transition-colors text-[10px] font-bold uppercase tracking-widest cursor-pointer"
                         >
-                          <Trash2 size={12} /> Excluir
+                          {cat.archived_at ? <ArchiveRestore size={16} /> : <Archive size={16} />} {cat.archived_at ? 'Restaurar' : 'Arquivar'}
                         </button>
                       </td>
                     </tr>
@@ -154,6 +167,7 @@ export default function CategoriasAdmin() {
         </div>
 
       </div>
+      <ConfirmDialog open={!!pending} title="Arquivar categoria?" message={`A categoria ${pending?.name || ''} poderá ser restaurada. Seus produtos não serão excluídos nem retirados da vitrine e continuarão disponíveis para gerenciamento.`} confirmLabel="Arquivar" busy={isSaving} onCancel={() => setPending(null)} onConfirm={() => { if (pending) void handleArchiveCategoria(pending); }} />
     </div>
   );
 }

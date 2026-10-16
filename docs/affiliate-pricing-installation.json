@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-09T12:04:48.765Z",
+  "installed": true,
+  "recordsPreserved": true,
+  "summary": {
+    "prices": 103,
+    "approvals": 0,
+    "unpriced": 10
+  },
+  "missing": [
+    {
+      "code": "PRO-AMR",
+      "name": "WO3 Máscara AMR"
+    },
+    {
+      "code": "PRO-CIF",
+      "name": "WO3 Máscara CIF"
+    },
+    {
+      "code": "PRO-DEEP",
+      "name": "WO3 Shampoo Deep Cleanse"
+    },
+    {
+      "code": "PRO-HMS",
+      "name": "WO3 Máscara HMS"
+    },
+    {
+      "code": "PRO-LPC",
+      "name": "WO3 Máscara LPC"
+    },
+    {
+      "code": "PRO-SOFT",
+      "name": "WO3 Shampoo Soft Cleanse"
+    },
+    {
+      "code": "TEST-01",
+      "name": "Produto de Teste 1 Real"
+    },
+    {
+      "code": "TESTE-001",
+      "name": "[TESTE] Produto de Teste 1"
+    },
+    {
+      "code": "TESTE-002",
+      "name": "[TESTE] Produto dasdasde Teste 2"
+    },
+    {
+      "code": "teste3",
+      "name": "testeeee"
+    }
+  ]
+}

@@ -7,10 +7,12 @@ import Link from 'next/link';
 import toast from 'react-hot-toast';
 import type { User } from '@supabase/supabase-js';
 import { useAccountOrders } from '@/lib/use-account-orders';
-import { getOrderStatus } from '@/lib/order-status';
+import { getOrderStatus, isOpenPayment } from '@/lib/order-status';
+import { orderAddressText } from '@/lib/order-contact';
 import OrderProductReviews from '@/components/OrderProductReviews';
+import OrderPayment from '@/components/OrderPayment';
 
-type TabStatus = 'Todos' | 'preparando' | 'enviado' | 'entregue';
+type TabStatus = 'Todos' | 'pagamentos' | 'preparando' | 'enviado' | 'entregue';
 
 type Profile = {
   nome: string | null;
@@ -20,7 +22,8 @@ type Profile = {
 // OTIMIZAÇÃO: Constantes estáticas e arrays pesados extraídos para fora do componente.
 // Evita a recriação destes arrays a cada renderização (ao digitar ou trocar abas), poupando memória do navegador.
 const TABS: { id: TabStatus, label: string }[] = [
-  { id: 'Todos', label: 'Todos' }, 
+  { id: 'Todos', label: 'Pedidos confirmados' },
+  { id: 'pagamentos', label: 'Pagamentos em aberto' },
   { id: 'preparando', label: 'Preparando' }, 
   { id: 'enviado', label: 'Em Rota' }, 
   { id: 'entregue', label: 'Finalizados' }
@@ -80,7 +83,7 @@ export default function PedidosPage() {
 
   // OTIMIZAÇÃO: Filtro e seleção memorizados
   const filteredOrders = useMemo(() => {
-    return activeTab === 'Todos' ? pedidos : pedidos.filter(order => order.status === activeTab);
+    return pedidos.filter(order => activeTab === 'pagamentos' ? isOpenPayment(order.status) : activeTab === 'Todos' ? !isOpenPayment(order.status) : order.status === activeTab);
   }, [pedidos, activeTab]);
 
   const selectedOrder = useMemo(() => {
@@ -191,7 +194,7 @@ export default function PedidosPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        <div className="account-workspace grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
           <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
             <div className="bg-slate-900 text-white rounded-xl p-6 shadow-sm border border-slate-800">
@@ -313,7 +316,7 @@ export default function PedidosPage() {
                             <OrderProductReviews orderId={order.id} purchasedItems={order.itens || []} delivered={isEntregue} />
                           </div>
 
-                          <div className="xl:col-span-7 relative pt-4 xl:pt-0">
+                          <div className={`xl:col-span-7 relative pt-4 xl:pt-0 ${isOpenPayment(order.status) ? 'hidden' : ''}`}>
                             <h4 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest hidden xl:block">Progresso da Entrega</h4>
                             
                             <div className="flex items-center justify-between relative px-2">
@@ -374,11 +377,11 @@ export default function PedidosPage() {
                           )}
 
                           <button type="button" aria-expanded={detailsOrderId === order.id} onClick={() => setDetailsOrderId(detailsOrderId === order.id ? null : order.id)} className="min-h-11 text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors flex items-center gap-1.5 uppercase tracking-wider">
-                            {detailsOrderId === order.id ? 'Fechar detalhes' : 'Ver detalhes'} <ChevronRight size={14} />
+                            {detailsOrderId === order.id ? 'Fechar detalhes' : order.status === 'pending' ? 'Ver pagamento e detalhes' : 'Ver detalhes'} <ChevronRight size={14} />
                           </button>
                         </div>
 
-                        {detailsOrderId === order.id && <div className="border-t border-slate-100 px-6 py-4 text-sm"><h4 className="font-semibold">Detalhes do pedido</h4><p className="mt-2 break-all">Referência: {order.id}</p><p>Status: {getOrderStatus(order.status).label}</p><p className="mt-2 break-words">Entrega: {order.endereco_entrega ? [order.endereco_entrega.rua, order.endereco_entrega.numero, order.endereco_entrega.bairro, order.endereco_entrega.cidade, order.endereco_entrega.estado, order.endereco_entrega.cep].filter(Boolean).join(', ') || 'Endereço não informado.' : 'Endereço não informado.'}</p></div>}
+                        {detailsOrderId === order.id && <div className="border-t border-slate-100 px-6 py-4 text-sm space-y-4"><OrderPayment key={order.id} orderId={order.id} /><h4 className="font-semibold">Detalhes do pedido</h4><p className="mt-2 break-all">Referência: {order.id}</p><p>Status: {getOrderStatus(order.status).label}</p><p className="mt-2 break-words">Recebimento: {orderAddressText(order.endereco_entrega) || 'Endereço não informado.'}</p></div>}
                         {isReviewing && !jaAvaliou && (
                           <div className="bg-[#F8FAFC] border-t border-slate-200 p-6 sm:p-8 animate-in slide-in-from-top-4 duration-300 shadow-inner">
                             <h4 className="font-bold text-slate-800 mb-1">Como foi sua experiência com a loja?</h4>

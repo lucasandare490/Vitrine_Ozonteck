@@ -2,7 +2,26 @@ begin;
 
 -- Preserve existing public testimonials; do not automatically publish old private criticism.
 alter table public.avaliacoes add column if not exists publicado boolean;
-update public.avaliacoes set publicado = (nota >= 4) where publicado is null;
+-- NOT VALID checks can reject updates to legacy rows they intentionally allow
+-- to remain. Restore those exact checks before releasing the transaction lock.
+do $$
+declare checks jsonb; item jsonb;
+begin
+  lock table public.avaliacoes in access exclusive mode;
+  select coalesce(jsonb_agg(jsonb_build_object('name', conname,
+    'definition', pg_get_constraintdef(oid))), '[]'::jsonb) into checks
+  from pg_constraint where conrelid='public.avaliacoes'::regclass
+    and contype='c' and not convalidated;
+  for item in select value from jsonb_array_elements(checks) loop
+    execute format('alter table public.avaliacoes drop constraint %I', item->>'name');
+  end loop;
+  update public.avaliacoes set publicado = (nota >= 4) where publicado is null;
+  for item in select value from jsonb_array_elements(checks) loop
+    execute format('alter table public.avaliacoes add constraint %I %s',
+      item->>'name', item->>'definition');
+  end loop;
+end;
+$$;
 alter table public.avaliacoes alter column publicado set default false;
 alter table public.avaliacoes alter column publicado set not null;
 

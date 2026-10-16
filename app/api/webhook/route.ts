@@ -68,6 +68,10 @@ function hasFreshSignatureTimestamp(signatureHeader: string, toleranceSeconds = 
 
 export async function POST(request: Request) {
   try {
+    const sandbox = process.env.PAYMENT_SANDBOX === 'true';
+    if (sandbox && !process.env.MP_ACCESS_TOKEN?.startsWith('TEST-')) {
+      return NextResponse.json({ error: 'Credenciais de teste não configuradas.' }, { status: 503 });
+    }
     const secret = requiredEnv('MP_WEBHOOK_SECRET');
     const signatureHeader = request.headers.get('x-signature');
     const requestId = request.headers.get('x-request-id');
@@ -138,7 +142,22 @@ export async function POST(request: Request) {
     const checkoutId = paymentInfo.external_reference
       || (typeof paymentInfo.metadata?.checkout_id === 'string' ? paymentInfo.metadata.checkout_id : null);
 
+    if (!sandbox && checkoutId?.startsWith('sandbox-')) {
+      return NextResponse.json({ success: true, ignored: true });
+    }
+
     const supabaseAdmin = getSupabaseAdmin();
+    if (sandbox) {
+      if (paymentInfo.live_mode !== false || !checkoutId?.startsWith('sandbox-')) {
+        return NextResponse.json({ success: true, ignored: true });
+      }
+      const { data: testOrder, error: testOrderError } = await supabaseAdmin.from('pedidos')
+        .select('itens').eq('checkout_id', checkoutId).maybeSingle();
+      if (testOrderError || !testOrder) return NextResponse.json({ error: 'Pedido de teste não localizado.' }, { status: 409 });
+      if (!Array.isArray(testOrder.itens) || !testOrder.itens.length || testOrder.itens.some((item: { code?: string }) => item.code !== 'TESTE-001')) {
+        return NextResponse.json({ success: true, ignored: true });
+      }
+    }
     const { data: processingResult, error: processingError } = await supabaseAdmin.rpc(
       'processar_status_pagamento',
       {

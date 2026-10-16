@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-12T15:31:36.959Z",
+  "scope": "Mercado Pago panel simulator over public HTTPS, actual webhook handler and SDK, temporary SQL database. No production data or storefront checkout.",
+  "results": [
+    {
+      "receivedAt": "2026-10-12T15:32:47.199Z",
+      "httpStatus": 200,
+      "paymentId": "1328413292",
+      "stocks": [
+        {
+          "estoque": 7
+        }
+      ]
+    },
+    {
+      "receivedAt": "2026-10-12T15:33:21.590Z",
+      "httpStatus": 200,
+      "paymentId": "1328413292",
+      "stocks": [
+        {
+          "estoque": 7
+        }
+      ]
+    }
+  ],
+  "mode": "public-sandbox-webhook-receiver"
+}

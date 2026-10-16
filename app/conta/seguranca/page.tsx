@@ -75,7 +75,7 @@ export default function SegurancaPage() {
         </div>
 
         {/* GRID PRINCIPAL: 12 Colunas */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="account-workspace grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="bg-slate-900 text-white rounded-xl p-8 shadow-sm border border-slate-800">

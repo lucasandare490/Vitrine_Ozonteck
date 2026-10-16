@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Users, Search, Loader2, AlertCircle, Mail, Phone, MapPin, Calendar } from 'lucide-react';
 import toast from 'react-hot-toast';
+import PaginatedGrid from '@/components/PaginatedGrid';
+import Link from 'next/link';
 
 type Cliente = {
   id: string;
@@ -61,6 +63,7 @@ export default function CarteiraClientes() {
             <Users className="text-teal-600 dark:text-teal-500" /> Carteira de Clientes
           </h1>
           <p className="text-slate-500 dark:text-[#A1A1AA] mt-1 text-xs font-medium">Faça a gestão dos clientes registados na sua loja.</p>
+          <Link href="/admin/precos" className="inline-flex min-h-11 items-center text-sm font-semibold text-teal-700 underline">Tabela de preços de afiliados</Link>
         </div>
       </div>
 
@@ -91,7 +94,7 @@ export default function CarteiraClientes() {
               <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Nenhum cliente encontrado.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <PaginatedGrid key={searchTerm} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
               {clientesFiltrados.map((cliente) => (
                 <div key={cliente.id} className="p-5 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] hover:border-teal-500/30 transition-colors group">
                   <div className="flex items-center gap-4 mb-4">
@@ -106,6 +109,7 @@ export default function CarteiraClientes() {
                     </div>
                   </div>
                   
+                  <Link href={`/admin/clientes/${cliente.id}/precos`} className="mb-3 inline-flex min-h-11 items-center font-semibold text-teal-700 underline">Benefício e preços</Link>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-[#A1A1AA]">
                       <Mail size={14} className="text-slate-400 dark:text-[#A1A1AA]" />
@@ -122,7 +126,7 @@ export default function CarteiraClientes() {
                   </div>
                 </div>
               ))}
-            </div>
+            </PaginatedGrid>
           )}
         </div>
       </div>

@@ -123,7 +123,7 @@ export default function MeusDadosPage() {
         </div>
 
         {/* GRADE DE 12 COLUNAS (GRID OFFSET) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+        <div className="account-workspace grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
           {/* COLUNA ESQUERDA (Info e Status) */}
           <div className="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">

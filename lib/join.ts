@@ -1,11 +1,21 @@
 // Preserve the sponsor and the bare combos parameter supplied for this storefront.
 export const JOIN_REGISTRATION_URL = 'https://office.grupoozonteck.com/register?sponsor=643bf95c3a5758bbf990802e&combos';
 
-export const JOIN_CONTACT_URL = 'https://wa.me/5581981472684?text=' + encodeURIComponent('Olá, Rogério! Quero conhecer a oportunidade de ser distribuidor independente OZONTECK e saber como entrar na sua rede. Pode me explicar os próximos passos e as condições atuais?');
+export const JOIN_CONTACT_URL = 'https://wa.me/5581981472684?text=' + encodeURIComponent('Olá, Rogério! Quero conhecer sua equipe OZONTECK e entender as opções de compra para consumo e de atuação como distribuidor. Pode me orientar sobre o cadastro e a aprovação do benefício na loja?');
 
 // The supplied video explains direct sales (01:18), network purchases (01:56),
 // repurchases (02:37) and qualification (03:03). It does not establish current rates.
 export const JOIN_FAQS = [
+  {
+    id: 22, categoria: 'rede',
+    pergunta: 'Preciso revender para comprar na loja?',
+    resposta: 'Não. Você pode comprar para consumo pelo preço normal, sem atuar como distribuidor. Para conhecer a equipe e solicitar o benefício de afiliado, converse com Rogério. O desconto depende da aprovação manual dele, não apenas de criar uma conta.',
+  },
+  {
+    id: 23, categoria: 'rede',
+    pergunta: 'Quando o preço de afiliado fica disponível?',
+    resposta: 'Somente depois que Rogério ativar o benefício na sua conta desta loja, mesmo que você já tenha cadastro na OZONTECK. Os valores são definidos por produto, não por um desconto único para todo o catálogo; os produtos WO3 mantêm o preço comum. O benefício não exige compra mínima mensal nesta loja e permanece ativo até ser desativado pelo administrador.',
+  },
   {
     id: 21, categoria: 'rede',
     pergunta: 'Isso é uma vaga de emprego?',
@@ -34,7 +44,7 @@ export const JOIN_FAQS = [
   {
     id: 18, categoria: 'rede',
     pergunta: 'Existe kit inicial ou condição de ativação para ser distribuidor independente?',
-    resposta: 'A apresentação da oportunidade inclui um kit inicial de produtos, uma condição de ativação e compras periódicas para manutenção da participação. Antes de concluir a adesão, confira com Rogério e no cadastro oficial quais opções estão vigentes, os valores e as condições de entrada e manutenção. Assim, você pode avaliar o que está incluído antes de escolher.',
+    resposta: 'Para atuar como distribuidor e participar do plano de remuneração da OZONTECK, confira com Rogério e no cadastro oficial as condições vigentes. Essas regras são separadas do benefício de preço nesta loja, que depende de aprovação manual e não exige compra mínima mensal.',
   },
   {
     id: 19, categoria: 'rede',

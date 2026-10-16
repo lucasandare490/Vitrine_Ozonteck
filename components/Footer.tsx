@@ -159,8 +159,8 @@ function FullFooter() {
               <li><Link href="/suporte" className="transition-colors hover:text-teal-700">Central de ajuda</Link></li>
             </ul>
             <div className="mt-7 border-t border-slate-200 pt-5">
-              <h3 className="text-sm font-bold text-slate-900">Construa seu negócio com a OZONTECK</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-600">Seja distribuidor independente e faça parte da rede de Rogério André. Conheça a atuação com vendas e desenvolvimento de equipe.</p>
+              <h3 className="text-sm font-bold text-slate-900">Faça parte da equipe OZONTECK</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600">Conheça a equipe de Rogério André para comprar para consumo ou atuar como distribuidor. O benefício de preço na loja depende de aprovação manual.</p>
               <Link href="/junte-se-a-nos" className="mt-2 inline-flex min-h-11 items-center font-bold text-sm text-teal-800 underline underline-offset-4">Quero conhecer a rede</Link>
             </div>
           </nav>

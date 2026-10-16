@@ -6,6 +6,11 @@ import { ShoppingBag, Search, Filter, Loader2, AlertCircle, Eye, Package, Truck,
 import toast from 'react-hot-toast';
 import ProductReviewModeration from '@/components/ProductReviewModeration';
 import StoreReviewModeration from '@/components/StoreReviewModeration';
+import AdminOrderContact from '@/components/AdminOrderContact';
+import AdminOrderSummary from '@/components/AdminOrderSummary';
+import AdminOrderChanges from '@/components/AdminOrderChanges';
+import { orderAddressText } from '@/lib/order-contact';
+import { isOpenPayment } from '@/lib/order-status';
 
 type Review = {
   id: string;
@@ -46,7 +51,6 @@ export default function AuditoriaPedidos() {
   const selectedReview = pedidoSelecionado?.avaliacao;
 
   const fetchData = async () => {
-    setLoading(true);
     
     const { data: pedidosData, error: pedidosError } = await supabase
       .from('pedidos')
@@ -65,8 +69,12 @@ export default function AuditoriaPedidos() {
   };
 
   useEffect(() => {
-    const timer = window.setTimeout(() => void fetchData(), 0);
-    return () => window.clearTimeout(timer);
+    const orderId = new URLSearchParams(window.location.search).get('pedido');
+    const timer = window.setTimeout(() => { if (orderId) setSearchTerm(orderId); void fetchData(); }, 0);
+    const refresh = () => { if (document.visibilityState === 'visible') void fetchData(); };
+    const interval = window.setInterval(refresh, 30000);
+    window.addEventListener('focus', refresh);
+    return () => { window.clearTimeout(timer); window.clearInterval(interval); window.removeEventListener('focus', refresh); };
   }, []);
 
   // OTIMIZAÇÃO: Filtro pesado envelopado em useMemo para não travar a UI enquanto o usuário digita na barra de busca
@@ -76,9 +84,9 @@ export default function AuditoriaPedidos() {
       const idPedido = pedido.id.toLowerCase();
       
       const matchBusca = nomeCliente.includes(searchTerm.toLowerCase()) || idPedido.includes(searchTerm.toLowerCase());
-      const matchStatus = statusFilter === 'Todos' || pedido.status === statusFilter.toLowerCase();
+      const matchStatus = statusFilter === 'Todos' ? !isOpenPayment(pedido.status) : statusFilter === 'abertos' ? isOpenPayment(pedido.status) : pedido.status === statusFilter.toLowerCase();
       
-      return matchBusca && matchStatus;
+      return matchBusca && (matchStatus || searchTerm === pedido.id);
     });
 
     return filtrados.sort((a, b) => {
@@ -107,8 +115,10 @@ export default function AuditoriaPedidos() {
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'preparando':
       case 'pending':
+      case 'aguardando_pagamento':
+        return <span className="text-sm text-amber-700">Aguardando pagamento</span>;
+      case 'preparando':
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20">
             <Package size={10} /> Preparando
@@ -137,6 +147,8 @@ export default function AuditoriaPedidos() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <AdminOrderSummary orders={pedidos} ready={!loading} />
+      <AdminOrderChanges />
       
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>
@@ -188,7 +200,8 @@ export default function AuditoriaPedidos() {
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full sm:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer transition-colors"
               >
-                <option value="Todos">Todos os Estados</option>
+                <option value="Todos">Pedidos confirmados</option>
+                <option value="abertos">Compras em aberto</option>
                 <option value="preparando">Preparando</option>
                 <option value="enviado">Enviado</option>
                 <option value="entregue">Entregue</option>
@@ -298,8 +311,7 @@ export default function AuditoriaPedidos() {
                 <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#202020] space-y-3">
                   <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] flex items-center gap-2"><MapPin size={14}/> Local de Entrega</h4>
                   <div>
-                    <p className="text-sm font-bold text-slate-900 dark:text-[#F0F0F0]">{pedidoSelecionado.endereco_entrega?.rua}</p>
-                    <p className="text-xs text-slate-500 dark:text-[#A1A1AA] mt-1">{pedidoSelecionado.endereco_entrega?.cidade} {pedidoSelecionado.endereco_entrega?.estado}</p>
+                    <p className="text-sm break-words font-bold text-slate-900 dark:text-[#F0F0F0]">{orderAddressText(pedidoSelecionado.endereco_entrega)}</p>
                   </div>
                 </div>
               </div>
@@ -319,13 +331,14 @@ export default function AuditoriaPedidos() {
                   )}
                 </ul>
                 <div className="mt-4 flex justify-between items-center p-4 bg-teal-50 dark:bg-teal-500/10 rounded-xl border border-teal-100 dark:border-teal-500/20">
-                  <span className="text-xs font-black uppercase tracking-widest text-teal-700 dark:text-teal-400">Total Pago</span>
+                  <span className="text-xs font-black uppercase tracking-widest text-teal-700 dark:text-teal-400">Total do pedido</span>
                   <span className="text-lg font-black text-teal-700 dark:text-teal-400">
                     {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedidoSelecionado.valor_total)}
                   </span>
                 </div>
               </div>
 
+              <AdminOrderContact id={pedidoSelecionado.id} address={pedidoSelecionado.endereco_entrega} />
               {selectedReview && (
                 <div className={`p-5 rounded-xl border ${selectedReview.nota <= 3 ? 'bg-red-50/50 dark:bg-red-500/10 border-red-200 dark:border-red-500/30' : 'bg-slate-50 dark:bg-[#202020] border-slate-200 dark:border-[#2D2D2D]'}`}>
                   <h4 className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2 mb-3 text-slate-400 dark:text-[#A1A1AA]">

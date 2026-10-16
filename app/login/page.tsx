@@ -271,7 +271,7 @@ export default function Login() {
   if (!isMounted) return <div className="h-screen w-full bg-[#FAFAFC]" />;
 
   return (
-    <main className="h-[calc(100dvh-72px)] sm:h-[calc(100dvh-80px)] w-full flex flex-col lg:flex-row bg-[#FAFAFC] overflow-hidden">
+    <main className="min-h-[calc(100dvh-116px)] lg:h-[calc(100dvh-80px)] w-full flex flex-col lg:flex-row bg-[#FAFAFC] lg:overflow-hidden">
       
       {/* LADO ESQUERDO: APRESENTAÇÃO E ACESSIBILIDADE */}
       <div className="relative hidden lg:flex flex-col lg:w-5/12 xl:w-1/2 bg-teal-950 p-8 lg:p-12 xl:p-16 shadow-2xl z-20 h-full overflow-y-auto no-scrollbar">

@@ -1,6 +1,7 @@
 'use client';
 
 import { isRetiredProduct } from '@/lib/catalog-availability';
+import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Suspense, useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
@@ -12,6 +13,8 @@ import Link from 'next/link';
 import { useCartStore } from '@/store/useCartStore';
 import toast from 'react-hot-toast';
 import { signOutWithCart } from '@/lib/cart-session';
+import SearchSuggestions from '@/components/SearchSuggestions';
+import { StorePrice, useStorePricing } from '@/components/StorePricing';
 
 type QuickBuyProduct = {
   id: string;
@@ -27,12 +30,14 @@ function subscribeToHydration() {
 }
 
 function NavbarView({ initialSearch }: { initialSearch: string }) {
+  const pricing = useStorePricing();
   const isMounted = useSyncExternalStore(subscribeToHydration, () => true, () => false);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [profileName, setProfileName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [userRole, setUserRole] = useState('cliente'); 
   const [navSearch, setNavSearch] = useState(initialSearch);
+  const [searchOpen, setSearchOpen] = useState(false);
   
   const [profileOpen, setProfileOpen] = useState(false);
   const [favsOpen, setFavsOpen] = useState(false);
@@ -98,7 +103,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
       setTotalFavs(allFavs.length);
       const codes = allFavs.slice(0, 3).map(f => f.produto_code);
       const { data: prods } = await supabase.from('produtos').select('id, code, name, category, price, image_url, estoque').in('code', codes).eq('is_deleted', false);
-      if (prods) setQuickBuyProducts(prods.filter((product) => !isRetiredProduct(product)));
+      if (prods) setQuickBuyProducts(prods.filter((product) => !isRetiredProduct(product) && !isTestProduct(product)));
     } else {
       setQuickBuyProducts([]);
       setTotalFavs(0);
@@ -154,15 +159,17 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
   };
 
   const handleQuickAdd = (product: QuickBuyProduct) => {
+    if (!pricing.ready) { toast.error('Aguarde a consulta dos preços.'); return; }
     if (Number(product.estoque) <= 0) { toast.error('Produto indisponível no momento.'); return; }
     addItem({
-      id: product.id, code: product.code, name: product.name, price: Number(product.price), estoque: Number(product.estoque)
+      id: product.id, code: product.code, name: product.name, price: Number(pricing.prices[product.code] ?? product.price), estoque: Number(product.estoque)
     });
     toast.success(`${product.name} adicionado ao carrinho!`);
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setSearchOpen(false);
     setIsMobileMenuOpen(false);
     if (navSearch.trim()) {
       router.push(`/?q=${encodeURIComponent(navSearch)}`);
@@ -181,7 +188,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
   return (
     <>
       <header className="w-full bg-gradient-to-r from-teal-950 to-teal-900 border-b border-teal-800 sticky top-0 z-50 transition-all shadow-md">
-        <nav className="w-full flex items-center justify-between px-3 sm:px-4 lg:px-6 py-3 sm:py-4 h-[72px] sm:h-20 gap-3 lg:gap-5">
+        <nav className="w-full flex flex-wrap items-center justify-between px-3 sm:px-4 lg:px-6 py-2 md:py-3 min-h-16 md:min-h-20 gap-2 lg:gap-5">
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 shrink-0">
             <button onClick={() => router.push('/')} className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter text-white flex items-center gap-1.5 hover:opacity-80 transition-opacity cursor-pointer">
@@ -198,25 +205,29 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
             </span>
           </div>
 
-          <div className="hidden md:block min-w-0 flex-1 max-w-2xl">
-            <form onSubmit={handleSearchSubmit} className="relative w-full group">
+          <div className="order-last w-full min-w-0 md:order-none md:w-auto md:flex-1 md:max-w-2xl">
+            <form onSubmit={handleSearchSubmit} onBlur={e => { if (!e.currentTarget.contains(e.relatedTarget)) setSearchOpen(false); }} onKeyDown={e => { if (e.key === 'Escape') setSearchOpen(false); }} className="relative w-full group">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Search size={18} className="text-slate-400 group-focus-within:text-teal-600 transition-colors" />
               </div>
               <input
-                type="text"
+                type="search"
+                enterKeyHint="search"
                 value={navSearch}
-                onChange={(e) => setNavSearch(e.target.value)}
+                onFocus={() => setSearchOpen(true)}
+                onChange={(e) => { setNavSearch(e.target.value); setSearchOpen(true); }}
+                aria-label="Buscar produtos"
                 placeholder="Buscar óleos, séruns, kits..."
-                className="w-full pl-11 pr-20 py-2.5 bg-white border-2 border-transparent focus:border-teal-400 rounded-full text-sm font-medium text-slate-800 outline-none transition-all placeholder:text-slate-400 shadow-inner"
+                className="w-full min-h-11 pl-11 pr-20 py-2 bg-white border-2 border-transparent focus:border-teal-400 rounded-lg md:rounded-full text-base md:text-sm font-medium text-slate-800 outline-none transition-all placeholder:text-slate-400 shadow-inner"
               />
-              <button type="submit" className="absolute inset-y-0 right-1.5 my-1.5 px-4 bg-teal-600 hover:bg-teal-50 text-white text-xs font-bold rounded-full transition-colors cursor-pointer shadow-sm">
+              <button type="submit" className="absolute inset-y-0 right-1.5 my-1.5 px-4 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-md md:rounded-full transition-colors cursor-pointer shadow-sm">
                 Buscar
               </button>
+              {searchOpen && navSearch.trim() && <SearchSuggestions query={navSearch} onSelect={() => setSearchOpen(false)} />}
             </form>
           </div>
           
-          <div className="flex items-center gap-3 sm:gap-6 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-3 shrink-0">
             
             <Link href="/sobre_cliente" className="text-[10px] sm:text-xs lg:text-[12px] font-bold text-teal-100 hover:text-white transition-colors hidden xl:flex items-center gap-1.5 border-r border-teal-800 pr-4 lg:pr-6">
               <Info size={14} /> Nossa História
@@ -226,7 +237,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
               <HelpCircle size={14} /> Central de Ajuda
             </Link>
 
-            <Link href="/junte-se-a-nos" className="text-[10px] sm:text-xs lg:text-[12px] font-bold text-teal-100 hover:text-white transition-colors hidden xl:flex items-center gap-1.5 border-r border-teal-800 pr-4 lg:pr-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"><Users size={14} aria-hidden="true" /> Junte-se a nós</Link>
+            <Link href="/junte-se-a-nos" className="hidden xl:flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-teal-400/60 bg-transparent px-3 text-xs font-bold text-teal-100 whitespace-nowrap transition-colors hover:border-teal-300 hover:bg-teal-400/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-200"><Users size={14} className="shrink-0 text-teal-300" aria-hidden="true" /> Junte-se a nós</Link>
 
             <div className="text-[10px] sm:text-xs lg:text-[12px] font-bold text-teal-100 hidden 2xl:flex items-center gap-1.5 border-r border-teal-800 pr-4 lg:pr-6">
               <CheckCircle2 className="text-teal-400 w-3.5 h-3.5 lg:w-4 lg:h-4"/>
@@ -235,7 +246,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
 
             <button 
               onClick={() => setIsMobileMenuOpen(true)} 
-              className="xl:hidden flex items-center justify-center text-teal-100 hover:text-white transition-colors focus:outline-none"
+              className="xl:hidden min-h-11 min-w-11 flex items-center justify-center text-teal-100 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-white"
               aria-label="Abrir Menu"
             >
               <Menu size={24} />
@@ -248,7 +259,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
                   <div className="relative hidden sm:block" onMouseEnter={() => { setFavsOpen(true); setProfileOpen(false); }} onMouseLeave={() => setFavsOpen(false)}>
                     <Link href="/conta/favoritos" className="flex items-center gap-1.5 p-2 rounded-lg text-teal-100 hover:text-white hover:bg-teal-800/50 transition-colors">
                       <Heart size={20} strokeWidth={2} />
-                      <span className="text-sm font-bold">Favoritos</span>
+                      <span className="hidden lg:inline text-sm font-bold">Favoritos</span>
                       {totalFavs > 0 && (
                         <span className="bg-teal-400 text-teal-950 text-[10px] font-bold px-1.5 py-0.5 rounded-full ml-1 transition-all">
                           {totalFavs}
@@ -273,7 +284,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <p className="text-xs font-bold text-slate-900 truncate">{prod.name}</p>
-                                    <p className="text-[11px] text-teal-600 font-bold">R$ {Number(prod.price).toFixed(2).replace('.', ',')}</p>
+                                    <p className="text-[11px] text-teal-600 font-bold"><StorePrice code={prod.code} price={Number(prod.price)} /></p>
                                   </div>
                                   <button onClick={() => { handleQuickAdd(prod); setFavsOpen(false); }} className="w-8 h-8 rounded-full bg-slate-100 hover:bg-teal-600 text-slate-500 hover:text-white flex items-center justify-center transition-colors shrink-0" title="Comprar">
                                     <Plus size={14} />
@@ -299,7 +310,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
                       <div className="relative w-9 h-9 rounded-full bg-teal-100 flex items-center justify-center border border-teal-200 overflow-hidden shrink-0 shadow-sm">
                         {avatarUrl ? <Image src={avatarUrl} alt="Perfil" fill sizes="36px" className="object-cover" /> : profileName ? <span className="text-teal-700 font-bold text-xs">{getInitials(profileName)}</span> : <User size={16} className="text-teal-700" />}
                       </div>
-                      <div className="hidden sm:flex flex-col items-start text-left">
+                      <div className="hidden lg:flex flex-col items-start text-left">
                         <span className="text-[10px] text-teal-200 font-medium leading-none">Olá, {profileName || 'Cliente'}</span>
                         <span className="text-sm font-bold text-white leading-tight flex items-center gap-1 mt-0.5">
                           Sua Conta <ChevronDown size={14} className={`text-teal-400 transition-transform ${profileOpen ? 'rotate-180' : ''}`} />
@@ -395,22 +406,6 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
               </button>
             </div>
 
-            <div className="p-5 border-b border-slate-100 bg-slate-50 md:hidden">
-              <form onSubmit={handleSearchSubmit} className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search size={16} className="text-slate-400" />
-                </div>
-                <input
-                  type="text"
-                  value={navSearch}
-                  onChange={(e) => setNavSearch(e.target.value)}
-                  placeholder="Buscar produtos..."
-                  aria-label="Buscar produtos"
-                  className="w-full bg-white border border-slate-200 rounded-full py-2.5 pl-10 pr-4 text-sm font-medium outline-none focus:border-teal-500 shadow-sm transition-colors"
-                />
-              </form>
-            </div>
-
             <div className="flex-1 overflow-y-auto py-2">
               <Link 
                 href="/sobre_cliente" 
@@ -434,8 +429,8 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
                 Central de Ajuda
               </Link>
               
-              <Link href="/junte-se-a-nos" onClick={() => setIsMobileMenuOpen(false)} className="px-6 py-4 flex items-center gap-4 text-slate-700 font-bold hover:bg-teal-50 hover:text-teal-700 transition-colors border-b border-slate-50 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-teal-700">
-                <div className="w-8 h-8 rounded-full bg-teal-50 flex items-center justify-center"><Users size={18} className="text-teal-600" aria-hidden="true" /></div> Junte-se a nós
+              <Link href="/junte-se-a-nos" onClick={() => setIsMobileMenuOpen(false)} className="mx-4 my-3 px-3 py-3 min-h-11 flex items-center gap-4 rounded-lg bg-teal-800 text-white font-bold hover:bg-teal-900 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">
+                <div className="w-8 h-8 shrink-0 flex items-center justify-center"><Users size={18} aria-hidden="true" /></div> Junte-se a nós
               </Link>
               <div className="px-6 py-4 flex items-center gap-4 text-slate-700 font-bold border-b border-slate-50">
                 <div className="w-8 h-8 rounded-full bg-emerald-50 flex items-center justify-center">

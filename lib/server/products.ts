@@ -3,7 +3,7 @@ import { cache } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import type { Product } from '@/lib/data';
 import { getProductResearch } from '@/lib/product-research';
-import { isTestProduct } from '@/lib/products';
+import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
 import { isRetiredProduct } from '@/lib/catalog-availability';
 
 export function catalogClient() {
@@ -31,7 +31,7 @@ export const getProduct = cache(async (code: string): Promise<Product | null> =>
   const { data, error } = await catalogClient().from('produtos').select(columns)
     .eq('code', code).eq('is_deleted', false).maybeSingle();
   if (error) throw new Error('Não foi possível consultar o catálogo.');
-  return data && !isRetiredProduct(data) ? mapProduct(data) : null;
+  return data && !isRetiredProduct(data) && !isTestProduct(data) ? mapProduct(data) : null;
 });
 
 export async function getRelatedProducts(product: Product) {
@@ -52,7 +52,7 @@ export async function getCatalogIndex() {
     const { data, error } = await client.from('produtos').select('code, name, category')
       .eq('is_deleted', false).order('code').range(offset, offset + 499);
     if (error) throw new Error('Não foi possível consultar o catálogo.');
-    products.push(...(data || []).filter((item) => !isRetiredProduct(item)));
+    products.push(...(data || []).filter((item) => !isRetiredProduct(item) && !isTestProduct(item)));
     if (!data || data.length < 500) return products;
   }
 }

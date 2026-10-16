@@ -16,7 +16,7 @@ export default function FloatingCart() {
     state.items.reduce((acc, item) => acc + item.quantity, 0)
   );
 
-  if (pathname === '/lista') return null;
+  if (pathname === '/lista' || pathname.startsWith('/admin')) return null;
   if (!isMounted) return null;
   if (totalItems === 0) return null;
 
