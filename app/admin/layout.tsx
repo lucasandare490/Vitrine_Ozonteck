@@ -104,6 +104,9 @@ const { theme, toggleTheme } = useThemeStore();
             <Link href="/admin/clientes" className={getLinkClass('/admin/clientes')}>
               <Users size={16} /> Carteira de Clientes
             </Link>
+            <Link href="/admin/relatorios" className={getLinkClass('/admin/relatorios')}>
+              <Activity size={16} /> Relatórios de Vendas
+            </Link>
           </div>
 
           <div className="space-y-1">
@@ -164,6 +167,7 @@ const { theme, toggleTheme } = useThemeStore();
             ['/admin', 'Visão geral'], ['/admin/pedidos', 'Pedidos'],
             ['/admin/clientes', 'Clientes'], ['/admin/produtos', 'Produtos'],
             ['/admin/categorias', 'Categorias'],
+            ['/admin/relatorios', 'Relatórios'],
           ].map(([href, label]) => <Link key={href} href={href} aria-current={pathname === href ? 'page' : undefined} className={`${getLinkClass(href)} min-h-11`}>{label}</Link>)}
         </nav>
 
