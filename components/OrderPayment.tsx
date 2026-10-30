@@ -9,6 +9,7 @@ type PaymentDetails = {
   orderId: string; orderStatus: string; status: string; amount: number; method: string; type: string;
   expiresAt: string | null; expired: boolean; payable: boolean;
   pixCode: string | null; pixImage: string | null; boletoCode: string | null; boletoUrl: string | null;
+  authenticationUrl?: string | null;
 };
 
 export default function OrderPayment({ orderId, onStatusChange }: { orderId: string; onStatusChange?: (status: string) => void }) {
@@ -66,6 +67,10 @@ export default function OrderPayment({ orderId, onStatusChange }: { orderId: str
     </div>
     {error && <p role="alert" className="text-sm text-amber-800">{error}</p>}
     {approved && <p className="text-sm">O Mercado Pago confirmou o pagamento. Acompanhe a preparação e o recebimento em Meus pedidos.</p>}
+    {payment?.payable && payment.authenticationUrl && <div className="space-y-3">
+      <p className="font-semibold">Confirme o pagamento com seu banco</p>
+      <iframe title="Confirmação segura do cartão" src={payment.authenticationUrl} className="h-[600px] w-full rounded-lg border border-slate-200" referrerPolicy="no-referrer" />
+    </div>}
     {payment?.payable && !error && <>
       <p className="font-semibold">{payment.method === 'pix' ? 'Pague com Pix' : payment.type === 'ticket' ? 'Pague o boleto' : 'Acompanhe a análise do pagamento'} · {payment.amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
       {payment.expiresAt && <p className="text-sm text-slate-600">Vencimento: {new Date(payment.expiresAt).toLocaleString('pt-BR')}</p>}

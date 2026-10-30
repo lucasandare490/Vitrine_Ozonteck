@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { requiresSecondFactor } from '@/lib/mfa-policy';
 import { createRateLimitGuard, readJsonBody } from '@/lib/server/http';
+import { cancelOrdersPayment } from '@/lib/server/orders-provider';
 
 const limit = createRateLimitGuard({ limit: 5, window: '1 m', prefix: 'order-change' });
 const reply = (body: unknown, status = 200) => NextResponse.json(body, { status, headers: { 'Cache-Control': 'private, no-store' } });
@@ -27,6 +28,14 @@ export async function POST(request: Request, context: { params: Promise<{ id: st
     const { data: order, error } = await db.from('pedidos').select('id,user_id,id_pagamento_mp,checkout_id,status,valor_total').eq('id', id).eq('user_id', user.id).maybeSingle();
     if (error || !order) return reply({ error: 'Compra não encontrada.' }, 404);
     if (!order.id_pagamento_mp || !['pending', 'falha_pagamento', 'pagamento_recusado', 'cancelado', 'cancelled'].includes(order.status)) return reply({ error: 'Esta compra não pode mais ser alterada. Consulte a loja.' }, 409);
+    if (String(order.id_pagamento_mp).startsWith('ORD')) {
+      const payment = await cancelOrdersPayment(db, order);
+      const { data, error: saveError } = await db.rpc('reabrir_compra_cancelada', {
+        p_order: id, p_user: user.id, p_payment: payment.id, p_reason: input.data.reason,
+      });
+      if (saveError) return reply({ error: 'Cobranca cancelada, mas a reabertura nao foi salva. Tente novamente nesta mesma compra.' }, 503);
+      return reply({ change: data });
+    }
     const client = new Payment(new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN! }));
     let payment = await client.get({ id: order.id_pagamento_mp });
     if (String(payment.id) !== String(order.id_pagamento_mp) || payment.external_reference !== order.checkout_id || payment.currency_id !== 'BRL'

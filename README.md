@@ -154,6 +154,7 @@ Documentação complementar:
 
 - [Publicação e troca de conta](docs/publicacao-pagamentos-checklist.md)
 - [Histórico de validação de pagamentos](docs/payment-validation-status.md)
+- [Migração Orders: preparação e pendências, ainda não ativa](docs/mercado-pago-orders-migration.md)
 - [Preços de afiliados](docs/affiliate-pricing.md)
 
 Os registros de validação são datados, não uma verificação contínua do ambiente.

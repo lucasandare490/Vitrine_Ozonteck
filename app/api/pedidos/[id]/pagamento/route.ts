@@ -3,6 +3,7 @@ import { MercadoPagoConfig, Payment } from 'mercadopago';
 import { NextResponse } from 'next/server';
 import { requiresSecondFactor } from '@/lib/mfa-policy';
 import { createRateLimitGuard } from '@/lib/server/http';
+import { readOrdersPayment, reconcileOrdersPayment } from '@/lib/server/orders-provider';
 
 const limit = createRateLimitGuard({ limit: 30, window: '1 m', prefix: 'ratelimit:order-payment' });
 const headers = { 'Cache-Control': 'private, no-store, max-age=0', Vary: 'Authorization' };
@@ -43,6 +44,18 @@ export async function GET(request: Request, context: { params: Promise<{ id: str
     if (error) return reply({ error: 'Não foi possível consultar o pedido.' }, 503);
     if (!order) return reply({ error: 'Pedido não encontrado.' }, 404);
     if (!order.id_pagamento_mp) return reply({ error: 'O pagamento ainda não está disponível. Tente novamente em instantes.' }, 409);
+    if (String(order.id_pagamento_mp).startsWith('ORD')) {
+      const payment = await readOrdersPayment(db, order);
+      await reconcileOrdersPayment(db, order, payment);
+      const { data: updated, error: updateError } = await db.from('pedidos').select('status').eq('id', order.id).single();
+      if (updateError) throw new Error('ORDER_STATUS_UNAVAILABLE');
+      const expired = !!payment.expiresAt && Date.parse(payment.expiresAt) <= Date.now();
+      const payable = ['pending', 'in_process'].includes(payment.status) && !expired
+        && !['cancelado', 'cancelled', 'reembolsado'].includes(updated.status);
+      return reply({ ...payment, orderId: order.id, orderStatus: updated.status, expired, payable,
+        pixCode: payable ? payment.pixCode : null, pixImage: payable ? payment.pixImage : null,
+        boletoCode: payable ? payment.boletoCode : null, boletoUrl: payable ? payment.boletoUrl : null });
+    }
     const payment = await new Payment(new MercadoPagoConfig({ accessToken: required('MP_ACCESS_TOKEN') })).get({ id: order.id_pagamento_mp });
     const reference = payment.external_reference || payment.metadata?.checkout_id;
     if (String(payment.id) !== String(order.id_pagamento_mp) || !order.checkout_id || reference !== order.checkout_id

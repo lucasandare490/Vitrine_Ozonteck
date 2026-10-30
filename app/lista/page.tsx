@@ -5,7 +5,7 @@ import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, Truck, Home, Briefc
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState, useRef, ReactNode, useMemo, type ComponentProps } from 'react';
+import { useCallback, useEffect, useState, useRef, ReactNode, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import type { User as SupabaseUser } from '@supabase/supabase-js';
 import { clsx, type ClassValue } from 'clsx';
@@ -14,14 +14,15 @@ import toast from 'react-hot-toast';
 import LoginModal from '@/components/LoginModal';
 import { isValidCpf } from '@/lib/auth';
 import CheckoutPayment from '@/components/CheckoutPayment';
+import OrdersCheckoutPayment, { type CheckoutFormData } from '@/components/OrdersCheckoutPayment';
 import OrderPayment from '@/components/OrderPayment';
 import OrderConfirmationPreview from '@/components/OrderConfirmationPreview';
 import { useStorePricing } from '@/components/StorePricing';
 import { syncCartForUser } from '@/lib/cart-session';
 
-import { initMercadoPago, Payment } from '@mercadopago/sdk-react';
+import { initMercadoPago } from '@mercadopago/sdk-react';
 
-initMercadoPago(process.env.NEXT_PUBLIC_MP_PUBLIC_KEY as string, { locale: 'pt-BR' });
+initMercadoPago((process.env.NEXT_PUBLIC_MP_ORDERS_PUBLIC_KEY || process.env.NEXT_PUBLIC_MP_PUBLIC_KEY) as string, { locale: 'pt-BR' });
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -81,7 +82,6 @@ type CustomerProfile = {
   endereco_completo?: string | null;
 };
 
-type PaymentProps = ComponentProps<typeof Payment>;
 
 export default function ListaDeInteresse() {
   const router = useRouter(); 
@@ -376,13 +376,34 @@ export default function ListaDeInteresse() {
 
   if (!isMounted) return null;
 
-  const onSubmit: PaymentProps['onSubmit'] = async ({ formData }) => {
+  const onSubmit = async ({ formData }: { formData: CheckoutFormData }) => {
     if (!pricesReady) throw new Error('Aguarde a confirmação dos preços.');
     const { data: { session } } = await supabase.auth.getSession();
-    const idempotencyKey = changeId.current ? `change-${changeId.current}` : checkoutAttemptKey.current ?? crypto.randomUUID();
+    const attemptStorageKey = `ozonteck-checkout:${session?.user.id || 'guest'}`;
+    let savedAttempt: { key: string; signature: string } | null = null;
+    try { savedAttempt = JSON.parse(localStorage.getItem(attemptStorageKey) || 'null'); } catch { /* Invalid local state is replaced below. */ }
+    if (savedAttempt?.key && session?.user) {
+      const { data: existing } = await supabase.from('pedidos')
+        .select('id,status_pagamento,valor_total,itens,id_pagamento_mp')
+        .eq('checkout_id', savedAttempt.key).eq('user_id', session.user.id).maybeSingle();
+      if (existing?.id_pagamento_mp) {
+        setConfirmedOrder({ id: existing.id, status: existing.status_pagamento, total: Number(existing.valor_total), count: existing.itens.length });
+        setPaymentStatus('success');
+        localStorage.removeItem(attemptStorageKey);
+        return;
+      }
+    }
+    if (!changeId.current && savedAttempt?.key && savedAttempt.signature !== cartSignature) {
+      throw new Error('Há uma tentativa de pagamento em andamento para outro carrinho. Consulte Meus pedidos antes de iniciar outra compra.');
+    }
+    const ordersPrefix = process.env.NEXT_PUBLIC_MP_ORDERS_PUBLIC_KEY ? 'orders-' : '';
+    const idempotencyKey = changeId.current ? `${ordersPrefix}change-${changeId.current}` : savedAttempt?.key || checkoutAttemptKey.current || `${ordersPrefix}${crypto.randomUUID()}`;
+    // Persist before sending: reloads and lost responses must reuse the same attempt.
+    localStorage.setItem(attemptStorageKey, JSON.stringify({ key: idempotencyKey, signature: cartSignature }));
     checkoutAttemptKey.current = idempotencyKey;
     const enhancedFormData = {
       ...formData,
+      issuer_id: formData.issuer_id ? Number(formData.issuer_id) : undefined,
       expected_total: currentTotal,
       cart_items: items.map(i => ({ code: i.code, quantity: i.quantity })),
       description: items.map(i => `${i.quantity}x ${i.name}`).join(', '),
@@ -427,7 +448,13 @@ export default function ListaDeInteresse() {
 
     if (!response.ok) {
       if (response.status === 409) window.dispatchEvent(new Event('store-pricing-changed'));
-      if (!data.id) checkoutAttemptKey.current = null;
+      // A network/server failure may follow a successful provider request.
+      // Keep the key so retries cannot create a second charge.
+      if (data.id && data.order_id) {
+        setConfirmedOrder({ id: data.order_id, status: 'pending', total: currentTotal, count: items.length });
+        setPaymentStatus('success');
+        localStorage.removeItem(attemptStorageKey);
+      }
       throw new Error(data.error || 'Não foi possível processar o pagamento.');
     }
 
@@ -436,11 +463,13 @@ export default function ListaDeInteresse() {
       setConfirmedOrder({ id: data.order_id, status: data.status, total: data.total, count: items.length });
       window.scrollTo({ top: 0, behavior: 'smooth' });
       setPaymentStatus('success');
+      localStorage.removeItem(attemptStorageKey);
       clearCart();
       return data;
     }
 
     checkoutAttemptKey.current = null;
+    localStorage.removeItem(attemptStorageKey);
     throw new Error(data.status_detail || 'Pagamento não aprovado.');
   };
 
@@ -701,7 +730,9 @@ export default function ListaDeInteresse() {
                   <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Finalizar Pagamento</h2>
                 </div>
                 <div className="p-2 sm:p-4">
-                  {pricesReady ? <CheckoutPayment key={currentTotal} initialization={initialization} onSubmit={onSubmit} /> : <p role="status">Não foi possível confirmar os preços. Atualize a página antes de pagar.</p>}
+                  {pricesReady ? (process.env.NEXT_PUBLIC_MP_ORDERS_PUBLIC_KEY
+                    ? <OrdersCheckoutPayment key={currentTotal} initialization={initialization} onSubmit={onSubmit} />
+                    : <CheckoutPayment key={currentTotal} initialization={initialization} onSubmit={onSubmit} />) : <p role="status">Não foi possível confirmar os preços. Atualize a página antes de pagar.</p>}
                 </div>
               </div>
             )}
