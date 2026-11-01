@@ -14,9 +14,9 @@ Este registro distingue observação, implementação e publicação. Não é de
 | --- | --- |
 | Catálogo, categorias, preços e estoque | Já existem; preservar fonte de dados e administração atuais. |
 | Cadastro, pedidos e acompanhamento | Já existem; não substituir o fluxo de confirmação após pagamento. |
-| Relatórios por período, produtos e clientes | Implementação local em `/admin/relatorios`, com exportação CSV. Ainda requer validação visual e publicação. |
+| Relatórios por período, produtos e clientes | Publicado em `/admin/relatorios`, com exportação CSV. Navegação autenticada confirmou carregamento e filtros: outubro mostra 1 pedido/R$ 9,99; todo o histórico mostra 9 pedidos/R$ 1.449,39. Exportação e revisão visual completa ainda pendentes. |
 | Lucro e pontos | Não calcular sem custos, taxas e regras de pontuação confiáveis. Total vendido não é lucro. |
-| Fiado e carnê | Não habilitar nesta etapa, conforme decisão conversada. |
+| Fiado e carnê | Excluídos do escopo por decisão expressa do usuário. |
 | Comprovante do Ozon Vendas | A própria página inspecionada é uma proposta visual com dados de exemplo; diz que envio em texto, imagem e PDF será aplicado após aprovação. Não tratar isso como função real comprovada. |
 | Lembretes e mensagens de WhatsApp | Referência tem textos de recompra, cobrança, aniversário e reativação. Notificações de celular são indicadas como futuras pela própria referência. Não enviar mensagens sem ação/autorização do usuário. |
 | Importação de produtos | Referência aceita lista e sugere preço 2x custo. Não aplicar esse cálculo automaticamente ao catálogo oficial da loja. |
@@ -25,20 +25,21 @@ Este registro distingue observação, implementação e publicação. Não é de
 
 ## E-mails
 
-- Painel Supabase autenticado confirmou uso dos modelos padrão e ausência de SMTP próprio configurado.
+- Na primeira inspeção, o Supabase usava os modelos padrão e não tinha SMTP próprio; essa situação foi corrigida na retomada.
 - Recuperação de senha usa Supabase Auth. Não foi localizado envio de e-mails de pedidos no código pesquisado.
 - Não confundir comprovantes enviados pelo Mercado Pago com notificações enviadas pela loja.
 - `lib/customer-email.ts`: modelo HTML responsivo e versão texto para boas-vindas, pagamento pendente/aprovado/recusado, alteração, envio, retirada, entrega, cancelamento, reembolso confirmado e recebimento de suporte.
-- Essa função **somente renderiza**. Ainda não envia mensagens e não está ligada aos eventos. A ativação depende de remetente e serviço de envio reais.
+- Essa função **somente renderiza**; o envio agora é feito separadamente pela função agendada `customer-emails`. Consulte [estado e limites do envio](email-delivery.md).
+- Remetente: `ozonteckrecife2@gmail.com`. O titular ativou a verificação em duas etapas e forneceu uma senha de aplicativo. SMTP foi configurado no Supabase e na Netlify; nenhuma credencial foi adicionada ao código. Autenticação Gmail aceita em 01/11/2026; recebimento na caixa de entrada ainda não conferido.
 - Modelos de autenticação devem preservar tokens e links gerados pelo Supabase; não gerar links de recuperação no navegador.
-- Antes de ativar envio: implementar persistência de eventos, prevenção de duplicidade, tentativas controladas e observabilidade. Falha de e-mail não pode desfazer pagamento ou pedido.
+- Fila persistente, deduplicação, reservas e tentativas limitadas instaladas no banco. Função publicada e executada com fila vazia; falha no envio não desfaz pagamento ou pedido.
 - Não enviar confirmação de reembolso sem evento confirmado; não anunciar retirada pronta sem essa informação operacional.
 
 ## Pagamento visual
 
 - Seleção local atualizada com ícones de Pix/cartão/boleto, destaque da opção escolhida, descrições e foco por teclado.
 - Não altera criação de cobranças nem credenciais.
-- Falta concluir avaliação visual no navegador e publicação.
+- Seleção estilizada publicada anteriormente no commit `1f9f729`; revisão visual completa do cartão continua pendente. A ajuda CVV aparece somente na modalidade cartão; exibição especificamente ao focar o campo ainda não implementada.
 
 ## Verificações desta retomada
 
