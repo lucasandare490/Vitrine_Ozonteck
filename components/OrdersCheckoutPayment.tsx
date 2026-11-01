@@ -3,6 +3,7 @@
 import { CardPayment } from '@mercadopago/sdk-react';
 import { Barcode, CreditCard, Check, ArrowRight, Loader2 } from 'lucide-react';
 import { memo, useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
+import CvvHelp from './CvvHelp';
 
 export type CheckoutFormData = {
   payment_method_id: string;
@@ -62,7 +63,7 @@ export default memo(function OrdersCheckoutPayment({ initialization, onSubmit }:
         </label>)}
     </fieldset>
     {method === 'card'
-      ? <CardPayment initialization={initialization} customization={customization} onSubmit={submitCard} onReady={ready} onError={onError} />
+      ? <><CardPayment initialization={initialization} customization={customization} onSubmit={submitCard} onReady={ready} onError={onError} /><CvvHelp /></>
       : <div className="space-y-4 rounded-xl bg-slate-50 p-5 dark:bg-neutral-900">
         <p className="text-sm text-slate-600">{method === 'pix' ? 'O QR Code e o código Pix aparecerão na próxima tela e ficarão disponíveis em Meus pedidos.' : 'O boleto ficará disponível na próxima tela e em Meus pedidos. A compra será confirmada após a compensação bancária.'}</p>
         <button type="button" disabled={busy} onClick={() => void submit({ payment_method_id: method }).catch(() => undefined)} className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-teal-700 px-6 font-semibold text-white transition-colors hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:opacity-50 sm:w-auto">{busy ? <Loader2 size={18} className="animate-spin" aria-hidden="true" /> : null}{busy ? 'Confirmando...' : method === 'pix' ? 'Gerar Pix' : 'Gerar boleto'}{!busy && <ArrowRight size={18} aria-hidden="true" />}</button>

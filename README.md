@@ -152,6 +152,7 @@ Essa checagem lê `.env`, não verifica serviços remotos e rejeita URLs locais 
 
 Documentação complementar:
 
+- [Notificações por e-mail: configuração e estado de validação](docs/email-delivery.md)
 - [Publicação e troca de conta](docs/publicacao-pagamentos-checklist.md)
 - [Histórico de validação de pagamentos](docs/payment-validation-status.md)
 - [Migração Orders: preparação e pendências, ainda não ativa](docs/mercado-pago-orders-migration.md)

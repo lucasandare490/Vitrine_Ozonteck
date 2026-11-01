@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Bell, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { getOrderStatus } from '@/lib/order-status';
 
 type Order = { id: string; status: string; created_at: string };
-const labels: Record<string, string> = { approved: 'Pagamento aprovado', pending: 'Pagamento pendente', in_process: 'Em análise', rejected: 'Pagamento recusado', entregue: 'Entregue', cancelado: 'Cancelado' };
 
 export default function AdminNotifications() {
   const [open, setOpen] = useState(false);
@@ -42,7 +42,7 @@ export default function AdminNotifications() {
     </button>
     {open && <section id="recent-orders" aria-label="Pedidos recentes" className="fixed inset-x-4 top-28 z-50 max-h-[70vh] overflow-y-auto rounded-lg border border-slate-200 bg-white p-4 text-slate-900 shadow-lg dark:bg-neutral-900 dark:text-white sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-80">
       <div className="flex items-center justify-between"><h2 className="font-bold">Pedidos recentes</h2><button type="button" title="Atualizar pedidos" aria-label="Atualizar pedidos" onClick={() => setRefresh(value => value + 1)} className="flex h-10 w-10 items-center justify-center"><RefreshCw size={16} /></button></div>
-      {loading ? <p role="status">Carregando...</p> : error ? <p role="alert" className="text-sm">Não foi possível consultar os pedidos. Verifique sua conexão e autorização.</p> : orders.length ? <ul className="divide-y divide-slate-200">{orders.map(order => <li key={order.id}><Link href={`/admin/pedidos?pedido=${encodeURIComponent(order.id)}`} onClick={() => setOpen(false)} className="block py-3 text-sm"><strong>Pedido #{order.id.slice(0, 8)}</strong><span className="block">{labels[order.status] || order.status}</span><time className="text-xs text-slate-500">{new Date(order.created_at).toLocaleString('pt-BR')}</time></Link></li>)}</ul> : <p className="py-3 text-sm">Nenhum pedido recebido.</p>}
+      {loading ? <p role="status">Carregando...</p> : error ? <p role="alert" className="text-sm">Não foi possível consultar os pedidos. Verifique sua conexão e autorização.</p> : orders.length ? <ul className="divide-y divide-slate-200">{orders.map(order => <li key={order.id}><Link href={`/admin/pedidos?pedido=${encodeURIComponent(order.id)}`} onClick={() => setOpen(false)} className="block py-3 text-sm"><strong>Pedido #{order.id.slice(0, 8)}</strong><span className="block">{getOrderStatus(order.status).label}</span><time className="text-xs text-slate-500">{new Date(order.created_at).toLocaleString('pt-BR')}</time></Link></li>)}</ul> : <p className="py-3 text-sm">Nenhum pedido recebido.</p>}
       <Link href="/admin/pedidos" onClick={() => setOpen(false)} className="mt-3 block font-semibold text-teal-700">Ver todos os pedidos</Link>
     </section>}
   </div>;

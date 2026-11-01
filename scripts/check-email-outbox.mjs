@@ -1,0 +1,33 @@
+import { PGlite } from '@electric-sql/pglite';
+import { readFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const db = new PGlite();
+try {
+  await db.exec(`create role anon; create role authenticated; create role service_role;
+    create schema auth; create table auth.users(id uuid primary key, email_confirmed_at timestamptz);
+    create table public.pedidos(id uuid primary key, user_id uuid, status text,status_pagamento text,id_pagamento_mp text);
+    create table public.pedido_alteracoes(id uuid primary key,user_id uuid,novo_pedido_id uuid);
+  `);
+  await db.exec(await readFile('supabase/migrations/202611010001_customer_email_outbox.sql','utf8'));
+  const user='00000000-0000-0000-0000-000000000001';
+  const order='00000000-0000-0000-0000-000000000002';
+  await db.query('insert into auth.users values ($1,null)',[user]);
+  await db.query('update auth.users set email_confirmed_at=now() where id=$1',[user]);
+  await db.query('update auth.users set email_confirmed_at=now() where id=$1',[user]);
+  await db.query("insert into pedidos values($1,$2,'pending','pending',null)",[order,user]);
+  assert.equal((await db.query('select * from customer_email_outbox')).rows.length,1);
+  await db.query("update pedidos set id_pagamento_mp='ORD123' where id=$1",[order]);
+  await db.exec("begin; update pedidos set status_pagamento='approved'; update pedidos set status='preparando'; commit;");
+  await db.exec("update pedidos set status='preparando';");
+  const rows=(await db.query('select event from customer_email_outbox order by created_at')).rows;
+  assert.deepEqual(rows.map(x=>x.event),['welcome','payment_pending','payment_approved']);
+  const claimed=(await db.query('select * from claim_customer_email()')).rows[0];
+  assert.equal(claimed.attempts,1);
+  assert.equal(claimed.state,'sending');
+  const other=(await db.query('select * from claim_customer_email()')).rows[0];
+  assert.notEqual(other.id,claimed.id);
+  await db.query("update customer_email_outbox set attempts=5,locked_until=now()-interval '1 minute' where id=$1",[claimed.id]);
+  await db.query('select * from claim_customer_email()');
+  assert.equal((await db.query('select state from customer_email_outbox where id=$1',[claimed.id])).rows[0].state,'failed');
+  console.log('Email queue: SQL triggers, final settlement, deduplication, leases and retry exhaustion passed.');
+} finally { await db.close(); }
