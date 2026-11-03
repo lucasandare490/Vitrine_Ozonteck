@@ -1,6 +1,8 @@
+import { isConfirmedSale, needsPaymentReview } from './confirmed-sale.ts';
+
 export type ReportOrder = {
   id: string; user_id: string | null; status: string; valor_total: number;
-  created_at: string;
+  created_at: string; status_pagamento?: string | null;
   endereco_entrega: { nome?: string } | null;
   itens: { code?: string; nome: string; qtd: number; preco_unitario?: number }[] | null;
 };
@@ -12,7 +14,7 @@ export function saleDate(value: string) {
 }
 
 export function buildSalesReport(orders: ReportOrder[], from: string, to: string) {
-  const paid = orders.filter(order => ['preparando', 'enviado', 'entregue'].includes(order.status)
+  const paid = orders.filter(order => isConfirmedSale(order)
     && Number.isFinite(Number(order.valor_total)) && Number(order.valor_total) >= 0
     && saleDate(order.created_at) >= from && saleDate(order.created_at) <= to);
   const totalCents = paid.reduce((sum, order) => sum + Math.round(Number(order.valor_total) * 100), 0);
@@ -34,6 +36,7 @@ export function buildSalesReport(orders: ReportOrder[], from: string, to: string
     customers.set(key, customer);
   }
   return {
+    needsReview: orders.filter(order => needsPaymentReview(order) && saleDate(order.created_at) >= from && saleDate(order.created_at) <= to),
     orders: paid, total: totalCents / 100,
     average: paid.length ? totalCents / paid.length / 100 : 0,
     returning: [...customers.values()].filter(customer => customer.orders > 1).length,

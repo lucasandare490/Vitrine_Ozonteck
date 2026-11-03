@@ -27,6 +27,12 @@ Este registro distingue observação, implementação e publicação. Não é de
 
 Revisão adicional em 03/11: histórico da referência não contém vendas nesta conta, portanto não foi possível comprovar os detalhes de uma venda real sem criar dados. Minha conta exibe dados cadastrais, plano gratuito limitado a 10 clientes e exclusão irreversível. Nenhuma conta ou venda foi excluída. O relatório de clientes da nossa loja agrupa por conta cadastrada, não por nome do destinatário de cada pedido.
 
+### Conciliação financeira em 03/11
+
+A conferência posterior do banco encontrou oito registros `entregue/pending`, um `preparando/approved`, um `pending/pending` e uma reserva expirada. Os totais antigos acima são evidência da versão anterior, não valores financeiros conciliados. Não foi estabelecida a origem dos oito registros legados; nenhum foi apagado ou aprovado manualmente.
+
+Visão geral, relatórios e atividade de clientes passam a usar a mesma regra: pagamento `approved` e pedido em preparação, enviado ou entregue. Divergências continuam na auditoria e ganham aviso e links no relatório, fora do faturamento. Histórico completo deve apresentar uma venda aprovada de R$ 9,99 com os dados observados nesta data. Auditoria e visão geral agora carregam todas as páginas do banco; relatório e carteira de clientes atualizam ao focar a aba e a cada 30 segundos. Testes cobrem entrega sem aprovação, reembolso, paginação acima de mil registros e falha sem exposição de resultado parcial.
+
 ## E-mails
 
 - Na primeira inspeção, o Supabase usava os modelos padrão e não tinha SMTP próprio; essa situação foi corrigida na retomada.

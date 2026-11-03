@@ -11,6 +11,8 @@ import AdminOrderSummary from '@/components/AdminOrderSummary';
 import AdminOrderChanges from '@/components/AdminOrderChanges';
 import { orderAddressText } from '@/lib/order-contact';
 import { isOpenPayment } from '@/lib/order-status';
+import { needsPaymentReview } from '@/lib/confirmed-sale';
+import { loadAllRows } from '@/lib/load-all-rows';
 
 type Review = {
   id: string;
@@ -29,6 +31,7 @@ type AuditDeliveryAddress = {
   estado?: string;
 };
 type AuditOrder = {
+  status_pagamento?: string | null;
   id: string;
   status: string;
   valor_total: number;
@@ -42,22 +45,24 @@ export default function AuditoriaPedidos() {
   const [pedidos, setPedidos] = useState<AuditOrder[]>([]);
   const [avaliacoes, setAvaliacoes] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('Todos');
   const [sortBy, setSortBy] = useState('data_desc');
-  
+
   const [pedidoSelecionado, setPedidoSelecionado] = useState<SelectedAuditOrder | null>(null);
   const selectedReview = pedidoSelecionado?.avaliacao;
 
   const fetchData = async () => {
-    
-    const { data: pedidosData, error: pedidosError } = await supabase
+
+    const { data: pedidosData, error: pedidosError } = await loadAllRows((from, to) => supabase
       .from('pedidos')
-      .select('id, status, valor_total, itens, endereco_entrega, created_at');
-    const { data: avaliacoesData, error: avaliacoesError } = await supabase
+      .select('id, status, status_pagamento, valor_total, itens, endereco_entrega, created_at')
+      .order('created_at', { ascending: false }).order('id').range(from, to));
+    const { data: avaliacoesData, error: avaliacoesError } = await loadAllRows((from, to) => supabase
       .from('avaliacoes')
-      .select('id, pedido_id, nome_cliente, nota, comentario, created_at');
+      .select('id, pedido_id, nome_cliente, nota, comentario, created_at')
+      .order('created_at', { ascending: false }).order('id').range(from, to));
 
     if (pedidosError || avaliacoesError) {
       toast.error(`Erro ao carregar dados.`);
@@ -82,28 +87,28 @@ export default function AuditoriaPedidos() {
     const filtrados = pedidos.filter((pedido) => {
       const nomeCliente = pedido.endereco_entrega?.nome?.toLowerCase() || '';
       const idPedido = pedido.id.toLowerCase();
-      
+
       const matchBusca = nomeCliente.includes(searchTerm.toLowerCase()) || idPedido.includes(searchTerm.toLowerCase());
       const matchStatus = statusFilter === 'Todos' ? !isOpenPayment(pedido.status) : statusFilter === 'abertos' ? isOpenPayment(pedido.status) : pedido.status === statusFilter.toLowerCase();
-      
+
       return matchBusca && (matchStatus || searchTerm === pedido.id);
     });
 
     return filtrados.sort((a, b) => {
       switch (sortBy) {
-        case 'data_asc': 
+        case 'data_asc':
           return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-        case 'data_desc': 
+        case 'data_desc':
           return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        case 'valor_desc': 
+        case 'valor_desc':
           return b.valor_total - a.valor_total;
-        case 'valor_asc': 
+        case 'valor_asc':
           return a.valor_total - b.valor_total;
-        case 'nome_asc': 
+        case 'nome_asc':
           const nomeA = a.endereco_entrega?.nome || '';
           const nomeB = b.endereco_entrega?.nome || '';
           return nomeA.localeCompare(nomeB);
-        case 'nome_desc': 
+        case 'nome_desc':
           const nomeC = a.endereco_entrega?.nome || '';
           const nomeD = b.endereco_entrega?.nome || '';
           return nomeD.localeCompare(nomeC);
@@ -149,7 +154,7 @@ export default function AuditoriaPedidos() {
     <div className="space-y-6 animate-in fade-in duration-500">
       <AdminOrderSummary orders={pedidos} ready={!loading} />
       <AdminOrderChanges />
-      
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>
           <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-[#F0F0F0] flex items-center gap-2">
@@ -163,24 +168,24 @@ export default function AuditoriaPedidos() {
       <StoreReviewModeration />
 
       <div className="bg-white dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden transition-colors">
-        
+
         <div className="p-4 border-b border-slate-200 dark:border-[#2D2D2D] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-[#171717]">
           <div className="relative w-full md:w-96">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA]" />
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Pesquisar por nome do cliente ou ID..." 
-              className="pl-10 pr-4 py-2 text-sm font-medium border border-slate-200 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#202020] text-slate-900 dark:text-[#F0F0F0] w-full transition-all placeholder:text-slate-400 dark:placeholder:text-[#A1A1AA]" 
+              placeholder="Pesquisar por nome do cliente ou ID..."
+              className="pl-10 pr-4 py-2 text-sm font-medium border border-slate-200 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#202020] text-slate-900 dark:text-[#F0F0F0] w-full transition-all placeholder:text-slate-400 dark:placeholder:text-[#A1A1AA]"
             />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <ArrowUpDown size={16} className="text-slate-400 dark:text-[#A1A1AA] hidden sm:block" />
-              <select 
-                value={sortBy} 
+              <select
+                value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="w-full sm:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer transition-colors"
               >
@@ -195,8 +200,8 @@ export default function AuditoriaPedidos() {
 
             <div className="flex items-center gap-2 w-full sm:w-auto">
               <Filter size={16} className="text-slate-400 dark:text-[#A1A1AA] hidden sm:block" />
-              <select 
-                value={statusFilter} 
+              <select
+                value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="w-full sm:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer transition-colors"
               >
@@ -237,7 +242,7 @@ export default function AuditoriaPedidos() {
                   const nomeCliente = pedido.endereco_entrega?.nome || 'Cliente não identificado';
                   const telefoneCliente = pedido.endereco_entrega?.telefone || 'Sem contacto';
                   const avaliacaoDoPedido = avaliacoes.find((avaliacao) => avaliacao.pedido_id === pedido.id);
-                  
+
                   return (
                     <tr key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group">
                       <td className="px-6 py-4">
@@ -257,14 +262,15 @@ export default function AuditoriaPedidos() {
                       </td>
                       <td className="px-6 py-4">
                         {getStatusBadge(pedido.status)}
+                        {needsPaymentReview(pedido) && <p className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400">Conferir pagamento · fora do total vendido</p>}
                       </td>
                       <td className="px-6 py-4">
                         {avaliacaoDoPedido ? (
                           <div className="flex items-center gap-0.5">
                             {[...Array(5)].map((_, i) => (
-                              <Star 
-                                key={i} size={12} 
-                                fill={i < avaliacaoDoPedido.nota ? (avaliacaoDoPedido.nota <= 3 ? "#EF4444" : "#F59E0B") : "transparent"} 
+                              <Star
+                                key={i} size={12}
+                                fill={i < avaliacaoDoPedido.nota ? (avaliacaoDoPedido.nota <= 3 ? "#EF4444" : "#F59E0B") : "transparent"}
                                 strokeWidth={i < avaliacaoDoPedido.nota ? 0 : 2}
                                 className={i < avaliacaoDoPedido.nota ? (avaliacaoDoPedido.nota <= 3 ? "text-red-500" : "text-[#F59E0B]") : "text-slate-300 dark:text-[#A1A1AA]"}
                               />

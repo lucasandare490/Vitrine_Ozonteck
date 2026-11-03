@@ -17,8 +17,12 @@ export default function SalesReports() {
   const [reload, setReload] = useState(0);
   useEffect(() => {
     let active = true;
-    async function load() {
-      setLoading(true); setError('');
+    let running = false;
+    async function load(background = false) {
+      if (running) return;
+      running = true;
+      if (!background) setLoading(true);
+      setError('');
       try {
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) throw new Error('Entre novamente para acessar os relatórios.');
@@ -31,7 +35,7 @@ export default function SalesReports() {
         const rows: ReportOrder[] = [];
         for (let offset = 0; ; offset += 500) {
           const { data, error: queryError } = await supabase.from('pedidos')
-            .select('id,user_id,status,valor_total,created_at,endereco_entrega,itens')
+            .select('id,user_id,status,status_pagamento,valor_total,created_at,endereco_entrega,itens')
             .in('status', ['preparando', 'enviado', 'entregue'])
             .order('created_at', { ascending: false }).order('id').range(offset, offset + 499);
           if (queryError) throw new Error('Não foi possível carregar as vendas. Tente novamente.');
@@ -41,10 +45,13 @@ export default function SalesReports() {
         }
         if (active) setOrders(rows);
       } catch (cause) { if (active) setError(cause instanceof Error ? cause.message : 'Falha ao carregar vendas.'); }
-      finally { if (active) setLoading(false); }
+      finally { running = false; if (active) setLoading(false); }
     }
     void load();
-    return () => { active = false; };
+    const refresh = () => { if (document.visibilityState === 'visible') void load(true); };
+    const interval = window.setInterval(refresh, 30000);
+    window.addEventListener('focus', refresh);
+    return () => { active = false; window.clearInterval(interval); window.removeEventListener('focus', refresh); };
   }, [reload]);
   const invalidRange = !from || !to || from > to;
   const report = useMemo(() => buildSalesReport(orders, from, to), [orders, from, to]);
@@ -55,7 +62,7 @@ export default function SalesReports() {
   }
   return <div className="space-y-6">
     <header className={panel}><h1 className="text-2xl font-bold">Relatórios de vendas</h1>
-      <p className="mt-2 text-sm text-slate-500">Pedidos confirmados, por data de criação da compra no horário de Recife. Pagamentos pendentes e pedidos cancelados não entram nos totais.</p>
+      <p className="mt-2 text-sm text-slate-500">Vendas com pagamento aprovado, por data de criação da compra no horário de Recife. Pendências, cancelamentos e reembolsos não entram nos totais.</p>
     </header>
     <section className={`${panel} flex flex-wrap items-end gap-4`} aria-label="Período do relatório">
       <label className="text-sm">De<input className="mt-1 block min-h-11 rounded border p-2 dark:bg-neutral-800" type="date" value={from} onChange={event => setFrom(event.target.value)} /></label>
@@ -70,6 +77,11 @@ export default function SalesReports() {
         ['Ticket médio', money(report.average)], ['Clientes com mais de uma compra no período', report.returning],
       ].map(([label, value]) => <section className={panel} key={label}><h2 className="text-sm text-slate-500">{label}</h2><p className="mt-2 text-2xl font-bold">{value}</p></section>)}</div>
       {!report.orders.length && <p className={panel}>Nenhuma venda confirmada neste período.</p>}
+      {report.needsReview.length > 0 && <section className="rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-950 dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100" aria-label="Pedidos com divergência de pagamento">
+        <h2 className="font-bold">{report.needsReview.length} pedido(s) precisam de conferência financeira</h2>
+        <p className="mt-2 text-sm">Constam como preparação, envio ou entrega, mas o banco não registra pagamento aprovado. Permanecem na auditoria e estão fora do total vendido.</p>
+        <div className="mt-3 flex flex-wrap gap-3">{report.needsReview.map(order => <Link className="rounded-lg border border-amber-400 px-3 py-2 text-sm underline" key={order.id} href={`/admin/pedidos?pedido=${encodeURIComponent(order.id)}`}>Conferir #{order.id.slice(0, 8)}</Link>)}</div>
+      </section>}
       <div className="grid gap-6 xl:grid-cols-2">
         <section className={panel}><h2 className="mb-4 text-lg font-bold">Produtos mais vendidos</h2><ol className="divide-y">{report.products.slice(0, 20).map(product => <li className="flex justify-between gap-4 py-3 text-sm" key={product.id}><span>{product.name}</span><strong className="shrink-0">{product.quantity} un.</strong></li>)}</ol></section>
         <section className={panel}><h2 className="mb-4 text-lg font-bold">Clientes por valor comprado</h2><ol className="divide-y">{report.customers.slice(0, 20).map(customer => <li className="flex justify-between gap-4 py-3 text-sm" key={customer.id}><span>{customer.name}<small className="block text-slate-500">{customer.orders} pedido(s)</small></span><strong className="shrink-0">{money(customer.total)}</strong></li>)}</ol></section>

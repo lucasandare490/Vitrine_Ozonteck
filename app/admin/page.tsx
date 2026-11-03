@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 import AdminOrderContact from '@/components/AdminOrderContact';
 import AdminOrderSummary from '@/components/AdminOrderSummary';
 import { orderAddressText } from '@/lib/order-contact';
+import { isConfirmedSale } from '@/lib/confirmed-sale';
+import { loadAllRows } from '@/lib/load-all-rows';
 
 type AdminOrderItem = { nome: string; qtd: number };
 type AdminDeliveryAddress = {
@@ -17,6 +19,7 @@ type AdminDeliveryAddress = {
   estado?: string;
 };
 type AdminOrder = {
+  status_pagamento?: string | null;
   id: string;
   status: string;
   valor_total: number;
@@ -28,16 +31,17 @@ type AdminOrder = {
 export default function VisaoGeralAdmin() {
   const [pedidos, setPedidos] = useState<AdminOrder[]>([]);
   const [loading, setLoading] = useState(true);
-  
+
   const [pedidoSelecionado, setPedidoSelecionado] = useState<AdminOrder | null>(null);
   const [isAtualizando, setIsAtualizando] = useState(false);
-  
+
   const [ordemFila, setOrdemFila] = useState<'antigos' | 'recentes'>('antigos');
 
   async function fetchDashboardData() {
-    const { data, error } = await supabase
+    const { data, error } = await loadAllRows((from, to) => supabase
       .from('pedidos')
-      .select('id, status, valor_total, itens, endereco_entrega, created_at');
+      .select('id, status, status_pagamento, valor_total, itens, endereco_entrega, created_at')
+      .order('created_at', { ascending: false }).order('id').range(from, to));
 
     if (error) {
       toast.error(`Erro ao carregar pedidos: ${error.message}`);
@@ -60,10 +64,10 @@ export default function VisaoGeralAdmin() {
     try {
       const { error } = await supabase.from('pedidos').update({ status: novoStatus }).eq('id', id);
       if (error) throw error;
-      
+
       toast.success(`Status alterado para: ${novoStatus.toUpperCase()}!`);
       setPedidoSelecionado((current) => current ? { ...current, status: novoStatus } : current);
-      fetchDashboardData(); 
+      fetchDashboardData();
     } catch (error: unknown) {
       toast.error(`Erro ao atualizar: ${error instanceof Error ? error.message : 'erro desconhecido'}`);
     } finally {
@@ -72,7 +76,7 @@ export default function VisaoGeralAdmin() {
   };
 
   // OTIMIZAÇÃO: Cálculos pesados memorizados para evitar re-renderizações desnecessárias
-  const faturamentoTotal = useMemo(() => pedidos.filter(p => ['preparando', 'enviado', 'entregue'].includes(p.status)).reduce((acc, curr) => acc + Number(curr.valor_total), 0), [pedidos]);
+  const faturamentoTotal = useMemo(() => pedidos.filter(isConfirmedSale).reduce((acc, curr) => acc + Number(curr.valor_total), 0), [pedidos]);
   const pedidosPendentes = useMemo(() => pedidos.filter(p => p.status === 'preparando').length, [pedidos]);
   const pedidosEnviados = useMemo(() => pedidos.filter(p => p.status === 'enviado').length, [pedidos]);
 
@@ -119,7 +123,7 @@ export default function VisaoGeralAdmin() {
   return (
     <div className="space-y-6 animate-in fade-in duration-500 relative">
       <AdminOrderSummary orders={pedidos} ready={!loading} />
-      
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>
           <h1 className="text-2xl font-bold tracking-tighter text-slate-900 dark:text-[#F0F0F0] flex items-center gap-2">
@@ -170,16 +174,16 @@ export default function VisaoGeralAdmin() {
       </div>
 
       <div className="bg-white dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] rounded-2xl flex flex-col shadow-sm dark:shadow-none overflow-hidden transition-colors">
-        
+
         <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#171717]">
           <h2 className="text-sm font-bold uppercase tracking-widest text-slate-800 dark:text-[#F0F0F0] flex items-center gap-2 mb-4 sm:mb-0">
             <Clock size={16} className="text-amber-500" /> Fila de Despacho Ativa
           </h2>
-          
+
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <ArrowUpDown size={14} className="text-slate-400 dark:text-[#A1A1AA]" />
-            <select 
-              value={ordemFila} 
+            <select
+              value={ordemFila}
               onChange={(e) => setOrdemFila(e.target.value as 'antigos' | 'recentes')}
               className="w-full sm:w-auto px-3 py-1.5 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-lg text-xs font-bold text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer"
             >
@@ -220,7 +224,7 @@ export default function VisaoGeralAdmin() {
                 {filaDespacho.map((pedido) => {
                   const nomeCliente = pedido.endereco_entrega?.nome || 'Cliente não identificado';
                   const telefoneCliente = pedido.endereco_entrega?.telefone || 'Sem telefone';
-                  
+
                   return (
                     <tr key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group">
                       <td className="px-6 py-4">
@@ -242,7 +246,7 @@ export default function VisaoGeralAdmin() {
                         {getStatusBadge(pedido.status)}
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <button 
+                        <button
                           onClick={() => setPedidoSelecionado(pedido)}
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#333333] hover:bg-teal-600 dark:hover:bg-teal-500 hover:text-white dark:hover:text-white text-slate-700 dark:text-[#F0F0F0] transition-colors text-[10px] font-bold uppercase tracking-widest cursor-pointer"
                         >
@@ -262,7 +266,7 @@ export default function VisaoGeralAdmin() {
       {pedidoSelecionado && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="bg-white dark:bg-[#171717] w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-[#2D2D2D] overflow-hidden flex flex-col max-h-[90vh]">
-            
+
             <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex justify-between items-center shrink-0">
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-[#F0F0F0] uppercase tracking-tighter flex items-center gap-2">
@@ -275,7 +279,7 @@ export default function VisaoGeralAdmin() {
             </div>
 
             <div className="p-6 overflow-y-auto scrollbar-thin space-y-6">
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2D2D2D] bg-slate-50/50 dark:bg-[#202020] space-y-3">
                   <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] flex items-center gap-2"><User size={14}/> Cliente</h4>
@@ -319,8 +323,8 @@ export default function VisaoGeralAdmin() {
             <div className="px-6 py-4 border-t border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <span className="text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest hidden sm:block">Alterar Status:</span>
-                <select 
-                  value={pedidoSelecionado.status} 
+                <select
+                  value={pedidoSelecionado.status}
                   onChange={(e) => handleAtualizarStatus(pedidoSelecionado.id, e.target.value)}
                   disabled={isAtualizando}
                   className="px-3 py-2 bg-white dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] rounded-lg text-xs font-bold text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer disabled:opacity-50"

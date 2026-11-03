@@ -1,4 +1,5 @@
-export type CustomerPurchase = { user_id: string | null; created_at: string; status: string; valor_total: number | string };
+import { isConfirmedSale } from './confirmed-sale.ts';
+export type CustomerPurchase = { user_id: string | null; created_at: string; status: string; status_pagamento?: string | null; valor_total: number | string };
 export type CustomerActivity = { orders: number; total: number; lastPurchase: string; daysSincePurchase: number };
 
 export function customerActivity(purchases: CustomerPurchase[], now = new Date()) {
@@ -6,7 +7,7 @@ export function customerActivity(purchases: CustomerPurchase[], now = new Date()
   for (const purchase of purchases) {
     const time = Date.parse(purchase.created_at);
     const amount = Number(purchase.valor_total);
-    if (!purchase.user_id || !['preparando', 'enviado', 'entregue'].includes(purchase.status)
+    if (!purchase.user_id || !isConfirmedSale(purchase)
       || !Number.isFinite(time) || !Number.isFinite(amount) || amount < 0 || time > now.getTime()) continue;
     const current = result.get(purchase.user_id) || { orders: 0, total: 0, lastPurchase: purchase.created_at, daysSincePurchase: 0 };
     current.orders++;

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildSalesReport, reportCsv, saleDate, type ReportOrder } from '../lib/sales-report.ts';
 
-const order = (changes: Partial<ReportOrder> = {}): ReportOrder => ({ id: '1', user_id: 'a', status: 'preparando', valor_total: 9.99, created_at: '2026-10-30T02:00:00Z', endereco_entrega: { nome: 'Cliente' }, itens: [{ code: 'A', nome: 'Produto', qtd: 2 }], ...changes });
+const order = (changes: Partial<ReportOrder> = {}): ReportOrder => ({ id: '1', user_id: 'a', status: 'preparando', status_pagamento: 'approved', valor_total: 9.99, created_at: '2026-10-30T02:00:00Z', endereco_entrega: { nome: 'Cliente' }, itens: [{ code: 'A', nome: 'Produto', qtd: 2 }], ...changes });
 test('reports only confirmed sales within Recife calendar dates', () => {
   const report = buildSalesReport([order(), order({ id: '2', status: 'aguardando_pagamento' }), order({ id: '3', status: 'cancelado' }), order({ id: '4', created_at: '2026-10-30T04:00:00Z' })], '2026-10-29', '2026-10-29');
   assert.equal(report.total, 9.99);
@@ -19,4 +19,12 @@ test('aggregates cents and quantities and keeps same-name customers separate', (
 test('empty reports do not create invalid averages and CSV neutralizes spreadsheet formulas', () => {
   assert.equal(buildSalesReport([], '', '9999').average, 0);
   assert.match(reportCsv([order({ endereco_entrega: { nome: '=HYPERLINK("evil")' } })]), /'\=HYPERLINK/);
+});
+
+test('delivered records without financial approval remain visible for review, outside revenue', () => {
+  const report = buildSalesReport([order(), order({ id: 'legacy', status: 'entregue', status_pagamento: 'pending', valor_total: 199.9 }), order({ id: 'refund', status: 'entregue', status_pagamento: 'refunded' })], '2026-10-01', '2026-10-31');
+  assert.equal(report.total, 9.99);
+  assert.equal(report.orders.length, 1);
+  assert.equal(report.needsReview.length, 2);
+  assert.doesNotMatch(reportCsv(report.orders), /legacy|refund/);
 });

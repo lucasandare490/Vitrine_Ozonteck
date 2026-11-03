@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Users, Search, Loader2, AlertCircle, Mail, Phone, MapPin, Calendar } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -25,9 +25,12 @@ export default function CarteiraClientes() {
   const [activityFilter, setActivityFilter] = useState('all');
   const [loadError, setLoadError] = useState('');
   const activity = useMemo(() => customerActivity(purchases), [purchases]);
+  const fetching = useRef(false);
 
-  const fetchClientes = async () => {
-    setLoading(true);
+  const fetchClientes = async (background = false) => {
+    if (fetching.current) return;
+    fetching.current = true;
+    if (!background) setLoading(true);
     setLoadError('');
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -45,7 +48,7 @@ export default function CarteiraClientes() {
         if (!data || data.length < 500) break;
       }
       for (let offset = 0; ; offset += 500) {
-        const { data, error } = await supabase.from('pedidos').select('user_id,created_at,status,valor_total')
+        const { data, error } = await supabase.from('pedidos').select('user_id,created_at,status,status_pagamento,valor_total')
           .in('status', ['preparando', 'enviado', 'entregue'])
           .order('created_at', { ascending: false }).order('id').range(offset, offset + 499);
         if (error) throw new Error('Não foi possível carregar o histórico de compras.');
@@ -57,13 +60,17 @@ export default function CarteiraClientes() {
     } catch (cause) {
       setLoadError(cause instanceof Error ? cause.message : 'Não foi possível carregar os clientes.');
     } finally {
+      fetching.current = false;
       setLoading(false);
     }
   };
 
   useEffect(() => {
     const timer = window.setTimeout(() => void fetchClientes(), 0);
-    return () => window.clearTimeout(timer);
+    const refresh = () => { if (document.visibilityState === 'visible') void fetchClientes(true); };
+    const interval = window.setInterval(refresh, 30000);
+    window.addEventListener('focus', refresh);
+    return () => { window.clearTimeout(timer); window.clearInterval(interval); window.removeEventListener('focus', refresh); };
   }, []);
 
   // OTIMIZAÇÃO: Memoriza a lista de clientes para evitar lags no input
