@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   ArrowUp,
@@ -39,32 +40,18 @@ const SOCIAL_LINKS = [
 ] as const;
 
 function PaymentMethods() {
-  return (
-    <div className="flex flex-wrap gap-2" aria-label="Formas de pagamento aceitas">
-      <span className="flex h-9 items-center justify-center rounded-md border border-slate-200 bg-white px-3 shadow-sm" title="Pix">
-        <svg viewBox="0 0 512 512" width="14" height="14" aria-hidden="true">
-          <path fill="#32BCAD" d="M123.4 207.2l87.5-87.5c24.9-24.9 65.3-24.9 90.2 0l87.5 87.5c24.9 24.9 24.9 65.3 0 90.2l-87.5 87.5c-24.9 24.9-65.3 24.9-90.2 0l-87.5-87.5c-24.8-24.9-24.8-65.4 0-90.2zm131.6-45.2L168.3 248.8c-3.9 3.9-3.9 10.3 0 14.2l86.7 86.7c3.9 3.9 10.3 3.9 14.2 0l86.7-86.7c3.9-3.9 3.9-10.3 0-14.2l-86.7-86.7c-3.9-4-10.3-4-14.2 0z" />
-        </svg>
-        <span className="ml-1.5 text-xs font-black text-slate-700">PIX</span>
-      </span>
-
-      <span className="flex h-9 w-16 items-center justify-center rounded-md border border-slate-200 bg-white px-3 shadow-sm" title="Visa">
-        <span className="text-base font-black italic text-[#1434CB]">VISA</span>
-      </span>
-
-      <span className="flex h-9 w-16 items-center justify-center rounded-md border border-slate-200 bg-white px-3 shadow-sm" title="Mastercard">
-        <svg viewBox="0 0 36 22" width="30" height="18" aria-hidden="true">
-          <circle cx="11" cy="11" r="11" fill="#EB001B" />
-          <circle cx="25" cy="11" r="11" fill="#F79E1B" />
-        </svg>
-      </span>
-
-      <span className="flex h-9 items-center justify-center rounded-md border border-slate-200 bg-white px-3 shadow-sm" title="Mercado Pago">
-        <Handshake size={16} className="text-[#009EE3]" aria-hidden="true" />
-        <span className="ml-1.5 text-[11px] font-bold text-[#007EB5]">Mercado Pago</span>
-      </span>
+  return <div>
+    <div className="grid max-w-64 grid-cols-3 gap-2" aria-label="Formas de pagamento">
+      {[
+        ['visa.png', 'Visa'], ['master.png', 'Mastercard'], ['elo.png', 'Elo'],
+        ['amex.svg', 'American Express'], ['boleto.gif', 'Boleto'], ['pix.gif', 'Pix'],
+      ].map(([file, name]) => <span key={name} title={name} className="flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-white p-2 shadow-sm">
+        <Image src={'/payments/' + file} alt={name} width={60} height={30} unoptimized className="h-7 w-14 object-contain" />
+      </span>)}
     </div>
-  );
+    <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-slate-600"><Handshake size={16} className="text-sky-600" aria-hidden="true" />Processado pelo Mercado Pago</p>
+    <p className="mt-2 text-xs leading-relaxed text-slate-500">Parcelas e disponibilidade do cartão são informadas no pagamento.</p>
+  </div>;
 }
 
 function SocialLinks() {
@@ -126,7 +113,7 @@ function FullFooter() {
             </div>
             <div>
               <h2 className="mb-1.5 text-base font-bold text-slate-900">Escolha como pagar</h2>
-              <p className="text-sm leading-relaxed text-slate-500">Pix, cartões de crédito em até 12x e saldo Mercado Pago.</p>
+              <p className="text-sm leading-relaxed text-slate-500">Pix, boleto e cartões. Confira as opções de parcelamento ao pagar.</p>
             </div>
           </div>
           <div className="flex items-start gap-4 md:px-8">
