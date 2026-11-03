@@ -4,6 +4,8 @@
 
 SMTP de autenticação foi configurado no painel Supabase; confirmação de cadastro e recuperação de senha receberam identidade visual em português. Isso é independente da função de envio de pedidos abaixo. Entrega real ainda precisa ser conferida.
 
+Em 03/11/2026, os sete avisos de segurança foram conferidos após recarregar o painel: senha, e-mail, telefone, vínculo e remoção de método de acesso, inclusão e remoção de MFA estão habilitados. Os modelos de convite, link de acesso, troca de e-mail e reautenticação também receberam identidade em português, preservando os campos gerados pelo Supabase. Essa conferência comprova configuração salva, não recebimento na caixa de entrada.
+
 A fila e a função SQL de reserva foram instaladas no banco em 01/11/2026. As credenciais SMTP foram salvas como configurações da Netlify, com a senha disponível somente no contexto de produção. A função `customer-emails` foi publicada no deploy `6ae7941778aa9cff94a79d63` (commit `a1da1a2`), com agendamento a cada cinco minutos e `CUSTOMER_EMAIL_ENABLED=true`. A execução manual da fila vazia terminou sem erro e a autenticação SMTP foi aceita pelo Gmail. A entrega de uma mensagem na caixa de entrada ainda não foi conferida.
 
 ## Ativação

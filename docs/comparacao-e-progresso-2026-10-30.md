@@ -7,6 +7,7 @@ Este registro distingue observação, implementação e publicação. Não é de
 - Propriedade com prefixo `https://ozonteck-recife.netlify.app/` verificada no Search Console.
 - Arquivo de verificação publicado no commit aa97e6e.
 - Sitemap observado como processado, com 113 páginas. Isso não garante indexação nem posição nos resultados.
+- Em 03/11/2026: robots.txt, sitemap.xml e arquivo de verificação responderam HTTP 200; sitemap com 113 URLs. Search Console mostrou última leitura em 01/11, status Processado. Relatório de indexação ainda informa dados em processamento.
 
 ## Referências e decisões
 
@@ -14,7 +15,8 @@ Este registro distingue observação, implementação e publicação. Não é de
 | --- | --- |
 | Catálogo, categorias, preços e estoque | Já existem; preservar fonte de dados e administração atuais. |
 | Cadastro, pedidos e acompanhamento | Já existem; não substituir o fluxo de confirmação após pagamento. |
-| Relatórios por período, produtos e clientes | Publicado em `/admin/relatorios`, com exportação CSV. Navegação autenticada confirmou carregamento e filtros: outubro mostra 1 pedido/R$ 9,99; todo o histórico mostra 9 pedidos/R$ 1.449,39. Exportação e revisão visual completa ainda pendentes. |
+| Relatórios por período, produtos e clientes | Publicado em `/admin/relatorios`, com exportação CSV. Navegação autenticada confirmou carregamento e filtros: outubro mostra 1 pedido/R$ 9,99; todo o histórico mostra 9 pedidos/R$ 1.449,39. Em 03/11 o CSV foi baixado pelo botão e conferido: nove registros, cabeçalho, valores e datas coerentes com o relatório. |
+| Clientes sem compra recente | Acrescentados filtros de 30/60 dias sem compra, compras recentes e ausência de compra confirmada, última compra, quantidade e total por conta. Carregamento paginado e mensagem de contato copiável, sem envio automático. Validação local concluída; conferir publicação. |
 | Lucro e pontos | Não calcular sem custos, taxas e regras de pontuação confiáveis. Total vendido não é lucro. |
 | Fiado e carnê | Excluídos do escopo por decisão expressa do usuário. |
 | Comprovante do Ozon Vendas | A própria página inspecionada é uma proposta visual com dados de exemplo; diz que envio em texto, imagem e PDF será aplicado após aprovação. Não tratar isso como função real comprovada. |
@@ -22,6 +24,8 @@ Este registro distingue observação, implementação e publicação. Não é de
 | Importação de produtos | Referência aceita lista e sugere preço 2x custo. Não aplicar esse cálculo automaticamente ao catálogo oficial da loja. |
 | Captação de interessados | A loja tem página de oportunidade e links oficiais; referência possui formulário nome/e-mail/WhatsApp. Avaliar fluxo e consentimento antes de adicionar persistência. |
 | PWA / aplicativo | Explicitamente reservado para etapa futura. |
+
+Revisão adicional em 03/11: histórico da referência não contém vendas nesta conta, portanto não foi possível comprovar os detalhes de uma venda real sem criar dados. Minha conta exibe dados cadastrais, plano gratuito limitado a 10 clientes e exclusão irreversível. Nenhuma conta ou venda foi excluída. O relatório de clientes da nossa loja agrupa por conta cadastrada, não por nome do destinatário de cada pedido.
 
 ## E-mails
 
