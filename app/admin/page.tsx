@@ -62,8 +62,9 @@ export default function VisaoGeralAdmin() {
   const handleAtualizarStatus = async (id: string, novoStatus: string) => {
     setIsAtualizando(true);
     try {
-      const { error } = await supabase.from('pedidos').update({ status: novoStatus }).eq('id', id);
+      const { data, error } = await supabase.from('pedidos').update({ status: novoStatus }).eq('id', id).eq('status_pagamento', 'approved').select('id');
       if (error) throw error;
+      if (data?.length !== 1) throw new Error('Pedido não atualizado. Confira a aprovação do pagamento e suas permissões.');
 
       toast.success(`Status alterado para: ${novoStatus.toUpperCase()}!`);
       setPedidoSelecionado((current) => current ? { ...current, status: novoStatus } : current);
@@ -77,11 +78,11 @@ export default function VisaoGeralAdmin() {
 
   // OTIMIZAÇÃO: Cálculos pesados memorizados para evitar re-renderizações desnecessárias
   const faturamentoTotal = useMemo(() => pedidos.filter(isConfirmedSale).reduce((acc, curr) => acc + Number(curr.valor_total), 0), [pedidos]);
-  const pedidosPendentes = useMemo(() => pedidos.filter(p => p.status === 'preparando').length, [pedidos]);
-  const pedidosEnviados = useMemo(() => pedidos.filter(p => p.status === 'enviado').length, [pedidos]);
+  const pedidosPendentes = useMemo(() => pedidos.filter(p => isConfirmedSale(p) && p.status === 'preparando').length, [pedidos]);
+  const pedidosEnviados = useMemo(() => pedidos.filter(p => isConfirmedSale(p) && p.status === 'enviado').length, [pedidos]);
 
   const filaDespacho = useMemo(() => {
-    const fila = pedidos.filter(p => ['preparando', 'enviado'].includes(p.status));
+    const fila = pedidos.filter(p => isConfirmedSale(p) && ['preparando', 'enviado'].includes(p.status));
     return fila.sort((a, b) => {
       if (ordemFila === 'antigos') {
         return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
