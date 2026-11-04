@@ -330,7 +330,7 @@ export default function PedidosPage() {
                                 <div className="w-7 h-7 rounded-full bg-teal-500 text-white flex items-center justify-center shadow-sm border-2 border-white ring-1 ring-teal-100">
                                   <Clock size={12} strokeWidth={3} />
                                 </div>
-                                <span className="text-[9px] font-bold text-slate-600 uppercase tracking-wider hidden sm:block">{getOrderStatus(order.status).paid ? 'Pago' : 'Recebido'}</span>
+                                <span className="text-[9px] font-bold text-slate-600 uppercase tracking-wider hidden sm:block">{getOrderStatus(order.status, order.status_pagamento).paid ? 'Pago' : 'Recebido'}</span>
                               </div>
 
                               <div className="relative z-10 flex flex-col items-center gap-2">

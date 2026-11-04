@@ -3,6 +3,16 @@ import test from 'node:test';
 import { getOrderStatus } from '../lib/order-status.ts';
 import { requiresSecondFactor } from '../lib/mfa-policy.ts';
 
+test('fulfilment does not prove that payment was approved', () => {
+  for (const status of ['preparando', 'enviado', 'entregue']) {
+    assert.equal(getOrderStatus(status, 'pending').paid, false);
+    assert.equal(getOrderStatus(status).paid, false);
+    assert.equal(getOrderStatus(status, 'approved').paid, true);
+    assert.equal(getOrderStatus(status, 'refunded').paid, false);
+  }
+  assert.equal(getOrderStatus('cancelado', 'approved').paid, false);
+});
+
 test('pending, declined and review orders never imply payment or shipment', () => {
   for (const status of ['pending', 'pagamento_recusado', 'revisao_pagamento', 'revisao_estoque', 'cancelado']) {
     assert.equal(getOrderStatus(status).paid, false);

@@ -35,6 +35,14 @@ Visão geral, relatórios e atividade de clientes passam a usar a mesma regra: p
 
 ## E-mails
 
+### Conferência publicada em 04/11/2026
+
+- Netlify mostrou o commit `6693512` publicado; o rodapé da loja exibiu Visa, Mastercard, Elo, American Express, boleto e Pix.
+- Relatório autenticado, opção Todo o histórico: uma venda paga, R$ 9,99, e oito divergências financeiras fora do total. O link de uma divergência abriu o pedido correspondente na auditoria com o aviso de conferência.
+- Captura local: `docs/evidencias/relatorio-conciliado-2026-11-04.png`.
+- Encontrada e corrigida outra inferência antiga: a linha do tempo do cliente chamava entrega/preparação de pagamento aprovado. Agora consulta `status_pagamento` e só exibe Pago quando esse campo confirma aprovação. O estado de entrega continua preservado. Nove testes relacionados, ESLint dos arquivos alterados e compilação de produção passaram.
+- Essa conferência não comprova entrega de e-mails na caixa de entrada, indexação efetiva no Google ou equivalência completa com as referências. Essas pendências continuam abertas.
+
 - Na primeira inspeção, o Supabase usava os modelos padrão e não tinha SMTP próprio; essa situação foi corrigida na retomada.
 - Recuperação de senha usa Supabase Auth. Não foi localizado envio de e-mails de pedidos no código pesquisado.
 - Não confundir comprovantes enviados pelo Mercado Pago com notificações enviadas pela loja.
