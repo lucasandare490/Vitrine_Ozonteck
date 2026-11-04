@@ -19,23 +19,26 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Ozonteck | Loja Virtual Recife",
+    default: "Ozonteck Recife | Produtos e atendimento com Rogério André",
     template: "%s | Ozonteck Recife",
   },
-  description: "A sua loja oficial de produtos ozonizados e nanotecnologia. A mesma experiência da loja física, agora online.",
+  description: "Compre cosméticos, cuidados capilares e produtos ozonizados com Rogério André, distribuidor autorizado Ozonteck em Recife. Entrega ou retirada na Boa Vista.",
+  icons: { icon: [{ url: '/brand-icon.png', type: 'image/png', sizes: '192x192' }], apple: '/brand-icon.png' },
   applicationName: "Ozonteck Recife",
   category: "ecommerce",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: "Ozonteck Recife",
-    title: "Ozonteck | Loja Virtual Recife",
-    description: "Produtos ozonizados e nanotecnologia com atendimento da unidade Ozonteck Recife.",
+    title: "Ozonteck Recife | Rogério André",
+    description: "Cosméticos, cuidados capilares e produtos ozonizados com atendimento de Rogério André. Entrega ou retirada na Boa Vista, Recife.",
+    images: [{ url: '/brand-share.png', width: 1200, height: 630, alt: 'Ozonteck Recife — distribuidor autorizado Rogério André' }],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Ozonteck | Loja Virtual Recife",
     description: "Produtos ozonizados e nanotecnologia com atendimento da unidade Ozonteck Recife.",
+    images: ['/brand-share.png'],
   },
   robots: {
     index: true,
@@ -51,6 +54,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={inter.className} suppressHydrationWarning>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org', '@type': 'WebSite',
+          name: 'Ozonteck Recife', alternateName: 'Ozonteck Recife — Rogério André',
+          url: getSiteUrl().toString(), inLanguage: 'pt-BR',
+        }).replace(/</g, '\\u003c') }} />
         <SecondFactorGate>
         <StorePricing>
         <CartSync />
@@ -60,25 +68,25 @@ export default function RootLayout({
             Ambiente de teste. Sem compra ou entrega real. Use apenas cartão e dados fictícios de teste. Somente o produto TESTE-001 pode ser pago.
           </div>
         )}
-        
+
         {children}
 
         <Footer />
-        
+
         <FloatingCart />
-        
+
         {/* ========================================= */}
         {/* WIDGETS GLOBAIS DE TELA                   */}
         {/* ========================================= */}
-        
+
         {/* 1. Novo Painel de Acessibilidade (Fixo à esquerda) */}
         <AccessibilityWidget />
 
         {/* 2. Plugin VLibras Governamental */}
         <VLibrasWidget />
-        
+
         {/* 3. WhatsApp Oficial Ozonteck */}
-        <a 
+        <a
           href="https://wa.me/5581981472684"
           target="_blank"
           rel="noopener noreferrer"
@@ -94,13 +102,13 @@ export default function RootLayout({
 
         </StorePricing>
         </SecondFactorGate>
-        <Toaster 
-          position="top-center" 
+        <Toaster
+          position="top-center"
           toastOptions={{
             style: { background: '#334155', color: '#fff', fontWeight: 'bold', fontSize: '14px', borderRadius: '100px' },
             success: { style: { background: '#0D9488' } },
             error: { style: { background: '#E11D48' } },
-          }} 
+          }}
         />
       </body>
     </html>
