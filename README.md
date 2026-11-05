@@ -195,3 +195,5 @@ No plano atual, o painel Netlify exige upgrade pago para ocultar o selo; ele per
 ### Indicador informativo no cadastro — 05/11/2026
 
 As duas entradas de cadastro mostram força estimada enquanto a pessoa digita, sem exigir classificação mínima ou novas regras de composição. A avaliação é local; o mínimo de oito caracteres já existente permanece. Suporte recebido e respondido/resolvido foi comprovado em produção até o Gmail do titular autorizado; o primeiro aviso foi inicialmente para spam e a resposta chegou à entrada após marcar o primeiro como legítimo. Detalhes e limites estão em `docs/email-delivery.md` e na revisão final.
+
+Indicador publicado no commit `d7fd28b`, deploy `6aecad29bc0dcbbea8d5b199`, com conferência pública das duas entradas em 05/11/2026. Suíte: 145 aprovados/zero falhas/um HTTP condicional ignorado; componentes 24/24; compilação aprovada.

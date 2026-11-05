@@ -9,8 +9,10 @@ Plano:
 - [x] Função pura em `lib/password-strength.ts`; componente `components/PasswordStrength.tsx` sem estado ou efeito externo.
 - [x] Integrar somente no cadastro, com `aria-describedby`, nomes acessíveis dos campos e sem alterar handlers de submissão.
 - [x] Testar localmente, compilar e conferir no Chrome com exemplos fictícios, sem criar conta nem alterar credencial.
-- [ ] Publicar e conferir versão pública; registrar junto da retomada de suporte/fila/caixa.
+- [x] Publicar e conferir versão pública; registrar junto da retomada de suporte/fila/caixa.
 
 Continuidade paralela: protocolo técnico na própria conta autorizada de Lucas; destinatário confirmado vem do Auth, sem criar cobrança ou enviar a cliente comercial. Acompanhar o worker agendado, comprovar mensagem na caixa e concluir protocolo. Acesso e dados específicos foram autorizados em 05/11 nesta mensagem do titular.
 
 Revisão: detectada repetição de blocos maiores que quatro caracteres; teste novo falhou antes e passou após ampliar a detecção. Suíte 145 aprovados/zero falhas/um HTTP condicional ignorado; componentes 24/24, build passou. Prévia real do cadastro completo em desktop/celular e modal do carrinho confirmada sem submeter cadastro; dados fictícios e carrinho local foram limpos.
+
+Publicado `d7fd28b`, Netlify `6aecad29bc0dcbbea8d5b199`; comparação pública `/login` e `/lista` confirmou chunks idênticos ao deploy e componente presente. Não foram criadas contas ou credenciais.
