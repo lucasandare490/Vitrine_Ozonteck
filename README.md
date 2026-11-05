@@ -118,6 +118,7 @@ O túnel depende do computador e dos processos ativos. Ao desligá-los, o acesso
 ```bash
 npm run lint
 npm test
+npm run test:components
 npx tsc --noEmit
 npm run build
 ```
@@ -158,7 +159,9 @@ Documentação complementar:
 - [Notificações por e-mail: configuração e estado de validação](docs/email-delivery.md)
 - [Publicação e troca de conta](docs/publicacao-pagamentos-checklist.md)
 - [Histórico de validação de pagamentos](docs/payment-validation-status.md)
-- [Migração Orders: preparação e pendências, ainda não ativa](docs/mercado-pago-orders-migration.md)
+- [Integração Orders: histórico da migração e limites de validação](docs/mercado-pago-orders-migration.md)
+- [Revisão de continuidade e evidências datadas](docs/revisao-final-2026-11-04.md)
+- [Revisão individual dos meios de pagamento e campos seguros](docs/payment-review-2026-11-04.md)
 - [Preços de afiliados](docs/affiliate-pricing.md)
 
 Os registros de validação são datados, não uma verificação contínua do ambiente.

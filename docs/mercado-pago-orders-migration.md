@@ -31,7 +31,7 @@ no Mercado Pago e confere identidade, referência e valor antes da conciliação
 ## Comportamento
 
 Pix e boleto permanecem disponíveis na compra e em Meus pedidos.
-Cartões usam o Card Payment Brick; dados de cartão são tokenizados pelo Mercado Pago.
+Cartões usam campos protegidos individuais do SDK oficial, com dados tokenizados pelo Mercado Pago. A mudança de 05/11 permite mostrar a ajuda no foco do CVV; o Brick foi mantido apenas na integração legada.
 A confirmação adicional do banco, quando exigida, aparece na própria página.
 A consulta de pagamentos pendentes atualiza a tela a cada 15 segundos.
 Aprovação exige confirmação do provedor; gerar um código ou boleto não confirma uma venda.

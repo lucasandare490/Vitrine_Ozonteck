@@ -19,10 +19,15 @@ export default function SupportTickets({ admin = false }: { admin?: boolean }) {
   const requestId = useRef<string | null>(null);
   const locked = useRef(false);
   const generation = useRef(0);
+  const currentUser = useRef<string | null | undefined>(undefined);
+  const accountVersion = useRef(0);
+  const mounted = useRef(false);
   const load = useCallback(async () => {
+    if (!mounted.current) return;
     const run = ++generation.current;
     const { data: { user } } = await supabase.auth.getUser();
     if (run !== generation.current) return;
+    currentUser.current = user?.id ?? null;
     setSignedIn(!!user);
     if (!user) { setTickets([]); setLoading(false); return; }
     let query = supabase.from('support_tickets').select('id,subject,message,status,response,created_at').order('created_at', { ascending: false }).range(page * 20, page * 20 + 19);
@@ -34,39 +39,57 @@ export default function SupportTickets({ admin = false }: { admin?: boolean }) {
     setLoading(false);
   }, [admin, page]);
   useEffect(() => {
-    const invalidate = () => { generation.current++; };
+    mounted.current = true;
+    const requestGeneration = generation;
+    let authTimer: number | undefined;
     const initial = window.setTimeout(() => { void load(); }, 0);
     const timer = window.setInterval(() => { if (!document.hidden) void load(); }, 30000);
     const focus = () => { void load(); };
     window.addEventListener('focus', focus);
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(event => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (!['SIGNED_IN', 'SIGNED_OUT', 'USER_UPDATED'].includes(event)) return;
-      generation.current++;
-      window.setTimeout(() => { setTickets([]); setSignedIn(false); setSubject(''); setMessage(''); requestId.current = null; void load(); }, 0);
+      const nextUser = session?.user.id ?? null;
+      if (currentUser.current === nextUser) return;
+      currentUser.current = nextUser;
+      generation.current++; accountVersion.current++;
+      setTickets([]); setSignedIn(false); setSubject(''); setMessage(''); setResponses({});
+      setNotice(''); setError(''); setPage(0); setLoading(true); setBusy(false);
+      requestId.current = null; locked.current = false;
+      window.clearTimeout(authTimer);
+      // Do not await auth/database work inside the Supabase auth callback.
+      authTimer = window.setTimeout(() => { if (mounted.current) void load(); }, 0);
     });
-    return () => { invalidate(); subscription.unsubscribe(); window.clearTimeout(initial); window.clearInterval(timer); window.removeEventListener('focus', focus); };
+    return () => {
+      mounted.current = false; requestGeneration.current++;
+      subscription.unsubscribe(); window.clearTimeout(initial); window.clearTimeout(authTimer);
+      window.clearInterval(timer); window.removeEventListener('focus', focus);
+    };
   }, [load]);
   const submit = async () => {
     if (locked.current) return;
+    const version = accountVersion.current;
     locked.current = true; setBusy(true); setError(''); setNotice('');
     requestId.current ||= crypto.randomUUID();
     try {
       const { data, error: failure } = await supabase.rpc('open_support_ticket', { p_id: requestId.current, p_subject: subject.trim(), p_message: message.trim() });
+      if (!mounted.current || version !== accountVersion.current) return;
       if (failure || !data) { setError(failure?.message.includes('SUPPORT_LIMIT') ? 'Você atingiu o limite de cinco solicitações em 24 horas.' : 'Não foi possível registrar. Confira sua sessão e tente novamente.'); return; }
       setNotice(`Solicitação registrada. Protocolo: ${data}`); setSubject(''); setMessage(''); requestId.current = null;
       await load();
-    } catch { setError('A conexão foi interrompida. Tente novamente para confirmar o registro.'); }
-    finally { locked.current = false; setBusy(false); }
+    } catch { if (mounted.current && version === accountVersion.current) setError('A conexão foi interrompida. Tente novamente para confirmar o registro.'); }
+    finally { if (mounted.current && version === accountVersion.current) { locked.current = false; setBusy(false); } }
   };
   const respond = async (ticket: Ticket, status: string) => {
     if (locked.current) return;
+    const version = accountVersion.current;
     locked.current = true; setBusy(true); setError(''); setNotice('');
     try {
       const { data, error: failure } = await supabase.rpc('respond_support_ticket', { p_id: ticket.id, p_response: responses[ticket.id] ?? ticket.response ?? '', p_status: status });
+      if (!mounted.current || version !== accountVersion.current) return;
       if (failure || !data) { setError('Não foi possível salvar a resposta. Confira o texto e sua autorização.'); return; }
       setNotice('Resposta salva. O aviso ao cliente foi registrado para envio.'); await load();
-    } catch { setError('A conexão foi interrompida. Atualize antes de responder novamente.'); }
-    finally { locked.current = false; setBusy(false); }
+    } catch { if (mounted.current && version === accountVersion.current) setError('A conexão foi interrompida. Atualize antes de responder novamente.'); }
+    finally { if (mounted.current && version === accountVersion.current) { locked.current = false; setBusy(false); } }
   };
   const input = 'w-full rounded-lg border border-slate-300 bg-white p-3 text-sm text-slate-900 dark:bg-neutral-900 dark:text-white';
   const button = 'min-h-11 rounded-lg bg-teal-700 px-4 py-2 text-sm font-bold text-white disabled:opacity-50';

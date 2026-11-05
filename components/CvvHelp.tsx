@@ -1,5 +1,5 @@
-export default function CvvHelp() {
-  return <details className="mx-4 mb-4 rounded-lg border border-slate-200 p-3 text-sm text-slate-700">
+export default function CvvHelp({ expanded = false }: { expanded?: boolean }) {
+  return <details open={expanded || undefined} className="mx-4 mb-4 rounded-lg border border-slate-200 p-3 text-sm text-slate-700">
     <summary className="cursor-pointer font-medium focus-visible:outline-2 focus-visible:outline-teal-600">Onde encontro o código de segurança (CVV)?</summary>
     <div className="mt-3 flex flex-wrap items-center gap-4">
       <div role="img" aria-label="Verso ilustrativo do cartão com o código 123 destacado" className="h-24 w-40 shrink-0 rounded-md border border-slate-400 bg-slate-100 pt-3">

@@ -1,9 +1,9 @@
 'use client';
 
-import { CardPayment } from '@mercadopago/sdk-react';
+import type { CardPayment } from '@mercadopago/sdk-react';
 import { Barcode, CreditCard, Check, ArrowRight, Loader2 } from 'lucide-react';
 import { memo, useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
-import CvvHelp from './CvvHelp';
+import SecureCardPayment from './SecureCardPayment';
 
 export type CheckoutFormData = {
   payment_method_id: string;
@@ -17,10 +17,6 @@ type Props = {
   initialization: ComponentProps<typeof CardPayment>['initialization'];
   onSubmit: (data: { formData: CheckoutFormData }) => Promise<unknown>;
 };
-const customization: ComponentProps<typeof CardPayment>['customization'] = {
-  paymentMethods: { maxInstallments: 12, types: { included: ['credit_card', 'debit_card'] } },
-};
-const ready = () => undefined;
 
 function PixSymbol() {
   return <svg viewBox="0 0 32 32" width="32" height="32" fill="none" aria-hidden="true"><path d="m10 7 4-4a3 3 0 0 1 4 0l4 4h-2l-4 4-4-4h-2Zm-3 3-4 4a3 3 0 0 0 0 4l4 4h5l4-4 4 4h5l4-4a3 3 0 0 0 0-4l-4-4h-5l-4 4-4-4H7Zm3 15 4 4a3 3 0 0 0 4 0l4-4h-2l-4-4-4 4h-2Z" fill="currentColor" /></svg>;
@@ -42,16 +38,6 @@ export default memo(function OrdersCheckoutPayment({ initialization, onSubmit }:
       throw cause;
     } finally { inFlight.current = false; setBusy(false); }
   }, []);
-  const submitCard = useCallback<NonNullable<ComponentProps<typeof CardPayment>['onSubmit']>>(async (data, extra) => {
-    if (extra?.paymentTypeId !== 'credit_card' && extra?.paymentTypeId !== 'debit_card') {
-      setError('Não foi possível identificar o tipo do cartão. Confira os dados.');
-      throw new Error('Tipo de cartão indisponível.');
-    }
-    await submit({ ...data, payment_type_id: extra.paymentTypeId });
-  }, [submit]);
-  const onError = useCallback<NonNullable<ComponentProps<typeof CardPayment>['onError']>>(event => {
-    if (event.type === 'critical') setError('Não foi possível carregar o formulário do cartão. Atualize a página.');
-  }, []);
   return <div className="space-y-5">
     <fieldset disabled={busy} className="grid gap-3 sm:grid-cols-3">
       <legend className="mb-3 font-semibold">Como deseja pagar?</legend>
@@ -63,7 +49,7 @@ export default memo(function OrdersCheckoutPayment({ initialization, onSubmit }:
         </label>)}
     </fieldset>
     {method === 'card'
-      ? <><CardPayment initialization={initialization} customization={customization} onSubmit={submitCard} onReady={ready} onError={onError} /><CvvHelp /></>
+      ? <SecureCardPayment amount={initialization.amount} payer={initialization.payer} onSubmit={submit} />
       : <div className="space-y-4 rounded-xl bg-slate-50 p-5 dark:bg-neutral-900">
         <p className="text-sm text-slate-600">{method === 'pix' ? 'O QR Code e o código Pix aparecerão na próxima tela e ficarão disponíveis em Meus pedidos.' : 'O boleto ficará disponível na próxima tela e em Meus pedidos. A compra será confirmada após a compensação bancária.'}</p>
         <button type="button" disabled={busy} onClick={() => void submit({ payment_method_id: method }).catch(() => undefined)} className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-xl bg-teal-700 px-6 font-semibold text-white transition-colors hover:bg-teal-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-700 disabled:opacity-50 sm:w-auto">{busy ? <Loader2 size={18} className="animate-spin" aria-hidden="true" /> : null}{busy ? 'Confirmando...' : method === 'pix' ? 'Gerar Pix' : 'Gerar boleto'}{!busy && <ArrowRight size={18} aria-hidden="true" />}</button>

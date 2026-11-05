@@ -41,3 +41,11 @@ Fiado e carnê estão excluídos do projeto por decisão do usuário. PWA contin
 Instalados os eventos reais de suporte recebido/respondido e retirada pronta. Suporte exige protocolo persistente e destinatário da conta verificada. Retirada exige ação explícita do administrador em pedido pago elegível; aprovação sozinha não aciona o aviso. O worker descarta retirada que perdeu elegibilidade. Consulte `202611040003_pickup_ready.sql` e `202611040004_support_tickets.sql`.
 
 As credenciais locais SMTP não estão disponíveis nesta sessão. Não houve novo envio nem prova de caixa de entrada em 04/11 nesta continuação. As tabelas foram instaladas sem gerar mensagens para compras históricas; fila remota permaneceu vazia na conferência.
+
+## Atualização comprovada em 04–05/11/2026
+
+O parágrafo anterior descreve o momento anterior à reconexão. Às 22:10 de 04/11 (Recife), uma mensagem única de verificação foi recebida e aberta em `ozonteckrecife2@gmail.com`, com o renderizador real, remetente da loja e link de suporte. Evidência: `evidencias/email-recebido-2026-11-04.png`. Nenhum cliente recebeu mensagem de teste e nenhuma compra fictícia foi criada.
+
+Na madrugada de 05/11, o painel Netlify confirmou a função `customer-emails` em produção, agendada a cada cinco minutos; registros até 00:40 mostraram execuções sem erro. A fila estava vazia na consulta anterior. Isso comprova o agendamento, mas ainda não comprova um protocolo real percorrendo gatilho, fila, trabalhador, confirmação `sent` e caixa de entrada. O teste direto SMTP e o teste do trabalhador não devem ser apresentados como essa mesma evidência.
+
+`tests/customer-email-worker.test.ts` executa o trabalhador real com adaptadores locais e cobre seis cenários: destinatário verificado e dono, protocolo de terceiro, retirada elegível/obsoleta, tentativa após falha, quinta falha, aceite SMTP com confirmação incerta e desativação. Não há rede nesses testes. `npm run test:components` cobre preservação de rascunhos, troca de conta e respostas atrasadas nas telas de suporte e administração.

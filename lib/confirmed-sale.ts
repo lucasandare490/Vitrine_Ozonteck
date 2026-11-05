@@ -9,3 +9,11 @@ export function needsPaymentReview(order: SaleState) {
   return ['preparando', 'enviado', 'entregue'].includes(order.status)
     && order.status_pagamento !== 'approved';
 }
+
+export function matchesAuditFilter(order: SaleState, filter: string) {
+  if (filter === 'Todos') return isConfirmedSale(order);
+  if (filter === 'historico') return true;
+  if (filter === 'revisao') return needsPaymentReview(order) || ['revisao_pagamento', 'revisao_estoque'].includes(order.status);
+  if (filter === 'abertos') return ['pending', 'aguardando_pagamento', 'in_process', 'authorized', 'falha_pagamento', 'pagamento_recusado'].includes(order.status);
+  return order.status === filter.toLowerCase();
+}

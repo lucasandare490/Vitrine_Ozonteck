@@ -74,3 +74,17 @@ O iframe de challenge 3DS é um fluxo documentado pelo provedor e é distinto de
 | `npx tsc --noEmit --incremental false` | Falhou com `TS6053`: arquivos gerados sob `.next/types/` não estavam disponíveis durante a leitura (incluindo checkout, webhook Orders e páginas). Verificação global de tipos inconclusiva; não foi regenerada a saída do Next nem alterada a configuração compartilhada. |
 
 Nenhum build, navegador, celular, deploy, painel do Mercado Pago, entrega pública de webhook ou transação externa foi usado como evidência nesta revisão. Os testes locais não permitem declarar crédito, débito ou boleto homologados de ponta a ponta.
+
+## Continuação de 05/11/2026
+
+O titular delegou a escolha do formulário seguro. A implementação Orders agora usa campos individuais oficiais (`fields.create`, `createCardToken`) do SDK Mercado Pago, em lugar do Brick de cartão. Número, validade e CVV permanecem em iframes do provedor, sem acesso a seus valores pelo código da loja. Nome/CPF do titular e apenas o token são usados na confirmação. `@mercadopago/sdk-js` 0.0.3 tornou-se dependência direta, na mesma versão já instalada pelo SDK React.
+
+A ilustração aparece ao receber o evento público `focus` do campo `securityCode` e desaparece no `blur`; não depende de inspeção do conteúdo de iframe. Testado no Chrome contra os campos reais, sem digitar cartão, gerar token ou criar cobrança. Evidência: `evidencias/cvv-foco-2026-11-05.png`. A prévia local, com envio deliberadamente desabilitado, foi removida após a inspeção e não integra o site publicado.
+
+Condições e tipos são obtidos do SDK para o BIN informado; a loja filtra crédito/débito ativos, 1–12 parcelas de crédito e uma no débito. Não há parcelas inventadas quando a resposta está vazia. Respostas antigas de BIN/condições e eventos após desmontagem são descartados. Testes executam os componentes reais com o SDK substituído em memória; verificam foco/saída, montagem estável, token, bloqueio de clique duplo e descarte de resultados antigos. Isso não comprova aprovação bancária.
+
+Acrescentados testes da rota Orders com o verificador real de assinatura HMAC do SDK e provedor/banco locais: rejeição de assinatura/horário/ID/ambiente, limite de chamadas, leitura autenticada antes de conciliar e quatro modalidades. A assinatura de teste respeita o ID recebido, conforme o contrato atual do SDK; uma primeira fixture incorreta foi corrigida após conferir implementação e documentação oficial. O adaptador legado `test-affiliate-checkout.cjs` passou após receber uma dependência Orders que falha se chamada fora do ramo esperado; as regras de preço/identidade não foram relaxadas.
+
+O Mercado Pago voltou a exigir validação por telefone. O titular informou em 05/11 que não dispõe do celular do responsável e pediu deixar essa etapa para depois. Homologação individual no provedor, captura/recusa/3DS, compensação e callbacks externos continuam como dependência externa adiada. Não foram realizadas cobranças reais nem alteradas as credenciais produtivas para simular sandbox.
+
+Fontes oficiais consultadas: [Secure Fields](https://github.com/mercadopago/sdk-js/blob/main/docs/fields.md), [notificações Orders](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/notifications). Não equiparar testes locais ao ciclo bancário real.

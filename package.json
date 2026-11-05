@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test --experimental-strip-types tests/*.test.ts"
+    "test": "node --test --experimental-strip-types tests/*.test.ts",
+    "test:components": "node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs"
   },
   "dependencies": {
+    "@mercadopago/sdk-js": "^0.0.3",
     "@mercadopago/sdk-react": "^1.0.7",
     "@netlify/functions": "^6.0.3",
     "@supabase/supabase-js": "^2.108.2",

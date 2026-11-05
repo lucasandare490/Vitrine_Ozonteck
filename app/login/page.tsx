@@ -10,6 +10,7 @@ import { serializeA11yPreferences, useAccessibilityStore } from '@/store/useAcce
 import { needsSecondFactor } from '@/lib/mfa';
 import { syncCartForUser } from '@/lib/cart-session';
 import { getPasswordValidationError } from '@/lib/auth';
+import { safeLoginReturn } from '@/lib/login-return';
 
 const OAUTH_PROVIDER_ENABLED = {
   google: process.env.NEXT_PUBLIC_AUTH_GOOGLE_ENABLED !== 'false',
@@ -104,7 +105,10 @@ export default function Login() {
 
         await syncCartForUser(session.user.id);
         const hasSavedCart = useCartStore.getState().items.length > 0;
-        if (profile?.role === 'admin') {
+        const returnTo = safeLoginReturn(window.location.search);
+        if (returnTo) {
+          router.push(returnTo);
+        } else if (profile?.role === 'admin') {
           router.push('/admin');
         } else if (hasSavedCart) {
           router.push('/lista'); 
@@ -137,7 +141,7 @@ export default function Login() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: provider,
         options: {
-          redirectTo: `${window.location.origin}/login`, 
+          redirectTo: `${window.location.origin}/login${safeLoginReturn(window.location.search) ? `?redirect=${encodeURIComponent(safeLoginReturn(window.location.search)!)}` : ''}`,
         }
       });
       if (error) throw error;
@@ -215,7 +219,10 @@ export default function Login() {
         setSuccessMsg('Acesso confirmado! Redirecionando...');
         
         const hasSavedCart = useCartStore.getState().items.length > 0;
-        if (profile?.role === 'admin') {
+        const returnTo = safeLoginReturn(window.location.search);
+        if (returnTo) {
+          router.push(returnTo);
+        } else if (profile?.role === 'admin') {
           window.location.assign('/admin');
         } else if (hasSavedCart) {
           window.location.assign('/lista'); 
@@ -255,7 +262,10 @@ export default function Login() {
         setSuccessMsg('Conta criada com sucesso! Redirecionando...');
         
         setTimeout(() => {
-          if (useCartStore.getState().items.length > 0) {
+          const returnTo = safeLoginReturn(window.location.search);
+          if (returnTo) {
+            router.push(returnTo);
+          } else if (useCartStore.getState().items.length > 0) {
             window.location.assign('/lista'); 
           } else {
             window.location.assign('/'); 

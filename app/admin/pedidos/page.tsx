@@ -10,8 +10,7 @@ import AdminOrderContact from '@/components/AdminOrderContact';
 import AdminOrderSummary from '@/components/AdminOrderSummary';
 import AdminOrderChanges from '@/components/AdminOrderChanges';
 import { orderAddressText } from '@/lib/order-contact';
-import { isOpenPayment } from '@/lib/order-status';
-import { needsPaymentReview } from '@/lib/confirmed-sale';
+import { matchesAuditFilter, needsPaymentReview } from '@/lib/confirmed-sale';
 import { loadAllRows } from '@/lib/load-all-rows';
 
 type Review = {
@@ -89,7 +88,7 @@ export default function AuditoriaPedidos() {
       const idPedido = pedido.id.toLowerCase();
 
       const matchBusca = nomeCliente.includes(searchTerm.toLowerCase()) || idPedido.includes(searchTerm.toLowerCase());
-      const matchStatus = statusFilter === 'Todos' ? !isOpenPayment(pedido.status) : statusFilter === 'abertos' ? isOpenPayment(pedido.status) : pedido.status === statusFilter.toLowerCase();
+      const matchStatus = matchesAuditFilter(pedido, statusFilter);
 
       return matchBusca && (matchStatus || searchTerm === pedido.id);
     });
@@ -207,6 +206,8 @@ export default function AuditoriaPedidos() {
               >
                 <option value="Todos">Pedidos confirmados</option>
                 <option value="abertos">Compras em aberto</option>
+                <option value="revisao">Conferência financeira</option>
+                <option value="historico">Todo o histórico</option>
                 <option value="preparando">Preparando</option>
                 <option value="enviado">Enviado</option>
                 <option value="entregue">Entregue</option>

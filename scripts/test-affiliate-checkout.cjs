@@ -36,6 +36,11 @@ async function run({ approved = false, authenticated = true, expected = 159.92, 
     zod:require('zod'),
     '@/lib/server/http':{createRateLimitGuard:()=>async()=> 'allowed',getClientIp:()=> '127.0.0.1',readJsonBody:r=>r.json(),RequestBodyError:class extends Error{}},
     '@/lib/auth':{isValidCpf:()=>true},
+    // This suite exercises the retained legacy branch. Any accidental Orders call is a failure.
+    '@/lib/server/orders-provider':{
+      createOrdersPayment:async()=>{throw new Error('Unexpected Orders call in legacy fixture');},
+      reconcileOrdersPayment:async()=>{throw new Error('Unexpected Orders reconciliation in legacy fixture');},
+    },
   };
   const exports = {};
   vm.runInNewContext(code,{exports,require:name=>{if(!(name in mocks))throw new Error(`Unexpected import ${name}`);return mocks[name];},process:{env:{NEXT_PUBLIC_SUPABASE_URL:'https://example.invalid',SUPABASE_SERVICE_ROLE_KEY:'fixture',MP_ACCESS_TOKEN:liveCredentials?'APP_USR-fixture':'TEST-fixture',NEXT_PUBLIC_MP_PUBLIC_KEY:'TEST-fixture',PAYMENT_SANDBOX:String(sandbox),MP_WEBHOOK_URL:'https://example.invalid/api/webhook'}},console:{error(){}},URL,Request,Response,Headers});
