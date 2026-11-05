@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-11-05T15:35:24.148Z",
+  "sourceCommit": "3ec7c66",
+  "scope": "New features confirmed in public HTML and actual served scripts; private deploy panel unavailable, deployment ID not asserted",
+  "checks": {
+    "root200": true,
+    "originalPix": true,
+    "originalElo": true,
+    "vectorMastercard": true,
+    "sharedPagination": true,
+    "cardConditionText": true,
+    "joinTitle": "Junte-se a nós | Ozonteck Recife",
+    "noDuplicateJoinTitle": true
+  },
+  "matchedAssets": {
+    "pagination": "/_next/static/chunks/3886-bbf01f9e8f4cb4ef.js",
+    "card": "/_next/static/chunks/app/lista/page-b9a88a71c48ff6ef.js"
+  },
+  "assetChecks": [
+    {
+      "path": "/payments/pix-oficial.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "path": "/payments/elo-oficial.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "path": "/payments/master-oficial.svg",
+      "status": 200,
+      "contentType": "image/svg+xml"
+    }
+  ]
+}

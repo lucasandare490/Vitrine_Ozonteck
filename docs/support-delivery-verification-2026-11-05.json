@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-11-05T16:13:34.150Z",
+  "scope": "Sanitized read-only support verification; no customer identity, protocol ID, message content or mailbox screenshots included",
+  "ticket": [
+    {
+      "status": "resolvido",
+      "response_saved": true
+    }
+  ],
+  "jobs": [
+    {
+      "event": "support_received",
+      "state": "sent",
+      "attempts": 1,
+      "error_code": null,
+      "created_at": "2026-11-05T15:48:03.030Z",
+      "sent_at": "2026-11-05T15:50:18.781Z"
+    },
+    {
+      "event": "support_updated",
+      "state": "sent",
+      "attempts": 1,
+      "error_code": null,
+      "created_at": "2026-11-05T15:58:44.508Z",
+      "sent_at": "2026-11-05T16:00:17.860Z"
+    }
+  ],
+  "inbox": {
+    "support_received": "Initially spam; manually marked legitimate in the owner mailbox; then in inbox",
+    "support_updated": "Seen directly in inbox after first message was marked legitimate",
+    "same_reference_confirmed": true
+  }
+}

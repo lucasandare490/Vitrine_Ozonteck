@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
+import PasswordStrength from '@/components/PasswordStrength';
 import { Mail, Lock, User, Loader2, X, Phone, CreditCard, MapPin, ShieldCheck, Info } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getPasswordValidationError, isValidCpf } from '@/lib/auth';
@@ -222,12 +223,14 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
                   <Lock size={16} className="text-slate-400" />
                 </div>
                 <input
-                  type="password" name="password" value={formData.password} onChange={handleChange} required autoComplete={isLogin ? 'current-password' : 'new-password'}
+                  type="password" id="modal-signup-password" aria-label={'Senha'} aria-describedby={!isLogin && formData.password ? 'modal-password-strength' : undefined} name="password" value={formData.password} onChange={handleChange} required autoComplete={isLogin ? 'current-password' : 'new-password'}
                   className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                   placeholder="••••••••"
                 />
               </div>
             </div>
+
+              {!isLogin && <PasswordStrength password={formData.password} id="modal-password-strength" />}
 
             <button type="submit" disabled={loading} className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all shadow-sm flex items-center justify-center mt-6 disabled:opacity-70">
               {loading ? <Loader2 size={18} className="animate-spin" /> : isLogin ? 'Entrar e Continuar' : 'Criar Conta e Continuar'}

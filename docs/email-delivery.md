@@ -49,3 +49,14 @@ O parágrafo anterior descreve o momento anterior à reconexão. Às 22:10 de 04
 Na madrugada de 05/11, o painel Netlify confirmou a função `customer-emails` em produção, agendada a cada cinco minutos; registros até 00:40 mostraram execuções sem erro. A fila estava vazia na consulta anterior. Isso comprova o agendamento, mas ainda não comprova um protocolo real percorrendo gatilho, fila, trabalhador, confirmação `sent` e caixa de entrada. O teste direto SMTP e o teste do trabalhador não devem ser apresentados como essa mesma evidência.
 
 `tests/customer-email-worker.test.ts` executa o trabalhador real com adaptadores locais e cobre seis cenários: destinatário verificado e dono, protocolo de terceiro, retirada elegível/obsoleta, tentativa após falha, quinta falha, aceite SMTP com confirmação incerta e desativação. Não há rede nesses testes. `npm run test:components` cobre preservação de rascunhos, troca de conta e respostas atrasadas nas telas de suporte e administração.
+
+## Suporte ponta a ponta comprovado — 05/11/2026, 13h13 de Recife
+
+Após autorização específica do titular para usar sua própria conta e caixa de entrada, o formulário público criou o protocolo técnico (identificador omitido no repositório público). A administração respondeu e resolveu; a conta cliente exibiu a resposta após recarga. Os dois eventos seguiram a fila e o worker realmente agendado, sem acionamento manual e sem destinatário arbitrário:
+
+- `support_received`: criado às 12:48:03, enviado às 12:50:18, uma tentativa e nenhum erro.
+- `support_updated`: criado às 12:58:44, enviado às 13:00:17, uma tentativa e nenhum erro.
+
+Ambos foram abertos no Gmail do titular e continham a mesma referência e link correto para `/suporte`. **A primeira mensagem foi classificada como spam**. Foi marcada como legítima nessa caixa; só depois apareceu na entrada. A segunda chegou diretamente à entrada após essa classificação. Isso comprova entrega desses dois eventos e não garante ausência de spam em outras caixas. Não foi criado filtro global nem desativada proteção do Gmail. Registro sanitizado em `support-delivery-verification-2026-11-05.json`. As três capturas do Gmail permanecem apenas no computador do titular; não são publicadas no Git.
+
+Os demais eventos (boas-vindas, compra/pagamento, status, retirada) continuam com as provas locais anteriores; estes dois envios não os validam automaticamente. Nenhuma compra foi criada/alterada e nenhum cliente comercial recebeu mensagem de verificação.

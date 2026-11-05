@@ -190,3 +190,8 @@ Para contribuir, siga [`AGENTS.md`](AGENTS.md). Antes de mudar APIs ou convenç�
 Paginação compartilhada e responsiva, artes oficiais nítidas no rodapé/Pix, condições dos meios sem promessa de débito liberado, campos de endereço acessíveis e título sem marca duplicada. Foram comprovadas gravações publicadas de segundo endereço/edição, interessado com contato concluído, lembrete concluído/reaberto e CSV no produto TESTE-001 com restauração dos valores originais. Registro sem dados pessoais em `docs/published-write-verification-2026-11-05.json`.
 
 No plano atual, o painel Netlify exige upgrade pago para ocultar o selo; ele permanece visível, respeitando custo zero. Débito, compensação de boleto, prova integral de webhook/estoque/telas e todos os eventos de e-mail têm limites externos documentados. O controle do Chrome foi desativado durante a conferência. Consulte a atualização final para publicação e evidências, sem presumir que código no Git já esteja publicado.
+
+
+### Indicador informativo no cadastro — 05/11/2026
+
+As duas entradas de cadastro mostram força estimada enquanto a pessoa digita, sem exigir classificação mínima ou novas regras de composição. A avaliação é local; o mínimo de oito caracteres já existente permanece. Suporte recebido e respondido/resolvido foi comprovado em produção até o Gmail do titular autorizado; o primeiro aviso foi inicialmente para spam e a resposta chegou à entrada após marcar o primeiro como legítimo. Detalhes e limites estão em `docs/email-delivery.md` e na revisão final.

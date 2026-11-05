@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { supabase } from '@/lib/supabase';
+import PasswordStrength from '@/components/PasswordStrength';
 import { useRouter } from 'next/navigation';
 import { Mail, Lock, User, ArrowRight, Loader2, CheckCircle2, ArrowLeft, Eye, EyeOff, Award, HeartHandshake, Fingerprint } from 'lucide-react';
 import Link from 'next/link';
@@ -511,7 +512,7 @@ export default function Login() {
                     <Lock size={16} className="text-slate-400" />
                   </div>
                   <input
-                    type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} required autoComplete={isLogin && !isRecovery ? 'current-password' : 'new-password'}
+                    type={showPassword ? "text" : "password"} id="signup-password" aria-label={isRecovery ? 'Sua Nova Senha' : 'Senha'} aria-describedby={!isLogin && !isRecovery && formData.password ? 'signup-password-strength' : undefined} name="password" value={formData.password} onChange={handleChange} required autoComplete={isLogin && !isRecovery ? 'current-password' : 'new-password'}
                     className="w-full pl-10 pr-10 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                     placeholder="••••••••"
                   />
@@ -523,6 +524,8 @@ export default function Login() {
                   </button>
                 </div>
               </div>
+
+              {!isLogin && !isRecovery && <PasswordStrength password={formData.password} id="signup-password-strength" />}
 
               {isLogin && !isRecovery && (
                 <div className="flex justify-end pt-1">
