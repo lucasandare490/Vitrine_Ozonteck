@@ -35,3 +35,9 @@ A fila e a função SQL de reserva foram instaladas no banco em 01/11/2026. As c
 `node --test --experimental-strip-types tests/customer-email*.test.ts` verifica conteúdo, escape de HTML, links restritos à loja, supressão de mensagens obsoletas e repetição limitada.
 
 Fiado e carnê estão excluídos do projeto por decisão do usuário. PWA continua reservado para o futuro.
+
+## Incrementos de 04/11/2026
+
+Instalados os eventos reais de suporte recebido/respondido e retirada pronta. Suporte exige protocolo persistente e destinatário da conta verificada. Retirada exige ação explícita do administrador em pedido pago elegível; aprovação sozinha não aciona o aviso. O worker descarta retirada que perdeu elegibilidade. Consulte `202611040003_pickup_ready.sql` e `202611040004_support_tickets.sql`.
+
+As credenciais locais SMTP não estão disponíveis nesta sessão. Não houve novo envio nem prova de caixa de entrada em 04/11 nesta continuação. As tabelas foram instaladas sem gerar mensagens para compras históricas; fila remota permaneceu vazia na conferência.

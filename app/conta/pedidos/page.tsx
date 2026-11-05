@@ -11,6 +11,7 @@ import { getOrderStatus, isOpenPayment } from '@/lib/order-status';
 import { orderAddressText } from '@/lib/order-contact';
 import OrderProductReviews from '@/components/OrderProductReviews';
 import OrderPayment from '@/components/OrderPayment';
+import { isPickupReady } from '@/components/PickupReadyAction';
 
 type TabStatus = 'Todos' | 'pagamentos' | 'preparando' | 'enviado' | 'entregue';
 
@@ -283,6 +284,9 @@ export default function PedidosPage() {
                     const isReviewing = reviewingOrderId === order.id;
                     const jaAvaliou = avaliacoesFeitas.includes(order.id);
                     const isEntregue = order.status === 'entregue';
+                    const isRetirada = order.endereco_entrega?.modalidade === 'retirada';
+                    const retiradaPronta = isPickupReady(order);
+                    const statusLabel = retiradaPronta ? 'Pronto para retirada' : getOrderStatus(order.status).label;
 
                     return (
                       <div key={order.id} className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden group transition-all relative">
@@ -298,7 +302,7 @@ export default function PedidosPage() {
                                 <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-md border hidden sm:block ${
                                   isEntregue ? 'bg-slate-100 text-slate-600 border-slate-200' : 'bg-teal-100 text-teal-700 border-teal-200'
                                 }`}>
-                                  {getOrderStatus(order.status).label}
+                                  {statusLabel}
                                 </span>
                               </div>
                               <p className="text-xs text-slate-500 mt-0.5 font-medium">Realizado em {new Date(order.created_at).toLocaleDateString('pt-BR')}</p>
@@ -310,6 +314,10 @@ export default function PedidosPage() {
                           </div>
                         </div>
 
+                        {retiradaPronta && <div role="status" className="mx-6 mt-5 flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800">
+                          <CheckCircle2 size={20} className="shrink-0" />
+                          <div><p className="font-bold">Pronto para retirada</p><p>Seu pedido já pode ser retirado na loja.</p></div>
+                        </div>}
                         <div className="p-6 grid grid-cols-1 xl:grid-cols-12 gap-8 items-center">
                           <div className="xl:col-span-5">
                             <h4 className="text-[10px] font-bold text-slate-400 mb-4 uppercase tracking-widest">Itens do Pedido</h4>
@@ -317,13 +325,13 @@ export default function PedidosPage() {
                           </div>
 
                           <div className={`xl:col-span-7 relative pt-4 xl:pt-0 ${isOpenPayment(order.status) ? 'hidden' : ''}`}>
-                            <h4 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest hidden xl:block">Progresso da Entrega</h4>
+                            <h4 className="text-[10px] font-bold text-slate-400 mb-6 uppercase tracking-widest hidden xl:block">{isRetirada ? 'Progresso da Retirada' : 'Progresso da Entrega'}</h4>
                             
                             <div className="flex items-center justify-between relative px-2">
                               <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-slate-100 rounded-full"></div>
                               
                               <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-teal-500 rounded-full transition-all`} 
-                                style={{ width: order.status === 'preparando' ? '33%' : order.status === 'enviado' ? '66%' : isEntregue ? '100%' : '10%' }}>
+                                style={{ width: retiradaPronta ? '66%' : order.status === 'preparando' ? '33%' : order.status === 'enviado' ? '66%' : isEntregue ? '100%' : '10%' }}>
                               </div>
 
                               <div className="relative z-10 flex flex-col items-center gap-2">
@@ -341,10 +349,10 @@ export default function PedidosPage() {
                               </div>
 
                               <div className="relative z-10 flex flex-col items-center gap-2">
-                                <div className={`flex items-center justify-center border-2 border-white transition-all ${order.status === 'enviado' ? 'w-10 h-10 rounded-full bg-teal-600 text-white shadow-md ring-4 ring-teal-100/50 animate-pulse mt-[-6px]' : isEntregue ? 'w-7 h-7 rounded-full bg-teal-500 text-white ring-1 ring-teal-100' : 'w-7 h-7 rounded-full bg-slate-200 text-slate-400'}`}>
-                                  <Truck size={order.status === 'enviado' ? 18 : 12} strokeWidth={2.5} />
+                                <div className={`flex items-center justify-center border-2 border-white transition-all ${retiradaPronta || order.status === 'enviado' ? 'w-10 h-10 rounded-full bg-teal-600 text-white shadow-md ring-4 ring-teal-100/50 animate-pulse mt-[-6px]' : isEntregue ? 'w-7 h-7 rounded-full bg-teal-500 text-white ring-1 ring-teal-100' : 'w-7 h-7 rounded-full bg-slate-200 text-slate-400'}`}>
+                                  {isRetirada ? <Package size={retiradaPronta ? 18 : 12} strokeWidth={2.5} /> : <Truck size={order.status === 'enviado' ? 18 : 12} strokeWidth={2.5} />}
                                 </div>
-                                <span className={`text-[10px] uppercase tracking-wider ${order.status === 'enviado' ? 'font-bold text-teal-700 mt-[-2px]' : 'font-bold text-slate-400 hidden sm:block'}`}>Em Rota</span>
+                                <span className={`text-[10px] uppercase tracking-wider ${retiradaPronta || order.status === 'enviado' ? 'font-bold text-teal-700 mt-[-2px]' : 'font-bold text-slate-400 hidden sm:block'}`}>{isRetirada ? 'Pronto para retirada' : 'Em Rota'}</span>
                               </div>
 
                               <div className="relative z-10 flex flex-col items-center gap-2">
@@ -381,7 +389,7 @@ export default function PedidosPage() {
                           </button>
                         </div>
 
-                        {detailsOrderId === order.id && <div className="border-t border-slate-100 px-6 py-4 text-sm space-y-4"><OrderPayment key={order.id} orderId={order.id} /><h4 className="font-semibold">Detalhes do pedido</h4><p className="mt-2 break-all">Referência: {order.id}</p><p>Status: {getOrderStatus(order.status).label}</p><p className="mt-2 break-words">Recebimento: {orderAddressText(order.endereco_entrega) || 'Endereço não informado.'}</p></div>}
+                        {detailsOrderId === order.id && <div className="border-t border-slate-100 px-6 py-4 text-sm space-y-4"><OrderPayment key={order.id} orderId={order.id} /><h4 className="font-semibold">Detalhes do pedido</h4><p className="mt-2 break-all">Referência: {order.id}</p><p>Status: {statusLabel}</p><p className="mt-2 break-words">Recebimento: {orderAddressText(order.endereco_entrega) || 'Endereço não informado.'}</p></div>}
                         {isReviewing && !jaAvaliou && (
                           <div className="bg-[#F8FAFC] border-t border-slate-200 p-6 sm:p-8 animate-in slide-in-from-top-4 duration-300 shadow-inner">
                             <h4 className="font-bold text-slate-800 mb-1">Como foi sua experiência com a loja?</h4>

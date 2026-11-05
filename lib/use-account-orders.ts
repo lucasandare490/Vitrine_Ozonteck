@@ -5,6 +5,7 @@ import { supabase } from './supabase';
 
 export type AccountOrder = {
   id: string; status: string; status_pagamento: string | null; valor_total: number; created_at: string;
+  retirada_pronta_em: string | null;
   itens: { code?: string; price?: number; nome: string; qtd: number }[];
   endereco_entrega: { nome?: string; telefone?: string; rua?: string; numero?: string; complemento?: string; bairro?: string; cidade?: string; estado?: string; cep?: string; modalidade?: 'entrega' | 'retirada' } | null;
 };
@@ -24,7 +25,7 @@ export function useAccountOrders(latestOnly = false) {
         return;
       }
       let query = supabase.from('pedidos')
-        .select('id, status, status_pagamento, valor_total, itens, endereco_entrega, created_at')
+        .select('id, status, status_pagamento, retirada_pronta_em, valor_total, itens, endereco_entrega, created_at')
         .eq('user_id', session.user.id).order('created_at', { ascending: false });
       if (latestOnly) query = query.limit(1);
       const { data, error: queryError } = await query;

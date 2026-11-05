@@ -134,7 +134,7 @@ export default function CategoriasAdmin() {
             ) : visibleCategories.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-64 text-center px-4">
                 <AlertCircle size={32} className="text-slate-300 dark:text-[#2D2D2D] mb-2" />
-                <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Nenhuma categoria cadastrada.</p>
+                <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">{archived ? 'Nenhuma categoria arquivada.' : 'Nenhuma categoria ativa.'}</p>
               </div>
             ) : (
               <table className="w-full text-left text-sm whitespace-nowrap">

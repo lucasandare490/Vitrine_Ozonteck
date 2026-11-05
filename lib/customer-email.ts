@@ -11,6 +11,7 @@ export const customerEmailEvents = {
   order_cancelled: ['Pedido cancelado — Ozonteck Recife', 'Seu pedido foi cancelado', 'Consulte os detalhes na sua conta. Se houve pagamento, acompanhe separadamente a situação do reembolso.'],
   refund_confirmed: ['Reembolso confirmado — Ozonteck Recife', 'O reembolso foi confirmado', 'O prazo para o valor aparecer depende da instituição e da forma de pagamento utilizada.'],
   support_received: ['Recebemos sua solicitação — Ozonteck Recife', 'Sua solicitação foi recebida', 'Nossa equipe recebeu sua mensagem. Acompanhe o atendimento pelo canal informado na solicitação.'],
+  support_updated: ['Resposta ao seu atendimento — Ozonteck Recife', 'Seu atendimento foi atualizado', 'A loja respondeu à sua solicitação. Acesse a Central de Ajuda para consultar a resposta e a situação do atendimento.'],
 } as const;
 
 export type CustomerEmailEvent = keyof typeof customerEmailEvents;

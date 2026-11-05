@@ -17,7 +17,7 @@ Loja virtual com catálogo, carrinho, conta do cliente, pagamentos pelo Mercado 
 
 ### Pagamentos e pedidos
 
-- Checkout transparente do Mercado Pago com cartão de crédito, Pix e boleto. Débito não está habilitado atualmente.
+- Checkout transparente do Mercado Pago com crédito, débito, Pix e boleto conforme suporte da conta e do provedor. A implementação não equivale à homologação individual de cada modalidade; consulte a revisão de pagamentos de 04/11/2026.
 - Recuperação das instruções de Pix e boleto em compras pendentes, sem gerar outra cobrança apenas para consultá-las.
 - Separação entre pagamentos em aberto e pedidos confirmados após aprovação.
 - Atualização por consulta ao servidor e notificações do Mercado Pago, com validação de assinatura no webhook.
@@ -31,6 +31,9 @@ Loja virtual com catálogo, carrinho, conta do cliente, pagamentos pelo Mercado 
 - Histórico específico de alterações de compras e comparação de dados.
 - Sino de pedidos recentes, atualizado a cada 30 segundos enquanto a página está visível.
 - Contato com o cliente pelo WhatsApp, sem depender de ele enviar o pedido manualmente.
+- Protocolos de suporte e respostas administrativas, avisos transacionais em fila e ação explícita de pedido pronto para retirada.
+- Captação consentida de interessados, importação de preço/estoque com prévia e lembretes administrativos persistentes.
+- Histórico futuro das alterações em categorias, preservado após exclusão.
 
 O sino não é uma notificação push: com o painel fechado, esse recurso não envia avisos automáticos por WhatsApp ou pelo navegador.
 
@@ -38,7 +41,7 @@ O sino não é uma notificação push: com o painel fechado, esse recurso não e
 
 | Camada | Tecnologias |
 | --- | --- |
-| Aplicação | Next.js 16.3.6, React 19, TypeScript |
+| Aplicação | Next.js 16.4.3, React 19, TypeScript |
 | Interface | Tailwind CSS 4, Lucide React, React Hot Toast |
 | Estado | Zustand |
 | Dados e autenticação | Supabase / PostgreSQL, Auth e políticas RLS |

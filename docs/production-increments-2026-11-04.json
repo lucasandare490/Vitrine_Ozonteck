@@ -1,0 +1,68 @@
+{
+  "checkedAt": "2026-11-05T00:56:07.547Z",
+  "scope": "Read-only production schema and aggregate counts; no business mutations",
+  "migrations": [
+    {
+      "name": "202611040002_category_audit.sql"
+    },
+    {
+      "name": "202611040003_pickup_ready.sql"
+    },
+    {
+      "name": "202611040004_support_tickets.sql"
+    },
+    {
+      "name": "202611040005_join_interests.sql"
+    },
+    {
+      "name": "202611040006_product_import.sql"
+    },
+    {
+      "name": "202611040007_admin_reminders.sql"
+    }
+  ],
+  "orders": [
+    {
+      "status": "entregue",
+      "status_pagamento": "pending",
+      "total": 8
+    },
+    {
+      "status": "pending",
+      "status_pagamento": "pending",
+      "total": 1
+    },
+    {
+      "status": "preparando",
+      "status_pagamento": "approved",
+      "total": 1
+    },
+    {
+      "status": "reserva_expirada",
+      "status_pagamento": "pending",
+      "total": 1
+    }
+  ],
+  "features": [
+    {
+      "relname": "category_audit",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "support_tickets",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "join_interests",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "admin_reminders",
+      "relrowsecurity": true
+    }
+  ],
+  "queue": [],
+  "serviceSupportRead": {
+    "allowed": true
+  }
+}

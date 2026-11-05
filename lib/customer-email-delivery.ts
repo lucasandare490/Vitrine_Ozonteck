@@ -1,6 +1,6 @@
 import type { CustomerEmailEvent } from './customer-email.ts';
 
-export type EmailOrder = { status: string; status_pagamento: string; user_id: string };
+export type EmailOrder = { status: string; status_pagamento: string; user_id: string; retirada_pronta_em?: string | null; endereco_entrega?: { modalidade?: string } | null };
 
 /** Suppress obsolete messages when settlement or fulfilment overtakes the queue. */
 export function shouldDeliverOrderEmail(event: CustomerEmailEvent, order: EmailOrder) {
@@ -10,6 +10,7 @@ export function shouldDeliverOrderEmail(event: CustomerEmailEvent, order: EmailO
     case 'payment_approved': return paid && ['preparando','enviado','entregue'].includes(order.status);
     case 'payment_rejected': return order.status_pagamento === 'rejected' && order.status === 'pagamento_recusado';
     case 'order_shipped': return paid && order.status === 'enviado';
+    case 'pickup_ready': return paid && order.status === 'preparando' && !!order.retirada_pronta_em && order.endereco_entrega?.modalidade === 'retirada';
     case 'order_delivered': return paid && order.status === 'entregue';
     case 'order_cancelled': return ['cancelado','cancelled'].includes(order.status);
     case 'refund_confirmed': return order.status_pagamento === 'refunded' && order.status === 'reembolsado';

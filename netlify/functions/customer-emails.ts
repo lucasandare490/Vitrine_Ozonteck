@@ -20,7 +20,7 @@ export default async function deliverCustomerEmail() {
   const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data, error } = await db.rpc('claim_customer_email');
   if (error) throw new Error('EMAIL_QUEUE_UNAVAILABLE');
-  const job = data?.[0] as { id: string; lease: string; user_id: string; pedido_id: string | null; event: CustomerEmailEvent; attempts: number } | undefined;
+  const job = data?.[0] as { id: string; lease: string; user_id: string; pedido_id: string | null; support_id: string | null; event: CustomerEmailEvent; attempts: number } | undefined;
   if (!job) return;
   const finish = async (values: Record<string, unknown>) => {
     const result = await db.from('customer_email_outbox').update(values).eq('id', job.id).eq('lease', job.lease).eq('state', 'sending').select('id');
@@ -35,16 +35,23 @@ export default async function deliverCustomerEmail() {
       return;
     }
     if (job.pedido_id) {
-      const { data: order, error: orderError } = await db.from('pedidos').select('user_id,status,status_pagamento').eq('id', job.pedido_id).maybeSingle();
+      const { data: order, error: orderError } = await db.from('pedidos').select('user_id,status,status_pagamento,retirada_pronta_em,endereco_entrega').eq('id', job.pedido_id).maybeSingle();
       if (orderError) throw new Error('EMAIL_ORDER_LOOKUP_FAILED');
       if (!order || order.user_id !== job.user_id || !shouldDeliverOrderEmail(job.event, order)) {
         await finish({ state: 'skipped', error_code: 'EVENT_SUPERSEDED', lease: null, locked_until: null });
         return;
       }
     }
+    if (job.support_id) {
+      const ticket = await db.from('support_tickets').select('user_id').eq('id', job.support_id).maybeSingle();
+      if (ticket.error) throw new Error('EMAIL_SUPPORT_LOOKUP_FAILED');
+      if (!ticket.data || ticket.data.user_id !== job.user_id) {
+        await finish({ state: 'skipped', error_code: 'EVENT_SUPERSEDED', lease: null, locked_until: null }); return;
+      }
+    }
     const content = renderCustomerEmail({ event: job.event, siteUrl,
-      reference: job.pedido_id || undefined,
-      actionUrl: job.pedido_id ? '/conta/pedidos' : '/conta',
+      reference: job.pedido_id || job.support_id || undefined,
+      actionUrl: job.pedido_id ? '/conta/pedidos' : job.support_id ? '/suporte' : '/conta',
     });
     const smtp = nodemailer.createTransport({ host: 'smtp.gmail.com', port: 465, secure: true,
       auth: { user, pass: pass.replace(/\s/g, '') }, connectionTimeout: 5000, greetingTimeout: 5000, socketTimeout: 8000,

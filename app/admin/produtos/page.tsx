@@ -9,6 +9,7 @@ import NextImage from 'next/image';
 import Link from 'next/link';
 import { productPath } from '@/lib/products';
 import { isRetiredProduct } from '@/lib/catalog-availability';
+import ProductImport from '@/components/ProductImport';
 
 type AdminProduct = {
   id: string;
@@ -226,6 +227,7 @@ export default function ProdutosAdmin() {
 
   return (
     <div className="space-y-6 animate-in fade-in duration-500">
+      <ProductImport onImported={() => { void fetchData(); }} />
       
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#171717] p-6 rounded-2xl border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none transition-colors">
         <div>

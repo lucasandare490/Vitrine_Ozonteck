@@ -9,6 +9,7 @@ import AdminOrderSummary from '@/components/AdminOrderSummary';
 import { orderAddressText } from '@/lib/order-contact';
 import { isConfirmedSale } from '@/lib/confirmed-sale';
 import { loadAllRows } from '@/lib/load-all-rows';
+import PickupReadyAction, { isPickupReady } from '@/components/PickupReadyAction';
 
 type AdminOrderItem = { nome: string; qtd: number };
 type AdminDeliveryAddress = {
@@ -17,11 +18,13 @@ type AdminDeliveryAddress = {
   rua?: string;
   cidade?: string;
   estado?: string;
+  modalidade?: 'entrega' | 'retirada';
 };
 type AdminOrder = {
   status_pagamento?: string | null;
   id: string;
   status: string;
+  retirada_pronta_em: string | null;
   valor_total: number;
   itens: AdminOrderItem[];
   endereco_entrega: AdminDeliveryAddress | null;
@@ -40,13 +43,14 @@ export default function VisaoGeralAdmin() {
   async function fetchDashboardData() {
     const { data, error } = await loadAllRows((from, to) => supabase
       .from('pedidos')
-      .select('id, status, status_pagamento, valor_total, itens, endereco_entrega, created_at')
+      .select('id, status, status_pagamento, retirada_pronta_em, valor_total, itens, endereco_entrega, created_at')
       .order('created_at', { ascending: false }).order('id').range(from, to));
 
     if (error) {
       toast.error(`Erro ao carregar pedidos: ${error.message}`);
     } else {
       setPedidos(data || []);
+      setPedidoSelecionado(current => current ? data?.find(order => order.id === current.id) ?? null : null);
     }
     setLoading(false);
   }
@@ -67,8 +71,7 @@ export default function VisaoGeralAdmin() {
       if (data?.length !== 1) throw new Error('Pedido não atualizado. Confira a aprovação do pagamento e suas permissões.');
 
       toast.success(`Status alterado para: ${novoStatus.toUpperCase()}!`);
-      setPedidoSelecionado((current) => current ? { ...current, status: novoStatus } : current);
-      fetchDashboardData();
+      await fetchDashboardData();
     } catch (error: unknown) {
       toast.error(`Erro ao atualizar: ${error instanceof Error ? error.message : 'erro desconhecido'}`);
     } finally {
@@ -92,7 +95,13 @@ export default function VisaoGeralAdmin() {
     });
   }, [pedidos, ordemFila]);
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (order: AdminOrder) => {
+    const { status } = order;
+    if (isPickupReady(order)) return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-500/20">
+        <CheckCircle2 size={10} /> Pronto para retirada
+      </span>
+    );
     switch (status) {
       case 'preparando':
         return (
@@ -244,7 +253,7 @@ export default function VisaoGeralAdmin() {
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedido.valor_total)}
                       </td>
                       <td className="px-6 py-4">
-                        {getStatusBadge(pedido.status)}
+                        {getStatusBadge(pedido)}
                       </td>
                       <td className="px-6 py-4 text-right">
                         <button
@@ -272,7 +281,7 @@ export default function VisaoGeralAdmin() {
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-[#F0F0F0] uppercase tracking-tighter flex items-center gap-2">
                   Pedido #{pedidoSelecionado.id.split('-')[0]}
-                  {getStatusBadge(pedidoSelecionado.status)}
+                  {getStatusBadge(pedidoSelecionado)}
                 </h3>
                 <p className="text-[10px] font-medium text-slate-500 dark:text-[#A1A1AA] mt-1">Realizado em {new Date(pedidoSelecionado.created_at).toLocaleString('pt-BR')}</p>
               </div>
@@ -318,6 +327,13 @@ export default function VisaoGeralAdmin() {
                   </span>
                 </div>
               </div>
+              <PickupReadyAction key={pedidoSelecionado.id} order={pedidoSelecionado} disabled={isAtualizando}
+                onUpdated={readyAt => {
+                  const id = pedidoSelecionado.id;
+                  setPedidos(current => current.map(order => order.id === id ? { ...order, retirada_pronta_em: readyAt } : order));
+                  setPedidoSelecionado(current => current?.id === id ? { ...current, retirada_pronta_em: readyAt } : current);
+                  void fetchDashboardData();
+                }} />
               <AdminOrderContact id={pedidoSelecionado.id} address={pedidoSelecionado.endereco_entrega} />
             </div>
 

@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { JOIN_FAQS } from '@/lib/join';
+import SupportTickets from '@/components/SupportTickets';
 
 import { useState, useMemo } from 'react';
 import { Search, Truck, CreditCard, RefreshCcw, User, Users, HelpCircle, ChevronDown, MessageCircle, MapPin } from 'lucide-react';
@@ -279,6 +280,7 @@ export default function SuportePage() {
           <Link href="/junte-se-a-nos" className="mt-4 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade e o cadastro</Link>
         </section>
 
+        <SupportTickets />
         <div className="mt-12 text-center flex flex-col items-center">
           <p className="text-slate-500 text-sm mb-4 font-medium">Não encontrou o que procurava ou precisa de uma análise técnica?</p>
           <a

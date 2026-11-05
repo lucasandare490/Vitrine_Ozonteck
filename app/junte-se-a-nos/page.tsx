@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight, MessageCircle, ShoppingBag, Users, ChartNoAxesCombined, ChevronDown } from 'lucide-react';
 import { JOIN_REGISTRATION_URL, JOIN_CONTACT_URL, JOIN_FAQS } from '@/lib/join';
+import JoinInterestForm from '@/components/JoinInterestForm';
 
 export const metadata: Metadata = {
   title: 'Junte-se a nós | Ozonteck Recife',
@@ -48,6 +49,8 @@ export default function JoinPage() {
             </ol>
           </aside>
         </div>
+
+        <JoinInterestForm />
 
         <section aria-labelledby="join-work-title" className="py-10 lg:py-14">
           <p className="text-xs font-bold uppercase tracking-widest text-teal-800">Entenda a oportunidade</p>

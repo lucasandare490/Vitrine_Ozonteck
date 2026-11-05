@@ -1,12 +1,13 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Plus, Trash2, MapPin, Loader2, Home, Briefcase, Map, Building, AlertTriangle, Truck, CheckCircle2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import PickupPoint from '@/components/PickupPoint';
+import { validateSavedAddress } from '@/lib/saved-address';
 
 // OTIMIZAÇÃO: Constante estática extraída para fora da renderização para evitar recriação de arrays na RAM a cada digitação do usuário.
 const TIPOS_ENDERECO = ['Casa', 'Trabalho', 'Outro'] as const;
@@ -33,6 +34,8 @@ export default function EnderecosPage() {
   
   // Modais
   const [showModal, setShowModal] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const cepRequest = useRef(0);
   const [enderecoToDelete, setEnderecoToDelete] = useState<string | null>(null);
   
   // Loaders de ação
@@ -57,17 +60,19 @@ export default function EnderecosPage() {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) return router.push('/login');
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('enderecos')
       .select('id, user_id, apelido, cep, rua, numero, complemento, bairro, cidade, estado, principal, created_at')
       .eq('user_id', session.user.id)
       .order('principal', { ascending: false });
 
-    if (data) setEnderecos(data);
+    if (error) toast.error('Não foi possível carregar seus endereços.');
+    else if (data) setEnderecos(data);
     setLoading(false);
   }, [router]);
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const request = ++cepRequest.current;
     let value = e.target.value.replace(/\D/g, '');
     if (value.length > 8) value = value.slice(0, 8);
     if (value.length > 5) value = value.replace(/^(\d{5})(\d)/, '$1-$2');
@@ -79,6 +84,7 @@ export default function EnderecosPage() {
       try {
         const res = await fetch(`https://viacep.com.br/ws/${value.replace('-', '')}/json/`);
         const data = await res.json();
+        if (request !== cepRequest.current) return;
         if (!data.erro) {
           setNovoEnd(prev => ({
             ...prev,
@@ -91,15 +97,31 @@ export default function EnderecosPage() {
       } catch {
         toast.error("Não foi possível buscar o CEP.");
       } finally {
-        setIsFetchingCep(false);
+        if (request === cepRequest.current) setIsFetchingCep(false);
       }
-    }
+    } else { setIsFetchingCep(false); }
+  };
+
+  const openNewAddress = () => {
+    cepRequest.current++; setIsFetchingCep(false); setEditingId(null);
+    setNovoEnd({ cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' });
+    setTipoEndereco('Casa'); setNomePersonalizado(''); setShowModal(true);
+  };
+
+  const openEditAddress = (address: Address) => {
+    cepRequest.current++; setIsFetchingCep(false); setEditingId(address.id);
+    setNovoEnd({ cep: address.cep || '', rua: address.rua || '', numero: address.numero || '', complemento: address.complemento || '', bairro: address.bairro || '', cidade: address.cidade || '', estado: address.estado || '' });
+    const standard = address.apelido === 'Casa' || address.apelido === 'Trabalho';
+    setTipoEndereco(standard ? address.apelido as 'Casa' | 'Trabalho' : 'Outro');
+    setNomePersonalizado(standard ? '' : address.apelido || 'Outro'); setShowModal(true);
   };
 
   const handleAddEndereco = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!novoEnd.cep || !novoEnd.rua || !novoEnd.numero) {
-      toast.error('Preencha os campos obrigatórios (CEP, Rua, Número).');
+    if (saving) return;
+    const validationError = validateSavedAddress(novoEnd);
+    if (validationError) {
+      toast.error(validationError);
       return;
     }
 
@@ -111,8 +133,7 @@ export default function EnderecosPage() {
       const isFirst = enderecos.length === 0;
       const apelidoFinal = tipoEndereco === 'Outro' ? (nomePersonalizado || 'Outro') : tipoEndereco;
 
-      const { error } = await supabase.from('enderecos').insert({
-        user_id: session.user.id,
+      const values = {
         apelido: apelidoFinal,
         cep: novoEnd.cep,
         rua: novoEnd.rua,
@@ -120,20 +141,25 @@ export default function EnderecosPage() {
         complemento: novoEnd.complemento || null,
         bairro: novoEnd.bairro,
         cidade: novoEnd.cidade,
-        estado: novoEnd.estado,
-        principal: isFirst ? true : false
-      });
+        estado: novoEnd.estado.trim().toUpperCase(),
+      };
+      const query = editingId
+        ? supabase.from('enderecos').update(values).eq('id', editingId).eq('user_id', session.user.id)
+        : supabase.from('enderecos').insert({ ...values, user_id: session.user.id, principal: isFirst });
+      const { data, error } = await query.select('id');
 
       if (error) throw error;
+      if (data?.length !== 1) throw new Error('Endereço não encontrado.');
 
       toast.success('Endereço salvo com sucesso!');
       setShowModal(false);
+      setEditingId(null);
       setNovoEnd({ cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' });
       setTipoEndereco('Casa');
       setNomePersonalizado('');
       void fetchEnderecos();
     } catch {
-      toast.error('Erro ao adicionar endereço.');
+      toast.error('Não foi possível salvar o endereço. Confira os dados e sua sessão.');
     } finally {
       setSaving(false);
     }
@@ -143,9 +169,9 @@ export default function EnderecosPage() {
     if (!enderecoToDelete) return;
     
     setIsDeleting(true);
-    const { error } = await supabase.from('enderecos').delete().eq('id', enderecoToDelete);
+    const { data, error } = await supabase.from('enderecos').delete().eq('id', enderecoToDelete).select('id');
     
-    if (!error) {
+    if (!error && data?.length === 1) {
       toast.success('Endereço removido.');
       fetchEnderecos();
     } else {
@@ -202,7 +228,7 @@ export default function EnderecosPage() {
             </div>
             
             <button 
-              onClick={() => setShowModal(true)}
+              onClick={openNewAddress}
               className="hidden sm:flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm"
             >
               <Plus size={16} /> Adicionar Endereço
@@ -254,7 +280,7 @@ export default function EnderecosPage() {
                   Você ainda não cadastrou nenhum local para entrega. Adicione seu primeiro endereço para facilitar suas futuras compras.
                 </p>
                 <button 
-                  onClick={() => setShowModal(true)}
+                  onClick={openNewAddress}
                   className="bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm py-3 px-6 rounded-lg transition-colors flex items-center gap-2 shadow-sm"
                 >
                   <Plus size={16} /> Cadastrar Endereço
@@ -264,7 +290,7 @@ export default function EnderecosPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <button 
-                  onClick={() => setShowModal(true)}
+                  onClick={openNewAddress}
                   className="min-h-[240px] rounded-xl border-2 border-dashed border-slate-300 bg-slate-50/50 hover:bg-teal-50/50 hover:border-teal-400 transition-all duration-300 flex flex-col items-center justify-center gap-4 group cursor-pointer"
                 >
                   <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-400 group-hover:text-teal-600 group-hover:scale-110 transition-all duration-300">
@@ -323,6 +349,7 @@ export default function EnderecosPage() {
                         </div>
                       )}
 
+                      <button type="button" onClick={() => openEditAddress(end)} className="min-h-11 px-2 text-xs font-bold text-teal-700">Editar</button>
                       <button 
                         onClick={() => setEnderecoToDelete(end.id)} 
                         className="text-slate-400 hover:text-red-500 transition-colors p-1"
@@ -347,7 +374,7 @@ export default function EnderecosPage() {
               <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
                 <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                   <MapPin size={18} className="text-teal-600" />
-                  Cadastrar Novo Endereço
+                  {editingId ? 'Editar Endereço' : 'Cadastrar Novo Endereço'}
                 </h3>
               </div>
               
@@ -390,7 +417,7 @@ export default function EnderecosPage() {
                   </div>
                   <div className="col-span-12 sm:col-span-2">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Nº</label>
-                    <input type="text" value={novoEnd.numero} onChange={(e) => setNovoEnd({...novoEnd, numero: e.target.value.replace(/\D/g, '')})} placeholder="123" required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
+                    <input type="text" value={novoEnd.numero} onChange={(e) => setNovoEnd({...novoEnd, numero: e.target.value})} maxLength={30} placeholder="123 ou S/N" required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
                   </div>
 
                   <div className="col-span-12 sm:col-span-4">

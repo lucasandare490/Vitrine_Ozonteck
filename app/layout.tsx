@@ -15,29 +15,32 @@ import VLibrasWidget from "@/components/VLibrasWidget";
 import { getSiteUrl } from "@/lib/site";
 
 const inter = Inter({ subsets: ["latin"] });
+const siteName = "Ozonteck Recife";
+const siteTitle = `${siteName} | Produtos e atendimento com Rogério André`;
+const siteDescription = "Cosméticos, cuidados capilares e produtos ozonizados com atendimento de Rogério André em Recife. Consulte os produtos e as opções de entrega ou retirada.";
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
   title: {
-    default: "Ozonteck Recife | Produtos e atendimento com Rogério André",
-    template: "%s | Ozonteck Recife",
+    default: siteTitle,
+    template: `%s | ${siteName}`,
   },
-  description: "Compre cosméticos, cuidados capilares e produtos ozonizados com Rogério André, distribuidor autorizado Ozonteck em Recife. Entrega ou retirada na Boa Vista.",
+  description: siteDescription,
   icons: { icon: [{ url: '/brand-icon.png', type: 'image/png', sizes: '192x192' }], apple: '/brand-icon.png' },
-  applicationName: "Ozonteck Recife",
+  applicationName: siteName,
   category: "ecommerce",
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    siteName: "Ozonteck Recife",
-    title: "Ozonteck Recife | Rogério André",
-    description: "Cosméticos, cuidados capilares e produtos ozonizados com atendimento de Rogério André. Entrega ou retirada na Boa Vista, Recife.",
-    images: [{ url: '/brand-share.png', width: 1200, height: 630, alt: 'Ozonteck Recife — distribuidor autorizado Rogério André' }],
+    siteName,
+    title: siteTitle,
+    description: siteDescription,
+    images: [{ url: '/brand-share.png', width: 1200, height: 630, alt: 'Ozonteck Recife — produtos e atendimento com Rogério André' }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ozonteck | Loja Virtual Recife",
-    description: "Produtos ozonizados e nanotecnologia com atendimento da unidade Ozonteck Recife.",
+    title: siteTitle,
+    description: siteDescription,
     images: ['/brand-share.png'],
   },
   robots: {
@@ -56,7 +59,7 @@ export default function RootLayout({
       <body className={inter.className} suppressHydrationWarning>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org', '@type': 'WebSite',
-          name: 'Ozonteck Recife', alternateName: 'Ozonteck Recife — Rogério André',
+          name: siteName, alternateName: 'Ozonteck Recife — Rogério André',
           url: getSiteUrl().toString(), inLanguage: 'pt-BR',
         }).replace(/</g, '\\u003c') }} />
         <SecondFactorGate>

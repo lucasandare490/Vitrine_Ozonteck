@@ -40,6 +40,9 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      ...['/admin/:path*', '/conta/:path*', '/api/:path*', '/lista', '/login'].map(source => ({
+        source, headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }],
+      })),
       {
         source: '/(.*)',
         headers: [
