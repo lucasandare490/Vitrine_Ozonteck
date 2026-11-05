@@ -166,6 +166,10 @@ Documentação complementar:
 
 Os registros de validação são datados, não uma verificação contínua do ambiente.
 
+### Conferência de 05/11/2026
+
+Versão operacional `5db3391` confirmada publicada na Netlify (deploy `6aec539c7a698311a8bd32d7`). Suíte local: 137 aprovados, um HTTP condicional ignorado; componentes: 24/24; SEO público separado: 7/7; compilação de produção aprovada. Homologação isolada confirmou Pix, emissão de boleto, aprovação/recusa e 3DS de crédito, cancelamento e reembolso. Débito encontrou restrição da conta de teste. Não houve cobrança real nessa revisão. Todos os eventos remotos de e-mail e o ciclo completo sandbox com banco/webhook ainda não possuem comprovação individual. O Google ainda exibiu o resultado antigo; não há garantia de prazo para nova leitura. Consulte a revisão final para distinguir implementação, publicação, validação e dependências externas.
+
 ## Estrutura
 
 ```text

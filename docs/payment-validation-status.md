@@ -1,5 +1,7 @@
 # Validacao de pagamento - 2026-10-10
 
+> Histórico de verificações: as limitações de outubro abaixo não descrevem sozinhas o estado atual. Em 05/11/2026, a loja usa o endereço HTTPS estável `https://ozonteck-recife.netlify.app`, Orders com vínculo de provedor e webhook `/api/webhook/orders`, mantendo suporte às cobranças legadas. A revisão [individual atualizada](payment-review-2026-11-04.md) contém os ensaios reais de homologação de Pix, emissão de boleto, crédito, 3DS, cancelamento e reembolso, além da restrição de débito e dos limites de comprovação. Deploy `5db3391` confirmado publicado; ver [revisão final](revisao-final-2026-11-04.md).
+
 ## Verificado
 
 - Consulta autenticada e somente leitura a `/users/me` do Mercado Pago: HTTP 200, site MLB, conta sem tag `test_user`. Nenhuma credencial ou dado pessoal foi registrado neste documento.

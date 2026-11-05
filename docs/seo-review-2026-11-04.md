@@ -65,9 +65,15 @@ O teste HTTP não autentica usuários, cria pedidos ou grava dados de negócio. 
 
 Esta revisão verifica os arquivos e o servidor local. Não comprova implantação, rastreamento público, indexação, posição ou aparência atual dos resultados do Google.
 
+> Histórico: a situação acima corresponde à revisão inicial. A atualização datada abaixo registra verificações posteriores da versão pública, sem modificar retroativamente a evidência original.
+
 Na publicação, `NEXT_PUBLIC_SITE_URL` precisa conter a URL pública correta da página inicial, preferencialmente HTTPS na raiz do domínio ou subdomínio. O helper existente usa localhost quando a configuração está ausente ou inválida; não foi alterado neste escopo. Não se deve confundir esse fallback local com um endereço de produção verificado.
 
 Após publicar, conferir o HTML público, `/favicon.ico`, `/brand-icon.png`, `/brand-share.png`, `robots.txt`, redirecionamentos e eventuais cabeçalhos da hospedagem. Validar o JSON-LD no [Schema Markup Validator](https://validator.schema.org/) e solicitar novo rastreamento da página inicial pela inspeção de URL do Search Console, se houver acesso. O Rich Results Test não valida o recurso de nome do site. Nenhuma dessas etapas externas foi executada ou declarada concluída nesta revisão.
 ## Atualização de 05/11/2026
 
 O conjunto SEO do commit `6d40ab9` foi confirmado publicado e os sete testes, incluindo HTML/imagens via HTTP, passaram contra a loja pública. O Search Console autenticado confirmou “O URL está no Google” e HTTPS. Uma nova solicitação da página inicial nesta data foi recusada por cota diária; também houve aviso de conexão do reCAPTCHA. Nenhuma tentativa adicional foi feita. Evidência: `evidencias/google-cota-2026-11-05.png`. Não há solicitação de indexação nova aceita nesta atualização; títulos, nome do site, descrição e ícone dependem da nova leitura e escolha do Google. O hostname gratuito permanece `ozonteck-recife.netlify.app`.
+
+## Resultado público conferido em 05/11/2026, 10h38 de Recife
+
+Sete verificações SEO passaram contra a loja pública. Deploy 5db3391 confirmado Published e arquivos públicos comparados ao permalink. A pesquisa `ozonteck recife netlify` ainda exibiu “Netlify”, o título “Ozonteck | Loja Virtual Recife” e a descrição antiga; captura `evidencias/google-resultado-2026-11-05.png`. Não houve nova solicitação aceita após a cota diária. Nome, descrição e favicon no resultado continuam dependentes de leitura/escolha do Google, mesmo com metadados corretos publicados.

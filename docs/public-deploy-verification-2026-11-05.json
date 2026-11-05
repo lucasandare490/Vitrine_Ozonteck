@@ -1,0 +1,28 @@
+{
+  "verifiedAt": "2026-11-05T13:38:11.555Z",
+  "commit": "5db3391c5a84718affc2d9fda589390b9efdb13d",
+  "deployId": "6aec539c7a698311a8bd32d7",
+  "scope": "Public HTML and JavaScript compared to exact deployment; JavaScript escape sequences decoded as text only. No account mutations or charges.",
+  "checks": [
+    {
+      "route": "/lista",
+      "status": 200,
+      "exactDeployChunksMatch": true,
+      "markersConfirmed": 1
+    },
+    {
+      "route": "/admin/clientes",
+      "status": 200,
+      "exactDeployChunksMatch": true,
+      "markersConfirmed": 3
+    },
+    {
+      "route": "/robots.txt",
+      "status": 200
+    },
+    {
+      "route": "/sitemap.xml",
+      "status": 200
+    }
+  ]
+}

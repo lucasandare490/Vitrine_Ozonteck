@@ -1,5 +1,7 @@
 # Publicacao e troca da conta de pagamentos
 
+> Atualização em 05/11/2026: hospedagem HTTPS estável e aplicação Orders já estão publicadas. O deploy `5db3391`, ID `6aec539c7a698311a8bd32d7`, foi confirmado Published; não é mais o túnel temporário descrito nas etapas históricas abaixo. Webhook Orders: `https://ozonteck-recife.netlify.app/api/webhook/orders`; legado permanece em `/api/webhook`. Não trocar credenciais antigas nem reatribuir cobranças históricas. Migrações novas aplicadas e evidências, inclusive limites de homologação/Google/e-mails, constam na [revisão final](revisao-final-2026-11-04.md).
+
 ## Preparado em 13/10/2026
 
 - Recuperacao autenticada de Pix/boleto nos pedidos, consulta automatica e nenhuma nova cobranca para reabrir instrucoes.
