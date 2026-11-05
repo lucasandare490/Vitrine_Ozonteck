@@ -1,4 +1,5 @@
 'use client';
+import Pagination from '@/components/Pagination';
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 type Reminder = { id: string; title: string; note: string; due_at: string; completed_at: string | null };
@@ -71,6 +72,6 @@ export default function RemindersPage() {
     {error && <p role="alert" className="text-red-700">{error}</p>}{notice && <p role="status" className="text-teal-800">{notice}</p>}
     <label className="flex min-h-11 items-center gap-2"><input type="checkbox" checked={done} onChange={event => { setDone(event.target.checked); setPage(0); }} />Mostrar concluídos</label>
     {!rows.length && <p>Nenhum lembrete nesta página.</p>}{rows.map(row => <article key={row.id} className="space-y-2 rounded-xl border bg-white p-5 text-slate-900"><h2 className="font-bold">{row.title}</h2><time>{new Date(row.due_at).toLocaleString('pt-BR')}</time><p className="whitespace-pre-wrap break-words text-sm">{row.note}</p><button type="button" disabled={busy} onClick={() => void toggle(row)} className={button}>{row.completed_at ? 'Reabrir' : 'Marcar concluído'}</button></article>)}
-    <nav className="flex items-center gap-3" aria-label="Páginas de lembretes"><button disabled={page === 0 || busy} onClick={() => setPage(value => value - 1)} className={button}>Anterior</button><span>Página {page + 1}</span><button disabled={rows.length < 30 || busy} onClick={() => setPage(value => value + 1)} className={button}>Próxima</button></nav>
+    <Pagination label="Páginas de lembretes" page={page + 1} hasNext={rows.length === 30} busy={busy} onChange={next => setPage(next - 1)} />
   </section>;
 }

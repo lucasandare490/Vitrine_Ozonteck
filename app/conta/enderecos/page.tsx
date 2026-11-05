@@ -396,7 +396,7 @@ export default function EnderecosPage() {
                   </div>
                   {tipoEndereco === 'Outro' && (
                     <input 
-                      type="text" value={nomePersonalizado} onChange={(e) => setNomePersonalizado(e.target.value)}
+                      aria-label="Nome do local" type="text" value={nomePersonalizado} onChange={(e) => setNomePersonalizado(e.target.value)}
                       placeholder="Ex: Casa de Praia, Apartamento da Mãe..." autoFocus required
                       className="mt-3 w-full px-4 py-2.5 bg-white border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400"
                     />
@@ -409,15 +409,15 @@ export default function EnderecosPage() {
                       <span>CEP</span>
                       {isFetchingCep && <Loader2 size={12} className="animate-spin text-teal-500"/>}
                     </label>
-                    <input type="text" value={novoEnd.cep} onChange={handleCepChange} placeholder="00000-000" maxLength={9} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
+                    <input aria-label="CEP" type="text" value={novoEnd.cep} onChange={handleCepChange} placeholder="00000-000" maxLength={9} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
                   </div>
                   <div className="col-span-12 sm:col-span-6">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Rua / Logradouro</label>
-                    <input type="text" value={novoEnd.rua} onChange={(e) => setNovoEnd({...novoEnd, rua: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
+                    <input aria-label="Rua / Logradouro" type="text" value={novoEnd.rua} onChange={(e) => setNovoEnd({...novoEnd, rua: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
                   </div>
                   <div className="col-span-12 sm:col-span-2">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Nº</label>
-                    <input type="text" value={novoEnd.numero} onChange={(e) => setNovoEnd({...novoEnd, numero: e.target.value})} maxLength={30} placeholder="123 ou S/N" required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
+                    <input aria-label="Número" type="text" value={novoEnd.numero} onChange={(e) => setNovoEnd({...novoEnd, numero: e.target.value})} maxLength={30} placeholder="123 ou S/N" required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
                   </div>
 
                   <div className="col-span-12 sm:col-span-4">
@@ -425,19 +425,19 @@ export default function EnderecosPage() {
                       <span>Complemento</span>
                       <span className="text-[9px] text-slate-400">(Opcional)</span>
                     </label>
-                    <input type="text" value={novoEnd.complemento} onChange={(e) => setNovoEnd({...novoEnd, complemento: e.target.value})} placeholder="Apto, Bloco..." className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
+                    <input aria-label="Complemento" type="text" value={novoEnd.complemento} onChange={(e) => setNovoEnd({...novoEnd, complemento: e.target.value})} placeholder="Apto, Bloco..." className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all placeholder:text-slate-400" />
                   </div>
                   <div className="col-span-12 sm:col-span-4">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Bairro</label>
-                    <input type="text" value={novoEnd.bairro} onChange={(e) => setNovoEnd({...novoEnd, bairro: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
+                    <input aria-label="Bairro" type="text" value={novoEnd.bairro} onChange={(e) => setNovoEnd({...novoEnd, bairro: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
                   </div>
                   <div className="col-span-12 sm:col-span-3">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Cidade</label>
-                    <input type="text" value={novoEnd.cidade} onChange={(e) => setNovoEnd({...novoEnd, cidade: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
+                    <input aria-label="Cidade" type="text" value={novoEnd.cidade} onChange={(e) => setNovoEnd({...novoEnd, cidade: e.target.value})} required className="w-full px-4 py-2.5 border border-slate-300 rounded-lg text-sm focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
                   </div>
                   <div className="col-span-12 sm:col-span-1">
                     <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1.5 text-center">UF</label>
-                    <input type="text" value={novoEnd.estado} onChange={(e) => setNovoEnd({...novoEnd, estado: e.target.value.toUpperCase()})} maxLength={2} required className="w-full px-2 py-2.5 border border-slate-300 rounded-lg text-sm uppercase text-center focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
+                    <input aria-label="UF" type="text" value={novoEnd.estado} onChange={(e) => setNovoEnd({...novoEnd, estado: e.target.value.toUpperCase()})} maxLength={2} required className="w-full px-2 py-2.5 border border-slate-300 rounded-lg text-sm uppercase text-center focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all" />
                   </div>
                 </div>
 

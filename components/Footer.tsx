@@ -1,13 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import PaymentBrands from './PaymentBrands';
 import { usePathname } from 'next/navigation';
 import {
   ArrowUp,
   Camera,
   CreditCard,
-  Handshake,
   Heart,
   Lock,
   MapPin,
@@ -38,21 +37,6 @@ const SOCIAL_LINKS = [
     icon: Music2,
   },
 ] as const;
-
-function PaymentMethods() {
-  return <div>
-    <div className="grid max-w-64 grid-cols-3 gap-2" aria-label="Formas de pagamento">
-      {[
-        ['visa.png', 'Visa'], ['master.png', 'Mastercard'], ['elo.png', 'Elo'],
-        ['amex.svg', 'American Express'], ['boleto.gif', 'Boleto'], ['pix.gif', 'Pix'],
-      ].map(([file, name]) => <span key={name} title={name} className="flex h-12 items-center justify-center rounded-lg border border-slate-200 bg-white p-2 shadow-sm">
-        <Image src={'/payments/' + file} alt={name} width={60} height={30} unoptimized className="h-7 w-14 object-contain" />
-      </span>)}
-    </div>
-    <p className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-slate-600"><Handshake size={16} className="text-sky-600" aria-hidden="true" />Processado pelo Mercado Pago</p>
-    <p className="mt-2 text-xs leading-relaxed text-slate-500">Parcelas e disponibilidade do cartão são informadas no pagamento.</p>
-  </div>;
-}
 
 function SocialLinks() {
   return (
@@ -172,7 +156,7 @@ function FullFooter() {
 
           <section aria-labelledby="footer-payment-title">
             <h2 id="footer-payment-title" className="mb-5 text-xs font-bold uppercase text-slate-900">Formas de pagamento</h2>
-            <PaymentMethods />
+            <PaymentBrands />
           </section>
 
           <section aria-labelledby="footer-security-title">

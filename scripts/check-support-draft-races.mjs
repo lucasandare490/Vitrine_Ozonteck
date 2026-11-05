@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createComponentHarness, elements, flushAsync } from './component-test-harness.mjs';
+import { paginationModule } from './pagination-test-renderer.mjs';
 
 async function mount(admin = false) {
   let userId = 'account-a', authReads = 0;
@@ -25,7 +26,7 @@ async function mount(admin = false) {
     },
     rpc(name, args) { return new Promise(done => requests.push({ name, args, done })); },
   };
-  const harness = createComponentHarness('components/SupportTickets.tsx', { supabase: client });
+  const harness = createComponentHarness('components/SupportTickets.tsx', { supabase: client, imports: { './Pagination': paginationModule } });
   const render = () => harness.render({ admin });
   render(); harness.flushTimeouts(); await flushAsync();
   return {

@@ -184,3 +184,9 @@ docs/                   Regras, evidências e orientações
 ```
 
 Para contribuir, siga [`AGENTS.md`](AGENTS.md). Antes de mudar APIs ou convenções do Next.js, consulte a documentação instalada em `node_modules/next/dist/docs/`.
+
+### Acabamento de 05/11/2026
+
+Paginação compartilhada e responsiva, artes oficiais nítidas no rodapé/Pix, condições dos meios sem promessa de débito liberado, campos de endereço acessíveis e título sem marca duplicada. Foram comprovadas gravações publicadas de segundo endereço/edição, interessado com contato concluído, lembrete concluído/reaberto e CSV no produto TESTE-001 com restauração dos valores originais. Registro sem dados pessoais em `docs/published-write-verification-2026-11-05.json`.
+
+No plano atual, o painel Netlify exige upgrade pago para ocultar o selo; ele permanece visível, respeitando custo zero. Débito, compensação de boleto, prova integral de webhook/estoque/telas e todos os eventos de e-mail têm limites externos documentados. O controle do Chrome foi desativado durante a conferência. Consulte a atualização final para publicação e evidências, sem presumir que código no Git já esteja publicado.

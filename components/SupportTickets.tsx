@@ -1,4 +1,5 @@
 'use client';
+import Pagination from './Pagination';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
@@ -115,7 +116,7 @@ export default function SupportTickets({ admin = false }: { admin?: boolean }) {
           <div className="flex flex-wrap gap-2"><button disabled={busy} className={button}>Enviar resposta</button><button type="button" disabled={busy || (responses[ticket.id] ?? ticket.response ?? '').trim().length < 2} onClick={() => void respond(ticket, 'resolvido')} className={button}>Responder e resolver</button></div>
         </form>}
       </article>)}
-      <nav aria-label="Páginas de atendimentos" className="flex items-center gap-3"><button type="button" disabled={page === 0 || busy} onClick={() => setPage(value => value - 1)} className={button}>Anterior</button><span>Página {page + 1}</span><button type="button" disabled={tickets.length < 20 || busy} onClick={() => setPage(value => value + 1)} className={button}>Próxima</button></nav>
+      <Pagination label="Páginas de atendimentos" page={page + 1} hasNext={tickets.length === 20} busy={busy} onChange={next => setPage(next - 1)} />
     </>}
   </section>;
 }

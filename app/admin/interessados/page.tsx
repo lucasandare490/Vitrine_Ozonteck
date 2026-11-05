@@ -1,4 +1,5 @@
 'use client';
+import Pagination from '@/components/Pagination';
 import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
@@ -43,6 +44,6 @@ export default function InterestedPeople() {
     {error && <p role="alert" className="text-red-700">{error}</p>}
     {!rows.length && <p>Nenhuma solicitação nesta página.</p>}
     {rows.map(row => <article key={row.id} className="space-y-2 rounded-xl border bg-white p-5 text-slate-900"><h2 className="font-bold">{row.name}</h2><p className="break-words text-sm">{row.phone} · {row.email}</p><p className="text-sm">Interesse: {({ consumo: 'Consumo', distribuicao: 'Distribuição', ambos: 'Consumo e distribuição' } as Record<string,string>)[row.interest]} · {new Date(row.created_at).toLocaleString('pt-BR')}</p><button type="button" disabled={busy} onClick={() => void update(row)} className="min-h-11 rounded-lg bg-teal-700 px-4 text-sm font-bold text-white disabled:opacity-50">{row.status === 'new' ? 'Marcar contato realizado' : 'Reabrir para contato'}</button></article>)}
-    <nav className="flex gap-4" aria-label="Páginas de interessados"><button disabled={!page || busy} onClick={() => setPage(value => value - 1)} className="min-h-11 underline disabled:opacity-50">Anterior</button><span className="py-3">Página {page + 1}</span><button disabled={rows.length < 30 || busy} onClick={() => setPage(value => value + 1)} className="min-h-11 underline disabled:opacity-50">Próxima</button></nav>
+    <Pagination label="Páginas de interessados" page={page + 1} hasNext={rows.length === 30} busy={busy} onChange={next => setPage(next - 1)} />
   </section>;
 }

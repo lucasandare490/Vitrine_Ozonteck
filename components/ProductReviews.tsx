@@ -1,4 +1,5 @@
 'use client';
+import Pagination from './Pagination';
 
 import { useEffect, useRef, useState } from 'react';
 import { Star } from 'lucide-react';
@@ -54,7 +55,7 @@ export default function ProductReviews({ code }: { code: string }) {
           <p className="whitespace-pre-line break-words leading-relaxed text-slate-700">{review.comentario}</p>
           <ReviewImages name={review.nome} images={review.imagens.map((path) => reviewImageUrl(path, process.env.NEXT_PUBLIC_SUPABASE_URL || '')).filter((url): url is string => Boolean(url))} />
         </article>)}</div>
-        {data.filtered > 6 && <nav aria-label="Páginas de avaliações" className="mt-6 flex flex-wrap items-center gap-4"><button type="button" disabled={page === 1} onClick={() => setPage(page - 1)} className="min-h-11 text-teal-800 disabled:opacity-40">Anterior</button><span>Página {page} de {Math.ceil(data.filtered / 6)}</span><button type="button" disabled={page * 6 >= data.filtered} onClick={() => setPage(page + 1)} className="min-h-11 text-teal-800 disabled:opacity-40">Próxima</button></nav>}
+        {data.filtered > 6 && <Pagination label="Páginas de avaliações" page={page} totalPages={Math.ceil(data.filtered / 6)} totalItems={data.filtered} pageSize={6} onChange={setPage} />}
       </>}
     </div>
   </section>;

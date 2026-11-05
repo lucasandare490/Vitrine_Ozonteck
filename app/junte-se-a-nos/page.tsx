@@ -6,7 +6,7 @@ import { JOIN_REGISTRATION_URL, JOIN_CONTACT_URL, JOIN_FAQS } from '@/lib/join';
 import JoinInterestForm from '@/components/JoinInterestForm';
 
 export const metadata: Metadata = {
-  title: 'Junte-se a nós | Ozonteck Recife',
+  title: 'Junte-se a nós',
   description: 'Conheça a equipe de Rogério André: compre para consumo ou conheça a atuação como distribuidor independente. Benefícios na loja dependem de aprovação manual.',
 };
 

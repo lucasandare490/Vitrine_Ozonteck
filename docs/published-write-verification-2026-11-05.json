@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-11-05T15:27:15.837Z",
+  "scope": "read-only; no personal values or credentials",
+  "checks": {
+    "reminders": [
+      {
+        "matching_records": 1,
+        "completed": true
+      }
+    ],
+    "interests": [
+      {
+        "matching_records": 1,
+        "contact_completed": true
+      }
+    ],
+    "addresses": [
+      {
+        "total_addresses": 2,
+        "primary_addresses": 1,
+        "edited_secondary_address": 1
+      }
+    ],
+    "csv_product": [
+      {
+        "code": "TESTE-001",
+        "price": "9.99",
+        "estoque": 9998
+      }
+    ],
+    "history": [
+      {
+        "delivered_without_approval": 8,
+        "linked_payments": 0,
+        "linked_checkouts": 0,
+        "earliest": "2026-09-15T03:00:00.000Z",
+        "latest": "2026-09-15T03:00:00.000Z"
+      }
+    ],
+    "email_states": []
+  }
+}

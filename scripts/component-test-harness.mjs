@@ -11,6 +11,7 @@ export const flushAsync = () => setImmediate();
 export function elements(tree, type) {
   if (!tree || typeof tree !== 'object') return [];
   if (Array.isArray(tree)) return tree.flatMap(node => elements(node, type));
+  if (typeof tree.type === 'function' && tree.type.name === 'Pagination') return elements(tree.type(tree.props), type);
   return [...(!type || tree.type === type ? [tree] : []), ...elements(tree.props?.children, type)];
 }
 

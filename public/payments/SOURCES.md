@@ -17,3 +17,15 @@ identificar os meios de pagamento, sem alteração da arte.
 
 Disponibilidade de uma marca não garante aprovação de uma transação ou
 parcelamento específico. As condições finais aparecem no checkout.
+
+## Acabamento de 05/11/2026
+
+As miniaturas pequenas de Elo, Mastercard, Pix e boleto deixaram de ser usadas no rodapé. Originais anteriores preservados para histórico, sem deformação nem ampliação artificial.
+
+- `elo-oficial.png` (328×168): arte monocromática positiva publicada em https://www.elo.com.br/marca-elo/ — https://media.elo.com.br/strapi-hml/monochromatic_brand_white_mobile_298b21a40c.png . A própria marca recomenda a variante positiva em canais de aceitação.
+- `pix-oficial.png` (540×190): original Banco Central — https://www.bcb.gov.br/content/estabilidadefinanceira/piximg/logo_pix.png . Arte preservada integralmente, também usada no checkout.
+- `master-oficial.svg`: símbolo vetorial do titular — https://www.mastercard.com/etc.clientlibs/marts/clientlibs/clientlib-site/resources/icons/mastercard-favicon.svg . Cores e proporções originais preservadas.
+- Visa mantém o original Mercado Pago de 64×48 sem ampliação acima desse tamanho; American Express mantém o SVG original.
+- Boleto é representado pelo ícone vetorial genérico Barcode do lucide-react já instalado, com legenda Boleto. Não usar marca de banco para sugerir beneficiário diferente.
+
+Legendas identificam as marcas por extenso; imagens decorativas não repetem a leitura acessível. As marcas indicam opções ilustradas, não aprovação garantida ou elegibilidade de todo cartão/débito.

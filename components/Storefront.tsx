@@ -1,4 +1,5 @@
 'use client';
+import Pagination from './Pagination';
 
 import GoogleStoreReviewsLink from '@/components/GoogleStoreReviewsLink';
 import { isRetiredProduct } from '@/lib/catalog-availability';
@@ -232,7 +233,7 @@ const AvaliacoesDaLoja = () => {
               <ChevronRight size={24} strokeWidth={2.5} />
             </button>
           </div>
-          {!legacy && estatisticas.total > 12 && <nav aria-label="Páginas de experiências de compra" className="mt-5 flex flex-wrap items-center gap-5"><button type="button" disabled={page===1} onClick={() => setPage(page-1)} className="min-h-11 text-teal-800 disabled:opacity-40">Anteriores</button><span>{page} de {Math.ceil(estatisticas.total/12)}</span><button type="button" disabled={page*12>=estatisticas.total} onClick={() => setPage(page+1)} className="min-h-11 text-teal-800 disabled:opacity-40">Próximas</button></nav>}
+          {!legacy && estatisticas.total > 12 && <Pagination label="Páginas de experiências de compra" page={page} totalPages={Math.ceil(estatisticas.total / 12)} totalItems={estatisticas.total} pageSize={12} onChange={setPage} />}
         </div>
       </RevealOnScroll>
     </section>

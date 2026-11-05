@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createComponentHarness, elements, flushAsync } from './component-test-harness.mjs';
+import { paginationModule } from './pagination-test-renderer.mjs';
 
 function database() {
   const reads = [], writes = [];
@@ -49,7 +50,7 @@ const configurations = [
   },
 ];
 async function mount(config) {
-  const db = database(), harness = createComponentHarness(config.path, { supabase: db.client });
+  const db = database(), harness = createComponentHarness(config.path, { supabase: db.client, imports: { '@/components/Pagination': paginationModule } });
   harness.render(); harness.flushTimeouts(); await flushAsync();
   return { db, harness };
 }

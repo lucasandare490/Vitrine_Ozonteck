@@ -1,6 +1,7 @@
 'use client';
 
 import type { CardPayment } from '@mercadopago/sdk-react';
+import Image from 'next/image';
 import { Barcode, CreditCard, Check, ArrowRight, Loader2 } from 'lucide-react';
 import { memo, useCallback, useEffect, useRef, useState, type ComponentProps } from 'react';
 import SecureCardPayment from './SecureCardPayment';
@@ -19,7 +20,7 @@ type Props = {
 };
 
 function PixSymbol() {
-  return <svg viewBox="0 0 32 32" width="32" height="32" fill="none" aria-hidden="true"><path d="m10 7 4-4a3 3 0 0 1 4 0l4 4h-2l-4 4-4-4h-2Zm-3 3-4 4a3 3 0 0 0 0 4l4 4h5l4-4 4 4h5l4-4a3 3 0 0 0 0-4l-4-4h-5l-4 4-4-4H7Zm3 15 4 4a3 3 0 0 0 4 0l4-4h-2l-4-4-4 4h-2Z" fill="currentColor" /></svg>;
+  return <Image src="/payments/pix-oficial.png" alt="" aria-hidden="true" width={540} height={190} unoptimized className="h-auto w-16 object-contain" />;
 }
 
 export default memo(function OrdersCheckoutPayment({ initialization, onSubmit }: Props) {
@@ -41,7 +42,7 @@ export default memo(function OrdersCheckoutPayment({ initialization, onSubmit }:
   return <div className="space-y-5">
     <fieldset disabled={busy} className="grid gap-3 sm:grid-cols-3">
       <legend className="mb-3 font-semibold">Como deseja pagar?</legend>
-      {([['pix', 'Pix', 'QR Code ou copia e cola'], ['boleto', 'Boleto', 'Pague pelo app do seu banco'], ['card', 'Cartão', 'Crédito ou débito']] as const).map(([value, label, description]) =>
+      {([['pix', 'Pix', 'QR Code ou copia e cola'], ['boleto', 'Boleto', 'Pague pelo app do seu banco'], ['card', 'Cartão', 'Opções e parcelas após informar o cartão']] as const).map(([value, label, description]) =>
         <label key={value} className={`relative flex min-h-36 cursor-pointer flex-col gap-3 rounded-2xl border-2 p-5 transition-colors focus-within:ring-2 focus-within:ring-teal-600 focus-within:ring-offset-2 ${busy ? 'cursor-wait opacity-60' : ''} ${method === value ? 'border-teal-600 bg-teal-50/70 shadow-sm dark:bg-teal-950/40' : 'border-slate-200 bg-white hover:border-teal-300 dark:border-neutral-700 dark:bg-neutral-900'}`}>
           <input className="sr-only" type="radio" name="payment-method" value={value} checked={method === value} onChange={() => { setMethod(value); setError(''); }} />
           <span className="flex items-center justify-between gap-3"><span className="flex h-12 w-12 items-center justify-center rounded-xl bg-white text-teal-700 shadow-sm ring-1 ring-teal-100 dark:bg-neutral-800 dark:text-teal-300 dark:ring-neutral-700">{value === 'pix' ? <PixSymbol /> : value === 'card' ? <CreditCard size={29} aria-hidden="true" /> : <Barcode size={29} aria-hidden="true" />}</span><span aria-hidden="true" className={`flex h-5 w-5 items-center justify-center rounded-full border ${method === value ? 'border-teal-700 bg-teal-700 text-white' : 'border-slate-300'}`}>{method === value && <Check size={13} strokeWidth={3} />}</span></span>

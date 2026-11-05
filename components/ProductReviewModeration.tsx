@@ -1,4 +1,5 @@
 'use client';
+import Pagination from './Pagination';
 
 import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -38,7 +39,8 @@ export default function ProductReviewModeration() {
       {busy && <p role="status">Processando…</p>}{error && <p role="alert">{error}</p>}
       {!busy && !error && !items.length && <p>Nenhuma avaliação nesta página.</p>}
       {items.map(item => <div key={item.id} className="border-t border-slate-200 py-3"><p className="font-semibold">{item.nome} · {item.nota}/5 · {item.publicado ? 'Publicada' : 'Não publicada'}</p><p className="break-words text-xs text-slate-500">Produto: {item.produto}</p><p className="my-2 whitespace-pre-wrap break-words">{item.comentario}</p><button type="button" disabled={busy} onClick={() => void moderate(item)} className="min-h-11 text-sm font-semibold text-teal-700 disabled:opacity-50">{item.publicado ? 'Ocultar avaliação' : 'Publicar avaliação'}</button></div>)}
-      <div className="flex gap-4"><button disabled={busy || page === 0} onClick={() => void load(page - 1)} className="min-h-11 disabled:opacity-50">Anterior</button><button disabled={busy || items.length < 20} onClick={() => void load(page + 1)} className="min-h-11 disabled:opacity-50">Próxima</button><button disabled={busy} onClick={() => void load(page)} className="min-h-11">Atualizar</button></div>
+      <Pagination label="Páginas de moderação de produtos" page={page + 1} hasNext={items.length === 20} busy={busy} onChange={next => void load(next - 1)} />
+      <button type="button" disabled={busy} onClick={() => void load(page)} className="min-h-11 rounded-xl border border-slate-200 px-4 text-sm font-semibold disabled:opacity-50">Atualizar</button>
     </div>}
   </section>;
 }
