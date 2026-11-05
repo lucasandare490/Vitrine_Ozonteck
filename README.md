@@ -46,7 +46,7 @@ O sino não é uma notificação push: com o painel fechado, esse recurso não e
 | Estado | Zustand |
 | Dados e autenticação | Supabase / PostgreSQL, Auth e políticas RLS |
 | Pagamentos | SDKs do Mercado Pago para servidor e React |
-| Validação e limites | Zod, Upstash Redis / Ratelimit |
+| Validação e limites | Zod; limite compartilhado no PostgreSQL/Supabase em produção; Redis opcional no desenvolvimento |
 | Testes | Node Test Runner; Playwright e PGlite em verificações adicionais |
 
 ## Executar localmente

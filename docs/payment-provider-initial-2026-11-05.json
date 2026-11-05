@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-05T09:15:24.556Z",
+  "environment": "test",
+  "testSellerConfirmed": true,
+  "scope": "Real provider sandbox requests using the shop request builder and normalizer. No shop DB, customer messages or real payments.",
+  "cases": [
+    {
+      "scenario": "pix",
+      "method": "pix",
+      "reference": "78f0d2fb-16a7-4578-b4b9-0a921fcb06a5",
+      "result": "failed",
+      "orderId": "ORDTST01M6NFVF4TD6W6E23JNEH9NCE6",
+      "createdStatus": "action_required",
+      "error": "ORDER_IDENTITY_MISMATCH"
+    },
+    {
+      "scenario": "boleto",
+      "method": "boleto",
+      "reference": "27212ddb-fe71-4d37-a2fc-096a0ed4f533",
+      "result": "failed",
+      "orderId": "ORDTST01M6NFVGKSYMJ0JX6N07XDM4Q9",
+      "createdStatus": "action_required",
+      "error": "ORDER_IDENTITY_MISMATCH"
+    },
+    {
+      "scenario": "credit-approved",
+      "method": "credit_card",
+      "reference": "1216bb26-04e3-4d9f-a1b9-d7f10fc57fd7",
+      "result": "failed",
+      "error": "REFUSING_NON_TEST_CARD_TOKEN"
+    },
+    {
+      "scenario": "credit-rejected",
+      "method": "credit_card",
+      "reference": "bf7d7ca6-f9b3-4569-bad4-058812bcfc00",
+      "result": "failed",
+      "error": "REFUSING_NON_TEST_CARD_TOKEN"
+    },
+    {
+      "scenario": "debit-approved",
+      "method": "debit_card",
+      "reference": "f5933bb7-7d22-496e-ba52-4f37ee652194",
+      "result": "failed",
+      "error": "REFUSING_NON_TEST_CARD_TOKEN"
+    }
+  ]
+}

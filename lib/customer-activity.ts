@@ -19,7 +19,18 @@ export function customerActivity(purchases: CustomerPurchase[], now = new Date()
   return result;
 }
 
-export function customerContactMessage(name: string | null) {
+export const customerContactPurposes = [
+  { value: 'contact', label: 'Atendimento' },
+  { value: 'reorder', label: 'Recompra' },
+  { value: 'reactivation', label: 'Retomar contato' },
+] as const;
+
+export function customerContactMessage(name: string | null, purpose: string = 'contact') {
   const firstName = name?.trim().split(/\s+/)[0];
-  return `Olá${firstName ? `, ${firstName}` : ''}! Aqui é da Ozonteck Recife. Como você está? Se precisar de ajuda para escolher um produto ou fazer uma nova compra, estamos à disposição. Você pode ver a loja em https://ozonteck-recife.netlify.app/. Se preferir não receber esse tipo de contato, é só nos avisar.`;
+  const message = purpose === 'reorder'
+    ? 'Quer ajuda para encontrar os produtos da sua próxima compra? Podemos conferir as opções e a disponibilidade na loja.'
+    : purpose === 'reactivation'
+      ? 'Passando para saber se você precisa de alguma ajuda com nossos produtos. Se quiser conhecer as opções da loja, estamos à disposição.'
+      : 'Como você está? Se precisar de ajuda para escolher um produto ou fazer uma nova compra, estamos à disposição.';
+  return `Olá${firstName ? `, ${firstName}` : ''}! Aqui é da Ozonteck Recife. ${message} Você pode ver a loja em https://ozonteck-recife.netlify.app/. Se preferir não receber esse tipo de contato, é só nos avisar.`;
 }

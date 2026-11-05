@@ -470,7 +470,9 @@ export default function ListaDeInteresse() {
 
     checkoutAttemptKey.current = null;
     localStorage.removeItem(attemptStorageKey);
-    throw new Error(data.status_detail || 'Pagamento não aprovado.');
+    throw new Error(data.status === 'rejected'
+      ? 'Pagamento recusado. Confira os dados ou escolha outra forma de pagamento.'
+      : 'Pagamento não aprovado. Consulte sua compra antes de tentar novamente.');
   };
 
   return (

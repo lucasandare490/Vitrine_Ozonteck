@@ -18,3 +18,17 @@ test('last purchase does not depend on order and customers stay separate', () =>
   assert.match(customerContactMessage('Ana Silva'), /Olá, Ana!/);
   assert.match(customerContactMessage(null), /^Olá!/);
 });
+
+test('contact drafts offer distinct purposes without inventing debts, benefits or customer dates', () => {
+  const drafts = ['contact', 'reorder', 'reactivation'].map(purpose => customerContactMessage(' Ana Silva ', purpose));
+  assert.equal(new Set(drafts).size, 3);
+  assert.match(drafts[1], /próxima compra/);
+  assert.match(drafts[2], /precisa de alguma ajuda/);
+  for (const draft of drafts) {
+    assert.match(draft, /^Olá, Ana!/);
+    assert.match(draft, /https:\/\/ozonteck-recife\.netlify\.app\//);
+    assert.match(draft, /preferir não receber/);
+    assert.doesNotMatch(draft, /aniversário|dívida|desconto|cura|último contato/i);
+  }
+  assert.equal(customerContactMessage(null, 'unknown'), customerContactMessage(null));
+});

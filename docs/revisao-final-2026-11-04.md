@@ -139,3 +139,37 @@ A repetição da compilação webpack terminou com código 0, TypeScript e 29 p�
 - Google: URL indexada/HTTPS e identidade publicada; nova solicitação em 05/11 recusada por cota. Não registrar como pedido de indexação aceito.
 - Histórico: não existe evidência para reconstruir categorias apagadas antes da trilha ou determinar a origem dos oito pedidos legados. Nenhum dado foi inventado/aprovado manualmente. Depoimentos preexistentes não foram classificados como falsos nem apagados sem evidências.
 - Referências: recursos aplicáveis receberam implementação e testes; não se declara reprodução integral de sistemas externos. Fiado/carnê excluídos e aplicativo/PWA futuro. Valores de custo/lucro, pontuação e aniversário exigem dados/regras comerciais reais antes de inventar indicadores ou disparos.
+
+## Retomada com Mercado Pago autenticado — 05/11/2026
+
+### Concluído e validado
+
+- `62733dbe6df21ee06cafc2678e447b3072f81b7e` publicado, deploy `6aec0abaf651cdf48285cc33`, Published em 05/11 às 01:50:12 de Recife. A consulta autenticada de pagamento antigo passou a mostrar expiração e opções de alteração. Nenhuma confirmação de alteração foi executada. Sete testes públicos de SEO passaram após essa publicação.
+- Pedidos do cliente: Confirmados contém somente a compra paga de R$ 9,99; Todo o histórico contém as três compras da conta, preservando pendência e expiração. Captura `evidencias/pedidos-confirmados-2026-11-05.png`.
+- Carrinho publicado: entrega/retirada alternaram os títulos e explicações; Novo endereço vazio bloqueou avanço; selecionar o endereço existente permitiu continuar. Etapa de pagamento com escolhas estilizadas e campos oficiais de cartão, ajuda CVV no foco/saída, sem remontagem nos cliques comuns. Uma carga inicial dos campos expirou; alternar Pix → Cartão recuperou. Carrinho original de um LifeShii, R$ 159,90, entrega/endereço original e Pix restaurados, sem gravação de endereço, tokenização ou cobrança produtiva. Captura segura `evidencias/checkout-publicado-2026-11-05.png`.
+- Banco: consulta somente leitura às 05:50 de Recife confirmou sete incrementos instalados, RLS nas cinco tabelas novas, categoria de ensaio ativa e mesmos 11 pedidos: oito legados entregue/pending, um preparando/approved, um pending/pending e uma reserva expirada. Arquivo agregado `production-final-check-2026-11-05.json`, sem dados pessoais ou credenciais.
+- Após o titular liberar o painel Mercado Pago, foram realizadas operações reais **no provedor de homologação**, isoladas do banco da loja. Pix aprovado, boleto emitido e depois cancelado, crédito aprovado e depois reembolsado, crédito recusado, desafio 3DS aprovado e recusado. GETs autenticados confirmaram os estados. Nenhuma transferência ou cobrança real. Evidências e fontes em `payment-review-2026-11-04.md`, `payment-provider-test-2026-11-05.json`, `payment-management-test-2026-11-05.json` e capturas 3DS.
+- Painel produtivo: chave pública correspondente e webhook `https://ozonteck-recife.netlify.app/api/webhook/orders`, tópico Order. Nada foi substituído por teste, nenhuma credencial foi resetada e nenhum segredo integra o Git. O progresso visual do assistente de integração não é prova de aprovação bancária.
+
+### Correções e recursos adicionais desta publicação
+
+- Orders pode omitir `transaction_security.status` ao devolver `pending_challenge`. O normalizador agora reconhece o desafio pelo status_detail; ainda exige URL segura e validação integral da cobrança.
+- Recusa SDK 402 com `data.id` recupera a cobrança por GET autenticado e valida ID, conta, aplicação, referência e valor. Nunca confia no status do corpo de erro. Timeout sem ID preserva resultado desconhecido/idempotência. O checkout mostra recusa compreensível em português e permite nova tentativa somente após resultado terminal conhecido.
+- Carteira de clientes: seletor de modelos copiáveis Atendimento/Recompra/Retomar contato, personalizado pelo nome, link da loja e opção de não receber contato. Nenhum envio automático, promessa, dívida, desconto ou aniversário inventado. Completa o recurso aplicável de mensagens prontas das referências sem criar custos.
+- TypeScript exclui o diretório gerado e já ignorado `out`. Arquivos de outra prévia local nesse diretório estavam entrando no glob global; foram preservados. Um literal da nova fixture foi tipado corretamente. Nenhum teste nem código de aplicação foi excluído para mascarar erro.
+- Verificação: **137 testes aprovados, zero falhas, um HTTP condicional ignorado; 24/24 testes de componentes; ESLint dirigido sem erros; build webpack/TypeScript e 29 páginas aprovados**. O HTTP condicional é executado separadamente contra produção. Regressões novas observadas falhar antes e passar após correção. Revisão independente focada não encontrou defeito crítico/importante nos cinco arquivos de pagamento examinados.
+
+### Implementado, mas não validado em todo o ciclo externo
+
+- Fila de e-mails, eventos de suporte/retirada e demais notificações possuem testes SQL e worker. Entrega SMTP real na caixa da loja está comprovada em 04/11; cada evento ainda não foi exercitado individualmente por pedido remoto até a caixa de entrada. Não fabricar pedidos ou alterar retirada de venda real para obter essa prova.
+- Persistência e autorização de endereços, CSV e novos cadastros cobertas por testes; a inspeção publicada acima foi deliberadamente sem novas gravações de ensaio. Categoria vazia foi a exceção especificamente autorizada e restaurada.
+- Homologação acima não é um checkout completo de ponta a ponta com sessão, banco e recebimento público de webhook. Rotas/assinatura/persistência têm testes locais; produção não recebeu cobranças para esse fim. Boleto emitido não comprova compensação.
+
+### Dependências externas e limites
+
+- **Débito:** o cartão Elo de teste oficial retornou `payment_method_not_allowed_for_collector` (HTTP 400). Não declarar débito aprovado nem desativar a conta produtiva por inferência. A elegibilidade/liberação precisa ser conferida com o Mercado Pago. Não houve cobrança em cartão real.
+- **Google:** identidade, título, descrição, favicon, canonical, sitemap e robots publicados; Search Console confirmou URL indexada/HTTPS. Nova solicitação em 05/11 recusada por cota diária, sem aceite. Nome/snippet/imagem dependem de nova leitura e seleção do Google; sem garantia de aparência ou prazo.
+- **Histórico:** categorias excluídas antes da trilha não foram reconstruídas sem backup; oito legados financeiros preservados em conferência, sem origem inventada.
+- **Escopo:** fiado/carnê excluídos; PWA futuro. Custos, pontos e aniversários não inventados. Não declarar 100% de sistemas externos ou hospedagem gratuita eterna; limites dos provedores podem pausar serviços.
+
+Este registro substitui o adiamento de acesso ao Mercado Pago descrito anteriormente, sem apagar o histórico. A confirmação do próximo deploy deve ser registrada após a Netlify efetivamente publicá-lo.

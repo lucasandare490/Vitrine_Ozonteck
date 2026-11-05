@@ -86,6 +86,18 @@ test('Pix data is normalized without exposing payer, token or raw response', () 
   assert.equal('transactions' in result, false);
 });
 
+test('actual Orders challenge can omit the nested authentication status', () => {
+  const raw = response();
+  const challenge = { ...raw, status_detail: 'pending_challenge', transactions: { payments: [{
+    amount: '9.99', payment_method: { id: 'master', type: 'credit_card',
+      transaction_security: { url: 'https://www.mercadopago.com.br/auth/card/validation/pages/remedies/test', validation: 'on_fraud_risk' as const, liability_shift: 'required' as const } },
+  }] } };
+  const normalized = normalizeOrdersResponse(challenge, expected);
+  assert.equal(normalized.status, 'pending');
+  assert.equal(normalized.requiresAuthentication, true);
+  assert.match(normalized.authenticationUrl!, /^https:\/\/www\.mercadopago\.com\.br\/auth\//);
+});
+
 test('foreign account, app, currency, order, reference and amount are rejected', () => {
   for (const patch of [
     { user_id: 'other' }, { integration_data: { application_id: 'other' } },

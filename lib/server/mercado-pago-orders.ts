@@ -154,7 +154,7 @@ export function normalizeOrdersResponse(order: OrderResponse, expected: OrdersId
     boletoCode: method?.type === 'ticket' ? method.digitable_line ?? method.barcode_content ?? null : null,
     boletoUrl: method?.type === 'ticket' ? safeTicketUrl(method.ticket_url) : null,
     // A challenge must be handled by the frontend, never interpreted as approval.
-    requiresAuthentication: method?.transaction_security?.status === 'pending',
+    requiresAuthentication: order.status_detail === 'pending_challenge' || method?.transaction_security?.status === 'pending',
     authenticationUrl: order.status_detail === 'pending_challenge' ? safeTicketUrl(method?.transaction_security?.url) : null,
     partiallyRefunded: order.status_detail === 'partially_refunded',
   };

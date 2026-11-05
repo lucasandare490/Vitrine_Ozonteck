@@ -6,7 +6,7 @@ import { Users, Search, Loader2, AlertCircle, Mail, Phone, MapPin, Calendar } fr
 import toast from 'react-hot-toast';
 import PaginatedGrid from '@/components/PaginatedGrid';
 import Link from 'next/link';
-import { customerActivity, customerContactMessage, type CustomerPurchase } from '@/lib/customer-activity';
+import { customerActivity, customerContactMessage, customerContactPurposes, type CustomerPurchase } from '@/lib/customer-activity';
 
 type Cliente = {
   id: string;
@@ -23,6 +23,7 @@ export default function CarteiraClientes() {
   const [searchTerm, setSearchTerm] = useState('');
   const [purchases, setPurchases] = useState<CustomerPurchase[]>([]);
   const [activityFilter, setActivityFilter] = useState('all');
+  const [contactPurpose, setContactPurpose] = useState('contact');
   const [loadError, setLoadError] = useState('');
   const activity = useMemo(() => customerActivity(purchases), [purchases]);
   const fetching = useRef(false);
@@ -93,7 +94,7 @@ export default function CarteiraClientes() {
 
   async function copyContact(name: string | null) {
     try {
-      await navigator.clipboard.writeText(customerContactMessage(name));
+      await navigator.clipboard.writeText(customerContactMessage(name, contactPurpose));
       toast.success('Mensagem copiada. Revise antes de enviar e respeite a preferência do cliente.');
     } catch { toast.error('Não foi possível copiar a mensagem. Verifique a permissão do navegador.'); }
   }
@@ -132,6 +133,11 @@ export default function CarteiraClientes() {
                 <option value="30">Há 30 dias ou mais sem comprar</option>
                 <option value="60">Há 60 dias ou mais sem comprar</option>
                 <option value="never">Sem compra confirmada</option>
+              </select>
+            </label>
+            <label className="text-sm font-medium">Modelo de mensagem
+              <select value={contactPurpose} onChange={event => setContactPurpose(event.target.value)} className="ml-3 min-h-11 rounded-xl border border-slate-200 bg-white px-3 dark:border-neutral-700 dark:bg-neutral-900">
+                {customerContactPurposes.map(purpose => <option key={purpose.value} value={purpose.value}>{purpose.label}</option>)}
               </select>
             </label>
             <button onClick={() => void fetchClientes()} disabled={loading} className="min-h-11 rounded-xl border px-4 disabled:opacity-50">Atualizar</button>

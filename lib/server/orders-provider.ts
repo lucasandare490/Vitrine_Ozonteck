@@ -1,6 +1,7 @@
 import { MercadoPagoConfig, Order } from 'mercadopago';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { buildOrdersRequest, normalizeOrdersResponse, type OrdersCheckoutInput } from './mercado-pago-orders';
+import { createOrderResponse } from './orders-creation';
 
 export type StoredOrder = {
   id: string; checkout_id: string; valor_total: number | string;
@@ -54,8 +55,8 @@ export async function createOrdersPayment(db: SupabaseClient, order: StoredOrder
   if (error) throw new Error('PAYMENT_BINDING_UNAVAILABLE');
   const identity = await validateOrdersBinding(db, order);
   if (order.id_pagamento_mp) return readOrdersPayment(db, order);
-  const raw = await ordersClient().create({ body, requestOptions: { idempotencyKey: order.checkout_id } });
-  return normalizeOrdersResponse(raw, identity);
+  const { raw, recoveredId } = await createOrderResponse(ordersClient(), body, order.checkout_id);
+  return normalizeOrdersResponse(raw, { ...identity, ...(recoveredId ? { id: recoveredId } : {}) });
 }
 
 export async function reconcileOrdersPayment(db: SupabaseClient, order: StoredOrder, payment: Awaited<ReturnType<typeof readOrdersPayment>>) {

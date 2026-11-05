@@ -84,3 +84,9 @@ As observações acima preservam o histórico e não substituem a situação atu
 | Rodapé e métodos de pagamento | Logos institucionais dos meios já publicados e visíveis na vitrine. |
 
 Fora do escopo por decisão do titular: fiado/carnê; PWA/aplicativo ficam para depois. Não reproduzir cobrança premium, alegações de renda/saúde, prévia de comprovante demonstrativa nem indicadores de lucro/pontos sem fontes e regras reais. A loja não é declarada equivalente a 100% de ambos os sistemas.
+
+### Conferência posterior em 05/11
+
+- Mensagens prontas aplicáveis: Atendimento, Recompra e Retomar contato disponíveis para copiar na carteira, com nome, link da loja e preferência de contato. Sem envio automático. Aniversário sem data e cobrança de dívida não confirmada não são inferidos.
+- CVV conferido no formulário publicado: abre no foco/fecha ao sair. Ensaios isolados com a conta test_user do provedor confirmaram Pix aprovado, emissão/cancelamento de boleto e aprovação/recusa/3DS/reembolso de crédito. Débito devolveu restrição da conta de teste e permanece sem aprovação comprovada. Ver `payment-review-2026-11-04.md`.
+- O deploy `62733db` foi confirmado publicado e a consulta de pagamento antigo voltou a funcionar com o limite distribuído no PostgreSQL. Evidência e pendências externas estão na revisão final, mantendo os registros anteriores como histórico.

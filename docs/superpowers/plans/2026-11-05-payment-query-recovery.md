@@ -21,9 +21,15 @@
 ## Tarefas
 
 - [x] Reproduzir filtro divergente, escrever teste falhando e corrigir `lib/confirmed-sale.ts` / `app/conta/pedidos/page.tsx`; incluir histórico completo.
-- [ ] Criar teste SQL de janela móvel, isolamento, concorrência serializada, expiração, permissões e falha de parâmetros.
-- [ ] Criar migração aditiva `202611050001_database_rate_limit.sql`; não alterar migrações instaladas.
-- [ ] Criar `lib/server/database-rate-limit.ts` e teste de transporte/falhas; integrar produção em `lib/server/http.ts`.
-- [ ] Executar testes, lint e build; instalar incremento por executor com checksum.
-- [ ] Publicar, conferir pedido confirmado/histórico e consulta existente; registrar evidências e limitações do provedor legado.
-- [ ] Atualizar documentação final e checklist, mantendo histórico.
+- [x] Criar teste SQL de janela móvel, isolamento, concorrência serializada, expiração, permissões e falha de parâmetros.
+- [x] Criar migração aditiva `202611050001_database_rate_limit.sql`; não alterar migrações instaladas.
+- [x] Criar `lib/server/database-rate-limit.ts` e teste de transporte/falhas; integrar produção em `lib/server/http.ts`.
+- [x] Executar testes, lint e build; instalar incremento por executor com checksum.
+- [x] Publicar, conferir pedido confirmado/histórico e consulta existente; registrar evidências e limitações do provedor legado.
+- [x] Atualizar documentação final e checklist, mantendo histórico.
+
+## Evidência de encerramento deste plano — 05/11/2026
+
+Commit `62733dbe6df21ee06cafc2678e447b3072f81b7e`, deploy Netlify `6aec0abaf651cdf48285cc33`, Published às 01:50 de Recife. Consulta antiga voltou a mostrar expiração e opções de alteração, em vez da falha de limite. Pedidos confirmados mostrou somente a compra aprovada; Todo o histórico preservou as três compras da conta. Teste remoto concorrente: três aceites/nove negativas. Sete testes HTTP de SEO passaram contra produção. Nenhuma cobrança nem alteração financeira foi feita.
+
+Ruling: completar os modelos copiáveis de atendimento, recompra e retomada na carteira de clientes — recurso aplicável das referências já solicitado; não envia contatos nem inventa aniversários, dívidas, descontos ou regras comerciais.

@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-05T08:50:00.301Z",
+  "scope": "Read-only aggregate check; no personal data or credentials.",
+  "orders": [
+    {
+      "status": "entregue",
+      "status_pagamento": "pending",
+      "count": 8
+    },
+    {
+      "status": "pending",
+      "status_pagamento": "pending",
+      "count": 1
+    },
+    {
+      "status": "preparando",
+      "status_pagamento": "approved",
+      "count": 1
+    },
+    {
+      "status": "reserva_expirada",
+      "status_pagamento": "pending",
+      "count": 1
+    }
+  ],
+  "rls": [
+    {
+      "relname": "admin_reminders",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "api_rate_limits",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "category_audit",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "join_interests",
+      "relrowsecurity": true
+    },
+    {
+      "relname": "support_tickets",
+      "relrowsecurity": true
+    }
+  ],
+  "migrations": [
+    {
+      "name": "202611040002_category_audit.sql"
+    },
+    {
+      "name": "202611040003_pickup_ready.sql"
+    },
+    {
+      "name": "202611040004_support_tickets.sql"
+    },
+    {
+      "name": "202611040005_join_interests.sql"
+    },
+    {
+      "name": "202611040006_product_import.sql"
+    },
+    {
+      "name": "202611040007_admin_reminders.sql"
+    },
+    {
+      "name": "202611050001_database_rate_limit.sql"
+    }
+  ],
+  "restoredCategoryActive": true
+}

@@ -88,3 +88,29 @@ Acrescentados testes da rota Orders com o verificador real de assinatura HMAC do
 O Mercado Pago voltou a exigir validação por telefone. O titular informou em 05/11 que não dispõe do celular do responsável e pediu deixar essa etapa para depois. Homologação individual no provedor, captura/recusa/3DS, compensação e callbacks externos continuam como dependência externa adiada. Não foram realizadas cobranças reais nem alteradas as credenciais produtivas para simular sandbox.
 
 Fontes oficiais consultadas: [Secure Fields](https://github.com/mercadopago/sdk-js/blob/main/docs/fields.md), [notificações Orders](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/notifications). Não equiparar testes locais ao ciclo bancário real.
+
+## Homologação efetiva após nova autenticação — 05/11/2026
+
+O titular reabriu a aplicação já autenticada. A restrição de acesso por telefone descrita acima deixou de impedir esta conferência. Credenciais de produção e webhook Order foram conferidos no painel; não foram substituídos por chaves de teste. A loja continua em produção.
+
+Homologação isolada usa `.env.orders-test.local` ignorado pelo Git, verifica `/users/me` com tag `test_user` antes de qualquer escrita e exige o identificador técnico da aplicação de teste correspondente à credencial. O construtor, o normalizador e o tratamento de criação são os reais do projeto. Não acessa banco da loja, envia e-mails ou movimenta dinheiro. O identificador técnico de teste é diferente da aplicação principal; não relaxar a validação de produção para igualá-los. A tokenização pode informar `live_mode: true` mesmo com a chave pública de teste do painel; o ambiente de liquidação foi protegido pelo vendedor `test_user`, chave pública exata e números fictícios oficiais fixos, não somente por esse atributo.
+
+| Caso no provedor | Evidência e limite |
+| --- | --- |
+| Pix | QR/copia e cola gerados; consulta posterior `processed/accredited`, normalizado approved. Aprovação automática documentada no sandbox, sem transferência bancária. |
+| Boleto | Linha digitável e URL emitidas, inicialmente action_required. Cancelamento posterior confirmado canceled. Não comprova compensação bancária. |
+| Crédito sem desafio | APRO-AUTH retornou processed/accredited; reembolso posterior confirmado refunded. |
+| Crédito recusado | OTHE-NAUT retornou erro SDK 402 com data.id; GET autenticado recuperou failed/rejected e validou a identidade completa. |
+| Crédito 3DS aprovado | APRO-CHOK abriu o desafio oficial no iframe; Confirmar da simulação seguido de GET retornou processed/accredited, authenticated. |
+| Crédito 3DS recusado | OTHE-CHNO e Confirmar da simulação seguidos de GET retornaram failed/failed, not_authenticated. |
+| Débito Elo oficial | HTTP 400 payment_method_not_allowed_for_collector. Não aprovado nessa conta de teste. Não inferir automaticamente a elegibilidade da conta produtiva; requer conferência/liberação do provedor. |
+
+Evidências sem segredos: `payment-provider-test-2026-11-05.json`, `payment-management-test-2026-11-05.json`, capturas `evidencias/3ds-aprovado-2026-11-05.png` e `evidencias/3ds-recusado-2026-11-05.png`. O JSON preserva tentativas iniciais, inclusive a expectativa incorreta sobre tokenização; não confundir falha de uma tentativa inicial com os resultados finais verificados. O arquivo `payment-provider-initial-2026-11-05.json` mantém a primeira execução.
+
+Defeitos corrigidos a partir de respostas reais: (1) pending_challenge pode vir sem transaction_security.status; agora solicita autenticação pelo status_detail também; (2) SDK 402 pode conter um pedido recusado criado, antes tratado como erro genérico. `createOrderResponse` lê somente o ID válido do erro e faz GET; quem chama valida ID/conta/aplicação/referência/valor antes de persistir. Timeout sem ID não vira recusa fictícia. O cliente só renova a tentativa depois de resultado terminal conhecido, com texto legível. Testes de regressão falharam antes das correções e passaram depois.
+
+Na loja publicada em produção, os três iframes de cartão carregaram, o CVV abriu a ajuda no foco e fechou ao sair; as montagens permaneceram estáveis. Uma primeira carga expirou e exibiu erro com pagamento desativado; ao selecionar Pix e voltar a Cartão os campos carregaram. Não se declara que uma inspeção pontual elimine intermitência de rede. Nenhum cartão foi digitado/tokenizado em produção; o carrinho original foi preservado.
+
+Esses resultados comprovam operações no provedor de homologação, não um checkout completo sandbox autenticado com banco/worker/webhook público. A rota assinada e a persistência foram testadas com adaptadores e SQL locais; a entrega externa real desses callbacks ainda não é evidência deste ensaio. Nenhuma cobrança real foi realizada.
+
+Referências oficiais adicionais: [Pix em testes](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/integration-test/pix), [boleto em testes](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/integration-test/boleto), [cartões em testes](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/integration-test/cards), [3DS](https://www.mercadopago.com.br/developers/pt/docs/checkout-api-orders/payment-management/integrate-3ds).

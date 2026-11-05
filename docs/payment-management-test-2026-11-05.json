@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-05T09:33:48.023Z",
+  "environment": "test",
+  "testSellerConfirmed": true,
+  "scope": "Official SDK against preexisting fictitious Orders only; no shop DB or real payments.",
+  "results": [
+    {
+      "scenario": "boleto",
+      "action": "cancel",
+      "orderId": "ORDTST01M6NFZXK3W6DD4DN5RBKJWSGY",
+      "before": "action_required",
+      "after": "canceled",
+      "detail": "canceled",
+      "confirmed": true
+    },
+    {
+      "scenario": "credit-approved",
+      "action": "refund",
+      "orderId": "ORDTST01M6NG7ESCG81P4P4070H933W2",
+      "before": "processed",
+      "after": "refunded",
+      "detail": "refunded",
+      "confirmed": true
+    }
+  ]
+}

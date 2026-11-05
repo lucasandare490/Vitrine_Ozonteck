@@ -23,3 +23,14 @@ Nenhum cliente pode acessar protocolo alheio ou responder como administrador. Re
 As caixas acima registram o alcance definido, não aprovação bancária ou equivalência integral com as referências. Seis migrações instaladas; commit operacional `6d40ab9` publicado. Entrega SMTP real na caixa da loja comprovada; trabalhador agendado observado sem erros, mas o ciclo completo de cada evento remoto ainda não está comprovado. Captação, atualização de produtos por CSV e lembretes estão implementados com persistência e testes SQL; manter revisão visual separada.
 
 Novas correções locais: filtro financeiro da auditoria, preservação de rascunhos no suporte, retorno seguro do login, descarte de listas antigas e formulário com Secure Fields para ajuda do CVV no foco. O CVV foi conferido nos campos reais do provedor em prévia local sem envio. Homologação no Mercado Pago foi expressamente adiada pelo titular em 05/11 por falta de acesso ao celular de validação. Google recusou a nova solicitação por cota; não houve nova indexação solicitada com sucesso.
+
+## Atualização posterior em 05/11
+
+- [x] Comparação dos recursos aplicáveis e implementação de captação, CSV de produtos existentes, lembretes e modelos de contato; exclusões de escopo registradas.
+- [x] Testes SQL/rotas/worker/componentes, lint e compilação; banco conferido; deploy `62733db` confirmado publicado.
+- [x] Documentação atualizada com limites e evidências, sem apagar registros anteriores.
+- [x] Acesso Mercado Pago reaberto pelo titular; CVV em produção e operações isoladas no provedor sandbox verificadas (Pix, boleto, crédito, 3DS, cancelamento e reembolso).
+- [ ] Débito aprovado no provedor: conta de teste devolveu restrição de elegibilidade. Dependência Mercado Pago.
+- [ ] Ciclo externo integral de cada evento de e-mail e callback público de homologação: não comprovados por este ensaio. SMTP real entregue e testes SQL/assinatura/worker não equivalem a esse ciclo.
+
+As caixas históricas acima não foram retroativamente transformadas em comprovação bancária. Ver a revisão final e a revisão de pagamentos para o alcance exato. Não há cobrança real autorizada nesta conferência.
