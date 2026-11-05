@@ -56,8 +56,8 @@ function inspect(env) {
     'Somente formato de origem HTTPS; propriedade, DNS e disponibilidade nao consultados.');
   add('database_configuration_present', ['NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_ROLE_KEY']
     .every(key => presence[key]), 'Sem conectar ao banco ou verificar migracoes, permissoes e dados.');
-  add('rate_limit_configuration_present', ['UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN']
-    .every(key => presence[key]), 'Presenca apenas; servico nao consultado.');
+  add('rate_limit_configuration_present', ['NEXT_PUBLIC_SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY']
+    .every(key => presence[key]), 'Limite distribuido no banco; presenca apenas, RPC/migracao/disponibilidade nao consultadas.');
   add('literal_values', keys.every(key => !env[key]?.includes('$')),
     'Referencias entre variaveis nao sao expandidas; revisar o ambiente efetivo separadamente.');
   return {

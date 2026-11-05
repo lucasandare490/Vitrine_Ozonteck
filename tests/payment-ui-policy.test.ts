@@ -61,6 +61,13 @@ test('Orders public key alone cannot pass configuration checks', () => {
   assert.equal(report.presence.MP_ORDERS_ACCESS_TOKEN, false);
 });
 
+test('production rate-limit configuration uses the database and does not require Redis', () => {
+  const { report, status } = run({ UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '' });
+  assert.equal(status, 0);
+  assert.equal(report.checks.find((check: { name: string }) => check.name === 'rate_limit_configuration_present').ok, true);
+  assert.equal(run({ SUPABASE_SERVICE_ROLE_KEY: '' }).status, 1);
+});
+
 test('sandbox flag exposes frontend and backend Orders selection mismatch', () => {
   const { report, status } = run({ PAYMENT_SANDBOX: 'true', NEXT_PUBLIC_PAYMENT_SANDBOX: 'true' });
   assert.equal(status, 1);

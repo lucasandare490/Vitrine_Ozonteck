@@ -24,8 +24,8 @@ add('Caminho de notificacoes',correctPath,'Deve terminar em /api/webhook.');
 add('Credenciais de pagamento para publicacao',Boolean(env.MP_ACCESS_TOKEN?.startsWith('APP_USR-')&&env.NEXT_PUBLIC_MP_PUBLIC_KEY?.startsWith('APP_USR-')),
   'Prefixo apenas; nao comprova identidade da conta, permissao ou homologacao.');
 add('Assinatura de notificacoes',Boolean(env.MP_WEBHOOK_SECRET?.trim()),'Deve corresponder ao segredo configurado no painel.');
-add('Limite distribuido de requisicoes',Boolean(env.UPSTASH_REDIS_REST_URL?.trim()&&env.UPSTASH_REDIS_REST_TOKEN?.trim()),
-  'O checkout bloqueia requisicoes em producao sem o servico de limite configurado.');
+add('Limite distribuido de requisicoes',Boolean(env.NEXT_PUBLIC_SUPABASE_URL?.trim()&&env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
+  'Producao usa consume_api_rate_limit no banco; exige migracao instalada e bloqueia se a RPC falhar.');
 add('Configuracao Supabase',Boolean(env.NEXT_PUBLIC_SUPABASE_URL?.trim()&&env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim()&&env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
   'Presenca apenas; nao verifica banco, migracoes ou permissoes.');
 console.log(JSON.stringify({scope:'Configuracao local, sem rede ou pagamentos. Nao certifica prontidao de producao.',checks},null,2));

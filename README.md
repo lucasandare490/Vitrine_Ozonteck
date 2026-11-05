@@ -87,7 +87,7 @@ O modelo está em [`.env.example`](.env.example). Nunca publique segredos no Git
 | `MP_ACCESS_TOKEN` | Credencial secreta do servidor para pagamentos |
 | `MP_WEBHOOK_SECRET` | Validação da assinatura das notificações |
 | `MP_WEBHOOK_URL` | URL pública HTTPS terminada em `/api/webhook` |
-| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Limite distribuído; necessário para o checkout em produção |
+| `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` | Opcional no desenvolvimento; produção usa limite distribuído no Supabase com a migração `202611050001_database_rate_limit.sql` |
 | `NEXT_PUBLIC_AUTH_GOOGLE_ENABLED`, `NEXT_PUBLIC_AUTH_FACEBOOK_ENABLED`, `NEXT_PUBLIC_AUTH_AZURE_ENABLED` | Visibilidade dos provedores de login |
 
 Os provedores de login também precisam estar configurados no Supabase e nos respectivos serviços. Variáveis `NEXT_PUBLIC_*` são expostas ao navegador e incorporadas ao frontend: nunca use esse prefixo para segredos. Alterações exigem reinício/recompilação.

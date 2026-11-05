@@ -106,3 +106,36 @@ Verificação final antes da publicação deste conjunto: suíte com 105 aprovad
 Não há prova individual de emissão/liquidação Orders de todos os meios, nem de todo evento remoto de e-mail atravessando fila e caixa de entrada. Categorias antigas sem histórico não foram reconstruídas. Lucro, pontos e regras comerciais de outro sistema não são inferidos sem dados; fiado/carnê excluídos, PWA futuro. Nenhum serviço gratuito oferece promessa de disponibilidade para sempre; esgotar limites pode pausar a hospedagem. A aparência escolhida pelo Google não é controlada diretamente pela loja.
 
 Verificação antes do envio desta continuação: `npm test` passou 126 testes, zero falhas e um HTTP condicional ignorado; `npm run test:components` passou 24/24. Build webpack completo e TypeScript passaram, sem a rota temporária de prévia. ESLint dirigido das correções passou sem erros. Os avisos anteriores de navegação por `window.location.assign` no login foram preservados nos ramos existentes; os novos retornos usam o roteador recomendado. O teste de checkout legado passou com adaptadores locais. As referências temporárias de tipos da prévia foram removidas somente do diretório gerado `.next-sandbox/dev/types`, após conferir o caminho absoluto; nenhum dado do projeto foi apagado.
+
+## Conferência publicada e recuperação de consultas — 05/11/2026
+
+### Concluído e validado
+
+- `4ba273d5b2a534ab1412288905942110c231d08c` confirmado **Published** na Netlify, deploy `6aec00a3b2273641552b4875`, às 01:05 de Recife. Publicação automática da main permanece habilitada.
+- Auditoria publicada: Pedidos confirmados contém somente a compra aprovada de R$ 9,99; Conferência financeira mantém oito legados fora do total. Relatórios com Todo o histórico apresentam o mesmo total, uma compra confirmada e oito divergências. Evidência: `evidencias/relatorio-publicado-2026-11-05.png`.
+- Interessados e lembretes abriram autenticados com consulta sem erro e listas vazias; filtros foram trocados sem gravação fictícia. Sino abriu e mostrou pedido aprovado, acesso a atendimentos e histórico de alterações.
+- Catálogo: editor de TESTE-001 abriu com dados existentes e foi cancelado. Prévia CSV mostrou preço R$ 9,99 e estoque 9998 → 9998; nenhuma confirmação de importação foi acionada. Nenhum produto foi alterado nessa conferência.
+- Endereços: endereço salvo apareceu; Editar trouxe todos os campos preenchidos e Cancelar fechou sem gravar. Não se declara que essa inspeção somente leitura comprove uma nova gravação remota.
+- Categoria `testeeeeee`, previamente conferida sem produtos ativos ou na lixeira, foi arquivada e restaurada **após autorização específica do titular**. Contagem voltou a oito ativas/zero arquivadas. Consulta somente leitura confirmou um registro ativo e duas entradas UPDATE no histórico: 01:24:08 e 01:26:49 de Recife, com responsável registrado e transições ativo → arquivado → ativo. Evidências: `evidencias/categoria-arquivada-2026-11-05.png` e `evidencias/categoria-restaurada-2026-11-05.png`. Nenhuma exclusão definitiva.
+
+### Defeitos adicionais encontrados e corrigidos
+
+- A área do cliente ainda incluía reserva expirada na aba Pedidos confirmados. Agora utiliza a mesma aprovação financeira dos relatórios; Preparando/Em rota/Finalizados também exigem aprovação. A nova opção Todo o histórico mantém cancelamentos, expirações e registros antigos. Pagamentos em aberto continua separado e acessível. Dois testes cobrem a classificação; sete testes relacionados de cliente/auditoria/relatório passaram.
+- A consulta publicada de uma cobrança antiga foi bloqueada antes de acessar o provedor. O endereço Upstash configurado no serviço não resolvia DNS (`ENOTFOUND`), confirmado sem expor token. Em produção, o limite compartilhado agora usa o PostgreSQL existente: janela móvel, trava por rota/identidade, hash SHA-256 em lugar de identificador bruto, limpeza limitada e falha fechada. Não há liberação ilimitada nem contador por instância em produção.
+- Incremento aditivo `202611050001_database_rate_limit.sql` instalado pelo executor com checksum. Tabela com RLS e sem acesso direto, inclusive para service_role; somente a função permite consumo pelo servidor. Anon/authenticated não podem ler/gravar ou executar essa função. Não altera tabelas financeiras.
+- Testes SQL locais verificaram janela móvel, isolamento, expiração, parâmetros e permissões. No banco remoto, 12 chamadas concorrentes por oito conexões aceitaram exatamente três e negaram nove. A chamada autenticada pela Data API negou a seguinte com HTTP 200/false, comprovando o caminho usado pelo servidor. Contador técnico isolado; nenhum pedido/cobrança foi criado. Registro: `database-rate-limit-verification-2026-11-05.json`.
+- Checkers locais e README atualizados para o backend de limite no banco. Presença de configuração continua sem equivaler a homologação de pagamentos.
+
+### Verificações desta correção
+
+`npm test`: 132 aprovados, zero falhas e um HTTP condicional ignorado. `npm run test:components`: 24/24. ESLint dirigido sem erros. A primeira compilação gerou JavaScript e passou TypeScript, mas falhou ao criar diretório gerado com EPERM no Windows; não foi declarada build aprovada. Repetição e publicação devem ser registradas abaixo após seu resultado.
+
+A repetição da compilação webpack terminou com código 0, TypeScript e 29 páginas geradas. O servidor local antigo iniciado pela revisão foi encerrado; a repetição recebeu acesso ao diretório gerado bloqueado. Nenhuma mudança de código foi feita para contornar o erro de permissão.
+
+### Limites mantidos
+
+- Mercado Pago: acesso por telefone adiado pelo titular. Homologação individual, 3DS e emissão/compensação no provedor não estão comprovadas. Não houve cobrança real nesta revisão.
+- E-mails: entrega SMTP à caixa da loja comprovada; eventos, fila e tentativas testados. Não foi feito pedido fictício nem enviado teste a clientes reais para declarar todos os eventos comprovados em produção.
+- Google: URL indexada/HTTPS e identidade publicada; nova solicitação em 05/11 recusada por cota. Não registrar como pedido de indexação aceito.
+- Histórico: não existe evidência para reconstruir categorias apagadas antes da trilha ou determinar a origem dos oito pedidos legados. Nenhum dado foi inventado/aprovado manualmente. Depoimentos preexistentes não foram classificados como falsos nem apagados sem evidências.
+- Referências: recursos aplicáveis receberam implementação e testes; não se declara reprodução integral de sistemas externos. Fiado/carnê excluídos e aplicativo/PWA futuro. Valores de custo/lucro, pontuação e aniversário exigem dados/regras comerciais reais antes de inventar indicadores ou disparos.

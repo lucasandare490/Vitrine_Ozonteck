@@ -2,6 +2,7 @@ import 'server-only';
 
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
+import { createDatabaseRateLimitGuard } from './database-rate-limit';
 
 export class RequestBodyError extends Error {
   constructor(
@@ -70,6 +71,9 @@ type RateLimiterOptions = {
 };
 
 export function createRateLimitGuard({ limit, window, prefix }: RateLimiterOptions) {
+  if (process.env.NODE_ENV === 'production') {
+    return createDatabaseRateLimitGuard({ limit, windowMs: parseWindow(window), prefix });
+  }
   const localRecords = new Map<string, { count: number; resetAt: number }>();
   const redisUrl = process.env.UPSTASH_REDIS_REST_URL?.trim();
   const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();

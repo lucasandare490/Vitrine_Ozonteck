@@ -8,12 +8,13 @@ import toast from 'react-hot-toast';
 import type { User } from '@supabase/supabase-js';
 import { useAccountOrders } from '@/lib/use-account-orders';
 import { getOrderStatus, isOpenPayment } from '@/lib/order-status';
+import { matchesAccountOrderFilter } from '@/lib/confirmed-sale';
 import { orderAddressText } from '@/lib/order-contact';
 import OrderProductReviews from '@/components/OrderProductReviews';
 import OrderPayment from '@/components/OrderPayment';
 import { isPickupReady } from '@/components/PickupReadyAction';
 
-type TabStatus = 'Todos' | 'pagamentos' | 'preparando' | 'enviado' | 'entregue';
+type TabStatus = 'Todos' | 'pagamentos' | 'preparando' | 'enviado' | 'entregue' | 'historico';
 
 type Profile = {
   nome: string | null;
@@ -27,7 +28,8 @@ const TABS: { id: TabStatus, label: string }[] = [
   { id: 'pagamentos', label: 'Pagamentos em aberto' },
   { id: 'preparando', label: 'Preparando' }, 
   { id: 'enviado', label: 'Em Rota' }, 
-  { id: 'entregue', label: 'Finalizados' }
+  { id: 'entregue', label: 'Finalizados' },
+  { id: 'historico', label: 'Todo o histórico' }
 ];
 
 const TAGS_ELOGIO = ['Entrega super rápida', 'Ótimo atendimento', 'Embalagem bem cuidada', 'Compra fácil', 'Recomendo a loja'];
@@ -84,7 +86,7 @@ export default function PedidosPage() {
 
   // OTIMIZAÇÃO: Filtro e seleção memorizados
   const filteredOrders = useMemo(() => {
-    return pedidos.filter(order => activeTab === 'pagamentos' ? isOpenPayment(order.status) : activeTab === 'Todos' ? !isOpenPayment(order.status) : order.status === activeTab);
+    return pedidos.filter(order => matchesAccountOrderFilter(order, activeTab));
   }, [pedidos, activeTab]);
 
   const selectedOrder = useMemo(() => {

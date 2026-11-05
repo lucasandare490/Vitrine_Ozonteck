@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-05T04:45:11.074Z",
+  "scope": "Operational counter only. No orders or payments changed.",
+  "concurrentRequests": 12,
+  "accepted": 3,
+  "denied": 9,
+  "authenticatedRpcStatus": 200,
+  "authenticatedRpcDenied": true
+}

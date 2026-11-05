@@ -17,3 +17,9 @@ export function matchesAuditFilter(order: SaleState, filter: string) {
   if (filter === 'abertos') return ['pending', 'aguardando_pagamento', 'in_process', 'authorized', 'falha_pagamento', 'pagamento_recusado'].includes(order.status);
   return order.status === filter.toLowerCase();
 }
+
+export function matchesAccountOrderFilter(order: SaleState, filter: string) {
+  if (filter === 'historico') return true;
+  if (filter === 'pagamentos') return matchesAuditFilter(order, 'abertos');
+  return isConfirmedSale(order) && (filter === 'Todos' || order.status === filter);
+}

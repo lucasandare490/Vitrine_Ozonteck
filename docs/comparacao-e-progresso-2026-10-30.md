@@ -66,3 +66,21 @@ Visão geral, relatórios e atividade de clientes passam a usar a mesma regra: p
 - Seis testes de relatórios/modelos de e-mail passaram: datas de Recife, apenas pedidos confirmados, cálculos, proteção CSV, escape HTML e restrição de links ao domínio da loja.
 - Compilação Turbopack encontrou falha de rede em Google Fonts e depois erro interno ao iniciar processo de CSS no Windows. `next build --webpack` concluiu com sucesso, incluindo TypeScript e geração de todas as páginas.
 - ESLint dos modelos de e-mail passou.
+
+## Atualização consolidada — 05/11/2026
+
+As observações acima preservam o histórico e não substituem a situação atual em `revisao-final-2026-11-04.md`.
+
+| Recurso aplicável das referências | Situação verificada |
+| --- | --- |
+| Catálogo, busca, filtros, preços e administração | Existentes; editor e prévia de atualização CSV conferidos na loja publicada, sem gravar alterações de ensaio. |
+| Captação e acompanhamento de interessados | Formulário autenticado/consentimento, persistência e lista administrativa; testes SQL e consulta publicada sem erro. Não equivale ao cadastro oficial da rede. |
+| Importação de informações | CSV de preço/estoque de códigos já existentes, prévia e confirmação atômica; cadastro de novos produtos permanece no formulário próprio. Não importa automaticamente clientes ou dados financeiros de outro sistema. |
+| Lembretes | Agenda administrativa persistente com concluir/reabrir; sem mensagem automática de cobrança ou WhatsApp. |
+| Pedidos, relatórios e clientes | Aprovação financeira compartilhada; uma venda de R$ 9,99 e oito legados em conferência, preservados fora do faturamento. Filtro do cliente corrigido para não chamar reserva expirada de pedido confirmado. |
+| Suporte e retirada | Protocolo, resposta, fila deduplicada; retirada por ação explícita em pedido elegível. SQL/componentes testados; não foi mudado um pedido real para fabricar prova de e-mail. |
+| Identidade dos e-mails | Uma entrega real em português comprovada na caixa da loja, com modelo/SMTP reais. Ciclo individual de todos os eventos remotos ainda não comprovado. |
+| Cartão e CVV | Secure Fields oficiais; ajuda abre no foco real do CVV e fecha ao sair. Aprovação/recusa/3DS e débito dependem da validação do provedor, adiada pelo titular. |
+| Rodapé e métodos de pagamento | Logos institucionais dos meios já publicados e visíveis na vitrine. |
+
+Fora do escopo por decisão do titular: fiado/carnê; PWA/aplicativo ficam para depois. Não reproduzir cobrança premium, alegações de renda/saúde, prévia de comprovante demonstrativa nem indicadores de lucro/pontos sem fontes e regras reais. A loja não é declarada equivalente a 100% de ambos os sistemas.

@@ -9,6 +9,7 @@ const allowed = [
   '202611040004_support_tickets.sql', '202611040005_join_interests.sql',
   '202611040006_product_import.sql',
   '202611040007_admin_reminders.sql',
+  '202611050001_database_rate_limit.sql',
 ];
 const requested = process.argv.slice(2).filter(x => !x.startsWith('--'));
 if (!requested.length || requested.some(x => !allowed.includes(x))) throw new Error('EXPLICIT_ALLOWED_MIGRATIONS_REQUIRED');
