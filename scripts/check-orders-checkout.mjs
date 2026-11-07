@@ -57,6 +57,7 @@ const env = {
 };
 const email = 'customer@example.invalid';
 const mailbox = [];
+const localMailTransport = require('nodemailer').createTransport({ streamTransport: true, buffer: true, newline: 'unix' });
 const rpcArgs = {
   liberar_reservas_expiradas: [], resolve_customer_prices: ['p_user_id'],
   reserve_priced_order: ['p_checkout_id','p_user_id','p_total','p_delivery_address','p_items','p_reservation_minutes'],
@@ -158,7 +159,12 @@ function load(file) {
         },
       };
       if (name === 'nodemailer') return { createTransport: () => ({
-        async sendMail(message) { mailbox.push(message); return { accepted: [message.to] }; }, close() {},
+        async sendMail(message) {
+          const delivery = await localMailTransport.sendMail(message);
+          mailbox.push({ ...message, envelope: delivery.envelope, mime: delivery.message.toString('utf8') });
+          return { accepted: delivery.envelope.to };
+        },
+        close() {},
       }) };
       if (name.startsWith('@/')) return load(name.slice(2) + '.ts');
       if (name.startsWith('.')) return load(resolve(dirname(file), name.endsWith('.ts') ? name : name + '.ts'));
@@ -223,7 +229,7 @@ try {
     payer: { email: 'test_user_br@testuser.com', first_name: card?.name ?? 'APRO', last_name: 'Teste',
       identification: { type: 'CPF', number: '52998224725' },
       address: { zip_code: '50050015', street_name: 'Rua de teste', street_number: '1', neighborhood: 'Centro', city: 'Recife', federal_unit: 'PE' } },
-    metadata: { phone: '81999999999', delivery_mode: 'retirada', user_id: customer },
+    metadata: { phone: '81999999999', delivery_mode: card ? 'entrega' : 'retirada', user_id: customer },
   }, { 'x-idempotency-key': key, 'x-forwarded-for': method === 'boleto' ? '127.0.0.1' : '127.0.0.2' }));
   async function json(response, expected = 200) {
     assert.equal(response.status, expected);
@@ -316,6 +322,7 @@ try {
   }
 
   await db.query('update produtos set estoque=1,price=9.99 where code=$1', [code]);
+  let approvedCredit;
   for (const [name, expectedStatus, expectedStock] of [['OTHE-NAUT','rejected',1],['APRO-AUTH','approved',0]]) {
     const token = await testCreditToken(name);
     const credit = await json(await start('master', 'orders-' + randomUUID(), undefined, {name,token}));
@@ -329,11 +336,34 @@ try {
     assert.equal(matchesAuditFilter(creditOrder,'Todos'), expectedStatus === 'approved');
     assert.equal(await stock(), expectedStock);
     await deliver();
+    if (expectedStatus === 'approved') approvedCredit = { ...credit, reference: paymentState.reference };
   }
   console.log('PASS credit decline returned stock and approval kept stock reserved in the complete test flow.');
+  assert.ok(approvedCredit, 'Approved test order required for the refund scenario');
+  await db.query("update pedidos set status='enviado' where id=$1", [approvedCredit.order_id]);
+  await deliver();
+  const captured = checkedResponse(await client.get({ id: approvedCredit.id }));
+  assert.equal(captured.status, 'processed');
+  assert.equal(captured.user_id, String(seller.id));
+  assert.equal(captured.integration_data?.application_id, application);
+  assert.equal(captured.external_reference, approvedCredit.reference);
+  await client.refund({ id: captured.id, requestOptions: { idempotencyKey: 'refund-' + captured.id } });
+  assert.equal(checkedResponse(await client.get({ id: captured.id })).status, 'refunded');
+  await json(await signedCallback(captured.id));
+  await json(await signedCallback(captured.id));
+  const refunded = await json(await lookup(approvedCredit.order_id));
+  assert.equal(refunded.status, 'refunded');
+  assert.equal(refunded.orderStatus, 'reembolsado');
+  assert.equal(await stock(), 0, 'Refund alone must not return merchandise to stock');
+  const { rows: [refundedOrder] } = await db.query('select status,status_pagamento from pedidos where id=$1', [approvedCredit.order_id]);
+  assert.equal(matchesAccountOrderFilter(refundedOrder,'Todos'), false);
+  assert.equal(matchesAuditFilter(refundedOrder,'Todos'), false);
+  await deliver();
+  console.log('PASS shipment and real test refund reached the queue; refund did not return stock or count as a sale.');
+
   await deliver(); // queue drained
   const { rows: sent } = await db.query("select event,id,attempts from customer_email_outbox where state='sent'");
-  const expectedEvents = ['welcome','payment_approved','payment_rejected'];
+  const expectedEvents = ['welcome','payment_approved','payment_rejected','order_shipped','refund_confirmed'];
   if (!creditOnly) expectedEvents.push('payment_pending','order_cancelled','order_changed','pickup_ready','order_delivered');
   for (const event of expectedEvents) {
     assert.ok(sent.some(row => row.event === event), event);
@@ -344,9 +374,13 @@ try {
     assert.equal(job.attempts, 1);
     const message = mailbox.find(message => message.messageId === '<' + job.id + '@shop.example.invalid>');
     assert.equal(message?.to, email);
+    assert.deepEqual(message.envelope.to, [email]);
+    assert.ok(message.mime.includes('Message-ID: ' + message.messageId));
+    assert.match(message.mime, /Content-Type: multipart\/alternative/i);
     assert.ok(message?.html.includes('https://shop.example.invalid/conta'));
   }
   console.log('PASS signed local webhook, shared account/audit filters and transactional mail in the local inbox.');
 } finally {
+  localMailTransport.close();
   await db.close();
 }
