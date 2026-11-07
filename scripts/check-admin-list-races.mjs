@@ -9,15 +9,16 @@ function database() {
   const reads = [], writes = [];
   const client = {
     rpc() { return request('write'); },
-    from() { return request('read'); },
+    from(table) { return request('read', table); },
   };
-  function request(initial) {
+  function request(initial, table) {
     let operation = initial;
-    const details = { filters: [], range: null };
+    const details = { filters: [], range: null, table };
     const query = {
-      select() { return query; }, order() { return query; },
+      select() { return query; }, order() { return query; }, limit() { return query; },
       range(from, to) { details.range = [from, to]; return query; },
       eq(...args) { details.filters.push(['eq', ...args]); return query; },
+      in(...args) { details.filters.push(['in', ...args]); return query; },
       is(...args) { details.filters.push(['is', ...args]); return query; },
       not(...args) { details.filters.push(['not', ...args]); return query; },
       insert() { operation = 'write'; return query; },
@@ -31,6 +32,31 @@ function database() {
   }
   return { client, reads, writes };
 }
+
+test('admin bell highlights a recent purchase change without an approved order or open support ticket', async () => {
+  const db = database();
+  const harness = createComponentHarness('components/AdminNotifications.tsx', {
+    supabase: db.client,
+    imports: { 'lucide-react': { Bell: 'svg', RefreshCw: 'svg' }, '@/lib/order-status': { getOrderStatus: () => ({ label: '' }) } },
+  });
+  const finish = async (offset, createdAt) => {
+    await flushAsync();
+    for (const query of db.reads.slice(offset, offset + 3)) {
+      query.done(query.table === 'pedido_alteracoes'
+        ? { data: [{ created_at: createdAt }], count: 5, error: null }
+        : { data: [], count: 0, error: null });
+    }
+    await flushAsync();
+  };
+  const indicator = () => elements(elements(harness.render(), 'button')[0], 'span').length;
+  harness.render();
+  await finish(0, new Date(Date.now() - 2 * 86400000).toISOString());
+  assert.equal(indicator(), 0, 'Old purchases remain in history without triggering the bell');
+  harness.poll();
+  await finish(3, new Date().toISOString());
+  assert.equal(indicator(), 1, 'A new change triggers the bell by itself');
+  harness.unmount();
+});
 const configurations = [
   {
     name: 'leads', path: 'app/admin/interessados/page.tsx',

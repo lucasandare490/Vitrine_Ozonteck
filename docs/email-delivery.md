@@ -66,3 +66,9 @@ Os demais eventos (boas-vindas, compra/pagamento, status, retirada) continuam co
 O mesmo endpoint do Supabase Auth usado pelo formulário da loja aceitou um pedido de recuperação para a conta verificada e autorizada pelo titular. O Gmail registrou a mensagem na caixa de entrada às 18h36 de Recife, com assunto de recuperação em português, identidade Ozonteck Recife e remetente esperado. Os cabeçalhos registraram SPF, DKIM e DMARC como aprovados. A evidência foi conferida por metadados, sem abrir o link de recuperação, redefinir a senha ou reproduzir o link no repositório.
 
 Esse resultado comprova a entrega de recuperação de senha via Supabase Auth. Boas-vindas, pagamentos e mudanças de pedido usam a fila agendada da Netlify e ainda precisam de confirmação individual em uma caixa autorizada.
+
+## Boas-vindas recebidas pela fila de produção — 07/11/2026
+
+Foi incluído um único evento controlado de boas-vindas para a conta verificada e autorizada. A função agendada da Netlify marcou o evento como enviado às 18h55min16s de Recife, com uma tentativa e nenhum erro. A mensagem chegou diretamente à caixa de entrada do Gmail às 18h55min15s, com a identidade e o remetente da loja. SPF, DKIM e DMARC foram aprovados.
+
+A prova cobre fila persistente, função agendada, SMTP e caixa de entrada para o evento de boas-vindas. O gatilho de confirmação de cadastro é validado separadamente em SQL local. Os eventos que exigem pedidos seguem com validação local e aguardam a conferência individual no Gmail em um ambiente de teste apropriado.
