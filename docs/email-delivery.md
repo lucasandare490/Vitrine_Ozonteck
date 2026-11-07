@@ -60,3 +60,9 @@ Após autorização específica do titular para usar sua própria conta e caixa 
 Ambos foram abertos no Gmail do titular e continham a mesma referência e link correto para `/suporte`. **A primeira mensagem foi classificada como spam**. Foi marcada como legítima nessa caixa; só depois apareceu na entrada. A segunda chegou diretamente à entrada após essa classificação. Isso comprova entrega desses dois eventos e não garante ausência de spam em outras caixas. Não foi criado filtro global nem desativada proteção do Gmail. Registro sanitizado em `support-delivery-verification-2026-11-05.json`. As três capturas do Gmail permanecem apenas no computador do titular; não são publicadas no Git.
 
 Os demais eventos (boas-vindas, compra/pagamento, status, retirada) continuam com as provas locais anteriores; estes dois envios não os validam automaticamente. Nenhuma compra foi criada/alterada e nenhum cliente comercial recebeu mensagem de verificação.
+
+## Recuperação de senha recebida no Gmail — 07/11/2026
+
+O mesmo endpoint do Supabase Auth usado pelo formulário da loja aceitou um pedido de recuperação para a conta verificada e autorizada pelo titular. O Gmail registrou a mensagem na caixa de entrada às 18h36 de Recife, com assunto de recuperação em português, identidade Ozonteck Recife e remetente esperado. Os cabeçalhos registraram SPF, DKIM e DMARC como aprovados. A evidência foi conferida por metadados, sem abrir o link de recuperação, redefinir a senha ou reproduzir o link no repositório.
+
+Esse resultado comprova a entrega de recuperação de senha via Supabase Auth. Boas-vindas, pagamentos e mudanças de pedido usam a fila agendada da Netlify e ainda precisam de confirmação individual em uma caixa autorizada.
