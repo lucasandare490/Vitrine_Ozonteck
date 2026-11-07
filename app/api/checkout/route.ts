@@ -220,7 +220,7 @@ export async function POST(request: Request) {
 
     const { data: products, error: productsError } = await supabaseAdmin
       .from('produtos')
-      .select('code, name, category, price, estoque, is_deleted')
+      .select('code, name, category, price, is_deleted')
       .in('code', itemCodes);
 
     if (productsError) {
@@ -238,15 +238,10 @@ export async function POST(request: Request) {
 
     for (const cartItem of cartItems) {
       const product = productsByCode.get(cartItem.code);
-      const stock = Number(product?.estoque);
       const unitPriceInCents = Math.round(Number(priceSnapshot.prices[cartItem.code]) * 100);
 
       if (!product || product.is_deleted === true || isRetiredProduct(product) || (isTestProduct(product) && !((sandbox || process.env.LIVE_TEST_PRODUCT === 'TESTE-001') && product.code === 'TESTE-001')) || !Number.isFinite(unitPriceInCents) || unitPriceInCents <= 0) {
         return NextResponse.json({ error: `O produto ${cartItem.code} não está disponível.` }, { status: 400 });
-      }
-
-      if (!Number.isInteger(stock) || stock < cartItem.quantity) {
-        return NextResponse.json({ error: `Estoque insuficiente para ${product.name}.` }, { status: 409 });
       }
 
       totalInCents += unitPriceInCents * cartItem.quantity;
@@ -285,6 +280,7 @@ export async function POST(request: Request) {
       cep: sanitize(address?.zip_code),
     };
 
+    // The reservation checks stock after looking up the attempt, so retries can reuse held units.
     const { data: reservationData, error: reservationError } = await supabaseAdmin.rpc(
       'reserve_priced_order',
       {

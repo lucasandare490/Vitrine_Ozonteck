@@ -185,7 +185,7 @@ try {
     '202611010001_customer_email_outbox','202611040003_pickup_ready','202611070001_payment_cancellation_status']) await db.exec(sql(name));
   await db.query('insert into auth.users values($1,$2,now())', [customer,email]);
   await db.query("insert into profiles values($1,'admin')", [admin]);
-  await db.query('insert into produtos values($1,$2,$3,50,3,false)', [code,'Produto QA','Cuidados']);
+  await db.query('insert into produtos values($1,$2,$3,50,1,false)', [code,'Produto QA','Cuidados']);
 
   const checkout = load('app/api/checkout/route.ts').POST;
   const webhook = load('app/api/webhook/orders/route.ts').POST;
@@ -224,10 +224,11 @@ try {
   const boleto = await json(await start('boleto', boletoKey));
   assertTestOrder(boleto.id);
   assert.equal((await json(await start('boleto', boletoKey))).id, boleto.id);
-  assert.equal(await stock(), 2);
+  assert.equal(await stock(), 0);
   const ticket = await json(await lookup(boleto.order_id));
   assert.ok(ticket.payable && ticket.boletoCode && ticket.boletoUrl);
   await json(await lookup(boleto.order_id, { Authorization: 'Bearer other-fixture' }), 404);
+  await json(await start('boleto', 'orders-' + randomUUID()), 409);
   await deliver(); // welcome
   await deliver(); // pending boleto
   console.log('PASS boleto issued, displayed only to owner, and checkout replay reused the order and reservation.');
@@ -240,7 +241,7 @@ try {
   assert.equal(cancelled.orderStatus, 'cancelado');
   assert.equal(cancelled.payable, false);
   assert.equal(cancelled.boletoCode, null);
-  assert.equal(await stock(), 3);
+  assert.equal(await stock(), 1);
   await deliver(); // cancellation
 
   const pix = await json(await start('pix', 'orders-' + randomUUID(), event.id));
@@ -265,7 +266,7 @@ try {
   const settled = await json(await lookup(pix.order_id));
   assert.equal(settled.status, 'approved');
   assert.equal(settled.orderStatus, 'preparando');
-  assert.equal(await stock(), 2);
+  assert.equal(await stock(), 0);
   const { rows: [row] } = await db.query('select * from pedidos where id=$1', [pix.order_id]);
   assert.equal(matchesAccountOrderFilter(row,'Todos'), true);
   assert.equal(matchesAuditFilter(row,'Todos'), true);
