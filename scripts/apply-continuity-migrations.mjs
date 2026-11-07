@@ -1,4 +1,4 @@
-// Explicit, additive migrations only. Run without --apply for a read-only plan.
+// Explicitly reviewed migrations only. Run without --apply for a read-only plan.
 import nextEnv from '@next/env';
 import pg from 'pg';
 import { readFile } from 'node:fs/promises';
@@ -10,6 +10,7 @@ const allowed = [
   '202611040006_product_import.sql',
   '202611040007_admin_reminders.sql',
   '202611050001_database_rate_limit.sql',
+  '202611070001_payment_cancellation_status.sql',
 ];
 const requested = process.argv.slice(2).filter(x => !x.startsWith('--'));
 if (!requested.length || requested.some(x => !allowed.includes(x))) throw new Error('EXPLICIT_ALLOWED_MIGRATIONS_REQUIRED');

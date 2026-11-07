@@ -7,11 +7,16 @@ const db = new PGlite();
 try {
   await db.exec(`
     create role service_role;
+    create role anon;
+    create role authenticated;
+    create schema auth;
+    create table auth.users(id uuid primary key, email_confirmed_at timestamptz);
     create table produtos(code text primary key, estoque integer not null, is_deleted boolean default false);
     create table pedidos(id uuid primary key default gen_random_uuid(), user_id uuid,
       checkout_id text unique, id_pagamento_mp text unique, valor_total numeric,
       status text, status_pagamento text, endereco_entrega jsonb, itens jsonb,
       estoque_baixado boolean default false, reserva_expira_em timestamptz);
+    create table pedido_alteracoes(id uuid primary key, user_id uuid, novo_pedido_id uuid);
     insert into produtos values('QA',10,false);
   `);
   const source = await fs.readFile('supabase/migrations/202609240002_security_hardening.sql','utf8');
@@ -19,12 +24,34 @@ try {
   const end = source.indexOf('\ncommit;', start);
   assert.ok(start >= 0 && end > start);
   await db.exec(source.slice(start, end));
-  await db.exec(await fs.readFile('supabase/migrations/202610130002_payment_lifecycle.sql', 'utf8'));
+  await db.exec(await fs.readFile('supabase/migrations/202611010001_customer_email_outbox.sql', 'utf8'));
+  await db.exec(await fs.readFile('supabase/migrations/202611070001_payment_cancellation_status.sql', 'utf8'));
+  const { rows: [permissions] } = await db.query(`select
+    has_function_privilege('service_role', 'public.processar_status_pagamento(text,text,text,numeric)', 'execute') as service,
+    has_function_privilege('anon', 'public.processar_status_pagamento(text,text,text,numeric)', 'execute') as anon,
+    has_function_privilege('authenticated', 'public.processar_status_pagamento(text,text,text,numeric)', 'execute') as customer`);
+  assert.deepEqual(permissions, {service:true, anon:false, customer:false});
+  const user = '00000000-0000-0000-0000-000000000001';
+  await db.query('insert into auth.users values ($1,now())', [user]);
   const stock = async () => (await db.query("select estoque from produtos where code='QA'")).rows[0].estoque;
-  const reserve = id => db.query('select reservar_pedido_checkout($1,null,79.96,$2,$3,30)',
-    [id, '{}', JSON.stringify([{code:'QA',qtd:2,preco_unitario:39.98}])]);
+  const reserve = id => db.query('select reservar_pedido_checkout($1,$2,79.96,$3,$4,30)',
+    [id, user, '{}', JSON.stringify([{code:'QA',qtd:2,preco_unitario:39.98}])]);
   const processPayment = async (id, status, amount=79.96) => (await db.query(
     'select processar_status_pagamento($1,$2,$3,$4) result', ['payment-'+id,status,id,amount])).rows[0].result;
+  await reserve('cancelled');
+  assert.equal(await stock(),8);
+  await processPayment('cancelled','pending');
+  const cancellation = await processPayment('cancelled','cancelled');
+  await processPayment('cancelled','cancelled');
+  assert.equal(await stock(),10);
+  assert.deepEqual((await db.query(`select status,status_pagamento,estoque_baixado
+    from pedidos where checkout_id='cancelled'`)).rows[0], {
+    status:'cancelado', status_pagamento:'cancelled', estoque_baixado:false,
+  });
+  assert.deepEqual((await db.query(`select event from customer_email_outbox
+    join pedidos on pedidos.id=pedido_id where checkout_id='cancelled' order by event`)).rows,
+    [{event:'order_cancelled'},{event:'payment_pending'}]);
+  assert.equal(cancellation.estoque_baixado,false);
   await reserve('approved'); await reserve('approved');
   assert.equal(await stock(),8);
   await processPayment('approved','approved'); await processPayment('approved','approved');
@@ -63,5 +90,5 @@ try {
   await db.exec("update pedidos set reserva_expira_em=now()-interval '1 minute' where checkout_id='late-no-stock'; select liberar_reservas_expiradas(); update produtos set estoque=0 where code='QA'");
   assert.equal((await processPayment('late-no-stock','approved')).estoque_disponivel,false);
   assert.equal(await stock(),0);
-  console.log('PASS: reservation/approval/rejection/expiry replay, shipped/delivered preservation, stale pending, refund replay, no automatic return stock, late approval, amount mismatch, foreign payment, missing order and insufficient stock. Local PostgreSQL only; remote concurrency not covered.');
+  console.log('PASS: cancellation releases stock once and queues the correct email; reservation/approval/rejection/expiry replay, shipped/delivered preservation, stale pending, refund replay, no automatic return stock, late approval, amount mismatch, foreign payment, missing order and insufficient stock. Local PostgreSQL only; remote concurrency not covered.');
 } finally { await db.close(); }
