@@ -11,10 +11,11 @@ const ts = require('typescript');
 const sdk = require('mercadopago');
 const code = ts.transpileModule(readFileSync('app/api/webhook/orders/route.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
 
-async function run(options: { signature?: boolean; stale?: boolean; bodyId?: string; sandbox?: boolean; foreign?: boolean; method?: string; providerStatus?: string; rate?: string; missing?: boolean; noStock?: boolean; partial?: boolean } = {}) {
+async function run(options: { signature?: boolean; stale?: boolean; bodyId?: string; uppercaseSignature?: boolean; sandbox?: boolean; foreign?: boolean; method?: string; providerStatus?: string; rate?: string; missing?: boolean; noStock?: boolean; partial?: boolean } = {}) {
   const id = 'ORDFIXTURE001', requestId = 'request-fixture', secret = 'secret-fixture';
   const timestamp = String(Date.now() - (options.stale ? 1200000 : 0));
-  const signature = createHmac('sha256', secret).update(`id:${id};request-id:${requestId};ts:${timestamp};`).digest('hex');
+  const signedId = options.uppercaseSignature ? id : id.toLowerCase();
+  const signature = createHmac('sha256', secret).update(`id:${signedId};request-id:${requestId};ts:${timestamp};`).digest('hex');
   let reads = 0;
   const reconciled: unknown[] = [];
   const raw = { id, type: 'online', external_reference: 'orders-reference-fixture', user_id: options.foreign ? 'foreign-account' : 'account-fixture', integration_data: { application_id: 'app-fixture' }, country_code: 'BRA', currency: 'BRL', total_amount: '9.99', total_paid_amount: '9.99', status: options.providerStatus || 'processed', status_detail: options.partial ? 'partially_refunded' : 'accredited', transactions: { payments: [{ amount: '9.99', payment_method: { id: options.method === 'boleto' ? 'boleto' : options.method === 'pix' ? 'pix' : 'visa', type: options.method === 'boleto' ? 'ticket' : options.method === 'pix' ? 'bank_transfer' : options.method || 'credit_card' } }] } };
@@ -44,9 +45,16 @@ async function run(options: { signature?: boolean; stale?: boolean; bodyId?: str
 }
 
 test('Orders webhook verifies real SDK signatures and rejects stale, mismatched, sandbox and rate-limited events before reads', async () => {
-  for (const [options, expected] of [[{ signature: false }, 401], [{ stale: true }, 401], [{ bodyId: 'ORDOTHER' }, 400], [{ sandbox: true }, 400], [{ rate: 'denied' }, 429], [{ rate: 'unavailable' }, 503]] as const) {
+  for (const [options, expected] of [[{ signature: false }, 401], [{ uppercaseSignature: true }, 401], [{ stale: true }, 401], [{ bodyId: 'ORDOTHER' }, 400], [{ sandbox: true }, 400], [{ rate: 'denied' }, 429], [{ rate: 'unavailable' }, 503]] as const) {
     const result = await run(options); assert.equal(result.status, expected); assert.equal(result.reads, 0); assert.equal(result.reconciled.length, 0);
   }
+});
+
+test('Orders accepts a lowercase HMAC resource ID with the original uppercase URL and body ID', async () => {
+  const result = await run();
+  assert.equal(result.status, 200);
+  assert.equal(result.reads, 1);
+  assert.equal(result.reconciled.length, 1);
 });
 
 test('each method reconciles only the authenticated provider status, never the webhook body status', async () => {

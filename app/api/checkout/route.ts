@@ -282,7 +282,7 @@ export async function POST(request: Request) {
 
     // The reservation checks stock after looking up the attempt, so retries can reuse held units.
     const { data: reservationData, error: reservationError } = await supabaseAdmin.rpc(
-      'reserve_priced_order',
+      body.change_id ? 'reserve_changed_order' : 'reserve_priced_order',
       {
         p_checkout_id: idempotencyKey,
         p_user_id: verifiedUserId,
@@ -290,6 +290,7 @@ export async function POST(request: Request) {
         p_delivery_address: deliveryAddress,
         p_items: orderItems,
         p_reservation_minutes: 30,
+        ...(body.change_id ? { p_change: body.change_id } : {}),
       },
     );
 
@@ -299,6 +300,9 @@ export async function POST(request: Request) {
     if (reservationError || !order || typeof order.id !== 'string') {
       if (reservationError?.message?.includes('PRICE_CHANGED')) {
         return NextResponse.json({ error: 'Os preços mudaram. Revise o total antes de pagar.' }, { status: 409 });
+      }
+      if (reservationError?.message === 'CHANGE_ALREADY_USED' || reservationError?.message === 'INVALID_ORDER') {
+        return NextResponse.json({ error: 'Esta alteração já foi utilizada ou não pertence à sua conta. Consulte Meus pedidos.' }, { status: 409 });
       }
       console.error('O pedido não pôde ser reservado no Supabase:', {
         checkoutId: idempotencyKey,
@@ -323,10 +327,6 @@ export async function POST(request: Request) {
       );
     }
 
-    if (body.change_id) {
-      const { error: changeError } = await supabaseAdmin.rpc('vincular_compra_alterada', { p_change: body.change_id, p_order: order.id, p_user: verifiedUserId });
-      if (changeError) return NextResponse.json({ error: 'Esta alteração já foi utilizada ou não pertence à sua conta. Consulte Meus pedidos.' }, { status: 409 });
-    }
     if (process.env.NEXT_PUBLIC_MP_ORDERS_PUBLIC_KEY && !sandbox) {
       const { data: binding, error: bindingError } = await supabaseAdmin.from('pedido_payment_provider')
         .select('api').eq('pedido_id', order.id).maybeSingle();

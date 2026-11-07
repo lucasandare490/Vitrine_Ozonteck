@@ -18,15 +18,17 @@ export async function POST(request: Request) {
     const requestId = request.headers.get('x-request-id');
     const id = new URL(request.url).searchParams.get('data.id');
     if (!signature || !requestId || requestId.length > 200 || !id || !/^ORD[A-Za-z0-9]+$/i.test(id)) return reply({ error: 'Notificacao invalida.' }, 400);
-    WebhookSignatureValidator.validate({ xSignature: signature, xRequestId: requestId, dataId: id, secret });
+    // Mercado Pago signs the lowercase form of alphanumeric resource IDs.
+    const signedId = id.toLowerCase();
+    WebhookSignatureValidator.validate({ xSignature: signature, xRequestId: requestId, dataId: signedId, secret });
     const timestamp = signature.split(',').map(part => part.trim()).find(part => part.startsWith('ts='))?.slice(3);
     const parsed = Number(timestamp);
     const millis = parsed < 1e12 ? parsed * 1000 : parsed;
     if (!timestamp || !/^\d+$/.test(timestamp) || !Number.isSafeInteger(parsed) || Math.abs(Date.now() - millis) > 600000) return reply({ error: 'Assinatura expirada.' }, 401);
-    const decision = await limit(id);
+    const decision = await limit(signedId);
     if (decision !== 'allowed') return reply({ error: 'Tente novamente.' }, decision === 'denied' ? 429 : 503);
     const body = schema.safeParse(await readJsonBody(request, 32768));
-    if (!body.success || body.data.data.id.toLowerCase() !== id.toLowerCase()) return reply({ error: 'Evento invalido.' }, 400);
+    if (!body.success || body.data.data.id.toLowerCase() !== signedId) return reply({ error: 'Evento invalido.' }, 400);
     // Only an authenticated GET from Mercado Pago is allowed to settle an order.
     const raw = await ordersClient().get({ id: body.data.data.id });
     if (!raw.external_reference) return reply({ error: 'Referencia ausente.' }, 409);

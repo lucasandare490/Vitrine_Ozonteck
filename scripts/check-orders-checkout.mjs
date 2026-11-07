@@ -15,13 +15,30 @@ const sdk = require('mercadopago');
 const credentials = parseEnv(readFileSync('.env.orders-test.local', 'utf8'));
 const accessToken = credentials.ORDERS_TEST_ACCESS_TOKEN;
 const application = credentials.ORDERS_TEST_APPLICATION_ID;
-assert.ok(application && accessToken?.match(/^APP_USR-(\d+)-/)?.[1] === application, 'Explicit test application required');
+const publicKey = credentials.ORDERS_TEST_PUBLIC_KEY;
+assert.ok(publicKey && application && accessToken?.match(/^APP_USR-(\d+)-/)?.[1] === application, 'Explicit test application required');
 const sellerResponse = await fetch('https://api.mercadopago.com/users/me', {
   headers: { Authorization: 'Bearer ' + accessToken }, signal: AbortSignal.timeout(15000),
 });
 assert.equal(sellerResponse.status, 200, 'Test credentials unavailable');
 const seller = await sellerResponse.json();
 assert.ok(seller.tags?.includes('test_user') && seller.site_id === 'MLB', 'Only a Brazilian test seller is allowed');
+
+async function testCreditToken(name) {
+  const url = new URL('https://api.mercadopago.com/v1/card_tokens');
+  url.searchParams.set('public_key', publicKey);
+  const response = await fetch(url, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: AbortSignal.timeout(15000),
+    body: JSON.stringify({
+      card_number: '5480832801033311', expiration_month: 11, expiration_year: 2030, security_code: '123',
+      cardholder: { name, identification: { type: 'CPF', number: '12345678909' } },
+    }),
+  });
+  assert.equal(response.status, 201, 'Official test card tokenization failed');
+  const token = await response.json();
+  assert.ok(token.id && token.public_key === publicKey, 'Test card token must belong to the test application');
+  return token.id;
+}
 
 const client = new sdk.Order(new sdk.MercadoPagoConfig({ accessToken, options: { timeout: 15000 } }));
 const assertTestOrder = id => assert.match(id, /^ORDTST[A-Z0-9]+$/, 'Expected a test order');
@@ -43,10 +60,10 @@ const mailbox = [];
 const rpcArgs = {
   liberar_reservas_expiradas: [], resolve_customer_prices: ['p_user_id'],
   reserve_priced_order: ['p_checkout_id','p_user_id','p_total','p_delivery_address','p_items','p_reservation_minutes'],
+  reserve_changed_order: ['p_checkout_id','p_user_id','p_total','p_delivery_address','p_items','p_reservation_minutes','p_change'],
   bind_order_payment_provider: ['p_order','p_account','p_application'],
   processar_status_pagamento: ['p_payment_id','p_payment_status','p_checkout_id','p_amount'],
   reabrir_compra_cancelada: ['p_order','p_user','p_payment','p_reason'],
-  vincular_compra_alterada: ['p_change','p_order','p_user'],
 };
 const dbValue = value => value !== null && typeof value === 'object' ? JSON.stringify(value) : value;
 const adapter = {
@@ -182,10 +199,11 @@ try {
   const hardening = sql('202609240002_security_hardening');
   await db.exec(hardening.slice(hardening.indexOf('create or replace function public.liberar_reservas_expiradas()'), hardening.lastIndexOf('commit;')));
   for (const name of ['202610090001_affiliate_pricing','202610140001_order_changes','202610220001_payment_provider_binding',
-    '202611010001_customer_email_outbox','202611040003_pickup_ready','202611070001_payment_cancellation_status']) await db.exec(sql(name));
+    '202611010001_customer_email_outbox','202611040003_pickup_ready','202611070001_payment_cancellation_status',
+    '202611070002_atomic_order_change_reservation']) await db.exec(sql(name));
   await db.query('insert into auth.users values($1,$2,now())', [customer,email]);
   await db.query("insert into profiles values($1,'admin')", [admin]);
-  await db.query('insert into produtos values($1,$2,$3,50,1,false)', [code,'Produto QA','Cuidados']);
+  await db.query('insert into produtos values($1,$2,$3,9.99,1,false)', [code,'Produto QA','Cuidados']);
 
   const checkout = load('app/api/checkout/route.ts').POST;
   const webhook = load('app/api/webhook/orders/route.ts').POST;
@@ -199,13 +217,14 @@ try {
     method: body ? 'POST' : 'GET', headers: { 'Content-Type': 'application/json', Authorization: 'Bearer customer-fixture', ...headers },
     body: body ? JSON.stringify(body) : undefined,
   });
-  const start = (method, key, changeId) => checkout(request('/api/checkout', {
-    expected_total: 50, cart_items: [{code,quantity:1}], payment_method_id: method, change_id: changeId,
-    payer: { email: 'test_user_br@testuser.com', first_name: 'APRO', last_name: 'Teste',
+  const start = (method, key, changeId, card) => checkout(request('/api/checkout', {
+    expected_total: method === 'pix' ? 50 : 9.99, cart_items: [{code,quantity:1}], payment_method_id: method, change_id: changeId,
+    ...(card ? { token: card.token, payment_type_id: 'credit_card' } : {}),
+    payer: { email: 'test_user_br@testuser.com', first_name: card?.name ?? 'APRO', last_name: 'Teste',
       identification: { type: 'CPF', number: '52998224725' },
       address: { zip_code: '50050015', street_name: 'Rua de teste', street_number: '1', neighborhood: 'Centro', city: 'Recife', federal_unit: 'PE' } },
     metadata: { phone: '81999999999', delivery_mode: 'retirada', user_id: customer },
-  }, { 'x-idempotency-key': key }));
+  }, { 'x-idempotency-key': key, 'x-forwarded-for': method === 'boleto' ? '127.0.0.1' : '127.0.0.2' }));
   async function json(response, expected = 200) {
     assert.equal(response.status, expected);
     return response.json();
@@ -213,72 +232,110 @@ try {
   const lookup = (id, headers) => payment(request('/api/pedidos/' + id + '/pagamento', null, headers), context(id));
   async function signedCallback(id) {
     const requestId = randomUUID(), timestamp = String(Date.now());
-    const signature = createHmac('sha256', secret).update(`id:${id};request-id:${requestId};ts:${timestamp};`).digest('hex');
+    const signature = createHmac('sha256', secret).update(`id:${id.toLowerCase()};request-id:${requestId};ts:${timestamp};`).digest('hex');
     // Envelope generated here; the handler independently fetches the actual test order.
     return webhook(request('/api/webhook/orders?data.id=' + id, {type:'order',live_mode:true,data:{id}}, {
       'x-request-id':requestId, 'x-signature':`ts=${timestamp},v1=${signature}`,
     }));
   }
 
-  const boletoKey = 'orders-' + randomUUID();
-  const boleto = await json(await start('boleto', boletoKey));
-  assertTestOrder(boleto.id);
-  assert.equal((await json(await start('boleto', boletoKey))).id, boleto.id);
-  assert.equal(await stock(), 0);
-  const ticket = await json(await lookup(boleto.order_id));
-  assert.ok(ticket.payable && ticket.boletoCode && ticket.boletoUrl);
-  await json(await lookup(boleto.order_id, { Authorization: 'Bearer other-fixture' }), 404);
-  await json(await start('boleto', 'orders-' + randomUUID()), 409);
-  await deliver(); // welcome
-  await deliver(); // pending boleto
-  console.log('PASS boleto issued, displayed only to owner, and checkout replay reused the order and reservation.');
+  await json(await start('boleto', 'orders-' + randomUUID(), randomUUID()), 409);
+  assert.equal(await stock(), 1, 'An invalid change must not reserve stock');
+  assert.equal((await db.query('select count(*)::int as count from pedidos')).rows[0].count, 0);
+  const { rows: [acl] } = await db.query(`select
+    has_function_privilege('service_role', 'public.reserve_changed_order(text,uuid,numeric,jsonb,jsonb,integer,uuid)', 'execute') as server,
+    has_function_privilege('authenticated', 'public.reserve_changed_order(text,uuid,numeric,jsonb,jsonb,integer,uuid)', 'execute') as customer,
+    has_function_privilege('anon', 'public.reserve_changed_order(text,uuid,numeric,jsonb,jsonb,integer,uuid)', 'execute') as anon`);
+  assert.deepEqual(acl, { server: true, customer: false, anon: false });
+  console.log('PASS invalid replacement rolls back order and stock, and only the server can invoke its reservation.');
 
-  const changeRequest = () => change(request('/api/pedidos/' + boleto.order_id + '/alterar', {reason:'pagamento'}), context(boleto.order_id));
-  const { change: event } = await json(await changeRequest());
-  assert.equal((await json(await changeRequest())).change.id, event.id);
-  await json(await signedCallback(boleto.id));
-  const cancelled = await json(await lookup(boleto.order_id));
-  assert.equal(cancelled.orderStatus, 'cancelado');
-  assert.equal(cancelled.payable, false);
-  assert.equal(cancelled.boletoCode, null);
-  assert.equal(await stock(), 1);
-  await deliver(); // cancellation
+  const creditOnly = process.argv.includes('--credit-only');
+  if (!creditOnly) {
+    const boletoKey = 'orders-' + randomUUID();
+    const boleto = await json(await start('boleto', boletoKey));
+    assertTestOrder(boleto.id);
+    assert.equal(boleto.status, 'pending', 'Unexpected test boleto state: ' + boleto.status_detail);
+    assert.equal((await json(await start('boleto', boletoKey))).id, boleto.id);
+    assert.equal(await stock(), 0);
+    const ticket = await json(await lookup(boleto.order_id));
+    assert.ok(ticket.payable && ticket.boletoCode && ticket.boletoUrl);
+    await json(await lookup(boleto.order_id, { Authorization: 'Bearer other-fixture' }), 404);
+    await json(await start('boleto', 'orders-' + randomUUID()), 409);
+    await deliver(); // welcome
+    await deliver(); // pending boleto
+    console.log('PASS boleto issued, displayed only to owner, and checkout replay reused the order and reservation.');
 
-  const pix = await json(await start('pix', 'orders-' + randomUUID(), event.id));
-  assertTestOrder(pix.id);
-  // Ensure the administrative history used by both the bell and the changes panel is readable.
-  await db.query("select set_config('request.jwt.claim.sub',$1,false)", [admin]);
-  await db.exec('set role authenticated');
-  const { rows: [notice] } = await db.query('select pedido_id,novo_pedido_id from pedido_alteracoes where id=$1', [event.id]);
-  assert.deepEqual(notice, {pedido_id:boleto.order_id, novo_pedido_id:pix.order_id});
-  await db.exec('reset role');
-  await deliver(); // replacement linked
-  await deliver(); // pending Pix, unless already settled
-  console.log('PASS boleto cancellation, stock release, replacement purchase and admin order-change history.');
+    const changeRequest = () => change(request('/api/pedidos/' + boleto.order_id + '/alterar', {reason:'pagamento'}), context(boleto.order_id));
+    const { change: event } = await json(await changeRequest());
+    assert.equal((await json(await changeRequest())).change.id, event.id);
+    await json(await signedCallback(boleto.id));
+    const cancelled = await json(await lookup(boleto.order_id));
+    assert.equal(cancelled.orderStatus, 'cancelado');
+    assert.equal(cancelled.payable, false);
+    assert.equal(cancelled.boletoCode, null);
+    assert.equal(await stock(), 1);
+    await deliver(); // cancellation
 
-  for (let attempt = 0; attempt < 10; attempt++) {
-    const state = checkedResponse(await client.get({ id: pix.id }));
-    if (state.status === 'processed') break;
-    await setTimeout(3000);
+    await db.query('update produtos set price=50 where code=$1', [code]);
+    const pixKey = 'orders-' + randomUUID();
+    const pix = await json(await start('pix', pixKey, event.id));
+    assertTestOrder(pix.id);
+    assert.equal((await json(await start('pix', pixKey, event.id))).id, pix.id);
+    // Ensure the administrative history used by both the bell and the changes panel is readable.
+    await db.query("select set_config('request.jwt.claim.sub',$1,false)", [admin]);
+    await db.exec('set role authenticated');
+    const { rows: [notice] } = await db.query('select pedido_id,novo_pedido_id from pedido_alteracoes where id=$1', [event.id]);
+    assert.deepEqual(notice, {pedido_id:boleto.order_id, novo_pedido_id:pix.order_id});
+    await db.exec('reset role');
+    await deliver(); // replacement linked
+    await deliver(); // pending Pix, unless already settled
+    console.log('PASS boleto cancellation, stock release, replacement purchase and admin order-change history.');
+
+    for (let attempt = 0; attempt < 10; attempt++) {
+      const state = checkedResponse(await client.get({ id: pix.id }));
+      if (state.status === 'processed') break;
+      await setTimeout(3000);
+    }
+    await json(await signedCallback(pix.id));
+    await json(await signedCallback(pix.id));
+    const settled = await json(await lookup(pix.order_id));
+    assert.equal(settled.status, 'approved');
+    assert.equal(settled.orderStatus, 'preparando');
+    assert.equal(await stock(), 0);
+    const { rows: [row] } = await db.query('select * from pedidos where id=$1', [pix.order_id]);
+    assert.equal(matchesAccountOrderFilter(row,'Todos'), true);
+    assert.equal(matchesAuditFilter(row,'Todos'), true);
+    assert.equal(row.retirada_pronta_em, null);
+    await deliver(); // approval
+    await db.query('update pedidos set retirada_pronta_em=now() where id=$1', [pix.order_id]);
+    await deliver(); // pickup
+    await db.query("update pedidos set status='entregue' where id=$1", [pix.order_id]);
+    await deliver(); // delivery
+  } else {
+    await deliver(); // welcome
   }
-  await json(await signedCallback(pix.id));
-  await json(await signedCallback(pix.id));
-  const settled = await json(await lookup(pix.order_id));
-  assert.equal(settled.status, 'approved');
-  assert.equal(settled.orderStatus, 'preparando');
-  assert.equal(await stock(), 0);
-  const { rows: [row] } = await db.query('select * from pedidos where id=$1', [pix.order_id]);
-  assert.equal(matchesAccountOrderFilter(row,'Todos'), true);
-  assert.equal(matchesAuditFilter(row,'Todos'), true);
-  assert.equal(row.retirada_pronta_em, null);
-  await deliver(); // approval
-  await db.query('update pedidos set retirada_pronta_em=now() where id=$1', [pix.order_id]);
-  await deliver(); // pickup
-  await db.query("update pedidos set status='entregue' where id=$1", [pix.order_id]);
-  await deliver(); // delivery
+
+  await db.query('update produtos set estoque=1,price=9.99 where code=$1', [code]);
+  for (const [name, expectedStatus, expectedStock] of [['OTHE-NAUT','rejected',1],['APRO-AUTH','approved',0]]) {
+    const token = await testCreditToken(name);
+    const credit = await json(await start('master', 'orders-' + randomUUID(), undefined, {name,token}));
+    assertTestOrder(credit.id);
+    assert.equal(credit.status, expectedStatus);
+    await json(await signedCallback(credit.id));
+    const paymentState = await json(await lookup(credit.order_id));
+    assert.equal(paymentState.status, expectedStatus);
+    const { rows: [creditOrder] } = await db.query('select status,status_pagamento from pedidos where id=$1', [credit.order_id]);
+    assert.equal(matchesAccountOrderFilter(creditOrder,'Todos'), expectedStatus === 'approved');
+    assert.equal(matchesAuditFilter(creditOrder,'Todos'), expectedStatus === 'approved');
+    assert.equal(await stock(), expectedStock);
+    await deliver();
+  }
+  console.log('PASS credit decline returned stock and approval kept stock reserved in the complete test flow.');
   await deliver(); // queue drained
   const { rows: sent } = await db.query("select event,id,attempts from customer_email_outbox where state='sent'");
-  for (const event of ['welcome','payment_pending','order_cancelled','order_changed','payment_approved','pickup_ready','order_delivered']) {
+  const expectedEvents = ['welcome','payment_approved','payment_rejected'];
+  if (!creditOnly) expectedEvents.push('payment_pending','order_cancelled','order_changed','pickup_ready','order_delivered');
+  for (const event of expectedEvents) {
     assert.ok(sent.some(row => row.event === event), event);
   }
   assert.equal(mailbox.length, sent.length);
@@ -289,7 +346,7 @@ try {
     assert.equal(message?.to, email);
     assert.ok(message?.html.includes('https://shop.example.invalid/conta'));
   }
-  console.log('PASS Pix settlement, signed local webhook replay, shared account/audit filters and transactional mail in the local inbox.');
+  console.log('PASS signed local webhook, shared account/audit filters and transactional mail in the local inbox.');
 } finally {
   await db.close();
 }
