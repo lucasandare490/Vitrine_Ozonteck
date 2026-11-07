@@ -345,7 +345,13 @@ export async function POST(request: Request) {
           return NextResponse.json({ error: 'Selecione uma forma de pagamento válida.' }, { status: 400 });
         }
         try {
-          const stored = order as StoredOrder;
+          // The reservation response omits checkout_id. Use the key passed to the reservation RPC.
+          const stored: StoredOrder = {
+            id: order.id,
+            checkout_id: idempotencyKey,
+            valor_total: total,
+            id_pagamento_mp: typeof order.id_pagamento_mp === 'string' ? order.id_pagamento_mp : null,
+          };
           const payment = await createOrdersPayment(supabaseAdmin, stored, {
             totalInCents, reference: idempotencyKey, description: sanitize(body.description), method,
             payer: body.payer,
