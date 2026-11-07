@@ -206,7 +206,7 @@ try {
   await db.exec(hardening.slice(hardening.indexOf('create or replace function public.liberar_reservas_expiradas()'), hardening.lastIndexOf('commit;')));
   for (const name of ['202610090001_affiliate_pricing','202610140001_order_changes','202610220001_payment_provider_binding',
     '202611010001_customer_email_outbox','202611040003_pickup_ready','202611070001_payment_cancellation_status',
-    '202611070002_atomic_order_change_reservation']) await db.exec(sql(name));
+    '202611070002_atomic_order_change_reservation','202611070003_payment_partial_refund']) await db.exec(sql(name));
   await db.query('insert into auth.users values($1,$2,now())', [customer,email]);
   await db.query("insert into profiles values($1,'admin')", [admin]);
   await db.query('insert into produtos values($1,$2,$3,9.99,1,false)', [code,'Produto QA','Cuidados']);
@@ -347,7 +347,35 @@ try {
   assert.equal(captured.user_id, String(seller.id));
   assert.equal(captured.integration_data?.application_id, application);
   assert.equal(captured.external_reference, approvedCredit.reference);
-  await client.refund({ id: captured.id, requestOptions: { idempotencyKey: 'refund-' + captured.id } });
+  const transaction = captured.transactions?.payments?.[0];
+  assert.ok(transaction?.id);
+  await client.refund({
+    id: captured.id,
+    body: { transactions: [{ id: transaction.id, amount: '1.00' }] },
+    requestOptions: { idempotencyKey: 'partial-' + captured.id },
+  });
+  const partial = checkedResponse(await client.get({ id: captured.id }));
+  assert.equal(partial.status_detail, 'partially_refunded');
+  console.log('Test partial refund', {
+    orderStatus: partial.status, statusDetail: partial.status_detail,
+    paidEqualsTotal: partial.total_paid_amount === partial.total_amount,
+  });
+  const partialNotification = await json(await signedCallback(captured.id));
+  assert.equal(partialNotification.requires_review, true);
+  const partialState = await json(await lookup(approvedCredit.order_id));
+  assert.equal(partialState.status, 'partially_refunded');
+  assert.equal(partialState.orderStatus, 'enviado');
+  assert.equal(partialState.payable, false);
+  assert.equal(await stock(), 0);
+  const { rows: [partialOrder] } = await db.query('select status,status_pagamento from pedidos where id=$1', [approvedCredit.order_id]);
+  assert.equal(matchesAccountOrderFilter(partialOrder,'Todos'), false);
+  assert.equal(matchesAuditFilter(partialOrder,'revisao'), true);
+  assert.equal((await db.query("select count(*)::int as count from customer_email_outbox where event='refund_confirmed'")).rows[0].count, 0);
+  await client.refund({
+    id: captured.id,
+    body: { transactions: [{ id: transaction.id, amount: '8.99' }] },
+    requestOptions: { idempotencyKey: 'refund-' + captured.id },
+  });
   assert.equal(checkedResponse(await client.get({ id: captured.id })).status, 'refunded');
   await json(await signedCallback(captured.id));
   await json(await signedCallback(captured.id));
@@ -359,7 +387,7 @@ try {
   assert.equal(matchesAccountOrderFilter(refundedOrder,'Todos'), false);
   assert.equal(matchesAuditFilter(refundedOrder,'Todos'), false);
   await deliver();
-  console.log('PASS shipment and real test refund reached the queue; refund did not return stock or count as a sale.');
+  console.log('PASS partial test refund flagged review, full refund reached the queue, and neither returned stock or counted as a sale.');
 
   await deliver(); // queue drained
   const { rows: sent } = await db.query("select event,id,attempts from customer_email_outbox where state='sent'");

@@ -42,7 +42,7 @@ export type OrdersIdentity = {
 };
 
 export type NormalizedOrderStatus = 'pending' | 'authorized' | 'approved' | 'in_process'
-  | 'rejected' | 'cancelled' | 'refunded' | 'in_mediation' | 'charged_back';
+  | 'rejected' | 'cancelled' | 'refunded' | 'partially_refunded' | 'in_mediation' | 'charged_back';
 
 function positiveCents(value: number) {
   if (!Number.isSafeInteger(value) || value <= 0) throw new Error('INVALID_ORDER_AMOUNT');
@@ -94,7 +94,7 @@ export function buildOrdersRequest(input: OrdersCheckoutInput): OrderRequest {
 export function normalizeOrdersStatus(status: string | undefined, detail: string | undefined): NormalizedOrderStatus {
   switch (status) {
     case 'created': return 'pending';
-    case 'processed': return 'approved';
+    case 'processed': return detail === 'partially_refunded' ? 'partially_refunded' : 'approved';
     case 'processing': return 'in_process';
     case 'action_required': return detail === 'waiting_capture' ? 'authorized' : 'pending';
     case 'failed': return 'rejected';
@@ -134,7 +134,8 @@ export function normalizeOrdersResponse(order: OrderResponse, expected: OrdersId
     throw new Error('PAYMENT_AMOUNT_MISMATCH');
   }
   const status = normalizeOrdersStatus(order.status, order.status_detail);
-  if (status === 'approved' && (!transaction || decimalCents(order.total_paid_amount) !== expected.totalInCents)) {
+  if ((status === 'approved' || status === 'partially_refunded')
+    && (!transaction || decimalCents(order.total_paid_amount) !== expected.totalInCents)) {
     throw new Error('ORDER_NOT_FULLY_PAID');
   }
   const method = transaction?.payment_method;
@@ -156,6 +157,6 @@ export function normalizeOrdersResponse(order: OrderResponse, expected: OrdersId
     // A challenge must be handled by the frontend, never interpreted as approval.
     requiresAuthentication: order.status_detail === 'pending_challenge' || method?.transaction_security?.status === 'pending',
     authenticationUrl: order.status_detail === 'pending_challenge' ? safeTicketUrl(method?.transaction_security?.url) : null,
-    partiallyRefunded: order.status_detail === 'partially_refunded',
+    partiallyRefunded: status === 'partially_refunded',
   };
 }

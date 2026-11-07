@@ -65,7 +65,7 @@ test('request rejects invalid amounts and references', () => {
 
 test('all supported states map without converting pending into approval', () => {
   for (const [state, detail, result] of [
-    ['created', 'created', 'pending'], ['processed', 'accredited', 'approved'],
+    ['created', 'created', 'pending'], ['processed', 'accredited', 'approved'], ['processed', 'partially_refunded', 'partially_refunded'],
     ['processing', 'in_process', 'in_process'], ['action_required', 'waiting_payment', 'pending'],
     ['action_required', 'waiting_capture', 'authorized'], ['action_required', 'waiting_retry', 'pending'],
     ['failed', 'failed', 'rejected'], ['canceled', 'expired', 'cancelled'],

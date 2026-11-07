@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     const identity = await validateOrdersBinding(db, order);
     const payment = normalizeOrdersResponse(raw, { ...identity, id: body.data.data.id });
     const result = await reconcileOrdersPayment(db, order, payment);
-    return reply({ success: true, requires_review: result.estoque_disponivel === false });
+    return reply({ success: true, requires_review: payment.partiallyRefunded || result.estoque_disponivel === false });
   } catch (error) {
     if (error instanceof InvalidWebhookSignatureError) return reply({ error: 'Assinatura invalida.' }, 401);
     if (error instanceof RequestBodyError) return reply({ error: error.message }, error.status);

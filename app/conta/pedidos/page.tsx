@@ -316,6 +316,9 @@ export default function PedidosPage() {
                           </div>
                         </div>
 
+                        {order.status_pagamento === 'partially_refunded' && <p className="mx-6 mt-5 text-sm font-semibold text-amber-800">
+                          Estorno parcial registrado. Para conferir os valores, fale com a loja.
+                        </p>}
                         {retiradaPronta && <div role="status" className="mx-6 mt-5 flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800">
                           <CheckCircle2 size={20} className="shrink-0" />
                           <div><p className="font-bold">Pronto para retirada</p><p>Seu pedido já pode ser retirado na loja.</p></div>

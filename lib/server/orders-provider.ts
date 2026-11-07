@@ -60,7 +60,6 @@ export async function createOrdersPayment(db: SupabaseClient, order: StoredOrder
 }
 
 export async function reconcileOrdersPayment(db: SupabaseClient, order: StoredOrder, payment: Awaited<ReturnType<typeof readOrdersPayment>>) {
-  if (payment.partiallyRefunded) throw new Error('PARTIAL_REFUND_REQUIRES_REVIEW');
   const { data, error } = await db.rpc('processar_status_pagamento', {
     p_payment_id: payment.id, p_payment_status: payment.status,
     p_checkout_id: order.checkout_id, p_amount: payment.amount,

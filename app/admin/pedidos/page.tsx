@@ -263,7 +263,9 @@ export default function AuditoriaPedidos() {
                       </td>
                       <td className="px-6 py-4">
                         {getStatusBadge(pedido.status)}
-                        {needsPaymentReview(pedido) && <p className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400">Conferir pagamento · fora do total vendido</p>}
+                        {needsPaymentReview(pedido) && <p className="mt-2 text-xs font-semibold text-amber-700 dark:text-amber-400">
+                          {pedido.status_pagamento === 'partially_refunded' ? 'Estorno parcial em conferência' : 'Conferir pagamento'} · fora do total vendido
+                        </p>}
                       </td>
                       <td className="px-6 py-4">
                         {avaliacaoDoPedido ? (

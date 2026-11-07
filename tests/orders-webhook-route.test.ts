@@ -30,7 +30,6 @@ async function run(options: { signature?: boolean; stale?: boolean; bodyId?: str
       ordersClient: () => ({ get: async () => { reads++; return raw; } }),
       validateOrdersBinding: async () => ({ accountId: 'account-fixture', applicationId: 'app-fixture', reference: raw.external_reference, totalInCents: 999 }),
       reconcileOrdersPayment: async (_db: unknown, _order: unknown, payment: { partiallyRefunded: boolean }) => {
-        if (payment.partiallyRefunded) throw new Error('PARTIAL_REFUND_REQUIRES_REVIEW');
         reconciled.push(payment); return { estoque_disponivel: !options.noStock };
       },
     },
@@ -67,8 +66,15 @@ test('each method reconciles only the authenticated provider status, never the w
 });
 
 test('foreign account, unknown provider states and missing orders cannot settle a sale', async () => {
-  for (const options of [{ foreign: true }, { providerStatus: 'unknown' }, { missing: true }, { partial: true }]) {
+  for (const options of [{ foreign: true }, { providerStatus: 'unknown' }, { missing: true }]) {
     const result = await run(options); assert.ok(result.status >= 400); assert.equal(result.reconciled.length, 0);
   }
   assert.equal((await run({ noStock: true })).body.requires_review, true);
+});
+
+test('a verified partial refund reconciles and is flagged for review', async () => {
+  const result = await run({ partial: true });
+  assert.equal(result.status, 200);
+  assert.equal(result.body.requires_review, true);
+  assert.equal((result.reconciled[0] as { status: string }).status, 'partially_refunded');
 });

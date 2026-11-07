@@ -12,6 +12,7 @@ const allowed = [
   '202611050001_database_rate_limit.sql',
   '202611070001_payment_cancellation_status.sql',
   '202611070002_atomic_order_change_reservation.sql',
+  '202611070003_payment_partial_refund.sql',
 ];
 const requested = process.argv.slice(2).filter(x => !x.startsWith('--'));
 if (!requested.length || requested.some(x => !allowed.includes(x))) throw new Error('EXPLICIT_ALLOWED_MIGRATIONS_REQUIRED');

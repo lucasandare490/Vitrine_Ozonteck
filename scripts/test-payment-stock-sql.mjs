@@ -26,6 +26,7 @@ try {
   await db.exec(source.slice(start, end));
   await db.exec(await fs.readFile('supabase/migrations/202611010001_customer_email_outbox.sql', 'utf8'));
   await db.exec(await fs.readFile('supabase/migrations/202611070001_payment_cancellation_status.sql', 'utf8'));
+  await db.exec(await fs.readFile('supabase/migrations/202611070003_payment_partial_refund.sql', 'utf8'));
   const { rows: [permissions] } = await db.query(`select
     has_function_privilege('service_role', 'public.processar_status_pagamento(text,text,text,numeric)', 'execute') as service,
     has_function_privilege('anon', 'public.processar_status_pagamento(text,text,text,numeric)', 'execute') as anon,
@@ -64,12 +65,23 @@ try {
   }
   await processPayment('approved', 'pending');
   assert.equal((await db.query("select status_pagamento from pedidos where checkout_id='approved'")).rows[0].status_pagamento, 'approved');
+  assert.equal((await processPayment('approved', 'partially_refunded', 0.01)).valor_valido, false);
+  assert.equal((await db.query("select status_pagamento from pedidos where checkout_id='approved'")).rows[0].status_pagamento, 'approved');
+  await processPayment('approved', 'partially_refunded');
+  await processPayment('approved', 'partially_refunded');
+  assert.equal((await processPayment('approved', 'approved', 0.01)).evento_ignorado, true);
+  assert.equal((await processPayment('approved', 'pending')).evento_ignorado, true);
+  assert.deepEqual((await db.query("select status,status_pagamento from pedidos where checkout_id='approved'")).rows[0],
+    {status:'entregue',status_pagamento:'partially_refunded'});
+  assert.equal((await db.query("select count(*)::int as count from customer_email_outbox where event='refund_confirmed'")).rows[0].count,0);
   const beforeRefund = await stock();
   await processPayment('approved', 'refunded');
   await processPayment('approved', 'refunded');
   await processPayment('approved', 'approved');
+  await processPayment('approved', 'partially_refunded');
   assert.equal(await stock(), beforeRefund);
   assert.equal((await db.query("select status from pedidos where checkout_id='approved'")).rows[0].status, 'reembolsado');
+  assert.equal((await db.query("select count(*)::int as count from customer_email_outbox where event='refund_confirmed'")).rows[0].count,1);
   assert.equal(await stock(),6);
   await processPayment('rejected','rejected'); await processPayment('rejected','rejected');
   assert.equal(await stock(),8);

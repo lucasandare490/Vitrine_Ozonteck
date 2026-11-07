@@ -458,7 +458,7 @@ export default function ListaDeInteresse() {
       throw new Error(data.error || 'Não foi possível processar o pagamento.');
     }
 
-    if (data.status === 'approved' || data.status === 'in_process' || data.status === 'pending') {
+    if (['approved', 'in_process', 'pending', 'partially_refunded'].includes(data.status)) {
       if (!data.order_id) throw new Error('Não foi possível obter o número do pedido. Consulte seus pedidos antes de tentar novamente.');
       setConfirmedOrder({ id: data.order_id, status: data.status, total: data.total, count: items.length });
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -498,7 +498,7 @@ export default function ListaDeInteresse() {
                 {preview || confirmedOrder?.status === 'approved' ? 'Pedido confirmado' : paymentStatus === 'success' ? 'Pagamento da compra' : 'Checkout Seguro'}
               </h1>
               <p className="text-slate-500 text-sm mt-1.5 font-medium">
-                {preview ? 'Prévia da confirmação de pagamento.' : confirmedOrder?.status === 'approved' ? 'Pagamento aprovado. Acompanhe a preparação em Meus pedidos.' : paymentStatus === 'success' ? 'Seu pedido será confirmado após a aprovação do pagamento.' : 'Finalize sua compra com total segurança.'}
+                {preview ? 'Prévia da confirmação de pagamento.' : confirmedOrder?.status === 'approved' ? 'Pagamento aprovado. Acompanhe a preparação em Meus pedidos.' : confirmedOrder?.status === 'partially_refunded' ? 'Acompanhe o estorno parcial em Meus pedidos.' : paymentStatus === 'success' ? 'Seu pedido será confirmado após a aprovação do pagamento.' : 'Finalize sua compra com total segurança.'}
               </p>
               {process.env.NODE_ENV === 'development' && <button type="button" onClick={() => setPreviewRequested(value => !value)} className="mt-4 min-h-11 rounded-md border border-teal-200 px-4 text-sm font-semibold text-teal-800 hover:bg-teal-50">{preview ? 'Voltar à compra real' : 'Prévia do pedido confirmado'}</button>}
             </div>

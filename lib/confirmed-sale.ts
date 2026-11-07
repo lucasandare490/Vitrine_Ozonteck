@@ -6,8 +6,8 @@ export function isConfirmedSale(order: SaleState) {
 }
 
 export function needsPaymentReview(order: SaleState) {
-  return ['preparando', 'enviado', 'entregue'].includes(order.status)
-    && order.status_pagamento !== 'approved';
+  return order.status_pagamento === 'partially_refunded'
+    || (['preparando', 'enviado', 'entregue'].includes(order.status) && order.status_pagamento !== 'approved');
 }
 
 export function matchesAuditFilter(order: SaleState, filter: string) {

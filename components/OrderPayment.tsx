@@ -58,8 +58,9 @@ export default function OrderPayment({ orderId, onStatusChange }: { orderId: str
     catch { setError('Não foi possível copiar. Selecione o código abaixo e copie manualmente.'); }
   }, []);
   const approved = payment?.status === 'approved';
+  const partiallyRefunded = payment?.status === 'partially_refunded';
   const terminal: Record<string, string> = { rejected: 'Pagamento recusado', cancelled: 'Pagamento cancelado', refunded: 'Pagamento reembolsado', charged_back: 'Pagamento contestado' };
-  const status = !payment ? 'Pagamento do pedido' : approved ? 'Pagamento aprovado' : payment.expired ? 'Prazo de pagamento encerrado' : terminal[payment.status || ''] || (payment.status === 'in_process' ? 'Pagamento em análise' : 'Aguardando pagamento');
+  const status = !payment ? 'Pagamento do pedido' : approved ? 'Pagamento aprovado' : partiallyRefunded ? 'Estorno parcial registrado' : payment.expired ? 'Prazo de pagamento encerrado' : terminal[payment.status || ''] || (payment.status === 'in_process' ? 'Pagamento em análise' : 'Aguardando pagamento');
   return <section aria-label="Pagamento do pedido" className="w-full min-w-0 space-y-4 text-left">
     <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
       <h2 aria-live="polite" className="flex items-center gap-2 text-lg font-bold">{approved ? <CheckCircle2 className="text-teal-700" size={22} /> : <Clock className="text-amber-600" size={22} />}{loading ? 'Consultando pagamento...' : status}</h2>
@@ -89,7 +90,7 @@ export default function OrderPayment({ orderId, onStatusChange }: { orderId: str
         </div>
       </div>
     </>}
-    {payment?.expired && !approved && <p className="text-sm">Não pague este código vencido. Entre em contato com a loja para verificar como continuar.</p>}
+    {payment?.expired && !approved && !partiallyRefunded && <p className="text-sm">Não pague este código vencido. Entre em contato com a loja para verificar como continuar.</p>}
     {payment && !error && ['pending', 'in_process', 'authorized', 'rejected', 'cancelled'].includes(payment.status) && <OrderChangeActions orderId={orderId} />}
   </section>;
 }
