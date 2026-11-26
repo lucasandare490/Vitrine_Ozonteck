@@ -340,3 +340,7 @@ Netlify exibiu **Published** para `d7fd28b3d93f6df6aa828edb09c08b6742142534`, de
 5. Executar o teste SEO público com as duas variáveis do domínio acima. Novos ajustes de preços devem usar os recursos administrativos com histórico, depois da confirmação comercial da comparação, sem editar migrações antigas.
 
 Nenhuma migração ou gravação de negócio foi necessária neste incremento. Não há declaração de conclusão integral: publicação e validações externas continuam pendentes pelos motivos registrados.
+
+### Confirmação do cadastro e esclarecimento das fontes — 26/11/2026
+
+Lucas confirmou que o link de cadastro correto é o atual da loja. A pendência de escolha de indicação acima está resolvida, preservando `lib/join.ts`. A avaliação dos materiais foi complementada com as fontes históricas de preços e descrições e com dois candidatos a confirmar: Instant Firm-Up 300 ml no PDF e Mind Chai apenas na tabela. Os produtos já excluídos foram separados dos ausentes, para evitar duplicação. Lucas solicitou uma mensagem para encaminhar ao responsável; ela foi preparada na conversa, sem envio a terceiros. Preços e produtos aguardam a confirmação comercial solicitada nessa mensagem.

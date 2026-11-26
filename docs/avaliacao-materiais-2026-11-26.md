@@ -76,10 +76,24 @@ A documentação oficial confirma que os custos dependem de categoria, tipo de a
 
 Antes de uma publicação futura: confirmar conta vendedora autorizada, preços de venda aprovados, custo/estoque real, embalagem, peso, dimensões, códigos de barras e correspondência de apresentação. O catálogo não contém sozinho todos esses dados para todos os produtos. Nenhum anúncio ou assinatura foi criado nesta avaliação.
 
+## Confirmação de Lucas e origem dos dados — 26/11/2026
+
+Lucas confirmou: **o link válido é o que já está na nossa loja**. Mantido `JOIN_REGISTRATION_URL` de `lib/join.ts`, sem mudança de código. A diferença com a indicação do Ozonbuilder permanece documentada apenas para histórico; não é mais uma decisão pendente.
+
+As informações anteriores têm fontes distintas, que não devem ser confundidas:
+
+- **Preço comum:** cadastro de produtos existente no banco, preservado nas revisões editoriais. Os registros examinados não demonstram uma única tabela externa vigente como origem de todos os preços comuns; não atribuir essa origem integralmente ao PDF recebido agora.
+- **Preço de afiliado/consultor:** transcrição dos valores das 12 imagens enviadas anteriormente por Lucas, documentada em `affiliate-pricing.md` e na migração `202610090002_affiliate_price_source.sql`, de 09/10/2026. Ajustes administrativos posteriores têm sua própria trilha.
+- **Descrições e apresentações:** fotos das embalagens fornecidas pela loja, pesquisa por produto nas páginas do Grupo Ozonteck, texto enviado em 28/09 informado como transcrição oficial e documento de produtos conciliado em 30/09. Referências complementares foram identificadas separadamente. Evidências: `product-label-review-2026-09-27.md`, `product-content-2026-09-28.md` e `product-document-review.md`. A apresentação de 30 sticks de 8 g vem da leitura das fotos anteriores; os hidratantes de 120 g foram tratados como nova fórmula distinta das loções antigas.
+
+**Candidato a cadastro adicional:** o PDF atual, p. 8, mostra **WO3 Instant Firm-Up, leave-in de 300 ml**. Esse nome não foi encontrado na consulta do cadastro de 26/11. Sua presença na imagem não comprova que a unidade Recife o venda ou tenha estoque; confirmar ficha, código/EAN, fotos e preços antes de cadastrá-lo. A imagem não atribui um preço legível a esse item. “Novo” aqui significa ausente do nosso cadastro identificado, não lançamento comprovado da marca.
+
+**Mind Chai aparece na tabela de junho**, não foi identificado no PDF nem no cadastro consultado. Também é candidato separado a confirmar. Férias no Caribe, Lua de Mel em Paris e Genolife já estão cadastrados. Lumino3, condicionador Kesen, Pro Kesen e ativador Master Curls já possuem registros excluídos; confirmar eventual retorno à venda, sem criar duplicatas.
+
 ## Decisões pendentes do responsável
 
-1. Confirmar qual dos dois links de indicação deve ser usado na loja.
-2. Confirmar a tabela vigente e a embalagem/lote dos produtos divergentes; decidir se a regra WO3 muda.
+1. Confirmar a tabela vigente e a embalagem/lote dos produtos divergentes; decidir se a regra WO3 muda.
+2. Confirmar se Instant Firm-Up e Mind Chai serão vendidos na unidade e fornecer os dados ausentes; confirmar se algum item antes retirado voltou à venda.
 3. Dizer se a intenção é apenas usar os materiais no site ou também executar um projeto de venda no Mercado Livre com condições e margem aprovadas.
 
 Até essa confirmação, os preços, códigos, categorias, registros excluídos e link de indicação foram preservados. A avaliação está concluída; uma atualização comercial automática com esses materiais ainda não é segura nem inequívoca.
