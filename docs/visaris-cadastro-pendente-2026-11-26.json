@@ -4,9 +4,9 @@
   "proposedInternalCode": "NUT-VISARIS",
   "name": "Visaris",
   "category": "Nutracêuticos",
-  "image": "/produtos/visaris.jpg",
-  "presentation": "Frasco com 60 cápsulas. Massa por cápsula pendente: materiais recebidos divergem entre 500 mg e 590 mg.",
-  "description": "Visaris é um suplemento alimentar da Ozonteck em frasco com 60 cápsulas. Os materiais de apresentação destacam astaxantina, luteína e zeaxantina. A composição integral e as instruções dependem do verso do rótulo.",
+  "image": "/produtos/visaris-590mg.webp",
+  "presentation": "Frasco com 60 cápsulas de 590 mg.",
+  "description": "Visaris é um suplemento alimentar da Ozonteck em frasco com 60 cápsulas de 590 mg. Os materiais de apresentação destacam astaxantina, luteína e zeaxantina. A composição integral e as instruções dependem do verso do rótulo.",
   "highlightedComponents": [
     "Astaxantina",
     "Luteína",
@@ -35,8 +35,7 @@
   "researchLimit": "O escritório oficial apresenta Visaris e confirma código/EAN, dimensões, peso logístico e dois contextos de preço. A ficha contém somente uma breve descrição e a frente do frasco. Não identifica comprovadamente o fabricante do lote, o verso completo nem resolve a situação regulatória atual. O CNPJ institucional no rodapé não substitui o fabricante impresso no produto. O comunicado da Anvisa e a notícia judicial posterior não permitem concluir, isoladamente, liberação ou proibição vigente de toda a marca.",
   "missing": [
     "Fabricante e CNPJ no verso do frasco e documentação atual aplicável à oferta.",
-    "Ingredientes integrais, alergênicos, instruções e advertências do verso do rótulo.",
-    "Confirmar apresentação por cápsula diante da divergência de 500 mg/590 mg. Não confundir os 110 g logísticos com o conteúdo líquido."
+    "Ingredientes integrais, alergênicos, instruções e advertências do verso do rótulo."
   ],
   "dimensionsCm": {
     "width": 5,
@@ -56,6 +55,25 @@
     {
       "source": "Imagem frontal do catálogo oficial (produto 5002901)",
       "value": "590 mg"
+    },
+    {
+      "source": "Responsável pela loja, confirmação encaminhada por Lucas em 27/11/2026",
+      "value": "590 mg",
+      "resolvesPreviousDiscrepancy": true
     }
-  ]
+  ],
+  "capsuleMassMg": 590,
+  "packagingConfirmation": {
+    "date": "2026-11-27",
+    "source": "Confirmação do responsável pela loja, encaminhada por Lucas nesta conversa: Certo 590.",
+    "capsules": 60,
+    "massPerCapsuleMg": 590
+  },
+  "previousPromotionalImage": "/produtos/visaris.jpg",
+  "imageSource": {
+    "url": "https://new-cdn-ozonteck.s3.amazonaws.com/products/a660157a-57bc-430c-9e23-c2cecc64cc9e.webp",
+    "retrievedOn": "2026-11-27",
+    "sha256": "f59cb10be774f96f4f0e416354bd67e866b3d0ff924286999a1f4b08cbcd6c6f",
+    "note": "Arquivo oficial preservado sem edição; imagem anterior de divulgação mantida separadamente, sem ser usada como principal no rascunho."
+  }
 }

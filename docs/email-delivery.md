@@ -72,3 +72,19 @@ Esse resultado comprova a entrega de recuperação de senha via Supabase Auth. B
 Foi incluído um único evento controlado de boas-vindas para a conta verificada e autorizada. A função agendada da Netlify marcou o evento como enviado às 18h55min16s de Recife, com uma tentativa e nenhum erro. A mensagem chegou diretamente à caixa de entrada do Gmail às 18h55min15s, com a identidade e o remetente da loja. SPF, DKIM e DMARC foram aprovados.
 
 A prova cobre fila persistente, função agendada, SMTP e caixa de entrada para o evento de boas-vindas. O gatilho de confirmação de cadastro é validado separadamente em SQL local. Os eventos que exigem pedidos seguem com validação local e aguardam a conferência individual no Gmail em um ambiente de teste apropriado.
+
+## Nove eventos de pedidos recebidos no Gmail — 27/11/2026
+
+O roteiro `scripts/verify-order-email-delivery.mjs` executou os gatilhos SQL reais, a fila persistente em PostgreSQL descartável (PGlite), a reserva de envio e o worker do código atual. O SMTP verdadeiro da loja enviou **uma mensagem por evento**, somente para a caixa do titular anteriormente autorizada. Pedidos e estados eram fictícios, com aviso de verificação no assunto e no corpo; não houve cobrança, pedido ou gravação no banco de produção.
+
+Foram recebidos diretamente na entrada, entre **18h31min17s e 18h31min38s de Recife**, os nove avisos: pagamento pendente, aprovado, recusado, compra alterada, enviado, pronto para retirada, entregue, cancelado e reembolso confirmado. O conector Gmail confirmou `INBOX` em cada mensagem e o cabeçalho `Message-ID` correspondente exatamente ao evento da fila. SPF, DKIM e DMARC passaram nas nove. Nenhuma mensagem foi movida, marcada como lida ou reclassificada. O relógio do Gmail registra o recebimento antes da confirmação SMTP final, como esperado.
+
+Cada evento ficou `sent`, com uma tentativa e sem erro. Uma segunda execução imediata do worker após cada envio não produziu outra mensagem. Retirada pronta foi criada com estado explícito de preparação/retirada em pedido fictício pago, e não deduzida apenas da aprovação financeira. Evidência sanitizada: `order-email-delivery-verification-2026-11-27.json`, execução `V20261127-fa0833c1`.
+
+**Limite da prova:** comprova gatilhos, fila, worker atual, SMTP e recebimento individual no Gmail em ambiente de verificação. Não comprova o checkout publicado, a entrega pública do webhook do Mercado Pago, o banco de produção ou o agendamento da versão nova na Netlify. A confirmação desses caminhos continua dependendo de publicação e acesso. As provas anteriores de suporte, recuperação e boas-vindas permanecem com seus escopos originais.
+
+### Repetir a verificação
+
+O modo padrão (`node scripts/verify-order-email-delivery.mjs`) usa transporte MIME em memória e não envia mensagens. Para o modo real, fornecer em ambiente privado `SMTP_USER`, `SMTP_APP_PASSWORD`, `EMAIL_VERIFICATION_RECIPIENT`, `EMAIL_VERIFICATION_OWN_INBOX_CONFIRMED=true` e `EMAIL_VERIFICATION_OUTPUT`, depois usar `--send`. Usar exclusivamente caixa de verificação explicitamente autorizada. Há limite de nove mensagens por execução, sem retentativa automática do roteiro. Nunca armazenar credenciais nos arquivos de evidência ou em comandos de documentação.
+
+Uma execução nova não substitui a prova existente: procurar primeiro no Gmail pelo identificador da execução e cruzar os nove `Message-ID`. Aceite SMTP e `sent` sozinhos não autorizam definir `inboxConfirmed=true`. Preservar evidências anteriores usando um arquivo de saída novo.

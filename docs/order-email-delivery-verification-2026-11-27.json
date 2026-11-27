@@ -1,0 +1,208 @@
+{
+  "runId": "V20261127-fa0833c1",
+  "mode": "isolated-database-real-smtp",
+  "startedAt": "2026-11-27T21:31:15.333Z",
+  "recipientScope": "Single explicitly authorized owner inbox; address omitted",
+  "boundary": "Real source SQL triggers and source worker; fictional order states in disposable PostgreSQL. Not a Mercado Pago approval, live checkout, production database write or Netlify scheduled-run verification.",
+  "events": [
+    {
+      "event": "payment_pending",
+      "jobId": "7ec572ab-e347-425e-ae53-4b228b454660",
+      "messageId": "<7ec572ab-e347-425e-ae53-4b228b454660@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:20.280Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:17.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "payment_approved",
+      "jobId": "dfd5e14e-cda0-4b31-bdfb-d509af206526",
+      "messageId": "<dfd5e14e-cda0-4b31-bdfb-d509af206526@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:22.293Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:20.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "payment_rejected",
+      "jobId": "80c020fc-96c3-487b-8d60-310c5a06d220",
+      "messageId": "<80c020fc-96c3-487b-8d60-310c5a06d220@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:25.038Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:22.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "order_changed",
+      "jobId": "17f7bd65-7006-4ac7-8814-6e3c3b05c85c",
+      "messageId": "<17f7bd65-7006-4ac7-8814-6e3c3b05c85c@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:27.745Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:25.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "order_shipped",
+      "jobId": "3a981a21-7202-469a-824d-4a5003f7a2e9",
+      "messageId": "<3a981a21-7202-469a-824d-4a5003f7a2e9@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:30.501Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:27.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "pickup_ready",
+      "jobId": "6ff77ee1-3f25-40e9-8c49-15ef1a7c7bd2",
+      "messageId": "<6ff77ee1-3f25-40e9-8c49-15ef1a7c7bd2@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:33.218Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:30.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "order_delivered",
+      "jobId": "c8769f34-1d1d-4b8a-8dd3-89f66d731379",
+      "messageId": "<c8769f34-1d1d-4b8a-8dd3-89f66d731379@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:35.974Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:33.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "order_cancelled",
+      "jobId": "3d033923-ef56-4020-a836-73958ab74320",
+      "messageId": "<3d033923-ef56-4020-a836-73958ab74320@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:38.865Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:35.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    },
+    {
+      "event": "refund_confirmed",
+      "jobId": "b9acefc3-563b-47c6-b1f9-12bf69968f6f",
+      "messageId": "<b9acefc3-563b-47c6-b1f9-12bf69968f6f@ozonteck-recife.netlify.app>",
+      "state": "sent",
+      "attempts": 1,
+      "sent_at": "2026-11-27T21:31:41.782Z",
+      "error_code": null,
+      "inboxConfirmed": true,
+      "inboxEvidence": {
+        "receivedAt": "2026-11-27T21:31:38.000Z",
+        "mailboxLabels": [
+          "INBOX"
+        ],
+        "authentication": {
+          "spf": "pass",
+          "dkim": "pass",
+          "dmarc": "pass"
+        }
+      }
+    }
+  ],
+  "completedAt": "2026-11-27T21:31:41.786Z",
+  "inboxVerification": {
+    "checkedAt": "2026-11-27T21:32:39.236Z",
+    "method": "Gmail connected account: search by verification run header and exact Message-ID metadata match for each event",
+    "messages": 9,
+    "directInbox": 9,
+    "spam": 0,
+    "mutations": "None: no messages marked read, moved, filtered, deleted or forwarded",
+    "productionScope": "No production order/database/provider or deployed scheduling validation"
+  }
+}

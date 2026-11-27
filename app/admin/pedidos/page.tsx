@@ -159,7 +159,7 @@ export default function AuditoriaPedidos() {
           <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-[#F0F0F0] flex items-center gap-2">
             <ShoppingBag className="text-teal-600 dark:text-teal-500" /> Auditoria de Pedidos
           </h1>
-          <p className="text-slate-500 dark:text-[#A1A1AA] mt-1 text-xs font-medium">Histórico completo de vendas e avaliações dos clientes.</p>
+          <p className="text-slate-500 dark:text-[#A1A1AA] mt-1 text-sm font-medium">Histórico de vendas desta loja, com pagamentos, entregas, retiradas e avaliações dos clientes.</p>
         </div>
       </div>
 

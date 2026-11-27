@@ -47,3 +47,9 @@ O painel autenticado da Netlify foi conferido em 27/11/2026 na janela correta. C
 Após a liberação: publicar o `main` mais recente, conferir o commit efetivamente publicado e repetir os fluxos e a conferência visual no domínio público. Não confundir a compilação local ou o envio ao Git com publicação. As dependências anteriores de pagamentos, e-mails e dados históricos continuam no documento de revisão; esta etapa não as declara concluídas.
 
 Para concluir Visaris: obter identificação do fabricante e documento atual aplicável, preencher somente dados do rótulo/fonte confirmada, conferir inexistência de código/nome duplicado e cadastrar com preço público e de consultor de R$ 89,95, mantendo a quantidade solicitada documentada.
+
+## Confirmações posteriores na mesma data
+
+O levantamento acima foi complementado pela leitura do escritório oficial: código **5002901**, EAN **7898760211513**, dimensões logísticas **5 × 11 × 5 cm** e peso logístico **110 g**. O responsável confirmou, em mensagem encaminhada por Lucas, **60 cápsulas de 590 mg**. Assim, a anotação de 500 mg do material promocional acima permanece como histórico e não é a apresentação atual do rascunho.
+
+Foto oficial de 590 mg preservada sem edição em `public/produtos/visaris-590mg.webp`, agora principal no rascunho. A arte anterior permanece em `public/produtos/visaris.jpg`. Preços autorizados e quantidade provisória foram preservados. O verso do rótulo e a documentação ainda não foram fornecidos; `publish=false` continua separado dessas confirmações de embalagem.

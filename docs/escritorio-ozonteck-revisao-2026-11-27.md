@@ -133,3 +133,13 @@ Não houve alteração de código executável, dependências, estrutura ou dados
 Esta é uma **conferência ampla de leitura das áreas acessíveis**, não uma certificação de todos os botões, todos os registros históricos ou operações financeiras. Não foram testados pagamentos, saques, transferências, sorteios, troca de senha, edição de perfil, contratos, cadastro de pessoas ou envio de suporte. Lista de Metas depende de acesso do fornecedor; arquivos pessoais e conteúdo integral de serviços externos ficaram fora da leitura.
 
 A publicação da Vitrine segue condicionada aos créditos da Netlify registrados na revisão principal. Esta pesquisa não publica uma nova versão e não encerra as pendências anteriores de pagamentos, e-mails, Google ou histórico sem evidência adicional.
+
+## Confirmação posterior do responsável — 27/11/2026
+
+Lucas encaminhou a resposta do pai: a aba Pedidos do escritório permite a cada afiliado acompanhar suas últimas compras, e o estoque fica por conta do centro de distribuição. A resposta esclarece a função observada da aba, sem confirmar integração com as vendas da Vitrine ou exigir que elas sejam reproduzidas automaticamente no escritório. Não deve ser confundida com uma auditoria de todos os procedimentos contratuais do CD.
+
+Na Vitrine, Meus Pedidos continua mostrando as compras do cliente autenticado, e a auditoria administrativa mostra as vendas da própria loja. O código consultado usa o identificador da sessão na consulta do cliente e não envia essas compras ao escritório. Não foi criada nova operação, transmissão ou cópia de dados entre sistemas.
+
+O responsável confirmou também **590 mg por cápsula do Visaris**. A diferença de 500/590 mg está resolvida para o cadastro preparado: frasco com 60 cápsulas de 590 mg. A arte de 500 mg permanece somente como material histórico recebido. A foto frontal oficial de 590 mg foi baixada sem edição em `public/produtos/visaris-590mg.webp` e vinculada ao rascunho, preservando a arte anterior. Verso, fórmula integral e documentação do fabricante continuam pendentes; não se ativou uma oferta por essa confirmação isolada.
+
+O estoque provisório durante a preparação já foi explicado por Lucas: será atualizado pelo responsável antes do início das vendas. Não se repete essa pergunta como impedimento para preparar o catálogo. Ainda não houve resposta sobre comercializar as sete apresentações adicionais (além do Visaris) ou sobre mudar globalmente a política de preços.

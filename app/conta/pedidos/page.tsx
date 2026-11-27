@@ -193,7 +193,7 @@ export default function PedidosPage() {
             Meus Pedidos
           </h1>
           <p className="text-slate-500 text-sm mt-1.5 font-medium">
-            Acompanhe o status, rastreie entregas e veja seu histórico completo.
+            Acompanhe suas compras feitas nesta loja: pagamento, entrega, retirada e histórico.
           </p>
         </div>
 

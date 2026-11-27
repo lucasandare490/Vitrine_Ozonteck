@@ -1,7 +1,7 @@
 {
   "date": "2026-11-27",
   "status": "identificados_na_fonte_oficial_nao_importados",
-  "reason": "Conferência solicitada pelo usuário. Preço e disponibilidade do escritório não autorizam inferir preço final, estoque físico da loja ou regularidade documental.",
+  "reason": "Conferência solicitada pelo usuário. As apresentações novas, além do Visaris já aprovado, aguardam confirmação de comercialização e tabela. Quantidade provisória será substituída pelo responsável antes do início das vendas.",
   "products": [
     {
       "officialCode": "47323",
@@ -15,7 +15,7 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "339 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "47326",
@@ -29,7 +29,7 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "324 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "47324",
@@ -43,7 +43,7 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "324 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "47327",
@@ -57,7 +57,7 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "324 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "47325",
@@ -71,7 +71,7 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "324 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "47322",
@@ -85,14 +85,14 @@
       "dimensions": "5.00 × 5.00 × 22.00 cm",
       "shippingWeight": "339 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     },
     {
       "officialCode": "5002901",
       "ean": "7898760211513",
       "name": "VISARIS",
       "category": "Nutracêuticos",
-      "presentation": "60 cápsulas; massa unitária a confirmar",
+      "presentation": "60 cápsulas de 590 mg",
       "officeCatalogPrice": 179.9,
       "officeAuthenticatedPrice": 89.95,
       "sourceImage": "https://new-cdn-ozonteck.s3.amazonaws.com/products/a660157a-57bc-430c-9e23-c2cecc64cc9e.webp",
@@ -102,7 +102,9 @@
       "userAuthorizedPublicPrice": 89.95,
       "userAuthorizedAffiliatePrice": 89.95,
       "userAuthorizedStock": 9999,
-      "blockedBy": "Documentação e verso do rótulo; ver rascunho Visaris."
+      "blockedBy": "Documentação e verso do rótulo; ver rascunho Visaris.",
+      "localImage": "/produtos/visaris-590mg.webp",
+      "presentationConfirmedOn": "2026-11-27"
     },
     {
       "officialCode": "47454",
@@ -116,7 +118,7 @@
       "dimensions": "5.50 × 11.00 × 5.50 cm",
       "shippingWeight": "330 g",
       "publish": false,
-      "blockedBy": "Definição comercial e estoque local não verificados para ativação."
+      "blockedBy": "Confirmar com o responsável a comercialização desta apresentação e a tabela aplicável."
     }
   ]
 }
