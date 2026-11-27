@@ -99,8 +99,8 @@ export default function JoinInterestForm() {
     {error && <p role="alert" className="mt-3 text-sm text-red-700">{error}</p>}
     {notice && <p role="status" className="mt-3 text-sm font-semibold text-teal-800">{notice}</p>}
     {loading ? <p role="status" className="mt-4 text-sm text-slate-600">Carregando formulário…</p>
-      : error && !userId ? <button type="button" className="mt-3 min-h-11 font-semibold text-teal-800 underline" onClick={() => setRetry(value => value + 1)}>Tentar carregar novamente</button>
-      : !userId ? <p className="mt-4 text-sm text-slate-700"><Link href="/login" className="inline-flex min-h-11 items-center font-semibold text-teal-800 underline">Entre na sua conta ou cadastre-se</Link> e volte a esta página para registrar seu interesse.</p>
+      : error && !userId ? <button type="button" className="mt-3 min-h-11 font-semibold text-teal-800 action-link" onClick={() => setRetry(value => value + 1)}>Tentar carregar novamente</button>
+      : !userId ? <p className="mt-4 text-sm text-slate-700"><Link href="/login" className="inline-flex min-h-11 items-center font-semibold text-teal-800 action-link">Entre na sua conta ou cadastre-se</Link> e volte a esta página para registrar seu interesse.</p>
       : <form className="mt-5 grid gap-4 sm:grid-cols-2" onSubmit={event => { event.preventDefault(); void submit(); }}>
         {registered && <p className="text-sm text-slate-600 sm:col-span-2">Seu interesse já está registrado. Você pode atualizar os dados, com intervalo de um minuto entre alterações.</p>}
         <label className="text-sm font-semibold text-slate-800">Nome<input name="name" autoComplete="name" required minLength={3} maxLength={120} disabled={busy} value={contact.name} onChange={event => setContact(value => ({ ...value, name: event.target.value }))} className={input} /></label>

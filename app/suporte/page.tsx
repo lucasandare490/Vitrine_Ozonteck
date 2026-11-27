@@ -177,7 +177,7 @@ export default function SuportePage() {
               {categoriaSelecionada && (
                 <button
                   onClick={() => setCategoriaSelecionada(null)}
-                  className="text-xs font-bold text-teal-600 hover:underline"
+                  className="text-xs font-bold text-teal-600 inline-link"
                 >
                   Ver todas as dúvidas
                 </button>
@@ -271,13 +271,13 @@ export default function SuportePage() {
           )}
         </div>
 
-        {perguntasFiltradas.some(faq => faq.categoria === 'devolucoes') && <p className="mt-4 text-sm text-slate-600">Referências sobre direitos do consumidor: <a href="https://www2.camara.leg.br/legin/fed/lei/1990/lei-8078-11-setembro-1990-365086-normaatualizada-pl.html" target="_blank" rel="noopener noreferrer" className="underline">CDC, arts. 26 e 49</a> e <a href="https://www2.camara.leg.br/legin/fed/decret/2013/decreto-7962-15-marco-2013-775557-publicacaooriginal-139266-pe.html" target="_blank" rel="noopener noreferrer" className="underline">Decreto nº 7.962/2013, art. 5º</a>.</p>}
+        {perguntasFiltradas.some(faq => faq.categoria === 'devolucoes') && <p className="mt-4 text-sm text-slate-600">Referências sobre direitos do consumidor: <a href="https://www2.camara.leg.br/legin/fed/lei/1990/lei-8078-11-setembro-1990-365086-normaatualizada-pl.html" target="_blank" rel="noopener noreferrer" className="inline-link">CDC, arts. 26 e 49</a> e <a href="https://www2.camara.leg.br/legin/fed/decret/2013/decreto-7962-15-marco-2013-775557-publicacaooriginal-139266-pe.html" target="_blank" rel="noopener noreferrer" className="inline-link">Decreto nº 7.962/2013, art. 5º</a>.</p>}
 
         <section aria-labelledby="support-join-title" className="mt-12 rounded-xl border border-teal-200 bg-teal-50 p-6 sm:p-8">
           <p className="text-xs font-bold uppercase tracking-widest text-teal-800">Construa seu negócio com a OZONTECK</p>
           <h2 id="support-join-title" className="mt-3 text-xl font-bold text-slate-900">Quer entrar na rede de Rogério?</h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-700">Entenda a atuação como distribuidor independente, tire suas dúvidas sobre vendas e desenvolvimento de rede e veja como iniciar seu cadastro com a indicação de Rogério André.</p>
-          <Link href="/junte-se-a-nos" className="mt-4 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade e o cadastro</Link>
+          <Link href="/junte-se-a-nos" className="mt-4 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 inline-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade e o cadastro</Link>
         </section>
 
         <SupportTickets />

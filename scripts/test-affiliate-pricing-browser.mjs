@@ -13,19 +13,19 @@ const output = 'C:/Users/lucas/.codex/visualizations/2026/09/24/01a0d1c8-61e2-78
 const browser = await chromium.launch({channel:'msedge',headless:true});
 try {
   for (const width of [320,390,1440]) {
-    let enabled=false, standard=79.96, custom=null, cart=[];
+    let enabled=false, standard=79.96, cart=[];
     const context = await browser.newContext({viewport:{width,height:900}});
     await context.addInitScript(({key,session})=>localStorage.setItem(key,JSON.stringify(session)),{key:`sb-${base.hostname.split('.')[0]}-auth-token`,session:{access_token:token,refresh_token:'fixture',expires_at:exp,expires_in:3600,token_type:'bearer',user}});
     await context.route(`${base.origin}/**`,async route=>{
       const request=route.request(), url=new URL(request.url()); let data=[];
       if(url.pathname.startsWith('/auth/')) data=user;
-      else if(url.pathname.endsWith('/rpc/my_store_prices')) data={enabled,prices:{'NUT-NXCAP':enabled?(custom??standard):159.92}};
-      else if(url.pathname.endsWith('/rpc/admin_pricing')) data={enabled,products:products.map(p=>({...p,affiliate_price:standard,customer_price:custom})),audit:[]};
+      else if(url.pathname.endsWith('/rpc/my_store_prices')) data={enabled,prices:{'NUT-NXCAP':enabled?standard:159.92}};
+      else if(url.pathname.endsWith('/rpc/admin_pricing')) data={enabled,products:products.map(p=>({...p,affiliate_price:standard,customer_price:null})),audit:[]};
       else if(url.pathname.endsWith('/rpc/admin_set_pricing')) {
         const b=request.postDataJSON();
         if(b.p_action==='access') enabled=b.p_enabled;
         else if(b.p_action==='affiliate') standard=b.p_price;
-        else custom=b.p_price;
+        else throw new Error('Individual prices are not part of the customer interface');
         data=null;
       } else if(url.pathname.endsWith('/profiles')) {
         if(request.method()==='PATCH') cart=request.postDataJSON().carrinho??cart;
@@ -40,19 +40,13 @@ try {
     await page.route('**/api/produtos/*/avaliacoes*', route => route.fulfill({contentType:'application/json',body:JSON.stringify({total:0,filtered:0,average:0,stars:[0,0,0,0,0],items:[]})}));
     page.on('dialog',d=>d.accept());
     await page.goto(`${site}/admin/clientes/${user.id}/precos`);
-    const checkbox=page.getByRole('checkbox',{name:/Desconto de afiliado/});
-    await checkbox.waitFor();
-    assert.equal(await checkbox.isChecked(),false);
-    await checkbox.click(); await page.getByRole('button',{name:'Autorizar benefício',exact:true}).click(); await page.getByText('Alteração salva.',{exact:true}).waitFor();
-    assert.equal(await checkbox.isChecked(),true);
-    await page.getByLabel('Exceção deste cliente (R$)').fill('70,00');
-    await page.getByRole('button',{name:'Salvar preço de NXCAP',exact:true}).click();
-    await page.waitForFunction(()=>document.body.textContent.includes('Preço deste cliente: R$ 70,00'));
-    assert.equal(custom,70);
+    await page.getByRole('button',{name:/Ativar preço de consultor para/}).click();
+    await page.getByRole('button',{name:'Sim, ativar benefício',exact:true}).click();
+    await page.getByRole('button',{name:/Desativar preço de consultor para/}).waitFor();
+    assert.equal(enabled,true);
+    assert.equal(await page.getByLabel('Exceção deste cliente (R$)').count(),0);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await page.screenshot({path:`${output}/affiliate-admin-${width}.png`,fullPage:true});
-    await page.getByRole('button',{name:'Remover preço especial de NXCAP',exact:true}).click();
-    await page.waitForFunction(()=>document.body.textContent.includes('Preço deste cliente: R$ 79,96'));
     await page.goto(`${site}/conta/favoritos`);
     await page.getByText('R$ 79,96',{exact:true}).first().waitFor();
     await page.goto(`${site}/produto/NUT-NXCAP`);
@@ -70,12 +64,12 @@ try {
     await page.getByText('R$ 159,92',{exact:true}).first().waitFor();
     await page.screenshot({path:`${output}/affiliate-cart-revoked-${width}.png`,fullPage:true});
     await page.goto(`${site}/admin/precos`);
-    await page.getByLabel('Preço de afiliado (R$)',{exact:true}).fill('75,00');
+    await page.getByLabel('Preço de consultor (R$)',{exact:true}).fill('75,00');
     await page.getByRole('button',{name:'Salvar preço de NXCAP',exact:true}).click();
-    await page.waitForFunction(()=>document.body.textContent.includes('Afiliado: R$ 75,00'));
+    await page.waitForFunction(()=>document.body.textContent.includes('Consultor: R$ 75,00'));
     assert.equal(standard,75);
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
-    console.log(`PASS ${width}: approval, exception save/remove, table edit, favorites/catalog/detail/cart prices and revocation; mocked customer requests, no payments.`);
+    console.log(`PASS ${width}: approval, no per-customer price inputs, table edit, favorites/catalog/detail/cart prices and revocation; mocked customer requests, no payments.`);
     await context.close();
   }
 } finally { await browser.close(); }

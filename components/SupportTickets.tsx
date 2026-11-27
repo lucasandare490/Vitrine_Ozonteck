@@ -98,7 +98,7 @@ export default function SupportTickets({ admin = false }: { admin?: boolean }) {
     <h2 id="support-tickets-title" className="text-xl font-bold">{admin ? 'Atendimentos dos clientes' : 'Meus atendimentos'}</h2>
     {error && <p role="alert" className="text-sm text-red-700">{error}</p>}
     {notice && <p role="status" className="break-words text-sm text-teal-800">{notice}</p>}
-    {loading ? <p role="status">Carregando atendimentos...</p> : !signedIn ? <Link href="/login?redirect=/suporte" className="text-teal-700 underline">Entre na sua conta para registrar e acompanhar uma solicitação.</Link> : <>
+    {loading ? <p role="status">Carregando atendimentos...</p> : !signedIn ? <Link href="/login?redirect=/suporte" className="text-teal-700 inline-link">Entre na sua conta para registrar e acompanhar uma solicitação.</Link> : <>
       {!admin && <form className="space-y-3" onSubmit={event => { event.preventDefault(); void submit(); }}><fieldset disabled={busy} className="space-y-3">
         <p className="text-sm text-slate-600">Registre sua dúvida e acompanhe a resposta aqui. Não informe senhas nem dados do cartão.</p>
         <label className="block text-sm font-semibold">Assunto<input required minLength={4} maxLength={120} value={subject} onChange={event => { setSubject(event.target.value); requestId.current = null; }} className={input} /></label>

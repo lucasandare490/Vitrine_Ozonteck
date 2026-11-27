@@ -61,7 +61,7 @@ const { theme, toggleTheme } = useThemeStore();
 
   const getLinkClass = (path: string) => {
     const isActive = pathname === path;
-    return `flex items-center gap-3 px-3 py-2.5 rounded-lg font-semibold transition-all text-xs ${
+    return `flex min-h-12 items-center gap-3 px-3 py-3 rounded-xl font-semibold transition-colors text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 ${
       isActive 
         ? 'bg-teal-100 dark:bg-teal-500/10 text-teal-800 dark:text-teal-400' 
         : 'text-slate-600 dark:text-[#A1A1AA] hover:bg-slate-100 dark:hover:bg-[#262626] hover:text-slate-900 dark:hover:text-[#F0F0F0]'
@@ -78,7 +78,7 @@ const { theme, toggleTheme } = useThemeStore();
   }
 
   return (
-    <div className={`${theme} flex min-h-screen bg-[#FAFAFC] dark:bg-[#121212] text-slate-900 dark:text-[#F0F0F0] transition-colors duration-300`}>
+    <div className={`${theme} admin-workspace flex min-h-screen bg-[#FAFAFC] dark:bg-[#121212] text-slate-900 dark:text-[#F0F0F0] transition-colors duration-300`}>
       
       {/* MENU LATERAL */}
       <aside className="w-64 shrink-0 bg-white dark:bg-[#171717] border-r border-slate-200 dark:border-[#2D2D2D] flex flex-col hidden lg:flex z-20 transition-colors">
@@ -90,14 +90,14 @@ const { theme, toggleTheme } = useThemeStore();
         
         <div className="flex-1 overflow-y-auto py-6 px-4 space-y-6 scrollbar-thin">
           <div className="space-y-1">
-            <div className="px-2 mb-2 text-[10px] font-black text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Painel Central</div>
+            <div className="px-2 mb-2 text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wide">Painel Central</div>
             <Link href="/admin" className={getLinkClass('/admin')}>
               <LayoutDashboard size={16} /> Visão Geral
             </Link>
           </div>
 
           <div className="space-y-1">
-            <div className="px-2 mb-2 text-[10px] font-black text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Gestão de Vendas</div>
+            <div className="px-2 mb-2 text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wide">Gestão de Vendas</div>
             <Link href="/admin/pedidos" className={getLinkClass('/admin/pedidos')}>
               <ShoppingCart size={16} /> Auditoria de Pedidos
             </Link>
@@ -119,7 +119,7 @@ const { theme, toggleTheme } = useThemeStore();
           </div>
 
           <div className="space-y-1">
-            <div className="px-2 mb-2 text-[10px] font-black text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Catálogo & Estoque</div>
+            <div className="px-2 mb-2 text-xs font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-wide">Catálogo & Estoque</div>
             <Link href="/admin/produtos" className={getLinkClass('/admin/produtos')}>
               <Package size={16} /> Todos os Produtos
             </Link>
@@ -135,7 +135,7 @@ const { theme, toggleTheme } = useThemeStore();
         {/* TOPBAR */}
         <header className="min-h-[72px] bg-white dark:bg-[#171717] border-b border-slate-200 dark:border-[#2D2D2D] flex flex-wrap gap-3 py-3 items-center justify-between px-4 sm:px-6 lg:px-10 shrink-0 transition-colors">
           <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2 text-[11px] font-bold text-slate-500 hover:text-slate-900 dark:text-[#A1A1AA] dark:hover:text-white transition-colors uppercase tracking-widest bg-slate-100 dark:bg-[#202020] px-3 py-1.5 rounded-full border border-transparent dark:border-[#2D2D2D]">
+            <Link href="/" className="flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-[#A1A1AA] dark:hover:text-white transition-colors bg-slate-100 dark:bg-[#202020] px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2D2D2D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
               <ArrowLeft size={14} /> Retornar à Vitrine
             </Link>
             <div className="hidden lg:flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-[#A1A1AA]">
@@ -148,10 +148,10 @@ const { theme, toggleTheme } = useThemeStore();
             <button 
               onClick={toggleTheme} 
               aria-label={theme === 'dark' ? 'Ativar tema claro' : 'Ativar tema escuro'}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-[#202020] hover:bg-slate-200 dark:hover:bg-[#262626] text-slate-500 dark:text-[#A1A1AA] hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer border border-slate-200 dark:border-[#2D2D2D] shadow-sm dark:shadow-none"
+              className="flex min-h-11 min-w-11 items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-100 dark:bg-[#202020] hover:bg-slate-200 dark:hover:bg-[#262626] text-slate-600 dark:text-[#A1A1AA] hover:text-teal-700 dark:hover:text-teal-400 transition-colors cursor-pointer border border-slate-200 dark:border-[#2D2D2D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
             >
               {theme === 'dark' ? <Moon size={14} className="text-teal-400" /> : <Sun size={14} className="text-amber-500" />}
-              <span className="text-[10px] font-black uppercase tracking-widest hidden sm:block">
+              <span className="text-sm font-semibold hidden sm:block">
                 {theme === 'dark' ? 'Escuro' : 'Claro'}
               </span>
             </button>
@@ -163,7 +163,7 @@ const { theme, toggleTheme } = useThemeStore();
                 <p className="text-sm font-bold text-slate-900 dark:text-white leading-none">{adminName}</p>
                 <p className="text-[10px] font-black text-teal-600 dark:text-teal-500 uppercase tracking-widest mt-1">Diretor(a)</p>
               </div>
-              <button onClick={handleLogout} className="relative w-10 h-10 rounded-full bg-slate-200 dark:bg-[#202020] border-2 border-slate-300 dark:border-[#2D2D2D] flex items-center justify-center overflow-hidden hover:border-red-500 dark:hover:border-red-500 transition-colors cursor-pointer" title="Sair do Painel">
+              <button onClick={handleLogout} className="relative w-11 h-11 rounded-full bg-slate-200 dark:bg-[#202020] border-2 border-slate-300 dark:border-[#2D2D2D] flex items-center justify-center overflow-hidden hover:border-red-500 dark:hover:border-red-500 transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600" title="Sair do Painel">
                 {adminAvatar ? <Image src={adminAvatar} alt="Admin" fill sizes="40px" className="object-cover" /> : <LogOut size={16} className="text-slate-500 dark:text-[#A1A1AA]" />}
               </button>
             </div>

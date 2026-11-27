@@ -1,0 +1,174 @@
+
+> ozonteck-vitrine@0.1.0 test:components
+> node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs scripts/check-customer-benefit-control.mjs
+
+TAP version 13
+# Subtest: admin bell highlights a recent purchase change without an approved order or open support ticket
+ok 1 - admin bell highlights a recent purchase change without an approved order or open support ticket
+  ---
+  duration_ms: 81.9789
+  ...
+# Subtest: leads: late results cannot overwrite a changed filter
+ok 2 - leads: late results cannot overwrite a changed filter
+  ---
+  duration_ms: 74.4858
+  ...
+# Subtest: leads: dependency cleanup invalidates results before the next request starts
+ok 3 - leads: dependency cleanup invalidates results before the next request starts
+  ---
+  duration_ms: 24.0672
+  ...
+# Subtest: leads: older poll failures cannot replace the latest successful result
+ok 4 - leads: older poll failures cannot replace the latest successful result
+  ---
+  duration_ms: 233.1425
+  ...
+# Subtest: leads: late page results cannot overwrite the next page
+ok 5 - leads: late page results cannot overwrite the next page
+  ---
+  duration_ms: 28.3312
+  ...
+# Subtest: leads: a mutation started on an old filter refreshes the current filter
+ok 6 - leads: a mutation started on an old filter refreshes the current filter
+  ---
+  duration_ms: 50.7897
+  ...
+# Subtest: leads: unmount invalidates an outstanding list request
+ok 7 - leads: unmount invalidates an outstanding list request
+  ---
+  duration_ms: 41.0648
+  ...
+# Subtest: leads: a mutation completing after unmount cannot reload or update state
+ok 8 - leads: a mutation completing after unmount cannot reload or update state
+  ---
+  duration_ms: 34.1969
+  ...
+# Subtest: reminders: late results cannot overwrite a changed filter
+ok 9 - reminders: late results cannot overwrite a changed filter
+  ---
+  duration_ms: 29.3835
+  ...
+# Subtest: reminders: dependency cleanup invalidates results before the next request starts
+ok 10 - reminders: dependency cleanup invalidates results before the next request starts
+  ---
+  duration_ms: 40.1761
+  ...
+# Subtest: reminders: older poll failures cannot replace the latest successful result
+ok 11 - reminders: older poll failures cannot replace the latest successful result
+  ---
+  duration_ms: 28.7816
+  ...
+# Subtest: reminders: late page results cannot overwrite the next page
+ok 12 - reminders: late page results cannot overwrite the next page
+  ---
+  duration_ms: 64.6857
+  ...
+# Subtest: reminders: a mutation started on an old filter refreshes the current filter
+ok 13 - reminders: a mutation started on an old filter refreshes the current filter
+  ---
+  duration_ms: 33.9409
+  ...
+# Subtest: reminders: unmount invalidates an outstanding list request
+ok 14 - reminders: unmount invalidates an outstanding list request
+  ---
+  duration_ms: 18.2726
+  ...
+# Subtest: reminders: a mutation completing after unmount cannot reload or update state
+ok 15 - reminders: a mutation completing after unmount cannot reload or update state
+  ---
+  duration_ms: 19.3773
+  ...
+# Subtest: reminder creation refreshes the current filter
+ok 16 - reminder creation refreshes the current filter
+  ---
+  duration_ms: 39.0745
+  ...
+# Subtest: reminder creation retry refreshes the current filter
+ok 17 - reminder creation retry refreshes the current filter
+  ---
+  duration_ms: 29.7266
+  ...
+# Subtest: benefit control does not interpret an unread status as inactive or allow a write
+ok 18 - benefit control does not interpret an unread status as inactive or allow a write
+  ---
+  duration_ms: 189.1413
+  ...
+# Subtest: opening and cancelling confirmation do not change the benefit
+ok 19 - opening and cancelling confirmation do not change the benefit
+  ---
+  duration_ms: 46.2149
+  ...
+# Subtest: confirmed activation changes only access and re-reads its persisted state
+ok 20 - confirmed activation changes only access and re-reads its persisted state
+  ---
+  duration_ms: 111.386
+  ...
+# Subtest: confirmed deactivation changes only access and re-reads its persisted state
+ok 21 - confirmed deactivation changes only access and re-reads its persisted state
+  ---
+  duration_ms: 27.063
+  ...
+# Subtest: a failed save keeps its error visible after re-reading the unchanged server state
+ok 22 - a failed save keeps its error visible after re-reading the unchanged server state
+  ---
+  duration_ms: 47.7571
+  ...
+# Subtest: a stale read cannot overwrite the state of a more recent read
+ok 23 - a stale read cannot overwrite the state of a more recent read
+  ---
+  duration_ms: 61.3668
+  ...
+# Subtest: a save finishing after the card unmounts cannot update state or start another read
+ok 24 - a save finishing after the card unmounts cannot update state or start another read
+  ---
+  duration_ms: 147.977
+  ...
+# Subtest: same-user SIGNED_IN retains the customer subject and message
+ok 25 - same-user SIGNED_IN retains the customer subject and message
+  ---
+  duration_ms: 259.5405
+  ...
+# Subtest: same-user SIGNED_IN preserves the idempotency ID after an uncertain submission
+ok 26 - same-user SIGNED_IN preserves the idempotency ID after an uncertain submission
+  ---
+  duration_ms: 118.8286
+  ...
+# Subtest: admin response drafts survive same-user SIGNED_IN
+ok 27 - admin response drafts survive same-user SIGNED_IN
+  ---
+  duration_ms: 116.401
+  ...
+# Subtest: admin response drafts are cleared on account change
+ok 28 - admin response drafts are cleared on account change
+  ---
+  duration_ms: 90.1133
+  ...
+# Subtest: changing accounts clears customer drafts
+ok 29 - changing accounts clears customer drafts
+  ---
+  duration_ms: 38.4481
+  ...
+# Subtest: unmount cancels a queued auth reload and its state updates
+ok 30 - unmount cancels a queued auth reload and its state updates
+  ---
+  duration_ms: 38.0761
+  ...
+# Subtest: a previous account submission cannot clear the new account draft or expose its protocol
+ok 31 - a previous account submission cannot clear the new account draft or expose its protocol
+  ---
+  duration_ms: 43.0895
+  ...
+# Subtest: a submission finishing after unmount cannot reload or update state
+ok 32 - a submission finishing after unmount cannot reload or update state
+  ---
+  duration_ms: 79.6801
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 32
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2135.0721

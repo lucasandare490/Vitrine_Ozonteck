@@ -48,7 +48,7 @@ export default function ProductReviews({ code }: { code: string }) {
       <label className="flex min-h-11 items-center gap-2 text-sm"><input type="checkbox" checked={images} onChange={(e) => { setImages(e.target.checked); setPage(1); }} className="h-5 w-5 accent-teal-700" />Com imagens</label>
     </div>
     <div aria-live="polite" aria-busy={loading}>
-      {loading ? <p className="py-6 text-slate-600">Carregando avaliações...</p> : error ? <div className="py-6"><p>Avaliações temporariamente indisponíveis.</p><button type="button" className="mt-3 min-h-11 text-teal-800 underline" onClick={() => setRetry((n) => n + 1)}>Tentar novamente</button></div> : data && <>
+      {loading ? <p className="py-6 text-slate-600">Carregando avaliações...</p> : error ? <div className="py-6"><p>Avaliações temporariamente indisponíveis.</p><button type="button" className="mt-3 min-h-11 text-teal-800 action-link" onClick={() => setRetry((n) => n + 1)}>Tentar novamente</button></div> : data && <>
         {data.items.length === 0 && <p className="py-6 text-slate-600">{data.total === 0 ? 'Este produto ainda não tem avaliações publicadas.' : 'Nenhuma avaliação corresponde aos filtros selecionados.'}</p>}
         <div className="space-y-4">{data.items.map((review) => <article key={review.id} className="rounded-2xl border border-slate-100 bg-slate-50/60 p-5">
           <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="break-words font-semibold">{review.nome}</h3><time className="text-sm text-slate-500" dateTime={review.created_at}>{new Date(review.created_at).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</time></div>

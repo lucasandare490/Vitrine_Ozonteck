@@ -132,7 +132,7 @@ function FullFooter() {
             <div className="mt-7 border-t border-slate-200 pt-5">
               <h3 className="text-sm font-bold text-slate-900">Faça parte da equipe OZONTECK</h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-600">Conheça a equipe de Rogério André para comprar para consumo ou atuar como distribuidor. O benefício de preço na loja depende de aprovação manual.</p>
-              <Link href="/junte-se-a-nos" className="mt-2 inline-flex min-h-11 items-center font-bold text-sm text-teal-800 underline underline-offset-4">Quero conhecer a rede</Link>
+              <Link href="/junte-se-a-nos" className="mt-2 inline-flex min-h-11 items-center font-bold text-sm text-teal-800 action-link">Quero conhecer a rede</Link>
             </div>
           </nav>
 

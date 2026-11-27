@@ -445,7 +445,7 @@ function HomeContent() {
                     <Search size={18} className="text-teal-600" />
                     <p className="text-sm font-bold text-teal-800">Resultados para: <span className="text-teal-600">&quot;{searchQuery}&quot;</span></p>
                   </div>
-                  <button onClick={() => {setSearchQuery(''); router.push('/');}} className="text-xs font-bold text-teal-600 hover:text-teal-800 underline uppercase tracking-widest">
+                  <button onClick={() => {setSearchQuery(''); router.push('/');}} className="text-xs font-bold text-teal-600 hover:text-teal-800 action-link uppercase tracking-widest">
                     Limpar Filtro
                   </button>
                 </div>
@@ -506,7 +506,7 @@ function HomeContent() {
                 <p className="text-sm text-slate-500">Não conseguimos encontrar &quot;{searchQuery}&quot;. Tente navegar pelas categorias.</p>
                 <button 
                   onClick={() => {setSearchQuery(''); setSelectedCategory('Todas'); router.push('/');}}
-                  className="mt-4 text-teal-600 font-bold text-xs hover:underline uppercase tracking-widest"
+                  className="mt-4 text-teal-600 font-bold text-xs action-link uppercase tracking-widest"
                 >
                   Ver todo o catálogo
                 </button>
@@ -547,7 +547,7 @@ function HomeContent() {
             <h2 id="team-invitation-title" className="text-xl font-bold text-slate-900">Conheça a equipe de Rogério André</h2>
             <p className="mt-2 text-sm leading-relaxed text-slate-600">Compre para consumo ou conheça a atuação como distribuidor independente. O preço de afiliado depende da aprovação de Rogério; criar uma conta não libera o benefício automaticamente.</p>
           </div>
-          <Link href="/junte-se-a-nos" className="inline-flex min-h-11 shrink-0 items-center gap-2 font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a equipe <ChevronRight size={18} aria-hidden="true" /></Link>
+          <Link href="/junte-se-a-nos" className="inline-flex min-h-11 shrink-0 items-center gap-2 font-bold text-teal-800 action-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a equipe <ChevronRight size={18} aria-hidden="true" /></Link>
         </div>
       </section>
 

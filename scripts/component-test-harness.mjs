@@ -68,7 +68,7 @@ export function createComponentHarness(path, { supabase, imports = {}, window: w
   } });
   runInNewContext(outputText, {
     exports, module: { exports }, ...timers, window, document: { hidden: false },
-    crypto: { randomUUID }, console, process: { env },
+    crypto: { randomUUID }, Event, console, process: { env },
     require(name) {
       if (Object.hasOwn(imports, name)) return imports[name];
       if (name === 'react') return hooks;

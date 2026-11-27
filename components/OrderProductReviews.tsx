@@ -34,7 +34,7 @@ export default function OrderProductReviews({ orderId, purchasedItems, delivered
       return <li key={`${purchased.code || 'legado'}-${index}`} className="py-4 first:pt-0">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0 flex-1">
-            <p className="break-words text-sm font-semibold">{purchased.code && !isRetiredProduct({ code: purchased.code }) ? <Link href={productPath(purchased.code)} className="text-teal-800 hover:underline">{purchased.nome}</Link> : purchased.nome}</p>
+            <p className="break-words text-sm font-semibold">{purchased.code && !isRetiredProduct({ code: purchased.code }) ? <Link href={productPath(purchased.code)} className="text-teal-800 inline-link">{purchased.nome}</Link> : purchased.nome}</p>
             <p className="mt-1 text-xs text-slate-600">Quantidade: {purchased.qtd}{typeof purchased.price === 'number' && Number.isFinite(purchased.price) ? ` · Valor unitário: ${formatPrice(purchased.price)}` : ''}</p>
           </div>
           {delivered && purchased.code && <button type="button" disabled={loading} aria-expanded={open} aria-label={`${open ? 'Fechar avaliação de' : 'Avaliar produto:'} ${purchased.nome}`} onClick={() => open ? setSelectedCode(null) : void load(purchased.code!)} className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-teal-700 disabled:opacity-50"><Star size={16} aria-hidden="true" />{open ? 'Fechar' : 'Avaliar produto'}</button>}
@@ -42,7 +42,7 @@ export default function OrderProductReviews({ orderId, purchasedItems, delivered
         {delivered && !purchased.code && <p className="mt-2 text-xs text-slate-500">Avaliação indisponível: item antigo sem código de identificação.</p>}
         {open && <div className="mt-3">
           {loading && <p role="status">Carregando avaliação…</p>}
-          {error && <div role="alert"><p>{error}</p><button type="button" onClick={() => void load(purchased.code!)} className="min-h-11 underline">Tentar novamente</button></div>}
+          {error && <div role="alert"><p>{error}</p><button type="button" onClick={() => void load(purchased.code!)} className="min-h-11 inline-link">Tentar novamente</button></div>}
           {!loading && !error && (item ? <ItemReview key={item.produto_id} item={item} orderId={orderId} onSent={() => setItems(current => current?.map(review => review.produto_id === item.produto_id ? { ...review, submitted: true } : review) || [])} /> : <p className="text-sm">Não foi possível confirmar este produto no pedido para avaliação.</p>)}
         </div>}
       </li>;

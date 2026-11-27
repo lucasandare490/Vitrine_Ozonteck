@@ -192,7 +192,7 @@ export default function FavoritosPage() {
             <p className="text-sm text-slate-500">Não achamos nada com o termo &quot;{searchQuery}&quot;.</p>
             <button 
               onClick={() => setSearchQuery('')}
-              className="mt-4 text-teal-600 font-bold text-xs uppercase tracking-widest hover:underline"
+              className="mt-4 text-teal-600 font-bold text-xs uppercase tracking-widest action-link"
             >
               Limpar busca
             </button>

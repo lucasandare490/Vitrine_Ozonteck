@@ -6,6 +6,7 @@ import { Users, Search, Loader2, AlertCircle, Mail, Phone, MapPin, Calendar } fr
 import toast from 'react-hot-toast';
 import PaginatedGrid from '@/components/PaginatedGrid';
 import Link from 'next/link';
+import CustomerBenefitControl from '@/components/CustomerBenefitControl';
 import { customerActivity, customerContactMessage, customerContactPurposes, type CustomerPurchase } from '@/lib/customer-activity';
 
 type Cliente = {
@@ -25,6 +26,7 @@ export default function CarteiraClientes() {
   const [activityFilter, setActivityFilter] = useState('all');
   const [contactPurpose, setContactPurpose] = useState('contact');
   const [loadError, setLoadError] = useState('');
+  const [benefitRevision, setBenefitRevision] = useState(0);
   const activity = useMemo(() => customerActivity(purchases), [purchases]);
   const fetching = useRef(false);
 
@@ -58,6 +60,7 @@ export default function CarteiraClientes() {
       }
       setClientes(allClients);
       setPurchases(allPurchases);
+      setBenefitRevision(value => value + 1);
     } catch (cause) {
       setLoadError(cause instanceof Error ? cause.message : 'Não foi possível carregar os clientes.');
     } finally {
@@ -107,8 +110,8 @@ export default function CarteiraClientes() {
           <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-[#F0F0F0] flex items-center gap-2">
             <Users className="text-teal-600 dark:text-teal-500" /> Carteira de Clientes
           </h1>
-          <p className="text-slate-500 dark:text-[#A1A1AA] mt-1 text-xs font-medium">Faça a gestão dos clientes registados na sua loja.</p>
-          <Link href="/admin/precos" className="inline-flex min-h-11 items-center text-sm font-semibold text-teal-700 underline">Tabela de preços de afiliados</Link>
+          <p className="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-300">Consulte os clientes, acompanhe as compras e autorize o preço de consultor no próprio cartão.</p>
+          <Link href="/admin/precos" className="action-link mt-4">Ver tabela geral de preços de consultor</Link>
         </div>
       </div>
 
@@ -121,8 +124,9 @@ export default function CarteiraClientes() {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Pesquisar por nome, email ou telemóvel..."
-              className="pl-10 pr-4 py-2 text-sm font-medium border border-slate-200 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#202020] text-slate-900 dark:text-[#F0F0F0] w-full transition-all placeholder:text-slate-400 dark:placeholder:text-[#A1A1AA]"
+              aria-label="Pesquisar clientes por nome, e-mail ou telefone"
+              placeholder="Nome, e-mail ou telefone"
+              className="min-h-12 pl-10 pr-4 py-2 text-base font-medium border border-slate-200 dark:border-[#2D2D2D] rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#202020] text-slate-900 dark:text-[#F0F0F0] w-full transition-all placeholder:text-slate-400 dark:placeholder:text-[#A1A1AA]"
             />
           </div>
           <div className="mt-4 flex flex-wrap items-end gap-3">
@@ -165,29 +169,29 @@ export default function CarteiraClientes() {
                       {cliente.nome ? cliente.nome.charAt(0).toUpperCase() : 'C'}
                     </div>
                     <div className="overflow-hidden">
-                      <h3 className="font-bold text-slate-900 dark:text-[#F0F0F0] truncate">{cliente.nome || 'Nome não definido'}</h3>
-                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 dark:text-[#A1A1AA] mt-0.5 flex items-center gap-1">
-                        <Calendar size={10} /> Registado a {new Date(cliente.created_at).toLocaleDateString('pt-BR')}
+                      <h2 className="text-lg font-bold text-slate-900 dark:text-[#F0F0F0] break-words">{cliente.nome || 'Nome não definido'}</h2>
+                      <p className="text-xs font-medium text-slate-500 dark:text-[#A1A1AA] mt-1 flex items-center gap-1">
+                        <Calendar size={10} /> Cadastro em {new Date(cliente.created_at).toLocaleDateString('pt-BR')}
                       </p>
                     </div>
                   </div>
 
-                  <Link href={`/admin/clientes/${cliente.id}/precos`} className="mb-3 inline-flex min-h-11 items-center font-semibold text-teal-700 underline">Benefício e preços</Link>
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-[#A1A1AA]">
+                  <CustomerBenefitControl userId={cliente.id} customerName={cliente.nome} refreshKey={benefitRevision} />
+                  <div className="mt-4 space-y-3">
+                    <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-[#A1A1AA]">
                       <Mail size={14} className="text-slate-400 dark:text-[#A1A1AA]" />
-                      <span className="truncate">{cliente.email || 'Sem email'}</span>
+                      <span className="break-all">{cliente.email || 'Sem e-mail'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-[#A1A1AA]">
+                    <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-[#A1A1AA]">
                       <Phone size={14} className="text-slate-400 dark:text-[#A1A1AA]" />
-                      <span>{cliente.telefone || 'Sem telemóvel'}</span>
+                      <span>{cliente.telefone || 'Sem telefone'}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs font-medium text-slate-600 dark:text-[#A1A1AA]">
+                    <div className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-[#A1A1AA]">
                       <MapPin size={14} className="text-slate-400 dark:text-[#A1A1AA] shrink-0" />
-                      <span className="truncate">{cliente.endereco_completo || 'Sem morada registada'}</span>
+                      <span className="break-words">{cliente.endereco_completo || 'Sem endereço cadastrado'}</span>
                     </div>
                   </div>
-                  <div className="mt-4 border-t border-slate-200 pt-3 text-xs dark:border-neutral-700">
+                  <div className="mt-4 border-t border-slate-200 pt-3 text-sm dark:border-neutral-700">
                     {activity.has(cliente.id) ? <>
                       <p>Última compra: {new Date(activity.get(cliente.id)!.lastPurchase).toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza' })}</p>
                       <p className="mt-1">{activity.get(cliente.id)!.orders} compra(s) · {activity.get(cliente.id)!.total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>

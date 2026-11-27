@@ -29,7 +29,7 @@ export default function JoinPage() {
               <a href={JOIN_REGISTRATION_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-12 items-center justify-center gap-3 rounded-lg bg-teal-800 px-5 py-3 text-center font-bold text-white transition-colors hover:bg-teal-900 ${focus}`}>
                 Cadastro oficial na equipe <ArrowUpRight size={20} className="shrink-0" aria-hidden="true" /><span className="sr-only"> (cadastro oficial em nova aba)</span>
               </a>
-              <a href={JOIN_CONTACT_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center gap-2 rounded font-semibold text-teal-800 underline underline-offset-4 ${focus}`}>
+              <a href={JOIN_CONTACT_URL} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center gap-2 rounded font-semibold text-teal-800 action-link ${focus}`}>
                 <MessageCircle size={18} className="shrink-0" aria-hidden="true" /> Conversar com Rogério<span className="sr-only"> (WhatsApp, nova aba)</span>
               </a>
             </div>
@@ -79,7 +79,7 @@ export default function JoinPage() {
                 <p className="pb-5 text-sm leading-relaxed text-slate-600">{faq.resposta}</p>
               </details>)}
             </div>
-            <Link href="/suporte" className={`mt-4 inline-flex min-h-11 items-center gap-2 rounded font-semibold text-teal-800 underline underline-offset-4 ${focus}`}>Mais dúvidas sobre ser distribuidor <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link href="/suporte" className={`mt-4 inline-flex min-h-11 items-center gap-2 rounded font-semibold text-teal-800 action-link ${focus}`}>Mais dúvidas sobre ser distribuidor <ArrowRight size={16} aria-hidden="true" /></Link>
           </section>
           <aside aria-labelledby="join-qr-title" className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-left sm:p-8">
             <h2 id="join-qr-title" className="text-xl font-bold text-slate-900">Seu próximo passo começa aqui</h2>

@@ -72,7 +72,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </span>
         
         <h3 className="text-xs sm:text-[14px] font-bold text-slate-900 mb-1 leading-tight line-clamp-2">
-          <Link href={productPath(product.code)} className="hover:underline">{product.name}</Link>
+          <Link href={productPath(product.code)} className="inline-link">{product.name}</Link>
         </h3>
         
         <div className="mt-auto pt-1.5 border-t border-slate-100 sm:border-none flex flex-wrap items-center justify-between gap-1">

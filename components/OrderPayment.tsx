@@ -85,7 +85,7 @@ export default function OrderPayment({ orderId, onStatusChange }: { orderId: str
             <label className="block text-sm font-medium">{payment.pixCode ? 'Pix copia e cola' : 'Código do boleto'}<textarea readOnly value={payment.pixCode || payment.boletoCode || ''} rows={3} className="mt-2 w-full resize-none break-all rounded-md border border-slate-300 bg-white p-3 font-mono text-xs text-slate-900" /></label>
             <button type="button" onClick={() => void copy(payment.pixCode || payment.boletoCode || '')} className="flex min-h-11 items-center justify-center gap-2 rounded-md bg-teal-700 px-4 font-semibold text-white"><Copy size={18} />{copied ? 'Código copiado' : payment.pixCode ? 'Copiar código Pix' : 'Copiar código do boleto'}</button>
           </>}
-          {payment.boletoUrl && <a href={payment.boletoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-semibold text-teal-700 underline"><ExternalLink size={18} />Abrir boleto</a>}
+          {payment.boletoUrl && <a href={payment.boletoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 font-semibold text-teal-700 action-link"><ExternalLink size={18} />Abrir boleto</a>}
           {payment.type === 'ticket' && <p className="text-sm text-slate-600">O status será atualizado após a confirmação bancária. Gerar o boleto não significa que ele foi pago.</p>}
         </div>
       </div>

@@ -380,7 +380,7 @@ export default function SobreCliente() {
           <p className="mb-3 text-xs font-bold uppercase tracking-widest text-teal-800">Faça parte desta história</p>
           <h2 id="about-join-title" className="text-2xl font-extrabold text-slate-900 sm:text-3xl">Construa seu negócio na rede de Rogério</h2>
           <p className="mt-4 max-w-3xl leading-relaxed text-slate-600">Você também pode fazer parte dessa trajetória como distribuidor independente na rede de Rogério André. Conheça a atuação com venda direta de produtos e desenvolvimento de equipe, entenda a proposta e converse com ele sobre os próximos passos para entrar na rede.</p>
-          <Link href="/junte-se-a-nos" className="mt-5 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade com Rogério</Link>
+          <Link href="/junte-se-a-nos" className="mt-5 inline-flex min-h-11 items-center rounded-md font-bold text-teal-800 action-link focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700">Conhecer a oportunidade com Rogério</Link>
         </section>
 
         <section>

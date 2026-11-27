@@ -34,7 +34,7 @@ try {
       };
     });
     if (!process.argv.includes('--real-ui')) await context.route('https://sdk.mercadopago.com/**', route => route.fulfill({ contentType: 'application/javascript', body: '' }));
-    await context.route('**/api/checkout', route => { throw new Error('Unexpected payment request'); });
+    await context.route('**/api/checkout', () => { throw new Error('Unexpected payment request'); });
     await context.route('https://viacep.com.br/**', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ logradouro: 'Rua Nova', bairro: 'Centro', localidade: 'Recife', uf: 'PE' }) }));
     await context.route(`${base.origin}/**`, async route => {
       const request = route.request(), url = new URL(request.url()); let data = [];
@@ -121,14 +121,14 @@ try {
     const notificationBounds = await page.locator('#recent-orders').boundingBox();
     assert.ok(notificationBounds.x >= 0 && notificationBounds.x + notificationBounds.width <= width);
     await page.goto(`${site}/admin/clientes/${user.id}/precos`);
-    await page.getByRole('checkbox', { name: /Desconto de afiliado/ }).click();
+    await page.getByRole('button', { name: /Ativar preço de consultor para/ }).click();
     await page.getByRole('dialog').waitFor();
     assert.equal(affiliateEnabled, false);
     await page.getByRole('button', { name: 'Cancelar', exact: true }).click();
     assert.equal(affiliateEnabled, false);
-    await page.getByRole('checkbox', { name: /Desconto de afiliado/ }).click();
-    await page.getByRole('button', { name: 'Autorizar benefício', exact: true }).click();
-    await page.getByText('Alteração salva.', { exact: true }).waitFor();
+    await page.getByRole('button', { name: /Ativar preço de consultor para/ }).click();
+    await page.getByRole('button', { name: 'Sim, ativar benefício', exact: true }).click();
+    await page.getByRole('button', { name: /Desativar preço de consultor para/ }).waitFor();
     assert.equal(affiliateEnabled, true);
     console.log(`PASS ${width}: stable payment mount, CVV visibility, pickup billing, multiple addresses, save failure, persistence reload, archive/restore, notifications. All integrations mocked; no charges or remote writes.`);
     await context.close();

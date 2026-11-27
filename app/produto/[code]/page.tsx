@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: Props) {
             <div className="flex items-center gap-2 bg-teal-950 px-6 py-3 text-white"><ShoppingLabel /><h2 id="purchase-title" className="text-[11px] font-semibold uppercase tracking-[.16em]">Sua escolha, com cuidado</h2></div>
             <div className="p-5 sm:p-7">
               <ProductActions product={product} />
-              {teaser && <p className="mt-5 border-t border-slate-100 pt-5 text-sm leading-relaxed text-slate-600">{teaser}<a href="#details-title" className="ml-1 inline-flex min-h-6 items-center font-semibold text-teal-800 underline underline-offset-4">Ler mais</a></p>}
+              {teaser && <p className="mt-5 border-t border-slate-100 pt-5 text-sm leading-relaxed text-slate-600">{teaser}<a href="#details-title" className="ml-1 inline-flex min-h-6 items-center font-semibold text-teal-800 inline-link">Ler mais</a></p>}
             </div>
           </section>
           <div className="rounded-2xl border border-teal-900/10 bg-[#eaf3f0] p-5">

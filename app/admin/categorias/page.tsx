@@ -149,7 +149,7 @@ export default function CategoriasAdmin() {
                     <tr key={cat.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors">
                       <td className="px-6 py-4 font-bold text-slate-900 dark:text-[#F0F0F0] text-xs">{cat.name}</td>
                       <td className="px-6 py-4 text-right">
-                        <Link className="mr-3 inline-flex min-h-11 items-center text-teal-700 underline" href={`/admin/produtos?categoria=${encodeURIComponent(cat.name)}`}>Gerenciar produtos</Link>
+                        <Link className="mr-3 inline-flex min-h-11 items-center text-teal-700 action-link" href={`/admin/produtos?categoria=${encodeURIComponent(cat.name)}`}>Gerenciar produtos</Link>
                         <button 
                           disabled={isSaving}
                           onClick={() => cat.archived_at ? void handleArchiveCategoria(cat) : setPending(cat)}

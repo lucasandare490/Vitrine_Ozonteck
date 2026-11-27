@@ -61,6 +61,60 @@ html, body {
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* Standard actions use a visible shape, rather than an underlined green label.
+   Explicit reading/color-vision preferences below retain their own cues. */
+.action-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 2.75rem;
+  max-width: 100%;
+  padding: .625rem 1rem;
+  border: 1px solid #99d5cb;
+  border-radius: .75rem;
+  background: #effcf8;
+  color: #115e59;
+  font-weight: 650;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.action-link:hover { background: #ccfbef; border-color: #0f766e; }
+.inline-link {
+  border-radius: .25rem;
+  padding: .125rem .25rem;
+  background: #e6f7f2;
+  color: #115e59;
+  font-weight: 650;
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.inline-link:hover { background: #baf2e1; }
+.action-link:focus-visible, .inline-link:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 3px;
+}
+.dark .action-link, .dark .inline-link { background: #12332f; border-color: #3b8278; color: #baf2e1; }
+.dark .action-link:hover, .dark .inline-link:hover { background: #1b4942; }
+.dark .action-link:focus-visible, .dark .inline-link:focus-visible { outline-color: #5eead4; }
+
+.admin-workspace main input:not([type="checkbox"]):not([type="radio"]),
+.admin-workspace main select,
+.admin-workspace main textarea { min-height: 2.75rem; font-size: 1rem; }
+.admin-workspace button:focus-visible,
+.admin-workspace input:focus-visible,
+.admin-workspace select:focus-visible,
+.admin-workspace textarea:focus-visible,
+.admin-workspace summary:focus-visible { outline: 3px solid #0f766e; outline-offset: 3px; }
+.dark .admin-workspace button:focus-visible,
+.dark .admin-workspace input:focus-visible,
+.dark .admin-workspace select:focus-visible,
+.dark .admin-workspace textarea:focus-visible,
+.dark .admin-workspace summary:focus-visible { outline-color: #5eead4; }
+
 /* ========================================================= */
 /* REFORÇO ESTRUTURAL WCAG 1.4.1 E NOVOS RECURSOS AAA        */
 /* ========================================================= */

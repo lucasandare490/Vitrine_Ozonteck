@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
-    "test:components": "node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs"
+    "test:components": "node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs scripts/check-customer-benefit-control.mjs"
   },
   "dependencies": {
     "@mercadopago/sdk-js": "^0.0.3",
