@@ -1,0 +1,5070 @@
+{
+  "source": "https://office.grupoozonteck.com/catalog",
+  "date": "2026-11-27",
+  "scope": "Fatos do catálogo renderizado. Não inclui saldos, rede, documentos pessoais nem descrições promocionais integrais.",
+  "priceMeaning": "Preço exibido no catálogo, diferente do preço autenticado da loja. Não é uma decisão de preço público da Vitrine Recife.",
+  "availabilityMeaning": "Presença no catálogo não comprova estoque local, fabricação atual ou autorização de venda.",
+  "categoryCounts": {
+    "Perfumes": 40,
+    "Linha capilar": 32,
+    "Bem Estar": 15,
+    "Nutracêuticos": 27,
+    "Acessorios": 64,
+    "Perfumes 100 ml": 15,
+    "Ingressos": 2
+  },
+  "categories": [
+    {
+      "category": "Perfumes",
+      "products": [
+        {
+          "id": "5",
+          "code": "40716",
+          "name": "CAPADÓCIA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40716"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210455"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ffab480a-bb71-4fdb-9276-5c63a2bef44a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/5/modal"
+        },
+        {
+          "id": "6",
+          "code": "40724",
+          "name": "CINDERELA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40724"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210462"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/07537d2c-5ec3-428d-b5c5-5b94ee469d67.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/6/modal"
+        },
+        {
+          "id": "7",
+          "code": "40723",
+          "name": "DG RED 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40723"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210486"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/8045567d-a393-4e93-ac24-e009cf3d9d29.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/7/modal"
+        },
+        {
+          "id": "8",
+          "code": "40722",
+          "name": "GRÉCIA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40722"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210493"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/12500c23-4a3a-4fd8-bfde-5f27cd71c98e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/8/modal"
+        },
+        {
+          "id": "9",
+          "code": "40721",
+          "name": "FERA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40721"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210479"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/3efc9320-b47d-4afd-a4c3-2ed619c7b9b1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/9/modal"
+        },
+        {
+          "id": "10",
+          "code": "40701",
+          "name": "MAXIMUM 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40701"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210509"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/90e85f87-41ff-439a-b59a-0cb30bbb3ea3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/10/modal"
+        },
+        {
+          "id": "11",
+          "code": "40720",
+          "name": "PRESIDENTE 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40720"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210516"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/21f114fb-05f5-47e3-b6ff-8211d5b2f0d9.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/11/modal"
+        },
+        {
+          "id": "12",
+          "code": "40728",
+          "name": "SENTIMENTO 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40728"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210523"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/03b4c609-1152-444f-a917-b8dc2c7206b5.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/12/modal"
+        },
+        {
+          "id": "13",
+          "code": "40719",
+          "name": "VIP GIRL VIP 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40719"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210561"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1162d4a7-2ec8-498b-86a5-a638834f0b13.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/13/modal"
+        },
+        {
+          "id": "14",
+          "code": "40718",
+          "name": "SOBERANO 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40718"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210530"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/70ab2eb6-7adf-4497-ae4a-e0f0c10203c5.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/14/modal"
+        },
+        {
+          "id": "47",
+          "code": "40717",
+          "name": "VG SEXY 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40717"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210554"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/3df52909-fe92-4163-8937-0ccb2e863d91.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/47/modal"
+        },
+        {
+          "id": "48",
+          "code": "40727",
+          "name": "SPEED BLACK 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40727"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210547"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/900c89e8-f321-4d60-89f4-08665a00b48d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/48/modal"
+        },
+        {
+          "id": "132",
+          "code": "40702",
+          "name": "303 VIP MEN 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40702"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210189"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/895bb1af-8194-4e58-9a5c-0e68393c4c54.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/132/modal"
+        },
+        {
+          "id": "133",
+          "code": "40703",
+          "name": "MAX BOSS 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40703"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210233"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0a4dc284-5b3a-4268-bd0a-8974e45267c1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/133/modal"
+        },
+        {
+          "id": "134",
+          "code": "40704",
+          "name": "303 MEN 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40704"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210196"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/647ed3b7-3ce8-4953-ad7b-1eef9cfed8b1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/134/modal"
+        },
+        {
+          "id": "135",
+          "code": "40726",
+          "name": "ALEM 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40726"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210424"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/5e977003-7eac-4d15-b8de-04b68da2dcd1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/135/modal"
+        },
+        {
+          "id": "136",
+          "code": "40705",
+          "name": "FANTASTICA BRY 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40705"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210301"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a2f8f4bb-b03d-476a-aed6-786dfb213611.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/136/modal"
+        },
+        {
+          "id": "137",
+          "code": "40729",
+          "name": "VENUM 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40729"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210271"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c539d678-1e82-432a-8bf3-4ddc26e93498.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/137/modal"
+        },
+        {
+          "id": "138",
+          "code": "40706",
+          "name": "VIDA BELLA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40706"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210172"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/4e02a338-3b86-4b38-a24c-cea730814782.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/138/modal"
+        },
+        {
+          "id": "139",
+          "code": "40707",
+          "name": "SEDUCTION 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40707"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210318"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ee1e0cb0-fd7a-4603-8afb-19e1fa293883.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/139/modal"
+        },
+        {
+          "id": "140",
+          "code": "40708",
+          "name": "GOUF BLUE 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40708"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210417"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b169daaa-7917-49a9-86de-fc2e51e0c27a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/140/modal"
+        },
+        {
+          "id": "141",
+          "code": "40709",
+          "name": "303 FOR WOMAN 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40709"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210257"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1aacbc6e-c231-45c5-8333-2cf0dc339766.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/141/modal"
+        },
+        {
+          "id": "142",
+          "code": "40710",
+          "name": "ANGELICAL 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40710"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210288"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/cd1a4c52-34b4-4481-9984-8ca2ae43eb96.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/142/modal"
+        },
+        {
+          "id": "143",
+          "code": "40715",
+          "name": "BLUE SKY 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40715"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210226"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/839e47c4-6bf1-4ca2-b7db-6d0d7d26f332.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/143/modal"
+        },
+        {
+          "id": "144",
+          "code": "40725",
+          "name": "FAMMA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40725"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210264"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/442981f2-0379-4359-9ba3-cbb4f08dff45.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/144/modal"
+        },
+        {
+          "id": "145",
+          "code": "40711",
+          "name": "EASY LINE 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40711"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210240"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/943dcf59-e725-4c2b-97ba-aed1b358442a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/145/modal"
+        },
+        {
+          "id": "146",
+          "code": "40712",
+          "name": "GOUF TRADICIONAL 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40712"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210295"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/7612a81b-2d68-4c9f-8067-85c612cdec00.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/146/modal"
+        },
+        {
+          "id": "147",
+          "code": "40714",
+          "name": "MADAME VI 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40714"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210202"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/30c41535-e9cc-4922-b2a0-d40f94d63785.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/147/modal"
+        },
+        {
+          "id": "148",
+          "code": "40730",
+          "name": "SCANDALOZA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40730"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210165"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "38 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/052b3e67-6bda-449e-bfbe-0762f305a784.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/148/modal"
+        },
+        {
+          "id": "149",
+          "code": "40799",
+          "name": "DOÇURINHA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40799"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210431"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/4cceec52-928b-4083-bded-cba85bbb08db.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/149/modal"
+        },
+        {
+          "id": "150",
+          "code": "40798",
+          "name": "AVENTURA 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40798"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210448"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/df72e498-cd22-4b71-916c-45bda2418f48.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/150/modal"
+        },
+        {
+          "id": "151",
+          "code": "40713",
+          "name": "SOUL 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40713"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210219"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/826a1703-1c71-48c9-924e-704696752865.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/151/modal"
+        },
+        {
+          "id": "590",
+          "code": "41726",
+          "name": "SUPREMO ELIXIR 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41726"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210646"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c047c2ac-7f11-4efc-a8f7-6c4924ac562f.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/590/modal"
+        },
+        {
+          "id": "614",
+          "code": "41727",
+          "name": "AALIYAH 17 ML",
+          "price": "R$ 48,00",
+          "priceValue": 48,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41727"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210998"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/5f38abf2-38e9-4d50-8c45-6476fb0b130d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/614/modal"
+        },
+        {
+          "id": "615",
+          "code": "41728",
+          "name": "SUBLIME 17 ML",
+          "price": "R$ 48,00",
+          "priceValue": 48,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41728"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211001"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e64e50e6-97dd-4817-934b-91f8dd88ff45.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/615/modal"
+        },
+        {
+          "id": "616",
+          "code": "41729",
+          "name": "RHINO ROYALE 17 ML",
+          "price": "R$ 48,00",
+          "priceValue": 48,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41729"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210974"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/8894a80f-ac84-4c6a-8a53-8722f91e9df9.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/616/modal"
+        },
+        {
+          "id": "617",
+          "code": "41730",
+          "name": "OUD ROYALE 17 ML",
+          "price": "R$ 48,00",
+          "priceValue": 48,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41730"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210981"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/19fa2b60-6627-477f-948f-2bdc2e2fb28e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/617/modal"
+        },
+        {
+          "id": "642",
+          "code": "45171",
+          "name": "Férias no Caribe by Virgínia Esquivel",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "45171"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211346"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "4.50 × 17.00 × 4.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "271 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c0c4cf6e-d651-45f8-8809-831f07e1261c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/642/modal"
+        },
+        {
+          "id": "643",
+          "code": "45170",
+          "name": "Lua de Mel em Paris by Virgínia Esquivel",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "45170"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211339"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "4.50 × 17.00 × 4.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "271 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0f5da00a-b4ce-4fcd-8973-b34183a63a16.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/643/modal"
+        },
+        {
+          "id": "714",
+          "code": "46496",
+          "name": "LABOOM 17 ML",
+          "price": "R$ 45,00",
+          "priceValue": 45,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "46496"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211377"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 9.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "58 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/610ec866-b07a-45d9-b41f-f3e109030a8d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/714/modal"
+        }
+      ]
+    },
+    {
+      "category": "Linha capilar",
+      "products": [
+        {
+          "id": "18",
+          "code": "40561",
+          "name": "AMPOLA SOFT HAIR",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40561"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428204"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 6.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "50 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/3f8da304-bd20-4b19-a774-7872039c400e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/18/modal"
+        },
+        {
+          "id": "19",
+          "code": "40546",
+          "name": "SHAMPOO OZON-KESEN",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40546"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428242"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "339 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/780bfc7d-a855-4ce6-847e-d0e9396c2e5d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/19/modal"
+        },
+        {
+          "id": "20",
+          "code": "40547",
+          "name": "MÁSCARA OZON-KESEN",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40547"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428259"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "323 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/88fa2405-4669-4c44-8dcb-44734327d325.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/20/modal"
+        },
+        {
+          "id": "21",
+          "code": "40548",
+          "name": "CONDICIONADOR OZON-KESEN",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40548"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428235"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "321 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/9dd6555b-8e03-4f77-ae2d-60f420911b2a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/21/modal"
+        },
+        {
+          "id": "22",
+          "code": "40562",
+          "name": "ÓLEO DE AÇAÍ",
+          "price": "R$ 105,00",
+          "priceValue": 105,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40562"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210141"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "42 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0bdb2ca0-465f-4fa1-969e-f90dee5667ed.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/22/modal"
+        },
+        {
+          "id": "23",
+          "code": "40563",
+          "name": "OZON CREAM",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40563"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210059"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 17.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "179 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a319b9e9-800d-4c35-a0c8-cb4dc2a080e3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/23/modal"
+        },
+        {
+          "id": "24",
+          "code": "40560",
+          "name": "OZON-FOR MEN",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40560"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210073"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 17.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "179 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/f47b80d6-580c-44d1-b28b-58da5dd2f7b3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/24/modal"
+        },
+        {
+          "id": "25",
+          "code": "40545",
+          "name": "TÔNICO CAPILAR",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40545"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210066"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "121 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/d65b51ea-752d-4d8a-8828-ae021fb4d393.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/25/modal"
+        },
+        {
+          "id": "26",
+          "code": "40556",
+          "name": "MÁSCARA OZON-BLOND",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40556"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210080"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "317 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/58865300-6188-4acc-8452-8b0a683440f8.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/26/modal"
+        },
+        {
+          "id": "27",
+          "code": "40555",
+          "name": "SHAMPOO OZON-BLOND",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40555"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210004"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "339 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/fa4dc0fc-8472-498f-b409-c805a0ab9544.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/27/modal"
+        },
+        {
+          "id": "32",
+          "code": "40544",
+          "name": "PRO KESEN",
+          "price": "R$ 499,90",
+          "priceValue": 499.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40544"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210097"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.00 × 7.00 × 30.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1963 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/41c21f82-798f-4aa3-a6d2-30d3dad55bc6.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/32/modal"
+        },
+        {
+          "id": "88",
+          "code": "40557",
+          "name": "SHAMPOO MASTER CURLS",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40557"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428297"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 6.00 × 17.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "344 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b9639347-d22d-41cf-9652-5df2e5b4d8b6.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/88/modal"
+        },
+        {
+          "id": "89",
+          "code": "40558",
+          "name": "MÁSCARA MASTER CURLS",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40558"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210592"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 6.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/7a0b6531-479f-42b6-bd29-0380ef633897.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/89/modal"
+        },
+        {
+          "id": "90",
+          "code": "40559",
+          "name": "ATIVADOR MASTER CURLS",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40559"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428228"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 6.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "461 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0653be99-e309-4888-88c5-c6b753625d74.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/90/modal"
+        },
+        {
+          "id": "121",
+          "code": "40549",
+          "name": "SHAMPOO OZON MEL",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40549"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428273"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "342 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/95f0f90c-8b9f-4e3f-af0c-4d35f8f5180d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/121/modal"
+        },
+        {
+          "id": "122",
+          "code": "40551",
+          "name": "CONDICIONADOR MEL & OZÔNIO",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40551"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428266"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a887c288-0723-490f-8425-6ba4e7cd1d0e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/122/modal"
+        },
+        {
+          "id": "126",
+          "code": "40552",
+          "name": "SHAMPOO KIDS",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40552"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210035"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "340 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/857764fc-7d1e-4a5a-b54e-202dd938ab6d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/126/modal"
+        },
+        {
+          "id": "127",
+          "code": "40553",
+          "name": "CONDICIONADOR KIDS",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40553"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210011"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "6.00 × 6.00 × 18.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "311 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/49c8a8bf-c7b3-4abc-bd82-d6f558fef407.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/127/modal"
+        },
+        {
+          "id": "128",
+          "code": "40554",
+          "name": "LEAVE IN KIDS",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40554"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210042"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "6.00 × 6.00 × 18.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "318 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/f71e9e9d-7003-4000-8108-32c73acc9bba.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/128/modal"
+        },
+        {
+          "id": "171",
+          "code": "40550",
+          "name": "MÁSCARA MEL & OZÔNIO",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40550"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428280"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 6.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "331 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/163a3f57-04b7-4080-bf9b-c6a2c9ca38b5.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/171/modal"
+        },
+        {
+          "id": "636",
+          "code": "40901",
+          "name": "WO3 SHAMPOO SOFT CLEANSE",
+          "price": "R$ 335,40",
+          "priceValue": 335.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40901"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211278"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.50 × 30.00 × 7.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c3986ed3-6dec-4198-a265-2f6920cb0417.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/636/modal"
+        },
+        {
+          "id": "637",
+          "code": "40902",
+          "name": "WO3 SHAMPOO DEEP CLEANSE",
+          "price": "R$ 375,40",
+          "priceValue": 375.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40902"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211285"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.50 × 30.00 × 7.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/13c28ac4-957f-46a6-b3b6-9f6c3c21fd8d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/637/modal"
+        },
+        {
+          "id": "638",
+          "code": "40903",
+          "name": "WO3 MÁSCARA AMR",
+          "price": "R$ 595,40",
+          "priceValue": 595.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40903"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211292"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.30 × 30.00 × 7.30 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/810780ac-f55a-4c19-9841-aac7b0bc4d01.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/638/modal"
+        },
+        {
+          "id": "639",
+          "code": "40905",
+          "name": "WO3 MÁSCARA CIF",
+          "price": "R$ 495,40",
+          "priceValue": 495.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40905"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211308"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.30 × 30.00 × 7.30 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6e91444c-5a0b-43df-acfc-017cd9e5802c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/639/modal"
+        },
+        {
+          "id": "640",
+          "code": "40906",
+          "name": "WO3 MÁSCARA HMS",
+          "price": "R$ 515,40",
+          "priceValue": 515.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40906"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211315"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.50 × 30.00 × 7.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/aab92051-ae2d-4ded-927d-01a29a7e17d0.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/640/modal"
+        },
+        {
+          "id": "641",
+          "code": "40907",
+          "name": "WO3 MÁSCARA LPC",
+          "price": "R$ 555,40",
+          "priceValue": 555.4,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40907"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211322"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.50 × 30.00 × 7.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ae34eb6f-a9b8-49b0-becc-0d2b35ff658e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/641/modal"
+        },
+        {
+          "id": "864",
+          "code": "47323",
+          "name": "WO3 QUANTIC COMPLEX - SHAMPOO EQUILIBRIUM",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47323"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211421"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "339 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/35996850-6090-4f0b-9305-68781629a9e3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/864/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        },
+        {
+          "id": "865",
+          "code": "47326",
+          "name": "WO3 QUANTIC COMPLEX - LIPID CONTROL MÁSCARA",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47326"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211469"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "324 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/7b095c04-4b06-4a36-8f84-a122f3d38345.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/865/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        },
+        {
+          "id": "866",
+          "code": "47324",
+          "name": "WO3 QUANTIC COMPLEX - AMINO REPAIR MÁSCARA",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47324"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211452"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "324 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/f73eec04-7ebf-463c-be20-927b28bbae00.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/866/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        },
+        {
+          "id": "867",
+          "code": "47327",
+          "name": "WO3 QUANTIC COMPLEX - HYDRA BALANCE MÁSCARA",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47327"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211476"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "324 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/91ae3c04-d314-461b-bb13-1e618f389f43.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/867/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        },
+        {
+          "id": "868",
+          "code": "47325",
+          "name": "WO3 QUANTIC COMPLEX - PROTEIN FORCE MÁSCARA",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47325"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211445"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "324 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/e95573cb-b0e7-490f-89fa-441cec59629d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/868/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        },
+        {
+          "id": "869",
+          "code": "47322",
+          "name": "WO3 QUANTIC COMPLEX - SHAMPOO DETOX",
+          "price": "R$ 109,90",
+          "priceValue": 109.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47322"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211438"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 22.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "339 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/904e1f64-21ac-4c5d-a869-54a436ef6cc7.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/869/modal",
+          "presentationObserved": "300 ml",
+          "presentationEvidence": "Imagem frontal oficial examinada no navegador em 27/11/2026."
+        }
+      ]
+    },
+    {
+      "category": "Bem Estar",
+      "products": [
+        {
+          "id": "28",
+          "code": "40568",
+          "name": "ÓLEO SOFH",
+          "price": "R$ 89,80",
+          "priceValue": 89.8,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40568"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210028"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "62 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/9f9a8eed-ca47-4097-9f2e-40bd2c3346a1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/28/modal"
+        },
+        {
+          "id": "31",
+          "code": "40569",
+          "name": "SABONETE OX3",
+          "price": "R$ 99,90",
+          "priceValue": 99.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40569"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210158"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.00 × 7.00 × 19.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "442 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/de32c0cb-b345-414b-b94a-0aae314d144e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/31/modal"
+        },
+        {
+          "id": "64",
+          "code": "40570",
+          "name": "LIFE SHII",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40570"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210103"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 18.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "234 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/be798165-3f0e-41fc-b8fd-71566849cebd.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/64/modal"
+        },
+        {
+          "id": "66",
+          "code": "40565",
+          "name": "HIDRATANTE SPEED BLACK",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40565"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210134"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "8.00 × 8.00 × 19.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "280 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/2fbe8e59-6d9d-4467-989d-d8640973ef23.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/66/modal"
+        },
+        {
+          "id": "67",
+          "code": "405640",
+          "name": "HIDRATANTE VG SEXY",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "405640"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210127"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "8.00 × 8.00 × 19.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "280 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c1fa5005-3237-49e3-a16c-858025e42b28.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/67/modal"
+        },
+        {
+          "id": "100",
+          "code": "40567",
+          "name": "ESFOLIANTE OXYLUSH",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40567"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210578"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "7.00 × 7.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "124 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/4996a50c-8bc1-499f-8a1f-2cfcdcf1520f.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/100/modal"
+        },
+        {
+          "id": "101",
+          "code": "40566",
+          "name": "SÉRUM FACIAL",
+          "price": "R$ 175,90",
+          "priceValue": 175.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40566"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210585"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "45 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0228b40b-e971-43fb-9441-d52e5eb20d53.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/101/modal"
+        },
+        {
+          "id": "204",
+          "code": "369845",
+          "name": "OZON FRESH",
+          "price": "R$ 59,90",
+          "priceValue": 59.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "369845"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898996428211"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "4.00 × 5.00 × 18.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "90 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/941e5b7b-b6b9-41f6-af99-5dba2cbc50c0.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/204/modal"
+        },
+        {
+          "id": "205",
+          "code": "40797",
+          "name": "PURE HOT",
+          "price": "R$ 59,90",
+          "priceValue": 59.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40797"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210608"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "45 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/49011b61-2785-4236-b47e-3be90b9d8fee.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/205/modal"
+        },
+        {
+          "id": "213",
+          "code": "IMP-206",
+          "name": "TOQUE LUMINOSO",
+          "price": "R$ 565,60",
+          "priceValue": 565.6,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-206"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "62 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/4171c4a9-d2c6-4aea-8f81-9213bf5db6f7.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/213/modal"
+        },
+        {
+          "id": "257",
+          "code": "IMP-99",
+          "name": "ENERGÉTICO XBOOSTER 269ML",
+          "price": "R$ 27,80",
+          "priceValue": 27.8,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-99"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 5.00 × 13.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "295 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/2aa870d8-93b2-426f-bd58-9add3dc44e1c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/257/modal"
+        },
+        {
+          "id": "343",
+          "code": "IMP-198",
+          "name": "OZON TRIX",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-198"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210622"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 3.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "42 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/59193a43-e5ea-4fd4-85d6-0b15f79be533.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/343/modal"
+        },
+        {
+          "id": "344",
+          "code": "IMP-199",
+          "name": "HAYDEK",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-199"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210615"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "4.00 × 4.00 × 15.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "149 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/433a7b00-c293-40f5-8af8-c5d600ebb24a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/344/modal"
+        },
+        {
+          "id": "624",
+          "code": "44988",
+          "name": "HIDRATANTE SPEED BLACK 120g",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "44988"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211230"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "8.00 × 8.00 × 19.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "120 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/3eeb23f5-b44f-4ff0-9fb4-c551f467503d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/624/modal"
+        },
+        {
+          "id": "625",
+          "code": "40564",
+          "name": "HIDRATANTE VG SEXY 120g",
+          "price": "R$ 79,90",
+          "priceValue": 79.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40564"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211209"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "8.00 × 8.00 × 19.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "120 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ff9570c1-c97a-4283-984c-e527ffb4f0fa.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/625/modal"
+        }
+      ]
+    },
+    {
+      "category": "Nutracêuticos",
+      "products": [
+        {
+          "id": "33",
+          "code": "IMP-33",
+          "name": "XBOOSTER",
+          "price": "R$ 139,90",
+          "priceValue": 139.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-33"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210400"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "75 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a9ef9f9b-c073-49c3-b3ba-e123097b8847.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/33/modal"
+        },
+        {
+          "id": "34",
+          "code": "IMP-34",
+          "name": "BORYSLIM",
+          "price": "R$ 139,90",
+          "priceValue": 139.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-34"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210325"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "64 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b7c24669-000d-49a8-9670-b92c23d35b3b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/34/modal"
+        },
+        {
+          "id": "62",
+          "code": "IMP-88",
+          "name": "NX CAP OZON",
+          "price": "R$ 159,92",
+          "priceValue": 159.92,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-88"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210356"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "82 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1d9c9d95-33a4-4db0-84b2-5d2c9d9aa952.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/62/modal"
+        },
+        {
+          "id": "65",
+          "code": "IMP-90",
+          "name": "ÔMEGA 3",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-90"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210363"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "110 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/cbc70975-adf8-4fb9-b8af-0055423cb2bf.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/65/modal"
+        },
+        {
+          "id": "72",
+          "code": "IMP-35",
+          "name": "K2MK7 e D3",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-35"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210349"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "76 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/15d0e885-6389-4706-9a54-d9e372d35b13.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/72/modal"
+        },
+        {
+          "id": "73",
+          "code": "IMP-91",
+          "name": "DREAM BLISS",
+          "price": "R$ 175,90",
+          "priceValue": 175.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-91"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210332"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "57 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1be0e3f0-e92f-452d-990f-f4af7e6b4132.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/73/modal"
+        },
+        {
+          "id": "74",
+          "code": "IMP-98",
+          "name": "TRI MAGNÉSIO",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-98"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210387"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "70 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e9d1eeeb-b3f7-4171-8c52-da02147f8954.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/74/modal"
+        },
+        {
+          "id": "103",
+          "code": "IMP-124",
+          "name": "VITA OZON PLUS",
+          "price": "R$ 139,90",
+          "priceValue": 139.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-124"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210370"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "78 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a5e5c297-66c7-46c9-8306-9a4830190db9.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/103/modal"
+        },
+        {
+          "id": "104",
+          "code": "IMP-125",
+          "name": "VIRTUOUS CAPS",
+          "price": "R$ 139,90",
+          "priceValue": 139.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-125"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210394"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "79 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e574da67-ab8b-4b15-936e-13679361bae0.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/104/modal"
+        },
+        {
+          "id": "164",
+          "code": "IMP-184",
+          "name": "OZON CREAT CAIXA",
+          "price": "R$ 299,90",
+          "priceValue": 299.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-184"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211131"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "343 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1275fbbd-e2ab-49fa-b83e-e11b3cad93e6.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/164/modal"
+        },
+        {
+          "id": "167",
+          "code": "IMP-187",
+          "name": "OZON CREAT MORANGO CAIXA",
+          "price": "R$ 299,90",
+          "priceValue": 299.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-187"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211155"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "343 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/de34c1e0-bc2d-44b6-8a6a-3f5a0660bdb8.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/167/modal"
+        },
+        {
+          "id": "169",
+          "code": "IMP-189",
+          "name": "AMYNO OZON CAIXA",
+          "price": "R$ 299,90",
+          "priceValue": 299.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-189"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/855f2a4c-3c98-47ca-98c1-76ee9d2930ca.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/169/modal"
+        },
+        {
+          "id": "192",
+          "code": "IMP-44",
+          "name": "OZON CREAT MORANGO UNIDADE",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-44"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211124"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.50 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c580d9b5-dc61-4faa-96ba-9c40d7f0a09a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/192/modal"
+        },
+        {
+          "id": "197",
+          "code": "IMP-45",
+          "name": "OZON CREAT UNIDADE",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-45"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211100"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "14.00 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/015cbbdf-6572-4187-85a1-5adcdd10e9ae.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/197/modal"
+        },
+        {
+          "id": "256",
+          "code": "IMP-201",
+          "name": "LUMINOUS VITA",
+          "price": "R$ 159,90",
+          "priceValue": 159.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-201"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211018"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "80 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/790f44a9-78d1-40f1-bad0-c6aa2f750724.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/256/modal"
+        },
+        {
+          "id": "258",
+          "code": "IMP-197",
+          "name": "AMYNO OZON UNIDADE",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-197"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.50 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/d4d394eb-905e-47d6-9004-172abce8f712.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/258/modal"
+        },
+        {
+          "id": "259",
+          "code": "IMP-46",
+          "name": "OZON FLEX UNIDADE",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-46"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211117"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "14.00 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ebc8a741-9925-44da-984e-f3f7ee92f08b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/259/modal"
+        },
+        {
+          "id": "594",
+          "code": "IMP-202",
+          "name": "SOFH D",
+          "price": "R$ 119,90",
+          "priceValue": 119.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-202"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210653"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "62 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/92682663-c09a-4f9d-9aa3-30431b6b4f2a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/594/modal"
+        },
+        {
+          "id": "595",
+          "code": "IMP-49",
+          "name": "Ozon Power Unidade",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-49"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "14.00 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b1511f45-b50f-46df-b26c-fa3c9ab2766b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/595/modal"
+        },
+        {
+          "id": "596",
+          "code": "IMP-47",
+          "name": "Ozon Lev Unidade",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-47"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211162"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "14.00 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/32a75fe8-96d5-44db-9e7d-7da56cdc4fc3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/596/modal"
+        },
+        {
+          "id": "597",
+          "code": "IMP-48",
+          "name": "Ozon Munity Unidade",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-48"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "14.00 × 3.50 × 14.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "9 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b0d56f2c-e865-4d26-b922-7929685f251d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/597/modal"
+        },
+        {
+          "id": "620",
+          "code": "IMP-203",
+          "name": "Melatozon",
+          "price": "R$ 159,80",
+          "priceValue": 159.8,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-203"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211094"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "3.00 × 10.00 × 3.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "62 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a57840bc-9b85-42a3-bcbc-c17de12b4e95.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/620/modal"
+        },
+        {
+          "id": "621",
+          "code": "IMP-204",
+          "name": "Cobalactin",
+          "price": "R$ 179,70",
+          "priceValue": 179.7,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-204"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211247"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "72 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0787e20f-a743-4416-9cad-9223db07b34e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/621/modal"
+        },
+        {
+          "id": "622",
+          "code": "IMP-207",
+          "name": "Genolife kids",
+          "price": "R$ 179,70",
+          "priceValue": 179.7,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-207"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211223"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "65 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/dc71e5ec-37f2-4cb4-bce3-710f6e610093.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/622/modal"
+        },
+        {
+          "id": "623",
+          "code": "IMP-209",
+          "name": "Ox",
+          "price": "R$ 179,70",
+          "priceValue": 179.7,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-209"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211193"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "77 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/10d6c443-a051-4644-8250-8db1515dc47d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/623/modal"
+        },
+        {
+          "id": "634",
+          "code": "IMP-190",
+          "name": "Ozon Flex Caixa",
+          "price": "R$ 299,90",
+          "priceValue": 299.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-190"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211148"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "343 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/00c6b04c-0b1d-4dd1-a489-40ed54831590.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/634/modal"
+        },
+        {
+          "id": "875",
+          "code": "5002901",
+          "name": "VISARIS",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "5002901"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211513"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.00 × 11.00 × 5.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "110 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/a660157a-57bc-430c-9e23-c2cecc64cc9e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/875/modal"
+        }
+      ]
+    },
+    {
+      "category": "Acessorios",
+      "products": [
+        {
+          "id": "75",
+          "code": "IMP-101",
+          "name": "CAIXA VERDE",
+          "price": "R$ 14,00",
+          "priceValue": 14,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-101"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ca668d15-41ec-440f-9787-9d66e4c4325d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/75/modal"
+        },
+        {
+          "id": "76",
+          "code": "IMP-102",
+          "name": "CAMISETA P PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-102"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a0fb1386-60e4-4251-a7f3-cd6cffca2e37.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/76/modal"
+        },
+        {
+          "id": "77",
+          "code": "IMP-103",
+          "name": "CAMISETA M PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-103"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/87a4ca7f-4f2a-4718-9161-3af931861634.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/77/modal"
+        },
+        {
+          "id": "78",
+          "code": "IMP-104",
+          "name": "CAMISETA G PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-104"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/89221285-9093-4c52-b095-532375dc3ce2.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/78/modal"
+        },
+        {
+          "id": "79",
+          "code": "IMP-105",
+          "name": "CAMISETA GG PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-105"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/f9011ddf-b18b-49d2-a815-b38906c52343.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/79/modal"
+        },
+        {
+          "id": "80",
+          "code": "IMP-106",
+          "name": "CAMISETA XG PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-106"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/429c5091-f92d-4e95-ad68-1a03a03e4320.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/80/modal"
+        },
+        {
+          "id": "81",
+          "code": "IMP-107",
+          "name": "CAMISETA XGG PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-107"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/cea2085f-b1af-4ea9-af3f-19d013df93d7.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/81/modal"
+        },
+        {
+          "id": "82",
+          "code": "IMP-108",
+          "name": "CAMISETA P BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-108"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a88f382a-4dae-4e98-a6b1-a7220e5efea4.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/82/modal"
+        },
+        {
+          "id": "83",
+          "code": "IMP-109",
+          "name": "CAMISETA M BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-109"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e360b84d-7a07-4d53-aaf0-9532b83bdcba.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/83/modal"
+        },
+        {
+          "id": "84",
+          "code": "IMP-110",
+          "name": "CAMISETA G BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-110"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ef197ae3-2804-4d0d-810b-bd89da97e9c2.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/84/modal"
+        },
+        {
+          "id": "85",
+          "code": "IMP-111",
+          "name": "CAMISETA GG BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-111"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/278752ab-3db6-48f4-9363-e5270ae6bf0e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/85/modal"
+        },
+        {
+          "id": "86",
+          "code": "IMP-112",
+          "name": "CAMISETA XG BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-112"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ec5e7462-e1c9-463b-9ad6-6c76f2f57385.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/86/modal"
+        },
+        {
+          "id": "87",
+          "code": "IMP-113",
+          "name": "CAMISETA XGG BRANCA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-113"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a04b8a03-377d-4677-95b4-d7270dc9167d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/87/modal"
+        },
+        {
+          "id": "94",
+          "code": "IMP-117",
+          "name": "NECESSAIRE AZUL",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-117"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e45d4f7f-a259-4c55-82f0-fa8dda84c521.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/94/modal"
+        },
+        {
+          "id": "97",
+          "code": "imp-120",
+          "name": "NECESSAIRE PRETA",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "imp-120"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/433ec2d9-1222-4988-b7f2-98fc386524a2.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/97/modal"
+        },
+        {
+          "id": "98",
+          "code": "IMP-121",
+          "name": "NECESSAIRE BRANCA",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-121"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/465cfa0d-6fbc-4f3e-ab74-37387e2a9dc8.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/98/modal"
+        },
+        {
+          "id": "99",
+          "code": "IMP-118",
+          "name": "NECESSAIRE AZUL CLARO",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-118"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/23272619-edf9-46c6-b0a5-200760cb25f3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/99/modal"
+        },
+        {
+          "id": "105",
+          "code": "IMP-126",
+          "name": "BONÉ PRETO COM BRANCO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-126"
+            },
+            {
+              "label": "Código EAN",
+              "value": "126"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/d8068c35-7c14-4605-911c-8b7568f4a70e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/105/modal"
+        },
+        {
+          "id": "106",
+          "code": "IMP-127",
+          "name": "BONÉ  BRANCO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-127"
+            },
+            {
+              "label": "Código EAN",
+              "value": "127"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6d9461fb-a9ef-4480-ae2a-d067678565c1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/106/modal"
+        },
+        {
+          "id": "107",
+          "code": "IMP-128",
+          "name": "CAMISETA P AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-128"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c74104a3-dab8-4dce-918d-0d1763b45e81.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/107/modal"
+        },
+        {
+          "id": "108",
+          "code": "IMP-129",
+          "name": "CAMISETA M AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-129"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6e9fdb74-59c0-41e8-b569-2476d36898f7.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/108/modal"
+        },
+        {
+          "id": "109",
+          "code": "IMP-130",
+          "name": "CAMISETA G AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-130"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6d9d9f4c-0a92-4aaa-af06-443f6da16f31.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/109/modal"
+        },
+        {
+          "id": "110",
+          "code": "IMP-131",
+          "name": "CAMISETA GG AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-131"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/ad19e89b-7db1-482b-92d3-b26cab62e131.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/110/modal"
+        },
+        {
+          "id": "111",
+          "code": "IMP-132",
+          "name": "CAMISETA XG AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-132"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b19dd579-88f3-4a49-8172-a663cd74f2fe.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/111/modal"
+        },
+        {
+          "id": "112",
+          "code": "IMP-133",
+          "name": "CAMISETA XGG AZUL",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-133"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/d68446db-343c-4fac-8cb0-a1f6494e8376.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/112/modal"
+        },
+        {
+          "id": "113",
+          "code": "IMP-134",
+          "name": "CAMISETA P CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-134"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/0f14df85-ba91-47ac-b7c7-9b4d480365ea.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/113/modal"
+        },
+        {
+          "id": "114",
+          "code": "IMP-135",
+          "name": "CAMISETA M CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-135"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/2ec717ae-b4b2-43a2-be51-7855eeb586fd.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/114/modal"
+        },
+        {
+          "id": "115",
+          "code": "IMP-136",
+          "name": "CAMISETA G CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-136"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/5a952056-ff55-4aa9-babd-c6f11d6c5055.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/115/modal"
+        },
+        {
+          "id": "116",
+          "code": "IMP-137",
+          "name": "CAMISETA GG CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-137"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/9febc8df-65c8-42ba-b395-149443b1e767.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/116/modal"
+        },
+        {
+          "id": "117",
+          "code": "IMP-138",
+          "name": "CAMISETA XG CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-138"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6b64dcab-9a03-4d1e-9f7a-3e700aee9945.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/117/modal"
+        },
+        {
+          "id": "118",
+          "code": "IMP-139",
+          "name": "CAMISETA XGG CINZA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-139"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/65fa9dae-b830-445f-b69f-d1033a8a6b8e.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/118/modal"
+        },
+        {
+          "id": "119",
+          "code": "IMP-140",
+          "name": "PORTA COMPRIMIDOS SEMANAL",
+          "price": "R$ 20,00",
+          "priceValue": 20,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-140"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6a93e8a8-25f9-4644-ad24-852a5d53885b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/119/modal"
+        },
+        {
+          "id": "120",
+          "code": "IMP-141",
+          "name": "NECESSAIRE VERDE",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-141"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/4d6c3fb0-cd3a-4efa-bcb8-887a3e3d9206.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/120/modal"
+        },
+        {
+          "id": "124",
+          "code": "IMP-145",
+          "name": "NECESSAIRE LILÁS",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-145"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/63e87beb-3b46-4fe2-ac51-00abdd7ff4ee.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/124/modal"
+        },
+        {
+          "id": "125",
+          "code": "IMP-146",
+          "name": "NECESSAIRE ROSA",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-146"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e9782dc9-f55e-4fe5-9150-efcc253e5763.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/125/modal"
+        },
+        {
+          "id": "152",
+          "code": "IMP-172",
+          "name": "CAMISETA P ROXA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-172"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/65353038-6bb0-40e3-baed-4279da8a742c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/152/modal"
+        },
+        {
+          "id": "153",
+          "code": "IMP-173",
+          "name": "CAMISETA M ROXA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-173"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/f55aa86c-f268-4cc9-acb8-c4d533aecd8a.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/153/modal"
+        },
+        {
+          "id": "154",
+          "code": "IMP-174",
+          "name": "CAMISETA G ROXA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-174"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/cf6b1e16-33a7-4aed-9501-84ee88d97419.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/154/modal"
+        },
+        {
+          "id": "155",
+          "code": "IMP-175",
+          "name": "CAMISETA GG ROXA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-175"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/6cb843ce-36aa-4c31-8465-eeeda040b28b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/155/modal"
+        },
+        {
+          "id": "156",
+          "code": "IMP-176",
+          "name": "CAMISETA P LARANJA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-176"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/7a52916f-ce63-43bd-bd8a-6a9939cbc42c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/156/modal"
+        },
+        {
+          "id": "157",
+          "code": "IMP-177",
+          "name": "CAMISETA M LARANJA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-177"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a6c4fb57-4a1e-44a0-a745-64e8169c21c2.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/157/modal"
+        },
+        {
+          "id": "158",
+          "code": "IMP-178",
+          "name": "CAMISETA G LARANJA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-178"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/36ca23c1-da43-4f0f-bf79-4d8225af63aa.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/158/modal"
+        },
+        {
+          "id": "159",
+          "code": "IMP-179",
+          "name": "CAMISETA GG LARANJA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-179"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c563c580-8a60-4b11-bb7d-baaea6f3c4de.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/159/modal"
+        },
+        {
+          "id": "160",
+          "code": "IMP-180",
+          "name": "CAMISETA P ROSA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-180"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/74c86b7c-b5c8-4086-bd90-ccbecebba9cc.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/160/modal"
+        },
+        {
+          "id": "161",
+          "code": "IMP-181",
+          "name": "CAMISETA M ROSA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-181"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/048747a1-0898-4d86-9839-67f1d670b090.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/161/modal"
+        },
+        {
+          "id": "162",
+          "code": "IMP-182",
+          "name": "CAMISETA G ROSA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-182"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/9c1e8219-1536-48ea-81aa-a875ca66d7f8.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/162/modal"
+        },
+        {
+          "id": "163",
+          "code": "IMP-183",
+          "name": "CAMISETA GG ROSA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-183"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/2b19ec1d-6d3d-4e6d-a94f-3cc93da4e15d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/163/modal"
+        },
+        {
+          "id": "244",
+          "code": "IMP-195",
+          "name": "Copo Térmico Ozonizou",
+          "price": "R$ 120,00",
+          "priceValue": 120,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-195"
+            },
+            {
+              "label": "Código EAN",
+              "value": "195"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/598de818-fe1d-4f98-9beb-0de9ee99dd7d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/244/modal"
+        },
+        {
+          "id": "245",
+          "code": "IMP-43",
+          "name": "NECESSAIRE VERMELHA",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-43"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/42e7b850-33b6-4104-a76c-dbcf90f883fb.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/245/modal"
+        },
+        {
+          "id": "246",
+          "code": "IMP-42",
+          "name": "NECESSAIRE PINK",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-42"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/2aad67f5-4f39-4703-a8b4-0f538c390a76.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/246/modal"
+        },
+        {
+          "id": "248",
+          "code": "IMP-40",
+          "name": "NECESSAIRE BEGE",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-40"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/bc476936-db8b-413b-9e53-dcf86dfca3d9.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/248/modal"
+        },
+        {
+          "id": "249",
+          "code": "IMP-41",
+          "name": "NECESSAIRE MARROM",
+          "price": "R$ 90,00",
+          "priceValue": 90,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-41"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/bbc5aa84-2c8e-47e7-821b-cbdd485babf5.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/249/modal"
+        },
+        {
+          "id": "250",
+          "code": "IMP-192",
+          "name": "BONÉ ROSA COM BRANCO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-192"
+            },
+            {
+              "label": "Código EAN",
+              "value": "192"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/8cb39bf6-73bf-4ab8-9190-23a2a6ce3cc8.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/250/modal"
+        },
+        {
+          "id": "251",
+          "code": "IMP-193",
+          "name": "BONÉ CINZA COM BRANCO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-193"
+            },
+            {
+              "label": "Código EAN",
+              "value": "193"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/bf1a06ff-0f1c-4c83-a733-5e162c63711c.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/251/modal"
+        },
+        {
+          "id": "252",
+          "code": "IMP-194",
+          "name": "BONÉ AZUL CLARO COM BRANCO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-194"
+            },
+            {
+              "label": "Código EAN",
+              "value": "194"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/c28d8cc6-97ee-4e0a-86c4-1abcf43cde71.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/252/modal"
+        },
+        {
+          "id": "253",
+          "code": "IMP-196",
+          "name": "BONÉ AZUL ESCURO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-196"
+            },
+            {
+              "label": "Código EAN",
+              "value": "196"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/63369e9d-086a-41fa-841b-6a72268294ad.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/253/modal"
+        },
+        {
+          "id": "283",
+          "code": "IMP-51",
+          "name": "Squeeze Rosa 500ml",
+          "price": "R$ 30,00",
+          "priceValue": 30,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-51"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/fdc3c0c0-cb06-4d01-8e3f-0cbc46ffc14d.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/283/modal"
+        },
+        {
+          "id": "284",
+          "code": "IMP-52",
+          "name": "Squeeze Turquesa 500ml",
+          "price": "R$ 30,00",
+          "priceValue": 30,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-52"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/49e2dd99-77b4-41a0-a302-af187526181b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/284/modal"
+        },
+        {
+          "id": "392",
+          "code": "IMP-205",
+          "name": "Caixinha de Presente",
+          "price": "R$ 10,00",
+          "priceValue": 10,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-205"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/a51f1c7d-c4aa-409e-a39e-72fc4f7e0f65.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/392/modal"
+        },
+        {
+          "id": "499",
+          "code": "IMP-29",
+          "name": "CAMISETA G7 PRETA",
+          "price": "R$ 160,00",
+          "priceValue": 160,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-29"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/5b28c971-8b3c-40cc-a789-a06b3e3e1bde.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/499/modal"
+        },
+        {
+          "id": "500",
+          "code": "IMP-16",
+          "name": "BONÉ PRETO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-16"
+            },
+            {
+              "label": "Código EAN",
+              "value": "16"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e965e224-4dc9-41e0-9bb8-2e5b490e9690.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/500/modal"
+        },
+        {
+          "id": "501",
+          "code": "IMP-15",
+          "name": "BONÉ BRANCO BORDADO",
+          "price": "R$ 180,00",
+          "priceValue": 180,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-15"
+            },
+            {
+              "label": "Código EAN",
+              "value": "15"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "10.00 × 10.00 × 10.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b5a51fc4-5d87-447d-b363-1dcb58dbd3f1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/501/modal"
+        },
+        {
+          "id": "635",
+          "code": "IMP-210",
+          "name": "CAIXA MEMÓRIAS OZONTECK",
+          "price": "R$ 439,90",
+          "priceValue": 439.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP-210"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b9294460-4914-458a-b238-b0a14a2faa41.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/635/modal"
+        },
+        {
+          "id": "680",
+          "code": "IMP -211",
+          "name": "CAIXA MEMORIAS",
+          "price": "R$ 0,00",
+          "priceValue": 0,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "IMP -211"
+            },
+            {
+              "label": "Código EAN",
+              "value": "211"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "300 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/feeee602-bf21-4089-b8c9-e86392d0f029.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/680/modal"
+        }
+      ]
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "products": [
+        {
+          "id": "618",
+          "code": "41731",
+          "name": "OUD ROYALE 100 Ml",
+          "price": "R$ 199,90",
+          "priceValue": 199.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41731"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211025"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/41523270-d314-4dc0-b280-8b170fc14852.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/618/modal"
+        },
+        {
+          "id": "619",
+          "code": "41732",
+          "name": "AALIYAH 100 Ml",
+          "price": "R$ 199,90",
+          "priceValue": 199.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41732"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211049"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/1fb30281-2df2-4eb8-bdfa-777239bc8195.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/619/modal"
+        },
+        {
+          "id": "631",
+          "code": "41733",
+          "name": "RHINO ROYALE 100 ML",
+          "price": "R$ 199,90",
+          "priceValue": 199.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41733"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211032"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/b8d0900f-d9d2-45db-841f-8f1f88494eda.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/631/modal"
+        },
+        {
+          "id": "632",
+          "code": "41734",
+          "name": "SUBLIME 100 ML",
+          "price": "R$ 199,90",
+          "priceValue": 199.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "41734"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211056"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/951ec347-3c45-475a-9467-020f27b09a61.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/632/modal"
+        },
+        {
+          "id": "676",
+          "code": "40730-B",
+          "name": "SCANDALOZA 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40730-B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210684"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/30583f7b-9deb-4931-9588-dca09544e2ce.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/676/modal"
+        },
+        {
+          "id": "677",
+          "code": "40706 - B",
+          "name": "VIDA BELLA 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40706 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210691"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 5.50 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/e115b82d-fafb-4e9f-9961-3c652acefa82.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/677/modal"
+        },
+        {
+          "id": "678",
+          "code": "40718 - B",
+          "name": "SOBERANO 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40718 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210714"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/727c698a-f042-47c7-9cfe-9cb2ceb07422.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/678/modal"
+        },
+        {
+          "id": "679",
+          "code": "40728-B",
+          "name": "SENTIMENTO 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40728-B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210738"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/268d2250-53d2-424e-8f17-d073a17be1f4.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/679/modal"
+        },
+        {
+          "id": "704",
+          "code": "40720 -B",
+          "name": "PRESIDENTE 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40720 -B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210769"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/63f6d161-653d-4596-a8d9-fb1a325543a3.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/704/modal"
+        },
+        {
+          "id": "705",
+          "code": "40703 - B",
+          "name": "MAX BOSS 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40703 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210882"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/975c7824-fda9-43f5-ae77-23a88fa5244b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/705/modal"
+        },
+        {
+          "id": "706",
+          "code": "40717 - B",
+          "name": "VG SEXY 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40717 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210707"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/9355c559-da93-4a1b-9016-752847119709.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/706/modal"
+        },
+        {
+          "id": "707",
+          "code": "40724 - B",
+          "name": "CINDERELA 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40724 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210936"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/dd937f00-7138-4cc3-878c-bf295002ddfb.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/707/modal"
+        },
+        {
+          "id": "709",
+          "code": "40714 - B",
+          "name": "MADAME VI 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40714 - B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210752"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/9f8705d9-3859-45e9-9d54-a894eff79a03.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/709/modal"
+        },
+        {
+          "id": "799",
+          "code": "40727 -B",
+          "name": "SPEED BLACK 100 ML",
+          "price": "R$ 179,90",
+          "priceValue": 179.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "40727 -B"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760211087"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://ozon-faos-develop.s3.amazonaws.com/products/aee76449-eff9-4d56-ae6d-29552a975433.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/799/modal"
+        },
+        {
+          "id": "870",
+          "code": "47454",
+          "name": "SUPREMO ELIXIR 100 ML",
+          "price": "R$ 199,90",
+          "priceValue": 199.9,
+          "fields": [
+            {
+              "label": "Código",
+              "value": "47454"
+            },
+            {
+              "label": "Código EAN",
+              "value": "7898760210660"
+            },
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "5.50 × 11.00 × 5.50 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "330 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/f084eb41-6136-4b40-a0a1-aedf4a68aaab.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/870/modal"
+        }
+      ]
+    },
+    {
+      "category": "Ingressos",
+      "products": [
+        {
+          "id": "839",
+          "code": "",
+          "name": "AVANCE - 22/11 - CONVENÇÃO INTERNACIONAL 2026",
+          "price": "R$ 347,00",
+          "priceValue": 347,
+          "fields": [
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "1.00 × 1.00 × 1.00 cm"
+            },
+            {
+              "label": "Peso (em gramas)",
+              "value": "1 g"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/48f29e32-6e60-469b-a8b5-cda8b7aab5d1.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/839/modal"
+        },
+        {
+          "id": "874",
+          "code": "",
+          "name": "Experiencia VIP",
+          "price": "R$ 250,00",
+          "priceValue": 250,
+          "fields": [
+            {
+              "label": "Largura (cm) × Altura (cm) × Comprimento (cm)",
+              "value": "0.00 × 0.00 × 0.00 cm"
+            }
+          ],
+          "image": "https://new-cdn-ozonteck.s3.amazonaws.com/products/da89fb58-c65a-4af6-9dea-3fc772ac766b.webp",
+          "whereToBuy": "https://office.grupoozonteck.com/catalog/874/modal"
+        }
+      ]
+    }
+  ]
+}

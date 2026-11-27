@@ -1,0 +1,3303 @@
+{
+  "date": "2026-11-27",
+  "method": "codigo oficial normalizado ou EAN exato; sem aproximação de nomes",
+  "liveCount": 111,
+  "items": [
+    {
+      "category": "Perfumes",
+      "name": "CAPADÓCIA 17 ML",
+      "officialCode": "40716",
+      "ean": "7898760210455",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-CAPA",
+          "live": {
+            "code": "PERF-CAPA",
+            "name": "Capadócia 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "CINDERELA 17 ML",
+      "officialCode": "40724",
+      "ean": "7898760210462",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-CIND",
+          "live": {
+            "code": "PERF-CIND",
+            "name": "Cinderela 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "DG RED 17 ML",
+      "officialCode": "40723",
+      "ean": "7898760210486",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-DG",
+          "live": {
+            "code": "PERF-DG",
+            "name": "DG Red 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "GRÉCIA 17 ML",
+      "officialCode": "40722",
+      "ean": "7898760210493",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-GREC",
+          "live": {
+            "code": "PERF-GREC",
+            "name": "Grécia 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "FERA 17 ML",
+      "officialCode": "40721",
+      "ean": "7898760210479",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-FERA",
+          "live": {
+            "code": "PERF-FERA",
+            "name": "Fera 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "MAXIMUM 17 ML",
+      "officialCode": "40701",
+      "ean": "7898760210509",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-MAXIMUM",
+          "live": {
+            "code": "PERF-MAXIMUM",
+            "name": "Maximum 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "PRESIDENTE 17 ML",
+      "officialCode": "40720",
+      "ean": "7898760210516",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-PRESIDENTE",
+          "live": {
+            "code": "PERF-PRESIDENTE",
+            "name": "Presidente 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SENTIMENTO 17 ML",
+      "officialCode": "40728",
+      "ean": "7898760210523",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SENTIMENTO",
+          "live": {
+            "code": "PERF-SENTIMENTO",
+            "name": "Sentimento 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "VIP GIRL VIP 17 ML",
+      "officialCode": "40719",
+      "ean": "7898760210561",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-VIP-GIRL",
+          "live": {
+            "code": "PERF-VIP-GIRL",
+            "name": "VIP Girl VIP 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SOBERANO 17 ML",
+      "officialCode": "40718",
+      "ean": "7898760210530",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SOBERANO",
+          "live": {
+            "code": "PERF-SOBERANO",
+            "name": "Soberano 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "VG SEXY 17 ML",
+      "officialCode": "40717",
+      "ean": "7898760210554",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-VG",
+          "live": {
+            "code": "PERF-VG",
+            "name": "VG Sexy 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SPEED BLACK 17 ML",
+      "officialCode": "40727",
+      "ean": "7898760210547",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SPEED",
+          "live": {
+            "code": "PERF-SPEED",
+            "name": "Speed Black 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "303 VIP MEN 17 ML",
+      "officialCode": "40702",
+      "ean": "7898760210189",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-303-VIP",
+          "live": {
+            "code": "PERF-303-VIP",
+            "name": "303 VIP Men 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "MAX BOSS 17 ML",
+      "officialCode": "40703",
+      "ean": "7898760210233",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-MAX-B",
+          "live": {
+            "code": "PERF-MAX-B",
+            "name": "Max Boss 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "303 MEN 17 ML",
+      "officialCode": "40704",
+      "ean": "7898760210196",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-303-M",
+          "live": {
+            "code": "PERF-303-M",
+            "name": "303 Men 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "ALEM 17 ML",
+      "officialCode": "40726",
+      "ean": "7898760210424",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-ALEM",
+          "live": {
+            "code": "PERF-ALEM",
+            "name": "Alem 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "FANTASTICA BRY 17 ML",
+      "officialCode": "40705",
+      "ean": "7898760210301",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-FANT",
+          "live": {
+            "code": "PERF-FANT",
+            "name": "Fantastica Bry 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "VENUM 17 ML",
+      "officialCode": "40729",
+      "ean": "7898760210271",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-VENUM",
+          "live": {
+            "code": "PERF-VENUM",
+            "name": "Venum 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "VIDA BELLA 17 ML",
+      "officialCode": "40706",
+      "ean": "7898760210172",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-VIDA",
+          "live": {
+            "code": "PERF-VIDA",
+            "name": "Vida Bella 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SEDUCTION 17 ML",
+      "officialCode": "40707",
+      "ean": "7898760210318",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SEDUC",
+          "live": {
+            "code": "PERF-SEDUC",
+            "name": "Seduction 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "GOUF BLUE 17 ML",
+      "officialCode": "40708",
+      "ean": "7898760210417",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-GOUF-B",
+          "live": {
+            "code": "PERF-GOUF-B",
+            "name": "Gouf Blue 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "303 FOR WOMAN 17 ML",
+      "officialCode": "40709",
+      "ean": "7898760210257",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-303-W",
+          "live": {
+            "code": "PERF-303-W",
+            "name": "303 For Woman 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "ANGELICAL 17 ML",
+      "officialCode": "40710",
+      "ean": "7898760210288",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-ANGE",
+          "live": {
+            "code": "PERF-ANGE",
+            "name": "Angelical 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "BLUE SKY 17 ML",
+      "officialCode": "40715",
+      "ean": "7898760210226",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-BLUE",
+          "live": {
+            "code": "PERF-BLUE",
+            "name": "Blue Sky 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "FAMMA 17 ML",
+      "officialCode": "40725",
+      "ean": "7898760210264",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-FAMMA",
+          "live": {
+            "code": "PERF-FAMMA",
+            "name": "Famma 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "EASY LINE 17 ML",
+      "officialCode": "40711",
+      "ean": "7898760210240",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-EASY",
+          "live": {
+            "code": "PERF-EASY",
+            "name": "Easy Line 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "GOUF TRADICIONAL 17 ML",
+      "officialCode": "40712",
+      "ean": "7898760210295",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-GOUF-T",
+          "live": {
+            "code": "PERF-GOUF-T",
+            "name": "Gouf Tradicional 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "MADAME VI 17 ML",
+      "officialCode": "40714",
+      "ean": "7898760210202",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-MAD",
+          "live": {
+            "code": "PERF-MAD",
+            "name": "Madame VI 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SCANDALOZA 17 ML",
+      "officialCode": "40730",
+      "ean": "7898760210165",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SCAN",
+          "live": {
+            "code": "PERF-SCAN",
+            "name": "Scandaloza 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "DOÇURINHA 17 ML",
+      "officialCode": "40799",
+      "ean": "7898760210431",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-DOCU",
+          "live": {
+            "code": "PERF-DOCU",
+            "name": "Doçurinha 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "AVENTURA 17 ML",
+      "officialCode": "40798",
+      "ean": "7898760210448",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-AVEN",
+          "live": {
+            "code": "PERF-AVEN",
+            "name": "Aventura 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SOUL 17 ML",
+      "officialCode": "40713",
+      "ean": "7898760210219",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SOUL",
+          "live": {
+            "code": "PERF-SOUL",
+            "name": "Soul 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SUPREMO ELIXIR 17 ML",
+      "officialCode": "41726",
+      "ean": "7898760210646",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SUPREMO",
+          "live": {
+            "code": "PERF-SUPREMO",
+            "name": "Supremo Elixir 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "AALIYAH 17 ML",
+      "officialCode": "41727",
+      "ean": "7898760210998",
+      "officePrice": "R$ 48,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-AALI",
+          "live": {
+            "code": "PERF-AALI",
+            "name": "Aaliyah 17 ml",
+            "category": "Perfumaria",
+            "price": 48,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "SUBLIME 17 ML",
+      "officialCode": "41728",
+      "ean": "7898760211001",
+      "officePrice": "R$ 48,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-SUBLI",
+          "live": {
+            "code": "PERF-SUBLI",
+            "name": "Sublime 17 ml",
+            "category": "Perfumaria",
+            "price": 48,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "RHINO ROYALE 17 ML",
+      "officialCode": "41729",
+      "ean": "7898760210974",
+      "officePrice": "R$ 48,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-RHINO",
+          "live": {
+            "code": "PERF-RHINO",
+            "name": "Rhino Royale 17 ml",
+            "category": "Perfumaria",
+            "price": 48,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "OUD ROYALE 17 ML",
+      "officialCode": "41730",
+      "ean": "7898760210981",
+      "officePrice": "R$ 48,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-OUD",
+          "live": {
+            "code": "PERF-OUD",
+            "name": "Oud Royale 17 ml",
+            "category": "Perfumaria",
+            "price": 48,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "Férias no Caribe by Virgínia Esquivel",
+      "officialCode": "45171",
+      "ean": "7898760211346",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-FER-VE",
+          "live": {
+            "code": "PERF-FER-VE",
+            "name": "Férias no Caribe by Virgínia Esquivel",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "Lua de Mel em Paris by Virgínia Esquivel",
+      "officialCode": "45170",
+      "ean": "7898760211339",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-LUA-VE",
+          "live": {
+            "code": "PERF-LUA-VE",
+            "name": "Lua de Mel em Paris by Virgínia Esquivel",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes",
+      "name": "LABOOM 17 ML",
+      "officialCode": "46496",
+      "ean": "7898760211377",
+      "officePrice": "R$ 45,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PERF-LABOOM",
+          "live": {
+            "code": "PERF-LABOOM",
+            "name": "Laboom 17 ml",
+            "category": "Perfumaria",
+            "price": 45,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "AMPOLA SOFT HAIR",
+      "officialCode": "40561",
+      "ean": "7898996428204",
+      "officePrice": "R$ 79,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-AMP-SF",
+          "live": {
+            "code": "CAP-AMP-SF",
+            "name": "Ampola Soft Hair",
+            "category": "Cuidados Capilares",
+            "price": 79.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "SHAMPOO OZON-KESEN",
+      "officialCode": "40546",
+      "ean": "7898996428242",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-SH-OK",
+          "live": {
+            "code": "CAP-SH-OK",
+            "name": "Shampoo Ozon-Kesen",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "MÁSCARA OZON-KESEN",
+      "officialCode": "40547",
+      "ean": "7898996428259",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-MAS-OK",
+          "live": {
+            "code": "CAP-MAS-OK",
+            "name": "Máscara Ozon-Kesen",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "CONDICIONADOR OZON-KESEN",
+      "officialCode": "40548",
+      "ean": "7898996428235",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "CAP-CO-KES",
+          "live": {
+            "code": "CAP-CO-KES",
+            "name": "Condicionador Ozon-Kesen",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "ÓLEO DE AÇAÍ",
+      "officialCode": "40562",
+      "ean": "7898760210141",
+      "officePrice": "R$ 105,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-O-ACAI",
+          "live": {
+            "code": "CAP-O-ACAI",
+            "name": "Óleo de Açaí",
+            "category": "Cuidados Capilares",
+            "price": 105,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "OZON CREAM",
+      "officialCode": "40563",
+      "ean": "7898760210059",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-O-CREAM",
+          "live": {
+            "code": "CAP-O-CREAM",
+            "name": "Ozon Cream",
+            "category": "Cuidados Capilares",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "OZON-FOR MEN",
+      "officialCode": "40560",
+      "ean": "7898760210073",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-FOR-MEN",
+          "live": {
+            "code": "CAP-FOR-MEN",
+            "name": "Ozon-For Men",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "TÔNICO CAPILAR",
+      "officialCode": "40545",
+      "ean": "7898760210066",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-TON",
+          "live": {
+            "code": "CAP-TON",
+            "name": "Tônico Capilar",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "MÁSCARA OZON-BLOND",
+      "officialCode": "40556",
+      "ean": "7898760210080",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-MAS-BL",
+          "live": {
+            "code": "CAP-MAS-BL",
+            "name": "Máscara Ozon-Blond",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "SHAMPOO OZON-BLOND",
+      "officialCode": "40555",
+      "ean": "7898760210004",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-SH-BL",
+          "live": {
+            "code": "CAP-SH-BL",
+            "name": "Shampoo Ozon-Blond",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "PRO KESEN",
+      "officialCode": "40544",
+      "ean": "7898760210097",
+      "officePrice": "R$ 499,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "CAP-PRO-KES",
+          "live": {
+            "code": "CAP-PRO-KES",
+            "name": "Pro Kesen",
+            "category": "Cuidados Capilares",
+            "price": 499.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "SHAMPOO MASTER CURLS",
+      "officialCode": "40557",
+      "ean": "7898996428297",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-SH-MC",
+          "live": {
+            "code": "CAP-SH-MC",
+            "name": "Shampoo Master Curls",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "MÁSCARA MASTER CURLS",
+      "officialCode": "40558",
+      "ean": "7898760210592",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-MAS-MC",
+          "live": {
+            "code": "CAP-MAS-MC",
+            "name": "Máscara Master Curls",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "ATIVADOR MASTER CURLS",
+      "officialCode": "40559",
+      "ean": "7898996428228",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "CAP-AT-MC",
+          "live": {
+            "code": "CAP-AT-MC",
+            "name": "Ativador Master Curls",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "SHAMPOO OZON MEL",
+      "officialCode": "40549",
+      "ean": "7898996428273",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "CAP-SH-MEL",
+          "live": {
+            "code": "CAP-SH-MEL",
+            "name": "Shampoo Ozon Mel",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "CONDICIONADOR MEL & OZÔNIO",
+      "officialCode": "40551",
+      "ean": "7898996428266",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "CAP-CO-MEL",
+          "live": {
+            "code": "CAP-CO-MEL",
+            "name": "Condicionador Mel & Ozônio",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "SHAMPOO KIDS",
+      "officialCode": "40552",
+      "ean": "7898760210035",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-KIDS-SH",
+          "live": {
+            "code": "CAP-KIDS-SH",
+            "name": "Shampoo Kids",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "CONDICIONADOR KIDS",
+      "officialCode": "40553",
+      "ean": "7898760210011",
+      "officePrice": "R$ 109,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-KIDS-CO",
+          "live": {
+            "code": "CAP-KIDS-CO",
+            "name": "Condicionador Kids",
+            "category": "Cuidados Capilares",
+            "price": 109.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "LEAVE IN KIDS",
+      "officialCode": "40554",
+      "ean": "7898760210042",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-KIDS-LE",
+          "live": {
+            "code": "CAP-KIDS-LE",
+            "name": "Leave in Kids",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "MÁSCARA MEL & OZÔNIO",
+      "officialCode": "40550",
+      "ean": "7898996428280",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "CAP-MAS-MEL",
+          "live": {
+            "code": "CAP-MAS-MEL",
+            "name": "Máscara Mel & Ozônio",
+            "category": "Cuidados Capilares",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 SHAMPOO SOFT CLEANSE",
+      "officialCode": "40901",
+      "ean": "7898760211278",
+      "officePrice": "R$ 335,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-SOFT",
+          "live": {
+            "code": "PRO-SOFT",
+            "name": "WO3 Shampoo Soft Cleanse",
+            "category": "Cuidados Capilares",
+            "price": 335.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 SHAMPOO DEEP CLEANSE",
+      "officialCode": "40902",
+      "ean": "7898760211285",
+      "officePrice": "R$ 375,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-DEEP",
+          "live": {
+            "code": "PRO-DEEP",
+            "name": "WO3 Shampoo Deep Cleanse",
+            "category": "Cuidados Capilares",
+            "price": 375.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 MÁSCARA AMR",
+      "officialCode": "40903",
+      "ean": "7898760211292",
+      "officePrice": "R$ 595,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-AMR",
+          "live": {
+            "code": "PRO-AMR",
+            "name": "WO3 Máscara AMR",
+            "category": "Cuidados Capilares",
+            "price": 595.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 MÁSCARA CIF",
+      "officialCode": "40905",
+      "ean": "7898760211308",
+      "officePrice": "R$ 495,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-CIF",
+          "live": {
+            "code": "PRO-CIF",
+            "name": "WO3 Máscara CIF",
+            "category": "Cuidados Capilares",
+            "price": 495.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 MÁSCARA HMS",
+      "officialCode": "40906",
+      "ean": "7898760211315",
+      "officePrice": "R$ 515,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-HMS",
+          "live": {
+            "code": "PRO-HMS",
+            "name": "WO3 Máscara HMS",
+            "category": "Cuidados Capilares",
+            "price": 515.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 MÁSCARA LPC",
+      "officialCode": "40907",
+      "ean": "7898760211322",
+      "officePrice": "R$ 555,40",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "PRO-LPC",
+          "live": {
+            "code": "PRO-LPC",
+            "name": "WO3 Máscara LPC",
+            "category": "Cuidados Capilares",
+            "price": 555.4,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - SHAMPOO EQUILIBRIUM",
+      "officialCode": "47323",
+      "ean": "7898760211421",
+      "officePrice": "R$ 109,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - LIPID CONTROL MÁSCARA",
+      "officialCode": "47326",
+      "ean": "7898760211469",
+      "officePrice": "R$ 119,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - AMINO REPAIR MÁSCARA",
+      "officialCode": "47324",
+      "ean": "7898760211452",
+      "officePrice": "R$ 119,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - HYDRA BALANCE MÁSCARA",
+      "officialCode": "47327",
+      "ean": "7898760211476",
+      "officePrice": "R$ 119,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - PROTEIN FORCE MÁSCARA",
+      "officialCode": "47325",
+      "ean": "7898760211445",
+      "officePrice": "R$ 119,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Linha capilar",
+      "name": "WO3 QUANTIC COMPLEX - SHAMPOO DETOX",
+      "officialCode": "47322",
+      "ean": "7898760211438",
+      "officePrice": "R$ 109,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "ÓLEO SOFH",
+      "officialCode": "40568",
+      "ean": "7898760210028",
+      "officePrice": "R$ 89,80",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-SOFH",
+          "live": {
+            "code": "BE-SOFH",
+            "name": "Óleo Sofh",
+            "category": "Bem Estar",
+            "price": 89.8,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "SABONETE OX3",
+      "officialCode": "40569",
+      "ean": "7898760210158",
+      "officePrice": "R$ 99,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-OX3",
+          "live": {
+            "code": "BE-OX3",
+            "name": "Sabonete OX3",
+            "category": "Bem Estar",
+            "price": 99.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "LIFE SHII",
+      "officialCode": "40570",
+      "ean": "7898760210103",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-SHII",
+          "live": {
+            "code": "BE-SHII",
+            "name": "Life Shii",
+            "category": "Bem Estar",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "HIDRATANTE SPEED BLACK",
+      "officialCode": "40565",
+      "ean": "7898760210134",
+      "officePrice": "R$ 79,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "versao_antiga_hidratante_nao_duplicar"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "HIDRATANTE VG SEXY",
+      "officialCode": "405640",
+      "ean": "7898760210127",
+      "officePrice": "R$ 79,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "versao_antiga_hidratante_nao_duplicar"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "ESFOLIANTE OXYLUSH",
+      "officialCode": "40567",
+      "ean": "7898760210578",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-LUSH",
+          "live": {
+            "code": "BE-LUSH",
+            "name": "Esfoliante Oxylush",
+            "category": "Bem Estar",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "SÉRUM FACIAL",
+      "officialCode": "40566",
+      "ean": "7898760210585",
+      "officePrice": "R$ 175,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "BE-SER-LUM",
+          "live": {
+            "code": "BE-SER-LUM",
+            "name": "Sérum Facial Lumino3",
+            "category": "Bem Estar",
+            "price": 175.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "OZON FRESH",
+      "officialCode": "369845",
+      "ean": "7898996428211",
+      "officePrice": "R$ 59,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-FRESH",
+          "live": {
+            "code": "BE-FRESH",
+            "name": "Ozon Fresh",
+            "category": "Bem Estar",
+            "price": 59.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "PURE HOT",
+      "officialCode": "40797",
+      "ean": "7898760210608",
+      "officePrice": "R$ 59,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-PURE",
+          "live": {
+            "code": "BE-PURE",
+            "name": "Pure Hot",
+            "category": "Bem Estar",
+            "price": 59.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "TOQUE LUMINOSO",
+      "officialCode": "IMP-206",
+      "officePrice": "R$ 565,60",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "BE-TOQUE-LUM",
+          "live": {
+            "code": "BE-TOQUE-LUM",
+            "name": "Toque Luminoso",
+            "category": "Bem Estar",
+            "price": 565.6,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "ENERGÉTICO XBOOSTER 269ML",
+      "officialCode": "IMP-99",
+      "officePrice": "R$ 27,80",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "BE-XBOOST-269",
+          "live": {
+            "code": "BE-XBOOST-269",
+            "name": "Energético Xbooster 269 ml",
+            "category": "Bem Estar",
+            "price": 27.8,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "OZON TRIX",
+      "officialCode": "IMP-198",
+      "ean": "7898760210622",
+      "officePrice": "R$ 79,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-TRIX",
+          "live": {
+            "code": "BE-TRIX",
+            "name": "Ozon Trix",
+            "category": "Bem Estar",
+            "price": 79.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "HAYDEK",
+      "officialCode": "IMP-199",
+      "ean": "7898760210615",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-HAY",
+          "live": {
+            "code": "BE-HAY",
+            "name": "Haydek",
+            "category": "Bem Estar",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "HIDRATANTE SPEED BLACK 120g",
+      "officialCode": "44988",
+      "ean": "7898760211230",
+      "officePrice": "R$ 79,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-HID-SB",
+          "live": {
+            "code": "BE-HID-SB",
+            "name": "Hidratante Speed Black 120g",
+            "category": "Bem Estar",
+            "price": 79.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Bem Estar",
+      "name": "HIDRATANTE VG SEXY 120g",
+      "officialCode": "40564",
+      "ean": "7898760211209",
+      "officePrice": "R$ 79,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "BE-HID-VG",
+          "live": {
+            "code": "BE-HID-VG",
+            "name": "Hidratante VG Sexy 120g",
+            "category": "Bem Estar",
+            "price": 79.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "XBOOSTER",
+      "officialCode": "IMP-33",
+      "ean": "7898760210400",
+      "officePrice": "R$ 139,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-XBOOST",
+          "live": {
+            "code": "NUT-XBOOST",
+            "name": "Xbooster",
+            "category": "Nutracêuticos",
+            "price": 139.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "BORYSLIM",
+      "officialCode": "IMP-34",
+      "ean": "7898760210325",
+      "officePrice": "R$ 139,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-BORYS",
+          "live": {
+            "code": "NUT-BORYS",
+            "name": "Boryslim",
+            "category": "Nutracêuticos",
+            "price": 139.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "NX CAP OZON",
+      "officialCode": "IMP-88",
+      "ean": "7898760210356",
+      "officePrice": "R$ 159,92",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-NXCAP",
+          "live": {
+            "code": "NUT-NXCAP",
+            "name": "NX Cap Ozon",
+            "category": "Nutracêuticos",
+            "price": 159.92,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "ÔMEGA 3",
+      "officialCode": "IMP-90",
+      "ean": "7898760210363",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-OMEGA",
+          "live": {
+            "code": "NUT-OMEGA",
+            "name": "Ômega 3",
+            "category": "Nutracêuticos",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "K2MK7 e D3",
+      "officialCode": "IMP-35",
+      "ean": "7898760210349",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-K2D3",
+          "live": {
+            "code": "NUT-K2D3",
+            "name": "K2MK7 e D3",
+            "category": "Nutracêuticos",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "DREAM BLISS",
+      "officialCode": "IMP-91",
+      "ean": "7898760210332",
+      "officePrice": "R$ 175,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-DREAM",
+          "live": {
+            "code": "NUT-DREAM",
+            "name": "Dream Bliss",
+            "category": "Nutracêuticos",
+            "price": 175.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "TRI MAGNÉSIO",
+      "officialCode": "IMP-98",
+      "ean": "7898760210387",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-TRIMAG",
+          "live": {
+            "code": "NUT-TRIMAG",
+            "name": "Tri Magnésio",
+            "category": "Nutracêuticos",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "VITA OZON PLUS",
+      "officialCode": "IMP-124",
+      "ean": "7898760210370",
+      "officePrice": "R$ 139,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-VITA-OZ",
+          "live": {
+            "code": "NUT-VITA-OZ",
+            "name": "Vita Ozon Plus",
+            "category": "Nutracêuticos",
+            "price": 139.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "VIRTUOUS CAPS",
+      "officialCode": "IMP-125",
+      "ean": "7898760210394",
+      "officePrice": "R$ 139,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-VIRT",
+          "live": {
+            "code": "NUT-VIRT",
+            "name": "Virtuous Caps",
+            "category": "Nutracêuticos",
+            "price": 139.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "OZON CREAT CAIXA",
+      "officialCode": "IMP-184",
+      "ean": "7898760211131",
+      "officePrice": "R$ 299,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-CREAT-CX",
+          "live": {
+            "code": "NUT-CREAT-CX",
+            "name": "Ozon Creat Caixa",
+            "category": "Nutracêuticos",
+            "price": 299.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "OZON CREAT MORANGO CAIXA",
+      "officialCode": "IMP-187",
+      "ean": "7898760211155",
+      "officePrice": "R$ 299,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-CREAT-MO-CX",
+          "live": {
+            "code": "NUT-CREAT-MO-CX",
+            "name": "Ozon Creat Morango Caixa",
+            "category": "Nutracêuticos",
+            "price": 299.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "AMYNO OZON CAIXA",
+      "officialCode": "IMP-189",
+      "officePrice": "R$ 299,90",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "NUT-AMYNO-CX",
+          "live": {
+            "code": "NUT-AMYNO-CX",
+            "name": "Amyno Ozon Caixa",
+            "category": "Nutracêuticos",
+            "price": 299.9,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "OZON CREAT MORANGO UNIDADE",
+      "officialCode": "IMP-44",
+      "ean": "7898760211124",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-CREAT-MO-UN",
+          "live": {
+            "code": "NUT-CREAT-MO-UN",
+            "name": "Ozon Creat Morango Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "OZON CREAT UNIDADE",
+      "officialCode": "IMP-45",
+      "ean": "7898760211100",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-CREAT-UN",
+          "live": {
+            "code": "NUT-CREAT-UN",
+            "name": "Ozon Creat Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "LUMINOUS VITA",
+      "officialCode": "IMP-201",
+      "ean": "7898760211018",
+      "officePrice": "R$ 159,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-LUMI",
+          "live": {
+            "code": "NUT-LUMI",
+            "name": "Luminous Vita",
+            "category": "Nutracêuticos",
+            "price": 159.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "AMYNO OZON UNIDADE",
+      "officialCode": "IMP-197",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "NUT-AMYNO-UN",
+          "live": {
+            "code": "NUT-AMYNO-UN",
+            "name": "Amyno Ozon Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "OZON FLEX UNIDADE",
+      "officialCode": "IMP-46",
+      "ean": "7898760211117",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-FLEX-UN",
+          "live": {
+            "code": "NUT-FLEX-UN",
+            "name": "Ozon Flex Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "SOFH D",
+      "officialCode": "IMP-202",
+      "ean": "7898760210653",
+      "officePrice": "R$ 119,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-SOFH-D",
+          "live": {
+            "code": "NUT-SOFH-D",
+            "name": "Sofh D",
+            "category": "Nutracêuticos",
+            "price": 119.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Ozon Power Unidade",
+      "officialCode": "IMP-49",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "NUT-POWER-UN",
+          "live": {
+            "code": "NUT-POWER-UN",
+            "name": "Ozon Power Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Ozon Lev Unidade",
+      "officialCode": "IMP-47",
+      "ean": "7898760211162",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-LEV-UN",
+          "live": {
+            "code": "NUT-LEV-UN",
+            "name": "Ozon Lev Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Ozon Munity Unidade",
+      "officialCode": "IMP-48",
+      "officePrice": "R$ 10,00",
+      "state": "cadastrado_desativado",
+      "matches": [
+        {
+          "code": "NUT-MUNITY-UN",
+          "live": {
+            "code": "NUT-MUNITY-UN",
+            "name": "Ozon Munity Unidade",
+            "category": "Nutracêuticos",
+            "price": 10,
+            "is_deleted": true
+          }
+        }
+      ],
+      "classification": "correspondencia_desativada_nao_reativar"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Melatozon",
+      "officialCode": "IMP-203",
+      "ean": "7898760211094",
+      "officePrice": "R$ 159,80",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-MELAT",
+          "live": {
+            "code": "NUT-MELAT",
+            "name": "Melatozon",
+            "category": "Nutracêuticos",
+            "price": 159.8,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Cobalactin",
+      "officialCode": "IMP-204",
+      "ean": "7898760211247",
+      "officePrice": "R$ 179,70",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-COBAL",
+          "live": {
+            "code": "NUT-COBAL",
+            "name": "Cobalactin",
+            "category": "Nutracêuticos",
+            "price": 179.7,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Genolife kids",
+      "officialCode": "IMP-207",
+      "ean": "7898760211223",
+      "officePrice": "R$ 179,70",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-GENO",
+          "live": {
+            "code": "NUT-GENO",
+            "name": "Genolife Kids",
+            "category": "Nutracêuticos",
+            "price": 179.7,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Ox",
+      "officialCode": "IMP-209",
+      "ean": "7898760211193",
+      "officePrice": "R$ 179,70",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-OX",
+          "live": {
+            "code": "NUT-OX",
+            "name": "Ox",
+            "category": "Nutracêuticos",
+            "price": 179.7,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "Ozon Flex Caixa",
+      "officialCode": "IMP-190",
+      "ean": "7898760211148",
+      "officePrice": "R$ 299,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "NUT-FLEX-CX",
+          "live": {
+            "code": "NUT-FLEX-CX",
+            "name": "Ozon Flex Caixa",
+            "category": "Nutracêuticos",
+            "price": 299.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Nutracêuticos",
+      "name": "VISARIS",
+      "officialCode": "5002901",
+      "ean": "7898760211513",
+      "officePrice": "R$ 179,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAIXA VERDE",
+      "officialCode": "IMP-101",
+      "officePrice": "R$ 14,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P PRETA",
+      "officialCode": "IMP-102",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M PRETA",
+      "officialCode": "IMP-103",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G PRETA",
+      "officialCode": "IMP-104",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata",
+      "possibleArchivedInternalCodes": [
+        "AC-CAM-P"
+      ],
+      "candidateLimit": "Sem código/EAN oficial comprovado no cadastro antigo. Semelhança de nome não estabelece identidade."
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG PRETA",
+      "officialCode": "IMP-105",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XG PRETA",
+      "officialCode": "IMP-106",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XGG PRETA",
+      "officialCode": "IMP-107",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P BRANCA",
+      "officialCode": "IMP-108",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M BRANCA",
+      "officialCode": "IMP-109",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G BRANCA",
+      "officialCode": "IMP-110",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG BRANCA",
+      "officialCode": "IMP-111",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XG BRANCA",
+      "officialCode": "IMP-112",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XGG BRANCA",
+      "officialCode": "IMP-113",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE AZUL",
+      "officialCode": "IMP-117",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE PRETA",
+      "officialCode": "imp-120",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE BRANCA",
+      "officialCode": "IMP-121",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE AZUL CLARO",
+      "officialCode": "IMP-118",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ PRETO COM BRANCO",
+      "officialCode": "IMP-126",
+      "ean": "126",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ  BRANCO",
+      "officialCode": "IMP-127",
+      "ean": "127",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P AZUL",
+      "officialCode": "IMP-128",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M AZUL",
+      "officialCode": "IMP-129",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G AZUL",
+      "officialCode": "IMP-130",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG AZUL",
+      "officialCode": "IMP-131",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XG AZUL",
+      "officialCode": "IMP-132",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XGG AZUL",
+      "officialCode": "IMP-133",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P CINZA",
+      "officialCode": "IMP-134",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M CINZA",
+      "officialCode": "IMP-135",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G CINZA",
+      "officialCode": "IMP-136",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG CINZA",
+      "officialCode": "IMP-137",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XG CINZA",
+      "officialCode": "IMP-138",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA XGG CINZA",
+      "officialCode": "IMP-139",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "PORTA COMPRIMIDOS SEMANAL",
+      "officialCode": "IMP-140",
+      "officePrice": "R$ 20,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE VERDE",
+      "officialCode": "IMP-141",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE LILÁS",
+      "officialCode": "IMP-145",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE ROSA",
+      "officialCode": "IMP-146",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P ROXA",
+      "officialCode": "IMP-172",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M ROXA",
+      "officialCode": "IMP-173",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G ROXA",
+      "officialCode": "IMP-174",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG ROXA",
+      "officialCode": "IMP-175",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P LARANJA",
+      "officialCode": "IMP-176",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M LARANJA",
+      "officialCode": "IMP-177",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G LARANJA",
+      "officialCode": "IMP-178",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG LARANJA",
+      "officialCode": "IMP-179",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA P ROSA",
+      "officialCode": "IMP-180",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA M ROSA",
+      "officialCode": "IMP-181",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G ROSA",
+      "officialCode": "IMP-182",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA GG ROSA",
+      "officialCode": "IMP-183",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata",
+      "possibleArchivedInternalCodes": [
+        "AC-CAM-R"
+      ],
+      "candidateLimit": "Sem código/EAN oficial comprovado no cadastro antigo. Semelhança de nome não estabelece identidade."
+    },
+    {
+      "category": "Acessorios",
+      "name": "Copo Térmico Ozonizou",
+      "officialCode": "IMP-195",
+      "ean": "195",
+      "officePrice": "R$ 120,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE VERMELHA",
+      "officialCode": "IMP-43",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE PINK",
+      "officialCode": "IMP-42",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE BEGE",
+      "officialCode": "IMP-40",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "NECESSAIRE MARROM",
+      "officialCode": "IMP-41",
+      "officePrice": "R$ 90,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ ROSA COM BRANCO",
+      "officialCode": "IMP-192",
+      "ean": "192",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ CINZA COM BRANCO",
+      "officialCode": "IMP-193",
+      "ean": "193",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ AZUL CLARO COM BRANCO",
+      "officialCode": "IMP-194",
+      "ean": "194",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ AZUL ESCURO",
+      "officialCode": "IMP-196",
+      "ean": "196",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "Squeeze Rosa 500ml",
+      "officialCode": "IMP-51",
+      "officePrice": "R$ 30,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "Squeeze Turquesa 500ml",
+      "officialCode": "IMP-52",
+      "officePrice": "R$ 30,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata",
+      "possibleArchivedInternalCodes": [
+        "AC-SQUEEZE"
+      ],
+      "candidateLimit": "Sem código/EAN oficial comprovado no cadastro antigo. Semelhança de nome não estabelece identidade."
+    },
+    {
+      "category": "Acessorios",
+      "name": "Caixinha de Presente",
+      "officialCode": "IMP-205",
+      "officePrice": "R$ 10,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAMISETA G7 PRETA",
+      "officialCode": "IMP-29",
+      "officePrice": "R$ 160,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ PRETO",
+      "officialCode": "IMP-16",
+      "ean": "16",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "BONÉ BRANCO BORDADO",
+      "officialCode": "IMP-15",
+      "ean": "15",
+      "officePrice": "R$ 180,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata"
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAIXA MEMÓRIAS OZONTECK",
+      "officialCode": "IMP-210",
+      "officePrice": "R$ 439,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata",
+      "possibleArchivedInternalCodes": [
+        "AC-CXMEM"
+      ],
+      "candidateLimit": "Sem código/EAN oficial comprovado no cadastro antigo. Semelhança de nome não estabelece identidade."
+    },
+    {
+      "category": "Acessorios",
+      "name": "CAIXA MEMORIAS",
+      "officialCode": "IMP -211",
+      "ean": "211",
+      "officePrice": "R$ 0,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "acessorio_sem_correspondencia_exata",
+      "possibleArchivedInternalCodes": [
+        "AC-CXMEM"
+      ],
+      "candidateLimit": "Sem código/EAN oficial comprovado no cadastro antigo. Semelhança de nome não estabelece identidade."
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "OUD ROYALE 100 Ml",
+      "officialCode": "41731",
+      "ean": "7898760211025",
+      "officePrice": "R$ 199,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-OUD",
+          "live": {
+            "code": "P100-OUD",
+            "name": "Oud Royale 100 ml",
+            "category": "Perfumaria",
+            "price": 199.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "AALIYAH 100 Ml",
+      "officialCode": "41732",
+      "ean": "7898760211049",
+      "officePrice": "R$ 199,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-AALIYAH",
+          "live": {
+            "code": "P100-AALIYAH",
+            "name": "Aaliyah 100 ml",
+            "category": "Perfumaria",
+            "price": 199.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "RHINO ROYALE 100 ML",
+      "officialCode": "41733",
+      "ean": "7898760211032",
+      "officePrice": "R$ 199,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-RHINO",
+          "live": {
+            "code": "P100-RHINO",
+            "name": "Rhino Royale 100 ml",
+            "category": "Perfumaria",
+            "price": 199.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SUBLIME 100 ML",
+      "officialCode": "41734",
+      "ean": "7898760211056",
+      "officePrice": "R$ 199,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-SUBLIME",
+          "live": {
+            "code": "P100-SUBLIME",
+            "name": "Sublime 100 ml",
+            "category": "Perfumaria",
+            "price": 199.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SCANDALOZA 100 ML",
+      "officialCode": "40730-B",
+      "ean": "7898760210684",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-SCAN",
+          "live": {
+            "code": "P100-SCAN",
+            "name": "Scandaloza 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "VIDA BELLA 100 ML",
+      "officialCode": "40706 - B",
+      "ean": "7898760210691",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-VIDA",
+          "live": {
+            "code": "P100-VIDA",
+            "name": "Vida Bella 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SOBERANO 100 ML",
+      "officialCode": "40718 - B",
+      "ean": "7898760210714",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-SOB",
+          "live": {
+            "code": "P100-SOB",
+            "name": "Soberano 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SENTIMENTO 100 ML",
+      "officialCode": "40728-B",
+      "ean": "7898760210738",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-SENT",
+          "live": {
+            "code": "P100-SENT",
+            "name": "Sentimento 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "PRESIDENTE 100 ML",
+      "officialCode": "40720 -B",
+      "ean": "7898760210769",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-PRES",
+          "live": {
+            "code": "P100-PRES",
+            "name": "Presidente 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "MAX BOSS 100 ML",
+      "officialCode": "40703 - B",
+      "ean": "7898760210882",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-MAXBOSS",
+          "live": {
+            "code": "P100-MAXBOSS",
+            "name": "Max Boss 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "VG SEXY 100 ML",
+      "officialCode": "40717 - B",
+      "ean": "7898760210707",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-VG",
+          "live": {
+            "code": "P100-VG",
+            "name": "VG Sexy 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "CINDERELA 100 ML",
+      "officialCode": "40724 - B",
+      "ean": "7898760210936",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-CIND",
+          "live": {
+            "code": "P100-CIND",
+            "name": "Cinderela 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "MADAME VI 100 ML",
+      "officialCode": "40714 - B",
+      "ean": "7898760210752",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-MADAME",
+          "live": {
+            "code": "P100-MADAME",
+            "name": "Madame VI 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SPEED BLACK 100 ML",
+      "officialCode": "40727 -B",
+      "ean": "7898760211087",
+      "officePrice": "R$ 179,90",
+      "state": "cadastrado_ativo",
+      "matches": [
+        {
+          "code": "P100-SPEED",
+          "live": {
+            "code": "P100-SPEED",
+            "name": "Speed Black 100 ml",
+            "category": "Perfumaria",
+            "price": 179.9,
+            "is_deleted": false
+          }
+        }
+      ],
+      "classification": "correspondencia_ativa"
+    },
+    {
+      "category": "Perfumes 100 ml",
+      "name": "SUPREMO ELIXIR 100 ML",
+      "officialCode": "47454",
+      "ean": "7898760210660",
+      "officePrice": "R$ 199,90",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "novo_produto_ou_apresentacao_ausente"
+    },
+    {
+      "category": "Ingressos",
+      "name": "AVANCE - 22/11 - CONVENÇÃO INTERNACIONAL 2026",
+      "officialCode": "",
+      "officePrice": "R$ 347,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "ingresso_fora_do_catalogo_comercial"
+    },
+    {
+      "category": "Ingressos",
+      "name": "Experiencia VIP",
+      "officialCode": "",
+      "officePrice": "R$ 250,00",
+      "state": "sem_correspondencia_confirmada",
+      "matches": [],
+      "classification": "ingresso_fora_do_catalogo_comercial"
+    }
+  ],
+  "activeCount": 111,
+  "totalDatabaseCount": 128,
+  "source": "https://office.grupoozonteck.com/catalog",
+  "methodLimit": "Correspondência por código normalizado/EAN; nomes semelhantes são apenas candidatos e não autorizam fusão, restauração ou importação.",
+  "liveCountMeaning": "Quantidade de linhas ativas no banco; inclui quatro produtos de teste, que não representam o catálogo comercial elegível.",
+  "summary": {
+    "correspondencia_ativa": 107,
+    "correspondencia_desativada_nao_reativar": 12,
+    "novo_produto_ou_apresentacao_ausente": 8,
+    "versao_antiga_hidratante_nao_duplicar": 2,
+    "acessorio_sem_correspondencia_exata": 64,
+    "ingresso_fora_do_catalogo_comercial": 2
+  },
+  "internalRowsWithoutExactOfficeMatch": [
+    {
+      "code": "AC-CAM-P",
+      "name": "Camiseta G Preta",
+      "category": "Acessórios",
+      "price": 160,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-CAM-R",
+      "name": "Camiseta GG Rosa",
+      "category": "Acessórios",
+      "price": 160,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-CXMEM",
+      "name": "Caixa Memórias",
+      "category": "Acessórios",
+      "price": 20,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-SQUEEZE",
+      "name": "Squeeze Turquesa 500ml",
+      "category": "Acessórios",
+      "price": 30,
+      "is_deleted": true
+    },
+    {
+      "code": "asdasd3",
+      "name": "asdasd",
+      "category": "Teste",
+      "price": 3,
+      "is_deleted": true
+    },
+    {
+      "code": "TEST-01",
+      "name": "Produto de Teste 1 Real",
+      "category": "Teste",
+      "price": 1,
+      "is_deleted": false
+    },
+    {
+      "code": "TESTE-001",
+      "name": "[TESTE] Produto de Teste 1",
+      "category": "Teste",
+      "price": 9.99,
+      "is_deleted": false
+    },
+    {
+      "code": "TESTE-002",
+      "name": "[TESTE] Produto dasdasde Teste 2",
+      "category": "Teste",
+      "price": 199,
+      "is_deleted": false
+    },
+    {
+      "code": "teste3",
+      "name": "testeeee",
+      "category": "Teste",
+      "price": 345,
+      "is_deleted": false
+    }
+  ],
+  "internalRowsWithoutExactOfficeMatchNote": "Quatro acessórios arquivados com candidatos por nome, um teste arquivado e quatro testes ativos. Não importar esses testes para o catálogo comercial."
+}

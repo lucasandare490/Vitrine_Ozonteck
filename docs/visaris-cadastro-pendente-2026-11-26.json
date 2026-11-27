@@ -5,29 +5,57 @@
   "name": "Visaris",
   "category": "Nutracêuticos",
   "image": "/produtos/visaris.jpg",
-  "presentation": "Frasco com 60 cápsulas de 500 mg.",
-  "description": "Visaris é um suplemento alimentar da Ozonteck em cápsulas. A apresentação fornecida contém 60 cápsulas de 500 mg e destaca astaxantina, luteína e zeaxantina.",
-  "highlightedComponents": ["Astaxantina", "Luteína", "Zeaxantina"],
+  "presentation": "Frasco com 60 cápsulas. Massa por cápsula pendente: materiais recebidos divergem entre 500 mg e 590 mg.",
+  "description": "Visaris é um suplemento alimentar da Ozonteck em frasco com 60 cápsulas. Os materiais de apresentação destacam astaxantina, luteína e zeaxantina. A composição integral e as instruções dependem do verso do rótulo.",
+  "highlightedComponents": [
+    "Astaxantina",
+    "Luteína",
+    "Zeaxantina"
+  ],
   "requestedStock": 9999,
   "stockSource": "Quantidade autorizada por Lucas nesta conversa; não é uma contagem física verificada.",
   "reportedPrice": 89.95,
   "reportedPriceType": "consultor",
   "publicPrice": 89.95,
   "affiliatePrice": 89.95,
-  "officialCode": null,
-  "ean": null,
-  "source": "Confirmação e imagem de divulgação encaminhadas por Lucas em 26/11/2026.",
+  "officialCode": "5002901",
+  "ean": "7898760211513",
+  "source": "Imagem e confirmação encaminhadas pelo responsável, complementadas por leitura do catálogo oficial e da loja de Recife autenticada em 27/11/2026.",
   "priceDecision": "Em 27/11/2026, Lucas autorizou usar R$ 89,95 também como preço ao cliente somente para o Visaris. Os demais produtos conservam os preços atuais.",
   "researchDate": "2026-11-27",
   "researchSources": [
     "https://grupoozonteck.com/produtos-lista/suplementos-alimentares",
     "https://grupoozonteck.lojavirtualnuvem.com.br/produtos/visaris-cuidado-dos-olhos-1a7vy/",
     "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-determina-apreensao-de-suplementos-alimentares-com-ozonio/",
-    "https://multinivelnews.com.br/justica-federal-suspende-resolucoes-da-anvisa-apos-questionamento-sobre-processo-de-revisao/"
+    "https://multinivelnews.com.br/justica-federal-suspende-resolucoes-da-anvisa-apos-questionamento-sobre-processo-de-revisao/",
+    "https://office.grupoozonteck.com/catalog",
+    "https://office.grupoozonteck.com/customer-store/product/651/show",
+    "https://new-cdn-ozonteck.s3.amazonaws.com/products/a660157a-57bc-430c-9e23-c2cecc64cc9e.webp"
   ],
-  "researchLimit": "A listagem pública do fabricante consultada não apresenta Visaris. Uma revenda o anuncia sem rótulo completo. Há comunicado da Anvisa relativo à Lemavi e notícia posterior de suspensão judicial; a situação atual e a aplicação ao fabricante deste frasco não foram comprovadas em fonte oficial. Não presumir liberação nem proibição vigente de toda a marca.",
+  "researchLimit": "O escritório oficial apresenta Visaris e confirma código/EAN, dimensões, peso logístico e dois contextos de preço. A ficha contém somente uma breve descrição e a frente do frasco. Não identifica comprovadamente o fabricante do lote, o verso completo nem resolve a situação regulatória atual. O CNPJ institucional no rodapé não substitui o fabricante impresso no produto. O comunicado da Anvisa e a notícia judicial posterior não permitem concluir, isoladamente, liberação ou proibição vigente de toda a marca.",
   "missing": [
-    "Identificar fabricante e CNPJ no verso do frasco e conferir documentação atual aplicável antes de publicar a oferta.",
-    "Código oficial, EAN, ingredientes integrais, alergênicos e instruções não estão legíveis no material recebido. Não inventar esses campos."
+    "Fabricante e CNPJ no verso do frasco e documentação atual aplicável à oferta.",
+    "Ingredientes integrais, alergênicos, instruções e advertências do verso do rótulo.",
+    "Confirmar apresentação por cápsula diante da divergência de 500 mg/590 mg. Não confundir os 110 g logísticos com o conteúdo líquido."
+  ],
+  "dimensionsCm": {
+    "width": 5,
+    "height": 11,
+    "length": 5
+  },
+  "shippingWeightGrams": 110,
+  "officeCatalogPrice": 179.9,
+  "officeAuthenticatedPrice": 89.95,
+  "officePriceObservedAt": "2026-11-27",
+  "officialImage": "https://new-cdn-ozonteck.s3.amazonaws.com/products/a660157a-57bc-430c-9e23-c2cecc64cc9e.webp",
+  "capsuleMassEvidence": [
+    {
+      "source": "Imagem de divulgação enviada por Lucas",
+      "value": "500 mg"
+    },
+    {
+      "source": "Imagem frontal do catálogo oficial (produto 5002901)",
+      "value": "590 mg"
+    }
   ]
 }

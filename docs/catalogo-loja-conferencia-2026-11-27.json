@@ -1,0 +1,902 @@
+{
+  "date": "2026-11-27",
+  "access": "admin_read_only",
+  "products": [
+    {
+      "code": "AC-CAM-P",
+      "name": "Camiseta G Preta",
+      "category": "Acessórios",
+      "price": 160,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-CAM-R",
+      "name": "Camiseta GG Rosa",
+      "category": "Acessórios",
+      "price": 160,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-CXMEM",
+      "name": "Caixa Memórias",
+      "category": "Acessórios",
+      "price": 20,
+      "is_deleted": true
+    },
+    {
+      "code": "AC-SQUEEZE",
+      "name": "Squeeze Turquesa 500ml",
+      "category": "Acessórios",
+      "price": 30,
+      "is_deleted": true
+    },
+    {
+      "code": "asdasd3",
+      "name": "asdasd",
+      "category": "Teste",
+      "price": 3,
+      "is_deleted": true
+    },
+    {
+      "code": "BE-FRESH",
+      "name": "Ozon Fresh",
+      "category": "Bem Estar",
+      "price": 59.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-HAY",
+      "name": "Haydek",
+      "category": "Bem Estar",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-HID-SB",
+      "name": "Hidratante Speed Black 120g",
+      "category": "Bem Estar",
+      "price": 79.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-HID-VG",
+      "name": "Hidratante VG Sexy 120g",
+      "category": "Bem Estar",
+      "price": 79.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-LUSH",
+      "name": "Esfoliante Oxylush",
+      "category": "Bem Estar",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-OX3",
+      "name": "Sabonete OX3",
+      "category": "Bem Estar",
+      "price": 99.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-PURE",
+      "name": "Pure Hot",
+      "category": "Bem Estar",
+      "price": 59.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-SER-LUM",
+      "name": "Sérum Facial Lumino3",
+      "category": "Bem Estar",
+      "price": 175.9,
+      "is_deleted": true
+    },
+    {
+      "code": "BE-SHII",
+      "name": "Life Shii",
+      "category": "Bem Estar",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-SOFH",
+      "name": "Óleo Sofh",
+      "category": "Bem Estar",
+      "price": 89.8,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-TOQUE-LUM",
+      "name": "Toque Luminoso",
+      "category": "Bem Estar",
+      "price": 565.6,
+      "is_deleted": true
+    },
+    {
+      "code": "BE-TRIX",
+      "name": "Ozon Trix",
+      "category": "Bem Estar",
+      "price": 79.9,
+      "is_deleted": false
+    },
+    {
+      "code": "BE-XBOOST-269",
+      "name": "Energético Xbooster 269 ml",
+      "category": "Bem Estar",
+      "price": 27.8,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-AMP-SF",
+      "name": "Ampola Soft Hair",
+      "category": "Cuidados Capilares",
+      "price": 79.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-AT-MC",
+      "name": "Ativador Master Curls",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-CO-KES",
+      "name": "Condicionador Ozon-Kesen",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-CO-MEL",
+      "name": "Condicionador Mel & Ozônio",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-FOR-MEN",
+      "name": "Ozon-For Men",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-KIDS-CO",
+      "name": "Condicionador Kids",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-KIDS-LE",
+      "name": "Leave in Kids",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-KIDS-SH",
+      "name": "Shampoo Kids",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-MAS-BL",
+      "name": "Máscara Ozon-Blond",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-MAS-MC",
+      "name": "Máscara Master Curls",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "name": "Máscara Mel & Ozônio",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-MAS-OK",
+      "name": "Máscara Ozon-Kesen",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-O-ACAI",
+      "name": "Óleo de Açaí",
+      "category": "Cuidados Capilares",
+      "price": 105,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-O-CREAM",
+      "name": "Ozon Cream",
+      "category": "Cuidados Capilares",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-PRO-KES",
+      "name": "Pro Kesen",
+      "category": "Cuidados Capilares",
+      "price": 499.9,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-SH-BL",
+      "name": "Shampoo Ozon-Blond",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-SH-MC",
+      "name": "Shampoo Master Curls",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-SH-MEL",
+      "name": "Shampoo Ozon Mel",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": true
+    },
+    {
+      "code": "CAP-SH-OK",
+      "name": "Shampoo Ozon-Kesen",
+      "category": "Cuidados Capilares",
+      "price": 109.9,
+      "is_deleted": false
+    },
+    {
+      "code": "CAP-TON",
+      "name": "Tônico Capilar",
+      "category": "Cuidados Capilares",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-AMYNO-CX",
+      "name": "Amyno Ozon Caixa",
+      "category": "Nutracêuticos",
+      "price": 299.9,
+      "is_deleted": true
+    },
+    {
+      "code": "NUT-AMYNO-UN",
+      "name": "Amyno Ozon Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": true
+    },
+    {
+      "code": "NUT-BORYS",
+      "name": "Boryslim",
+      "category": "Nutracêuticos",
+      "price": 139.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-COBAL",
+      "name": "Cobalactin",
+      "category": "Nutracêuticos",
+      "price": 179.7,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-CREAT-CX",
+      "name": "Ozon Creat Caixa",
+      "category": "Nutracêuticos",
+      "price": 299.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-CREAT-MO-CX",
+      "name": "Ozon Creat Morango Caixa",
+      "category": "Nutracêuticos",
+      "price": 299.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-CREAT-MO-UN",
+      "name": "Ozon Creat Morango Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-CREAT-UN",
+      "name": "Ozon Creat Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-DREAM",
+      "name": "Dream Bliss",
+      "category": "Nutracêuticos",
+      "price": 175.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-FLEX-CX",
+      "name": "Ozon Flex Caixa",
+      "category": "Nutracêuticos",
+      "price": 299.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-FLEX-UN",
+      "name": "Ozon Flex Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-GENO",
+      "name": "Genolife Kids",
+      "category": "Nutracêuticos",
+      "price": 179.7,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-K2D3",
+      "name": "K2MK7 e D3",
+      "category": "Nutracêuticos",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-LEV-UN",
+      "name": "Ozon Lev Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-LUMI",
+      "name": "Luminous Vita",
+      "category": "Nutracêuticos",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-MELAT",
+      "name": "Melatozon",
+      "category": "Nutracêuticos",
+      "price": 159.8,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-MUNITY-UN",
+      "name": "Ozon Munity Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": true
+    },
+    {
+      "code": "NUT-NXCAP",
+      "name": "NX Cap Ozon",
+      "category": "Nutracêuticos",
+      "price": 159.92,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-OMEGA",
+      "name": "Ômega 3",
+      "category": "Nutracêuticos",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-OX",
+      "name": "Ox",
+      "category": "Nutracêuticos",
+      "price": 179.7,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-POWER-UN",
+      "name": "Ozon Power Unidade",
+      "category": "Nutracêuticos",
+      "price": 10,
+      "is_deleted": true
+    },
+    {
+      "code": "NUT-SOFH-D",
+      "name": "Sofh D",
+      "category": "Nutracêuticos",
+      "price": 119.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-TRIMAG",
+      "name": "Tri Magnésio",
+      "category": "Nutracêuticos",
+      "price": 159.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-VIRT",
+      "name": "Virtuous Caps",
+      "category": "Nutracêuticos",
+      "price": 139.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-VITA-OZ",
+      "name": "Vita Ozon Plus",
+      "category": "Nutracêuticos",
+      "price": 139.9,
+      "is_deleted": false
+    },
+    {
+      "code": "NUT-XBOOST",
+      "name": "Xbooster",
+      "category": "Nutracêuticos",
+      "price": 139.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-AALIYAH",
+      "name": "Aaliyah 100 ml",
+      "category": "Perfumaria",
+      "price": 199.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-CIND",
+      "name": "Cinderela 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-MADAME",
+      "name": "Madame VI 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-MAXBOSS",
+      "name": "Max Boss 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-OUD",
+      "name": "Oud Royale 100 ml",
+      "category": "Perfumaria",
+      "price": 199.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-PRES",
+      "name": "Presidente 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-RHINO",
+      "name": "Rhino Royale 100 ml",
+      "category": "Perfumaria",
+      "price": 199.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-SCAN",
+      "name": "Scandaloza 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-SENT",
+      "name": "Sentimento 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-SOB",
+      "name": "Soberano 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-SPEED",
+      "name": "Speed Black 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-SUBLIME",
+      "name": "Sublime 100 ml",
+      "category": "Perfumaria",
+      "price": 199.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-VG",
+      "name": "VG Sexy 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "P100-VIDA",
+      "name": "Vida Bella 100 ml",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-303-M",
+      "name": "303 Men 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-303-VIP",
+      "name": "303 VIP Men 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-303-W",
+      "name": "303 For Woman 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-AALI",
+      "name": "Aaliyah 17 ml",
+      "category": "Perfumaria",
+      "price": 48,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-ALEM",
+      "name": "Alem 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-ANGE",
+      "name": "Angelical 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-AVEN",
+      "name": "Aventura 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-BLUE",
+      "name": "Blue Sky 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-CAPA",
+      "name": "Capadócia 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-CIND",
+      "name": "Cinderela 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-DG",
+      "name": "DG Red 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-DOCU",
+      "name": "Doçurinha 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-EASY",
+      "name": "Easy Line 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-FAMMA",
+      "name": "Famma 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-FANT",
+      "name": "Fantastica Bry 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-FER-VE",
+      "name": "Férias no Caribe by Virgínia Esquivel",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-FERA",
+      "name": "Fera 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-GOUF-B",
+      "name": "Gouf Blue 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-GOUF-T",
+      "name": "Gouf Tradicional 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-GREC",
+      "name": "Grécia 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-LABOOM",
+      "name": "Laboom 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-LUA-VE",
+      "name": "Lua de Mel em Paris by Virgínia Esquivel",
+      "category": "Perfumaria",
+      "price": 179.9,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-MAD",
+      "name": "Madame VI 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-MAX-B",
+      "name": "Max Boss 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-MAXIMUM",
+      "name": "Maximum 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-OUD",
+      "name": "Oud Royale 17 ml",
+      "category": "Perfumaria",
+      "price": 48,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-PRESIDENTE",
+      "name": "Presidente 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-RHINO",
+      "name": "Rhino Royale 17 ml",
+      "category": "Perfumaria",
+      "price": 48,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SCAN",
+      "name": "Scandaloza 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SEDUC",
+      "name": "Seduction 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SENTIMENTO",
+      "name": "Sentimento 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SOBERANO",
+      "name": "Soberano 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SOUL",
+      "name": "Soul 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SPEED",
+      "name": "Speed Black 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SUBLI",
+      "name": "Sublime 17 ml",
+      "category": "Perfumaria",
+      "price": 48,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-SUPREMO",
+      "name": "Supremo Elixir 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-VENUM",
+      "name": "Venum 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-VG",
+      "name": "VG Sexy 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-VIDA",
+      "name": "Vida Bella 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PERF-VIP-GIRL",
+      "name": "VIP Girl VIP 17 ml",
+      "category": "Perfumaria",
+      "price": 45,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-AMR",
+      "name": "WO3 Máscara AMR",
+      "category": "Cuidados Capilares",
+      "price": 595.4,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-CIF",
+      "name": "WO3 Máscara CIF",
+      "category": "Cuidados Capilares",
+      "price": 495.4,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-DEEP",
+      "name": "WO3 Shampoo Deep Cleanse",
+      "category": "Cuidados Capilares",
+      "price": 375.4,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-HMS",
+      "name": "WO3 Máscara HMS",
+      "category": "Cuidados Capilares",
+      "price": 515.4,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-LPC",
+      "name": "WO3 Máscara LPC",
+      "category": "Cuidados Capilares",
+      "price": 555.4,
+      "is_deleted": false
+    },
+    {
+      "code": "PRO-SOFT",
+      "name": "WO3 Shampoo Soft Cleanse",
+      "category": "Cuidados Capilares",
+      "price": 335.4,
+      "is_deleted": false
+    },
+    {
+      "code": "TEST-01",
+      "name": "Produto de Teste 1 Real",
+      "category": "Teste",
+      "price": 1,
+      "is_deleted": false
+    },
+    {
+      "code": "TESTE-001",
+      "name": "[TESTE] Produto de Teste 1",
+      "category": "Teste",
+      "price": 9.99,
+      "is_deleted": false
+    },
+    {
+      "code": "TESTE-002",
+      "name": "[TESTE] Produto dasdasde Teste 2",
+      "category": "Teste",
+      "price": 199,
+      "is_deleted": false
+    },
+    {
+      "code": "teste3",
+      "name": "testeeee",
+      "category": "Teste",
+      "price": 345,
+      "is_deleted": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-27",
+  "status": "passed",
+  "checks": [
+    "195 IDs distintos",
+    "128 linhas locais: 111 ativas/17 desativadas",
+    "107 ativos comerciais correspondentes",
+    "Classificação completa: 107 + 12 + 8 + 64 + 2 + 2 = 195",
+    "8 EAN-13 dos candidatos com dígito verificador válido",
+    "Visaris mantém preço autorizado, estoque solicitado e publish=false",
+    "Conferência aritmética em centavos dos indicadores privados",
+    "54 leituras de páginas/subtelas salvas na pasta privada",
+    "Arquivos JSON públicos sem os identificadores privados conferidos"
+  ],
+  "applicationTests": "Não repetidos: nenhuma alteração no código executável, dependências ou banco neste incremento.",
+  "deployment": "Nenhum deploy realizado; não altera a dependência de créditos registrada na revisão principal."
+}
