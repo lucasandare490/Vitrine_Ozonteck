@@ -143,3 +143,9 @@ PGlite em memoria, sem conectar ao Supabase real:
 Os testes usam schema/roles simulados: nao certificam permissoes herdadas, extensoes,
 Storage, estado de producao, checkout real ou toda a instalacao das bases 24.
 Nao houve mudanca de interface nem execucao de teste de pagamento em producao.
+
+## Atualização de endereço principal — 27/11/2026
+
+`202611270001_primary_address_switch.sql` corrige o conflito transitório do índice único ao alternar entre endereços. Exige função e índice anteriores, preserva assinatura/acessos existentes e não altera linhas na instalação. A função só atua nos endereços do titular autenticado, com trava transacional por conta.
+
+A migração já foi instalada e conferida no banco atual, com registro no executor de continuidade e cópia privada da definição anterior. Em outro ambiente, executar primeiro o plano explícito do executor para esse nome; instalar somente após conferir o alvo e ter reversão. `node scripts/check-saved-addresses.mjs` valida a regressão em PGlite local. Evidência remota sanitizada e limites em `docs/prepublicacao-endereco-migration-2026-11-27.json` e `docs/preparacao-publicacao-2026-11-27.md`. Nenhum endereço comercial foi usado para testar.

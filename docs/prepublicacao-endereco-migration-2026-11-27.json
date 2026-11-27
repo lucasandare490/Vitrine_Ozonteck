@@ -1,0 +1,27 @@
+{
+  "verifiedAt": "2026-11-27T21:49:48.392Z",
+  "before": {
+    "checkedAt": "2026-11-27T21:48:54.299Z",
+    "readOnly": true,
+    "legacyConflictPattern": true,
+    "currentFixPattern": false,
+    "uniqueIndex": true,
+    "ledger": true,
+    "anonExecute": true,
+    "authenticatedExecute": true,
+    "definitionSha256": "850fe6e6f1d9929f3e712cd09cb264dac867e126b41caf2e59fd0dce170b447d",
+    "privateBackupSaved": true
+  },
+  "migration": "202611270001_primary_address_switch.sql",
+  "migrationSha256": "476ce3935d85fbd8cc9efb37a4a164c6639b32d1a72927392b32bd98dc08c661",
+  "installedFunctionMatchesSource": true,
+  "ledgerMatchesSource": true,
+  "existingAnonExecuteUnchanged": true,
+  "existingAuthenticatedExecuteUnchanged": true,
+  "authenticatedUserRequiredByFunction": true,
+  "searchPath": [
+    "search_path=public, pg_temp"
+  ],
+  "customerAddressRowsReadOrChanged": false,
+  "scope": "DDL installation and read-only definition/ledger checks. No customer address switch or browser journey executed in production."
+}

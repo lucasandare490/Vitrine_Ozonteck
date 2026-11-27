@@ -1,0 +1,156 @@
+{
+  "startedAt": "2026-11-27T21:54:37.686Z",
+  "mode": "local-release-check",
+  "revision": "407f6f359c84daa56bebdb0e034a3369b5f9b6fc",
+  "trackedChanges": true,
+  "localChecksPassed": true,
+  "productionReady": false,
+  "boundary": "No UI/browser proof, external provider validation, live database migration, deployment or delivery is certified by this local run.",
+  "checksRequiringSeparateEvidence": [
+    "Visual and keyboard review in the browser",
+    "Verify migrations in the target database (this runner does not inspect it)",
+    "Deploy and verify the exact published revision",
+    "Public checkout/provider/webhook/stock/scheduled-email journey",
+    "Debit restriction and boleto settlement",
+    "Commercial approvals, real stock before sales, Visaris label/manufacturer documentation",
+    "Google processing and historical supporting records"
+  ],
+  "sourceHashes": {
+    "components/AdminPricing.tsx": "cdf2fede332915565dadeafd93e8cc2e85a740d6ade6d45fda7e562393fdd32e",
+    "app/conta/enderecos/page.tsx": "eca12f2eb4fb83207c0c2de531a5246bbaee1649af8f0c3fe133d355bd161fd1",
+    "supabase/migrations/202611270001_primary_address_switch.sql": "476ce3935d85fbd8cc9efb37a4a164c6639b32d1a72927392b32bd98dc08c661",
+    "scripts/check-release.mjs": "6581763ce577811e1ef295db2c65744b9e78ef4b9c250acb3f4fc5154b08a3c0",
+    "package.json": "3fb2d0b4890f2de521b87970a07575c35193a781ca24e95561d73e1a38399dce"
+  },
+  "steps": [
+    {
+      "id": "unit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 3086,
+      "log": "unit.log",
+      "executionError": null
+    },
+    {
+      "id": "components",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1346,
+      "log": "components.log",
+      "executionError": null
+    },
+    {
+      "id": "address-database",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1732,
+      "log": "address-database.log",
+      "executionError": null
+    },
+    {
+      "id": "category-audit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2007,
+      "log": "category-audit.log",
+      "executionError": null
+    },
+    {
+      "id": "product-import",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1721,
+      "log": "product-import.log",
+      "executionError": null
+    },
+    {
+      "id": "interested-customers",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1739,
+      "log": "interested-customers.log",
+      "executionError": null
+    },
+    {
+      "id": "admin-reminders",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1599,
+      "log": "admin-reminders.log",
+      "executionError": null
+    },
+    {
+      "id": "support",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1672,
+      "log": "support.log",
+      "executionError": null
+    },
+    {
+      "id": "pickup-ready",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1812,
+      "log": "pickup-ready.log",
+      "executionError": null
+    },
+    {
+      "id": "email-queue",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1678,
+      "log": "email-queue.log",
+      "executionError": null
+    },
+    {
+      "id": "rate-limit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1614,
+      "log": "rate-limit.log",
+      "executionError": null
+    },
+    {
+      "id": "benefit-pricing",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1732,
+      "log": "benefit-pricing.log",
+      "executionError": null
+    },
+    {
+      "id": "purchase-changes",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2041,
+      "log": "purchase-changes.log",
+      "executionError": null
+    },
+    {
+      "id": "payment-stock",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1853,
+      "log": "payment-stock.log",
+      "executionError": null
+    },
+    {
+      "id": "changed-code-lint",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 3664,
+      "log": "changed-code-lint.log",
+      "executionError": null
+    },
+    {
+      "id": "production-build",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 27810,
+      "log": "production-build.log",
+      "executionError": null
+    }
+  ],
+  "completedAt": "2026-11-27T21:55:34.933Z"
+}

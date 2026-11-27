@@ -1,0 +1,1 @@
+PASS 22 saved-address PostgreSQL checks: reproduced old index conflict; multiple addresses, repeated switching, edits, removal, ownership, rollback, grants and idempotent migration. No production writes or browser proof.

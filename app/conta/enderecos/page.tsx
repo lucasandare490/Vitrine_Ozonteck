@@ -31,6 +31,9 @@ export default function EnderecosPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [enderecos, setEnderecos] = useState<Address[]>([]);
+  const [loadError, setLoadError] = useState('');
+  const [changingPrimary, setChangingPrimary] = useState(false);
+  const lifecycle = useRef({ mounted: false, request: 0, writing: false });
   
   // Modais
   const [showModal, setShowModal] = useState(false);
@@ -57,18 +60,27 @@ export default function EnderecosPage() {
   });
 
   const fetchEnderecos = useCallback(async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return router.push('/login');
-
-    const { data, error } = await supabase
-      .from('enderecos')
-      .select('id, user_id, apelido, cep, rua, numero, complemento, bairro, cidade, estado, principal, created_at')
-      .eq('user_id', session.user.id)
-      .order('principal', { ascending: false });
-
-    if (error) toast.error('Não foi possível carregar seus endereços.');
-    else if (data) setEnderecos(data);
-    setLoading(false);
+    const state = lifecycle.current;
+    if (!state.mounted) return;
+    const ticket = ++state.request;
+    setLoadError('');
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!state.mounted || ticket !== state.request) return;
+      if (!session) { router.push('/login'); return; }
+      const { data, error } = await supabase
+        .from('enderecos')
+        .select('id, user_id, apelido, cep, rua, numero, complemento, bairro, cidade, estado, principal, created_at')
+        .eq('user_id', session.user.id)
+        .order('principal', { ascending: false });
+      if (!state.mounted || ticket !== state.request) return;
+      if (error || !Array.isArray(data)) throw new Error('ADDRESS_READ_FAILED');
+      setEnderecos(data);
+    } catch {
+      if (state.mounted && ticket === state.request) setLoadError('Não foi possível conferir seus endereços. Verifique a conexão e tente novamente.');
+    } finally {
+      if (state.mounted && ticket === state.request) setLoading(false);
+    }
   }, [router]);
 
   const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +94,7 @@ export default function EnderecosPage() {
     if (value.replace('-', '').length === 8) {
       setIsFetchingCep(true);
       try {
-        const res = await fetch(`https://viacep.com.br/ws/${value.replace('-', '')}/json/`);
+        const res = await fetch(`https://viacep.com.br/ws/${value.replace('-', '')}/json/`, { signal: AbortSignal.timeout(10000) });
         const data = await res.json();
         if (request !== cepRequest.current) return;
         if (!data.erro) {
@@ -95,7 +107,7 @@ export default function EnderecosPage() {
           }));
         }
       } catch {
-        toast.error("Não foi possível buscar o CEP.");
+        if (lifecycle.current.mounted && request === cepRequest.current) toast.error("Não foi possível buscar o CEP. Você pode preencher o endereço manualmente.");
       } finally {
         if (request === cepRequest.current) setIsFetchingCep(false);
       }
@@ -103,12 +115,14 @@ export default function EnderecosPage() {
   };
 
   const openNewAddress = () => {
+    if (lifecycle.current.writing || loadError) return;
     cepRequest.current++; setIsFetchingCep(false); setEditingId(null);
     setNovoEnd({ cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' });
     setTipoEndereco('Casa'); setNomePersonalizado(''); setShowModal(true);
   };
 
   const openEditAddress = (address: Address) => {
+    if (lifecycle.current.writing || loadError) return;
     cepRequest.current++; setIsFetchingCep(false); setEditingId(address.id);
     setNovoEnd({ cep: address.cep || '', rua: address.rua || '', numero: address.numero || '', complemento: address.complemento || '', bairro: address.bairro || '', cidade: address.cidade || '', estado: address.estado || '' });
     const standard = address.apelido === 'Casa' || address.apelido === 'Trabalho';
@@ -119,15 +133,19 @@ export default function EnderecosPage() {
   const handleAddEndereco = async (e: React.FormEvent) => {
     e.preventDefault();
     if (saving) return;
+    const state = lifecycle.current;
+    if (!state.mounted || state.writing || loadError) return;
     const validationError = validateSavedAddress(novoEnd);
     if (validationError) {
       toast.error(validationError);
       return;
     }
 
+    state.writing = true;
     setSaving(true);
     try {
       const { data: { session } } = await supabase.auth.getSession();
+      if (!state.mounted) return;
       if (!session) throw new Error('Sessão expirada.');
 
       const isFirst = enderecos.length === 0;
@@ -147,6 +165,7 @@ export default function EnderecosPage() {
         ? supabase.from('enderecos').update(values).eq('id', editingId).eq('user_id', session.user.id)
         : supabase.from('enderecos').insert({ ...values, user_id: session.user.id, principal: isFirst });
       const { data, error } = await query.select('id');
+      if (!state.mounted) return;
 
       if (error) throw error;
       if (data?.length !== 1) throw new Error('Endereço não encontrado.');
@@ -157,46 +176,62 @@ export default function EnderecosPage() {
       setNovoEnd({ cep: '', rua: '', numero: '', complemento: '', bairro: '', cidade: '', estado: '' });
       setTipoEndereco('Casa');
       setNomePersonalizado('');
-      void fetchEnderecos();
     } catch {
-      toast.error('Não foi possível salvar o endereço. Confira os dados e sua sessão.');
+      if (state.mounted) toast.error('Não foi possível confirmar o endereço. Confira os dados e sua sessão antes de tentar novamente.');
     } finally {
-      setSaving(false);
+      if (state.mounted) { await fetchEnderecos(); if (state.mounted) setSaving(false); }
+      state.writing = false;
     }
   };
 
   const executeDelete = async () => {
-    if (!enderecoToDelete) return;
-    
+    const state = lifecycle.current;
+    if (!enderecoToDelete || !state.mounted || state.writing || loadError) return;
+    state.writing = true;
     setIsDeleting(true);
-    const { data, error } = await supabase.from('enderecos').delete().eq('id', enderecoToDelete).select('id');
-    
-    if (!error && data?.length === 1) {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!state.mounted) return;
+      if (!session) throw new Error('SESSION_REQUIRED');
+      const { data, error } = await supabase.from('enderecos').delete().eq('id', enderecoToDelete).eq('user_id', session.user.id).select('id');
+      if (!state.mounted) return;
+      if (error || data?.length !== 1) throw new Error('ADDRESS_DELETE_UNCONFIRMED');
       toast.success('Endereço removido.');
-      fetchEnderecos();
-    } else {
-      toast.error('Erro ao remover o endereço.');
+      setEnderecoToDelete(null);
+    } catch {
+      if (state.mounted) toast.error('Não foi possível confirmar a remoção. Confira seus endereços antes de tentar novamente.');
+    } finally {
+      if (state.mounted) { await fetchEnderecos(); if (state.mounted) setIsDeleting(false); }
+      state.writing = false;
     }
-    
-    setIsDeleting(false);
-    setEnderecoToDelete(null); 
   };
 
   const handleSetPrincipal = async (id: string) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) return;
-    const { error } = await supabase.rpc('set_primary_address', { p_address_id: id });
-    if (error) {
-      toast.error('Não foi possível atualizar o endereço principal.');
-      return;
+    const state = lifecycle.current;
+    if (!state.mounted || state.writing || loadError) return;
+    state.writing = true;
+    setChangingPrimary(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!state.mounted) return;
+      if (!session) throw new Error('SESSION_REQUIRED');
+      const { error } = await supabase.rpc('set_primary_address', { p_address_id: id });
+      if (!state.mounted) return;
+      if (error) throw error;
+      toast.success('Endereço principal atualizado!');
+    } catch {
+      if (state.mounted) toast.error('Não foi possível confirmar o endereço principal. Confira o resultado antes de tentar novamente.');
+    } finally {
+      if (state.mounted) { await fetchEnderecos(); if (state.mounted) setChangingPrimary(false); }
+      state.writing = false;
     }
-    toast.success('Endereço principal atualizado!');
-    fetchEnderecos();
   };
 
   useEffect(() => {
+    const state = lifecycle.current;
+    state.mounted = true;
     const loadTimer = window.setTimeout(() => void fetchEnderecos(), 0);
-    return () => window.clearTimeout(loadTimer);
+    return () => { state.mounted = false; state.request++; cepRequest.current++; window.clearTimeout(loadTimer); };
   }, [fetchEnderecos]);
 
   if (loading) {
@@ -270,7 +305,7 @@ export default function EnderecosPage() {
           {/* COLUNA DIREITA: Área de Cartões de Endereço */}
           <div className="lg:col-span-8 xl:col-span-8 xl:col-start-5">
             
-            {enderecos.length === 0 ? (
+            {loadError ? <div className="rounded-xl border border-amber-200 bg-amber-50 p-6"><p role="alert" className="text-sm text-slate-800">{loadError}</p><button type="button" onClick={() => void fetchEnderecos()} className="action-link mt-4">Conferir novamente</button></div> : enderecos.length === 0 ? (
               <div className="bg-white border border-dashed border-slate-300 rounded-xl py-16 px-6 flex flex-col items-center justify-center text-center">
                 <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
                   <MapPin size={24} className="text-slate-300" strokeWidth={2} />
@@ -339,7 +374,8 @@ export default function EnderecosPage() {
                       {!end.principal ? (
                         <button 
                           onClick={() => handleSetPrincipal(end.id)} 
-                          className="text-[11px] font-bold text-slate-500 hover:text-teal-600 transition-colors uppercase tracking-wider"
+                          disabled={saving || isDeleting || changingPrimary}
+                          className="min-h-11 rounded-lg px-2 text-xs font-bold text-slate-600 hover:bg-teal-50 hover:text-teal-700 transition-colors disabled:opacity-50"
                         >
                           Tornar Principal
                         </button>
@@ -349,10 +385,11 @@ export default function EnderecosPage() {
                         </div>
                       )}
 
-                      <button type="button" onClick={() => openEditAddress(end)} className="min-h-11 px-2 text-xs font-bold text-teal-700">Editar</button>
+                      <button type="button" disabled={saving || isDeleting || changingPrimary} onClick={() => openEditAddress(end)} className="min-h-11 px-2 text-xs font-bold text-teal-700 disabled:opacity-50">Editar</button>
                       <button 
                         onClick={() => setEnderecoToDelete(end.id)} 
-                        className="text-slate-400 hover:text-red-500 transition-colors p-1"
+                        disabled={saving || isDeleting || changingPrimary}
+                        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg text-slate-500 hover:bg-red-50 hover:text-red-600 transition-colors disabled:opacity-50"
                         title="Excluir Endereço"
                       >
                         <Trash2 size={16} />

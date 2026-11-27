@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
-    "test:components": "node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs scripts/check-customer-benefit-control.mjs"
+    "test:components": "node --test scripts/check-admin-list-races.mjs scripts/check-support-draft-races.mjs scripts/check-customer-benefit-control.mjs scripts/check-admin-pricing.mjs scripts/check-saved-address-screen.mjs",
+    "test:integration": "node scripts/check-release.mjs --integration-only",
+    "verify:release": "node scripts/check-release.mjs"
   },
   "dependencies": {
     "@mercadopago/sdk-js": "^0.0.3",
