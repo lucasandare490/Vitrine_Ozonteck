@@ -11,15 +11,14 @@
   "requestedStock": 9999,
   "stockSource": "Quantidade autorizada por Lucas nesta conversa; não é uma contagem física verificada.",
   "reportedPrice": 89.95,
-  "reportedPriceType": null,
+  "reportedPriceType": "consultor",
   "publicPrice": null,
-  "affiliatePrice": null,
+  "affiliatePrice": 89.95,
   "officialCode": null,
   "ean": null,
   "source": "Confirmação e imagem de divulgação encaminhadas por Lucas em 26/11/2026.",
   "missing": [
-    "Confirmar se R$ 89,95 é preço de consultor ou preço ao cliente.",
-    "Se o valor for de consultor, informar também o preço final ao cliente.",
+    "Informar o preço final ao cliente; R$ 89,95 foi confirmado como preço de consultor.",
     "Código oficial, EAN, ingredientes integrais, alergênicos e instruções não estão legíveis no material recebido. Não inventar esses campos."
   ]
 }

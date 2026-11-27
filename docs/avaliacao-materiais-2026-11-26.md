@@ -92,7 +92,7 @@ As informações anteriores têm fontes distintas, que não devem ser confundida
 
 ## Decisões pendentes do responsável
 
-1. Os valores de Melatozon, árabes de 17 ml e Visaris ainda precisam ser identificados como preço de consultor ou de cliente. Não alterar automaticamente os preços públicos com base nesses números sem essa confirmação.
+1. Lucas confirmou posteriormente que os valores são de consultor. Melatozon e árabes já correspondem ao cadastro; falta o preço final ao cliente do Visaris, sem deduzir uma margem automaticamente.
 2. A resposta posterior do responsável resolveu as apresentações e indisponibilidades, conforme seção abaixo. O Visaris aguarda preço ao cliente para finalizar seu cadastro.
 3. Dizer se a intenção é apenas usar os materiais no site ou também executar um projeto de venda no Mercado Livre com condições e margem aprovadas.
 
@@ -127,3 +127,7 @@ Rascunho estruturado: `visaris-cadastro-pendente-2026-11-26.json`, incluindo qua
 - Os números confirmados pelo pai coincidem com o preço de consultor atual desses dois grupos, mas essa coincidência não prova que essa era sua intenção. Nenhum preço foi alterado.
 
 O SQL reversível de retirada está em `supabase/manual/20261126_descontinuar_shampoo_condicionador_mel.sql`. Uma eventual restauração futura exige nova decisão comercial, usando os mesmos IDs/códigos do registro antes/depois; não cadastrar cópias. Os controles adicionais de retirada no código aguardam publicação da Netlify; a desativação no banco e o sitemap público já foram comprovados.
+
+### Confirmação posterior do tipo de preço — 26/11/2026
+
+Lucas informou **“Ele respondeu consultor”**, resolvendo a classificação dos três valores: Melatozon R$ 79,90; árabes de 17 ml R$ 18,00; Visaris R$ 89,95. Os dois primeiros já correspondem aos preços de afiliado cadastrados e não exigem alteração. O rascunho do Visaris passou a registrar `reportedPriceType="consultor"` e `affiliatePrice=89.95`, preservando estoque solicitado 9999, `publicPrice=null` e `publish=false`. Falta apenas o preço comercial ao cliente para ativar esse produto; não aplicar automaticamente o dobro nem outra margem. Os trechos anteriores sem classificação ficam preservados como histórico.
