@@ -1,5 +1,5 @@
 {
-  "status": "aguardando_confirmacao_do_preco_ao_cliente",
+  "status": "aguardando_identificacao_do_fabricante_e_verificacao_regulatoria",
   "publish": false,
   "proposedInternalCode": "NUT-VISARIS",
   "name": "Visaris",
@@ -12,13 +12,22 @@
   "stockSource": "Quantidade autorizada por Lucas nesta conversa; não é uma contagem física verificada.",
   "reportedPrice": 89.95,
   "reportedPriceType": "consultor",
-  "publicPrice": null,
+  "publicPrice": 89.95,
   "affiliatePrice": 89.95,
   "officialCode": null,
   "ean": null,
   "source": "Confirmação e imagem de divulgação encaminhadas por Lucas em 26/11/2026.",
+  "priceDecision": "Em 27/11/2026, Lucas autorizou usar R$ 89,95 também como preço ao cliente somente para o Visaris. Os demais produtos conservam os preços atuais.",
+  "researchDate": "2026-11-27",
+  "researchSources": [
+    "https://grupoozonteck.com/produtos-lista/suplementos-alimentares",
+    "https://grupoozonteck.lojavirtualnuvem.com.br/produtos/visaris-cuidado-dos-olhos-1a7vy/",
+    "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-determina-apreensao-de-suplementos-alimentares-com-ozonio/",
+    "https://multinivelnews.com.br/justica-federal-suspende-resolucoes-da-anvisa-apos-questionamento-sobre-processo-de-revisao/"
+  ],
+  "researchLimit": "A listagem pública do fabricante consultada não apresenta Visaris. Uma revenda o anuncia sem rótulo completo. Há comunicado da Anvisa relativo à Lemavi e notícia posterior de suspensão judicial; a situação atual e a aplicação ao fabricante deste frasco não foram comprovadas em fonte oficial. Não presumir liberação nem proibição vigente de toda a marca.",
   "missing": [
-    "Informar o preço final ao cliente; R$ 89,95 foi confirmado como preço de consultor.",
+    "Identificar fabricante e CNPJ no verso do frasco e conferir documentação atual aplicável antes de publicar a oferta.",
     "Código oficial, EAN, ingredientes integrais, alergênicos e instruções não estão legíveis no material recebido. Não inventar esses campos."
   ]
 }

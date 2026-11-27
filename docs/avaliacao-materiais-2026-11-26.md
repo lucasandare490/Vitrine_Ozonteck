@@ -131,3 +131,7 @@ O SQL reversível de retirada está em `supabase/manual/20261126_descontinuar_sh
 ### Confirmação posterior do tipo de preço — 26/11/2026
 
 Lucas informou **“Ele respondeu consultor”**, resolvendo a classificação dos três valores: Melatozon R$ 79,90; árabes de 17 ml R$ 18,00; Visaris R$ 89,95. Os dois primeiros já correspondem aos preços de afiliado cadastrados e não exigem alteração. O rascunho do Visaris passou a registrar `reportedPriceType="consultor"` e `affiliatePrice=89.95`, preservando estoque solicitado 9999, `publicPrice=null` e `publish=false`. Falta apenas o preço comercial ao cliente para ativar esse produto; não aplicar automaticamente o dobro nem outra margem. Os trechos anteriores sem classificação ficam preservados como histórico.
+
+### Preço público resolvido e pesquisa complementar — 27/11/2026
+
+Lucas autorizou expressamente usar R$ 89,95 também como preço ao cliente **somente no Visaris**. O rascunho foi atualizado com os dois preços iguais; os demais produtos conservam suas tabelas. A etapa de preço está resolvida. A pesquisa complementar não encontrou ficha completa do Visaris na listagem pública do fabricante e identificou comunicado da Anvisa e notícia judicial posterior que exigem verificar o fabricante do frasco e a documentação atual. Isso não equivale a afirmar uma proibição vigente de toda a marca. A oferta permanece inativa, agora por essa dependência documental, não por falta de preço. Fontes, limites e próximos passos em `paginas-produto-e-visaris-2026-11-27.md`.

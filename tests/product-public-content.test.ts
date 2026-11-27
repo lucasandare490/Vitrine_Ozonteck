@@ -31,6 +31,11 @@ test('retired products remain excluded and new admin descriptions remain support
   assert.equal(getPublicProductDescription('NEW-ADMIN', '  '), undefined);
 });
 
+test('Soft Hair exposes the 20 ml presentation confirmed by the shop owner', () => {
+  const fields = getPublicProductSpecifications({ code: 'CAP-AMP-SF', category: 'Cuidados Capilares' });
+  assert.equal(fields.find(field => field.label === 'Apresentação')?.value, 'Ampola de 20 ml');
+});
+
 test('actual precautions survive and disputed facts are not republished', () => {
   assert.match(JSON.stringify(getPublicProductContent('BE-SHII')), /gravidez.*7 anos/);
   assert.match(JSON.stringify(getPublicProductContent('BE-FRESH')), /6 anos/);

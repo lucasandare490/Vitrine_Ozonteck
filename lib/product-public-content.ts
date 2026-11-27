@@ -309,7 +309,7 @@ for (const [small, large] of perfumePairs) {
   }
 }
 
-enrich('CAP-AMP-SF', [], section('Características', 'Tratamento capilar de ação instantânea.', 'Brilho tridimensional e cuidado intensivo dos fios danificados.'));
+enrich('CAP-AMP-SF', [], presentation('Ampola de 20 ml'), section('Características', 'Tratamento capilar de ação instantânea.', 'Brilho tridimensional e cuidado intensivo dos fios danificados.'));
 enrich('CAP-SH-OK', [], section('Tecnologia', 'Nanotecnologia ozonizada.'));
 enrich('CAP-MAS-OK', [], section('Tecnologia', 'Nanotecnologia ozonizada.'));
 enrich('CAP-SH-MC', [], section('Tecnologia', 'Nanotecnologia ozonizada.'));

@@ -35,8 +35,9 @@ export default function ProductReviews({ code }: { code: string }) {
       .finally(() => { if (!controller.signal.aborted) setResolvedKey(requestKey); });
     return () => controller.abort();
   }, [code, visible, stars, sort, images, page, retry, requestKey]);
-  return <section ref={section} aria-labelledby="reviews-title" className="border-t border-slate-200 py-8">
-    <h2 id="reviews-title" className="mb-6 text-2xl font-bold">Avaliações do produto</h2>
+  return <section ref={section} aria-labelledby="reviews-title" className="scroll-mt-32 rounded-[2rem] border border-slate-200/70 bg-white p-5 sm:p-8">
+    <p className="mb-2 text-[11px] font-bold uppercase tracking-[.18em] text-teal-700">Experiências de quem comprou</p>
+    <h2 id="reviews-title" className="scroll-mt-36 mb-6 text-2xl font-bold tracking-tight">Avaliações do produto</h2>
     {data && data.total > 0 && <div className="mb-6 grid gap-6 sm:grid-cols-[180px_1fr]">
       <div><p className="text-4xl font-bold">{data.average?.toLocaleString('pt-BR', { maximumFractionDigits: 1 })}<span className="text-base font-normal"> / 5</span></p><p className="mt-2 text-sm">{data.total} avaliações</p></div>
       <div className="max-w-lg space-y-2">{[5, 4, 3, 2, 1].map((rating) => <div key={rating} className="flex items-center gap-3 text-sm"><span className="w-20 shrink-0">{rating} estrelas</span><meter aria-label={`${rating} estrelas`} min={0} max={data.total} value={data.stars[rating - 1]} className="h-4 w-full" /><span className="w-8 text-right">{data.stars[rating - 1]}</span></div>)}</div>
@@ -49,7 +50,7 @@ export default function ProductReviews({ code }: { code: string }) {
     <div aria-live="polite" aria-busy={loading}>
       {loading ? <p className="py-6 text-slate-600">Carregando avaliações...</p> : error ? <div className="py-6"><p>Avaliações temporariamente indisponíveis.</p><button type="button" className="mt-3 min-h-11 text-teal-800 underline" onClick={() => setRetry((n) => n + 1)}>Tentar novamente</button></div> : data && <>
         {data.items.length === 0 && <p className="py-6 text-slate-600">{data.total === 0 ? 'Este produto ainda não tem avaliações publicadas.' : 'Nenhuma avaliação corresponde aos filtros selecionados.'}</p>}
-        <div className="divide-y divide-slate-200">{data.items.map((review) => <article key={review.id} className="py-6">
+        <div className="space-y-4">{data.items.map((review) => <article key={review.id} className="rounded-2xl border border-slate-100 bg-slate-50/60 p-5">
           <div className="flex flex-wrap items-center justify-between gap-2"><h3 className="break-words font-semibold">{review.nome}</h3><time className="text-sm text-slate-500" dateTime={review.created_at}>{new Date(review.created_at).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}</time></div>
           <p aria-label={`${review.nota} de 5 estrelas`} className="my-3 flex gap-1 text-amber-700">{[1, 2, 3, 4, 5].map((n) => <Star key={n} size={18} aria-hidden="true" fill={n <= review.nota ? 'currentColor' : 'none'} />)}</p>
           <p className="whitespace-pre-line break-words leading-relaxed text-slate-700">{review.comentario}</p>
