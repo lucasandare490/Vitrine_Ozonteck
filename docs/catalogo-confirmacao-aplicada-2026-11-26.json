@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-26",
+  "operation": "owner_confirmed_soft_delete",
+  "codes": [
+    "CAP-SH-MEL",
+    "CAP-CO-MEL"
+  ],
+  "countBefore": 128,
+  "countAfter": 128,
+  "activeBefore": 113,
+  "activeAfter": 111,
+  "before": [
+    {
+      "id": "073a5e5e-e6a5-4f56-9f88-14c6fcc809d3",
+      "code": "CAP-CO-MEL",
+      "name": "Condicionador Mel & Ozônio",
+      "price": "109.90",
+      "estoque": 9999,
+      "is_deleted": false
+    },
+    {
+      "id": "fe69b05e-6670-4f4f-aef3-26ac7334ce2f",
+      "code": "CAP-SH-MEL",
+      "name": "Shampoo Ozon Mel",
+      "price": "109.90",
+      "estoque": 9999,
+      "is_deleted": false
+    }
+  ],
+  "after": [
+    {
+      "id": "073a5e5e-e6a5-4f56-9f88-14c6fcc809d3",
+      "code": "CAP-CO-MEL",
+      "name": "Condicionador Mel & Ozônio",
+      "price": "109.90",
+      "estoque": 9999,
+      "is_deleted": true
+    },
+    {
+      "id": "fe69b05e-6670-4f4f-aef3-26ac7334ce2f",
+      "code": "CAP-SH-MEL",
+      "name": "Shampoo Ozon Mel",
+      "price": "109.90",
+      "estoque": 9999,
+      "is_deleted": true
+    }
+  ],
+  "otherProductsUnchanged": true,
+  "affiliatePricesUnchanged": true,
+  "rowsDeleted": 0,
+  "visarisCreated": false
+}

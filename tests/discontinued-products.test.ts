@@ -5,23 +5,27 @@ import { discontinuedProductCodes, isRetiredProduct } from '../lib/catalog-avail
 import { sanitizeCartItems } from '../store/useCartStore.ts';
 import { getPublicProductContent } from '../lib/product-public-content.ts';
 
-test('exact ten requested products blocked, retained conditioner and capsule Xbooster allowed', () => {
-  assert.equal(discontinuedProductCodes.length, 10);
-  assert.equal(new Set(discontinuedProductCodes).size, 10);
+test('owner-confirmed withdrawals stay blocked while Mel mask and capsule Xbooster remain available', () => {
+  assert.equal(discontinuedProductCodes.length, 12);
+  assert.equal(new Set(discontinuedProductCodes).size, 12);
   for (const code of discontinuedProductCodes) {
     assert.ok(isRetiredProduct({ code }));
     assert.equal(getPublicProductContent(code), undefined);
   }
-  for (const code of ['CAP-CO-MEL', 'NUT-XBOOST', 'NUT-BORYS']) {
+  for (const code of ['CAP-SH-MEL', 'CAP-CO-MEL']) {
+    assert.ok(isRetiredProduct({ code }), code);
+    assert.equal(getPublicProductContent(code), undefined, code);
+  }
+  for (const code of ['CAP-MAS-MEL', 'NUT-XBOOST', 'NUT-BORYS']) {
     assert.equal(isRetiredProduct({ code }), false);
     assert.ok(getPublicProductContent(code));
   }
 });
 
 test('saved interest lists discard discontinued products but preserve active items', () => {
-  const codes = [...discontinuedProductCodes, 'CAP-CO-MEL', 'NUT-XBOOST'];
+  const codes = [...discontinuedProductCodes, 'CAP-MAS-MEL', 'NUT-XBOOST'];
   const items = codes.map(code => ({ id: code, code, name: code, price: 10, estoque: 20, quantity: 2 }));
-  assert.deepEqual(sanitizeCartItems(items).map(p => p.code), ['CAP-CO-MEL', 'NUT-XBOOST']);
+  assert.deepEqual(sanitizeCartItems(items).map(p => p.code), ['CAP-MAS-MEL', 'NUT-XBOOST']);
 });
 
 test('document remains intact and explicit exception maps to exact code and EAN', () => {

@@ -67,5 +67,8 @@ test('toque luminoso e energetico retirados sem afetar Xbooster em capsulas', ()
   }
   assert.equal(isRetiredProduct({ code: 'NUT-XBOOST', category: 'Nutracêuticos' }), false);
   assert.equal(isRetiredProduct({ code: 'BE-SER-LUM', category: 'Bem Estar' }), true);
-  assert.equal(isRetiredProduct({ code: 'CAP-CO-MEL', category: 'Cuidados Capilares' }), false);
+  // The owner withdrew shampoo/conditioner on 26/11, keeping the Mel mask.
+  assert.equal(isRetiredProduct({ code: 'CAP-CO-MEL', category: 'Cuidados Capilares' }), true);
+  assert.equal(isRetiredProduct({ code: 'CAP-SH-MEL', category: 'Cuidados Capilares' }), true);
+  assert.equal(isRetiredProduct({ code: 'CAP-MAS-MEL', category: 'Cuidados Capilares' }), false);
 });

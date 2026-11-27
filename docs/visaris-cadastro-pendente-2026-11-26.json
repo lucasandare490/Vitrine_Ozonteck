@@ -1,0 +1,25 @@
+{
+  "status": "aguardando_confirmacao_do_preco_ao_cliente",
+  "publish": false,
+  "proposedInternalCode": "NUT-VISARIS",
+  "name": "Visaris",
+  "category": "Nutracêuticos",
+  "image": "/produtos/visaris.jpg",
+  "presentation": "Frasco com 60 cápsulas de 500 mg.",
+  "description": "Visaris é um suplemento alimentar da Ozonteck em cápsulas. A apresentação fornecida contém 60 cápsulas de 500 mg e destaca astaxantina, luteína e zeaxantina.",
+  "highlightedComponents": ["Astaxantina", "Luteína", "Zeaxantina"],
+  "requestedStock": 9999,
+  "stockSource": "Quantidade autorizada por Lucas nesta conversa; não é uma contagem física verificada.",
+  "reportedPrice": 89.95,
+  "reportedPriceType": null,
+  "publicPrice": null,
+  "affiliatePrice": null,
+  "officialCode": null,
+  "ean": null,
+  "source": "Confirmação e imagem de divulgação encaminhadas por Lucas em 26/11/2026.",
+  "missing": [
+    "Confirmar se R$ 89,95 é preço de consultor ou preço ao cliente.",
+    "Se o valor for de consultor, informar também o preço final ao cliente.",
+    "Código oficial, EAN, ingredientes integrais, alergênicos e instruções não estão legíveis no material recebido. Não inventar esses campos."
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "date": "2026-11-26",
+  "results": [
+    {
+      "code": "CAP-SH-MEL",
+      "status": 200,
+      "productStructuredData": false,
+      "noindex": true,
+      "expected": true
+    },
+    {
+      "code": "CAP-CO-MEL",
+      "status": 200,
+      "productStructuredData": false,
+      "noindex": true,
+      "expected": true
+    },
+    {
+      "code": "CAP-MAS-MEL",
+      "status": 200,
+      "productStructuredData": true,
+      "noindex": false,
+      "expected": true
+    }
+  ],
+  "sitemap": {
+    "status": 200,
+    "total": 111,
+    "withdrawnAbsent": true,
+    "maskPresent": true
+  },
+  "passed": true
+}

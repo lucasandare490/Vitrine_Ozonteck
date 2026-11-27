@@ -92,8 +92,38 @@ As informações anteriores têm fontes distintas, que não devem ser confundida
 
 ## Decisões pendentes do responsável
 
-1. Confirmar a tabela vigente e a embalagem/lote dos produtos divergentes; decidir se a regra WO3 muda.
-2. Confirmar se Instant Firm-Up e Mind Chai serão vendidos na unidade e fornecer os dados ausentes; confirmar se algum item antes retirado voltou à venda.
+1. Os valores de Melatozon, árabes de 17 ml e Visaris ainda precisam ser identificados como preço de consultor ou de cliente. Não alterar automaticamente os preços públicos com base nesses números sem essa confirmação.
+2. A resposta posterior do responsável resolveu as apresentações e indisponibilidades, conforme seção abaixo. O Visaris aguarda preço ao cliente para finalizar seu cadastro.
 3. Dizer se a intenção é apenas usar os materiais no site ou também executar um projeto de venda no Mercado Livre com condições e margem aprovadas.
 
 Até essa confirmação, os preços, códigos, categorias, registros excluídos e link de indicação foram preservados. A avaliação está concluída; uma atualização comercial automática com esses materiais ainda não é segura nem inequívoca.
+
+## Resposta do responsável aplicada — 26/11/2026
+
+Lucas encaminhou a confirmação do pai para atualizar o catálogo e, em seguida, autorizou quantidade **9999** para Visaris. Ao ser perguntado se os preços eram de consultor ou de cliente, respondeu **“Preciso confirmar com ele”**. Portanto, o valor informado não foi convertido automaticamente em preço público.
+
+### Aplicado e verificado
+
+- **Shampoo Ozon Mel (`CAP-SH-MEL`) e Condicionador Mel & Ozônio (`CAP-CO-MEL`)**: desativados no Supabase por `is_deleted=true`. Os demais campos foram preservados. A comparação transacional verificou todos os produtos e a tabela de preços de afiliado; nenhuma outra linha comercial foi alterada. A máscara `CAP-MAS-MEL` continua ativa.
+- Lumino3, condicionador Kesen, Pro Kesen e ativador Master Curls já estavam desativados e permaneceram assim. Mind Chai não foi encontrado no cadastro; não foi criado.
+- **Instant Firm-Up**: o responsável confirmou que ainda não foi lançado. Não cadastrar nem anunciar como disponível.
+- **Embalagens resolvidas:** Ozon Flex e Creat com 30 unidades; hidratante VG Sexy de 120 g; ampola Soft Hair de 20 ml. As fichas atuais já usam essas apresentações, portanto não foi necessário alterá-las nem criar duplicatas.
+- O link da loja continua o anteriormente confirmado por Lucas.
+
+Evidência de banco: `catalogo-confirmacao-aplicada-2026-11-26.json`. O total de registros permaneceu 128; os ativos passaram de 113 para 111. Evidência pública: `catalogo-publicacao-verificada-2026-11-26.json`. As páginas dos dois itens retirados não publicam dados de produto e receberam `noindex`; o sitemap tem 111 URLs, correspondentes a 107 produtos elegíveis e quatro páginas institucionais. A máscara permanece no sitemap e com dados estruturados de produto.
+
+### Visaris preparado, sem oferta de venda ativa
+
+Imagem original fornecida preservada, sem edição, em `public/produtos/visaris.jpg`. SHA-256: `6F6DEA32E698AA0798A4189C4AEB4E7A132A629C704ADE9C85A1756DBA7287F3`.
+
+O material legível identifica suplemento alimentar, 60 cápsulas de 500 mg e destaque para astaxantina, luteína e zeaxantina. O texto preparado limita-se a essas informações; não define dosagem, teores individuais, tratamento ou promessas de resultado. Código interno proposto `NUT-VISARIS`, sem inventar EAN ou código oficial. A consulta anterior não encontrou produto com esse nome.
+
+Rascunho estruturado: `visaris-cadastro-pendente-2026-11-26.json`, incluindo quantidade 9999 autorizada por Lucas e valor recebido de R$ 89,95, **ainda sem identificação de tipo de preço**. `publicPrice` e `affiliatePrice` continuam nulos e `publish=false`. Não foi criada linha vendável no banco com preço presumido. Se R$ 89,95 for consultor, falta também informar o valor final ao cliente.
+
+### Preços preservados até confirmação
+
+- Melatozon: cliente R$ 159,80; consultor R$ 79,90.
+- Árabes 17 ml: cliente R$ 48,00; consultor R$ 18,00.
+- Os números confirmados pelo pai coincidem com o preço de consultor atual desses dois grupos, mas essa coincidência não prova que essa era sua intenção. Nenhum preço foi alterado.
+
+O SQL reversível de retirada está em `supabase/manual/20261126_descontinuar_shampoo_condicionador_mel.sql`. Uma eventual restauração futura exige nova decisão comercial, usando os mesmos IDs/códigos do registro antes/depois; não cadastrar cópias. Os controles adicionais de retirada no código aguardam publicação da Netlify; a desativação no banco e o sitemap público já foram comprovados.

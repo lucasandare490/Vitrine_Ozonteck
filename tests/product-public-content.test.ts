@@ -4,10 +4,10 @@ import { productResearch } from '../lib/product-research.ts';
 import { retiredProductCodes } from '../lib/catalog-availability.ts';
 import { getPublicProductContent, getPublicProductDescription, getPublicProductSpecifications } from '../lib/product-public-content.ts';
 
-test('all 109 active catalog entries have clean public content without mutating research', () => {
+test('all 107 retained catalog entries have clean public content without mutating research', () => {
   const before = JSON.stringify(productResearch);
   const active = Object.keys(productResearch).filter(code => !retiredProductCodes.some(retired => retired === code));
-  assert.equal(active.length, 109);
+  assert.equal(active.length, 107);
   for (const code of active) {
     const content = getPublicProductContent(code);
     assert.ok(content, code);
@@ -54,7 +54,6 @@ test('supplied vitamins, ingredients, preparation and detailed features remain p
     'CAP-O-ACAI': [/adicionado a máscaras/, /duas a três vezes/],
     'CAP-MAS-OK': [/20 a 40 minutos/, /cupuaçu/, /queratina/],
     'NUT-LEV-UN': [/água gelada ou quente/, /Polidextrose/],
-    'CAP-CO-MEL': [/vitaminas A, D e E/i, /geleia real/i, /3 minutos/],
     'NUT-FLEX-CX': [/vitaminas C, D, E e K2/i],
     'BE-OX3': [/Vitaminas A, B, C e E/, /bardana/],
   };
@@ -62,4 +61,12 @@ test('supplied vitamins, ingredients, preparation and detailed features remain p
     const text = JSON.stringify(getPublicProductContent(code));
     for (const pattern of patterns) assert.match(text, pattern, code);
   }
+});
+
+test('withdrawn Mel conditioner retains its research without exposing a public product description', () => {
+  const history = JSON.stringify(productResearch['CAP-CO-MEL']);
+  assert.match(history, /vitaminas A, D e E/i);
+  assert.match(history, /geleia real/i);
+  assert.equal(getPublicProductContent('CAP-CO-MEL'), undefined);
+  assert.equal(getPublicProductDescription('CAP-CO-MEL', 'Descrição antiga'), undefined);
 });
