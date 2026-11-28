@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import BackButton from '@/components/BackButton';
 import { Suspense } from 'react';
 import type { Product } from '@/lib/data';
 import Link from 'next/link';
@@ -57,7 +58,7 @@ export default async function ProductPage({ params }: Props) {
   return <main className="product-page min-h-screen bg-[#f5f8f8] pb-10 text-slate-900">
     {!isTestProduct(product) && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />}
     <div className="mx-auto w-full max-w-[1360px] px-4 py-5 sm:px-6 lg:px-10 lg:py-7">
-      <nav aria-label="Caminho de navegação" className="mb-6 text-xs text-slate-500"><ol className="flex flex-wrap items-center gap-x-2 gap-y-1"><li><Link href="/" className="inline-flex min-h-8 items-center gap-1.5 rounded-md hover:text-teal-800 focus-visible:outline-teal-700"><ArrowLeft size={13} aria-hidden="true" />Vitrine</Link></li><li aria-hidden="true"><ChevronRight size={12} /></li><li className="break-words" aria-current="page">{product.name}</li></ol></nav>
+      <nav aria-label="Caminho de navegação" className="mb-6 text-xs text-slate-500"><ol className="flex flex-wrap items-center gap-x-2 gap-y-1"><li><BackButton className="inline-flex min-h-11 items-center gap-1.5 rounded-md hover:text-teal-800 focus-visible:outline-teal-700"><ArrowLeft size={13} aria-hidden="true" />Voltar</BackButton></li><li aria-hidden="true"><ChevronRight size={12} /></li><li className="break-words" aria-current="page">{product.name}</li></ol></nav>
       <header className="mb-6 flex flex-wrap items-end justify-between gap-4 sm:mb-8">
         <div className="min-w-0 w-full sm:flex-1">
           <span className="inline-flex rounded-full border border-teal-800/10 bg-teal-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-teal-800">{product.category}</span>

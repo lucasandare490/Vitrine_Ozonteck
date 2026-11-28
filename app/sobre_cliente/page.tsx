@@ -1,4 +1,5 @@
 'use client';
+import BackButton from '@/components/BackButton';
 
 import {
   ArrowLeft,
@@ -226,9 +227,9 @@ export default function SobreCliente() {
       <div className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 pt-10 sm:pt-14 relative z-10">
         
         <RevealOnScroll delay={100}>
-          <Link href="/" className="inline-flex items-center text-xs lg:text-[13px] font-bold text-teal-700 bg-white hover:bg-teal-600 hover:text-white border border-teal-200/60 rounded-full px-5 py-2 lg:px-6 lg:py-2 mb-10 transition-all duration-300 shadow-sm hover:shadow-md">
-            <ArrowLeft className="mr-2 w-3.5 h-3.5 lg:w-4 lg:h-4" /> VOLTAR AO CATÁLOGO
-          </Link>
+          <BackButton fallback="/#catalogo" className="inline-flex items-center text-xs lg:text-[13px] font-bold text-teal-700 bg-white hover:bg-teal-600 hover:text-white border border-teal-200/60 rounded-full px-5 py-2 lg:px-6 lg:py-2 mb-10 transition-all duration-300 shadow-sm hover:shadow-md">
+            <ArrowLeft className="mr-2 w-3.5 h-3.5 lg:w-4 lg:h-4" /> Voltar
+          </BackButton>
         </RevealOnScroll>
 
         <section className="mb-20 lg:mb-24 max-w-7xl mx-auto">

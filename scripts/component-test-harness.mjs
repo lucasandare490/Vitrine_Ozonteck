@@ -98,7 +98,7 @@ export function createComponentHarness(path, { supabase, imports = {}, window: w
       callbacks.forEach(callback => callback());
     },
     poll() { [...intervals.values()].forEach(callback => callback()); },
-    dispatchWindowEvent(event) { listeners.get(event)?.forEach(callback => callback()); },
+    dispatchWindowEvent(event, payload) { listeners.get(event)?.forEach(callback => callback(payload)); },
     unmount() {
       for (const slot of slots) slot?.cleanup?.();
       mounted = false;

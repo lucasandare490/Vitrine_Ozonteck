@@ -1,6 +1,8 @@
 'use client';
 
 import { useCartStore } from '@/store/useCartStore';
+import BackButton from '@/components/BackButton';
+import CheckoutBackNavigation from '@/components/CheckoutBackNavigation';
 import { ArrowLeft, Trash2, Image as ImageIcon, Plus, Minus, Truck, Home, Briefcase, User, CreditCard, Phone, Mail, Package, ShieldCheck, Lock, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -477,18 +479,14 @@ export default function ListaDeInteresse() {
 
   return (
     <main className="min-h-screen text-slate-900 bg-[#FAFAFC] relative flex flex-col overflow-hidden">
+      <CheckoutBackNavigation step={checkoutStep} complete={showConfirmation} onStep={setCheckoutStep} />
 
       <section className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-10 pb-24 relative z-10 flex-1 flex flex-col">
         
         <RevealOnScroll delay={0} className="w-full mb-8">
           
           {!showConfirmation && (
-            <button 
-              onClick={() => checkoutStep === 'address' ? setCheckoutStep('cart') : checkoutStep === 'payment' ? setCheckoutStep('address') : router.push('/')}
-              className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-5 transition-colors uppercase tracking-widest"
-            >
-              <ArrowLeft size={12} /> {checkoutStep === 'cart' ? 'Voltar para a Loja' : 'Voltar à etapa anterior'}
-            </button>
+            <BackButton className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-5 transition-colors uppercase tracking-widest"><ArrowLeft size={12} /> Voltar</BackButton>
           )}
 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-5 border-b border-slate-200/60">

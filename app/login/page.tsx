@@ -1,11 +1,11 @@
 'use client';
+import BackButton from '@/components/BackButton';
 
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { supabase } from '@/lib/supabase';
 import PasswordStrength from '@/components/PasswordStrength';
 import { useRouter } from 'next/navigation';
 import { Mail, Lock, User, ArrowRight, Loader2, CheckCircle2, ArrowLeft, Eye, EyeOff, Award, HeartHandshake, Fingerprint } from 'lucide-react';
-import Link from 'next/link';
 import { useCartStore } from '@/store/useCartStore';
 import { serializeA11yPreferences, useAccessibilityStore } from '@/store/useAccessibilityStore';
 import { needsSecondFactor } from '@/lib/mfa';
@@ -305,10 +305,10 @@ export default function Login() {
         <div className="relative z-10 flex flex-col w-full max-w-2xl mr-auto gap-8 xl:gap-10">
           
           <div className="flex items-center gap-4 sm:gap-5 w-full">
-            <Link href="/" className="inline-flex items-center text-teal-100 hover:text-white font-bold text-[11px] uppercase tracking-wider transition-colors shrink-0">
+            <BackButton fallback="/#catalogo" className="inline-flex items-center text-teal-100 hover:text-white font-bold text-[11px] uppercase tracking-wider transition-colors shrink-0">
               <ArrowLeft size={16} className="mr-2" />
-              Voltar à Vitrine
-            </Link>
+              Voltar
+            </BackButton>
 
             <div className="h-4 w-px bg-teal-600/50 hidden sm:block"></div>
 

@@ -1,3 +1,4 @@
+import BackButton from '@/components/BackButton';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,9 +17,9 @@ export default function JoinPage() {
   return (
     <main className="bg-white px-5 pb-14 pt-6 sm:px-8 lg:px-12 lg:pb-20">
       <div className="mx-auto w-full max-w-[1536px]">
-        <Link href="/" className={`mb-8 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-teal-800 ${focus}`}>
-          <ArrowLeft size={16} aria-hidden="true" /> Voltar à vitrine
-        </Link>
+        <BackButton fallback="/#catalogo" className={`mb-8 inline-flex min-h-11 items-center gap-2 rounded text-sm font-semibold text-teal-800 ${focus}`}>
+          <ArrowLeft size={16} aria-hidden="true" /> Voltar
+        </BackButton>
         <div className="grid items-start gap-8 border-b border-slate-200 pb-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14 lg:pb-14">
           <section aria-labelledby="join-title">
             <p className="mb-4 text-xs font-bold text-teal-800">Consumo e distribuição independente</p>

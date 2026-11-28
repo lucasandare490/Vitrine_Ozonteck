@@ -1,4 +1,5 @@
 'use client';
+import BackButton from '@/components/BackButton';
 
 import { isRetiredProduct } from '@/lib/catalog-availability';
 import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
@@ -135,12 +136,11 @@ export default function FavoritosPage() {
       
       <section className="max-w-[1800px] w-full mx-auto px-5 sm:px-10 lg:px-16 pt-8 sm:pt-12 pb-24 relative z-10">
         
-        <Link 
-          href="/" 
+        <BackButton fallback="/#catalogo"
           className="inline-flex items-center gap-2 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-6 transition-colors uppercase tracking-widest bg-white/50 px-3 py-1.5 rounded-full backdrop-blur-md border border-slate-200/50"
         >
-          <ArrowLeft size={12} /> Voltar para a loja
-        </Link>
+          <ArrowLeft size={12} /> Voltar
+        </BackButton>
 
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 pb-5 border-b border-slate-200/60">
           <div>

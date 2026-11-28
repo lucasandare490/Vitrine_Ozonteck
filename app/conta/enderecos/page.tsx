@@ -1,4 +1,5 @@
 'use client';
+import BackButton from '@/components/BackButton';
 import AppDialog from '@/components/AppDialog';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -6,7 +7,6 @@ import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Plus, Trash2, MapPin, Loader2, Home, Briefcase, Map, Building, AlertTriangle, Truck, CheckCircle2 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import Link from 'next/link';
 import PickupPoint from '@/components/PickupPoint';
 import { validateSavedAddress } from '@/lib/saved-address';
 
@@ -249,9 +249,9 @@ export default function EnderecosPage() {
         
         {/* CABEÇALHO */}
         <div className="mb-8 pb-5 border-b border-slate-200/60">
-          <Link href="/conta" className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-5 transition-colors uppercase tracking-widest">
-            <ArrowLeft size={12} /> Voltar para o Painel
-          </Link>
+          <BackButton fallback="/conta" className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 hover:text-teal-600 mb-5 transition-colors uppercase tracking-widest">
+            <ArrowLeft size={12} /> Voltar
+          </BackButton>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">

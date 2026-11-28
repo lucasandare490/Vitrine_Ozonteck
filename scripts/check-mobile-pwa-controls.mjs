@@ -147,3 +147,47 @@ test('product purchase: desktop and mobile use the same action and the provision
   assert.ok(elements(h.render({ product }), 'button').filter(node => node.props.onClick?.name === 'add').every(node => node.props.disabled));
   h.unmount();
 });
+
+for (const iconOnly of [false, true]) test(`back control: ${iconOnly ? 'mobile icon' : 'text button'} uses the shared history action, with a safe direct-entry fallback`, () => {
+  const calls = [], replaced = [], browser = { marker: 'browser' };
+  const harness = createComponentHarness('components/BackButton.tsx', {
+    window: browser,
+    imports: {
+      'next/navigation': { useRouter: () => ({ replace: href => replaced.push(href) }) },
+      'lucide-react': { ArrowLeft: 'svg' },
+      '@/lib/back-navigation': { navigateBack: (target, replace, fallback) => { calls.push([target.marker, fallback]); replace(fallback); } },
+    },
+  });
+  const tree = harness.render({ iconOnly, fallback: '/conta', className: 'mobile-icon-button' });
+  const button = elements(tree, 'button')[0];
+  assert.equal(button.props.type, 'button'); assert.match(button.props.className, /min-h-11/);
+  if (iconOnly) assert.equal(button.props['aria-label'], 'Voltar');
+  button.props.onClick(); assert.deepEqual(calls, [['browser', '/conta']]); assert.deepEqual(replaced, ['/conta']); harness.unmount();
+});
+
+for (const [step, complete, expected] of [['payment', false, 'address'], ['address', false, 'cart'], ['cart', false, null], ['payment', true, null]]) {
+  test(`checkout return: ${step}, completed=${complete} respects the step or lets page navigation continue`, () => {
+    const calls = [];
+    const harness = createComponentHarness('components/CheckoutBackNavigation.tsx', {
+      imports: { '@/lib/back-navigation': { backNavigationEvent: 'ozonteck:back' } },
+    });
+    harness.render({ step, complete, onStep: value => calls.push(value) });
+    const event = new Event('ozonteck:back', { cancelable: true }); harness.dispatchWindowEvent('ozonteck:back', event);
+    assert.deepEqual(calls, expected ? [expected] : []); assert.equal(event.defaultPrevented, expected !== null);
+    harness.unmount(); harness.dispatchWindowEvent('ozonteck:back', new Event('ozonteck:back', { cancelable: true }));
+    assert.equal(calls.length, expected ? 1 : 0);
+  });
+}
+test('checkout return: changing screens removes the previous step handler and confirmation no longer traps the user', () => {
+  const calls = [], onStep = value => calls.push(value);
+  const harness = createComponentHarness('components/CheckoutBackNavigation.tsx', {
+    imports: { '@/lib/back-navigation': { backNavigationEvent: 'ozonteck:back' } },
+  });
+  harness.render({ step: 'payment', complete: false, onStep });
+  harness.dispatchWindowEvent('ozonteck:back', new Event('ozonteck:back', { cancelable: true }));
+  harness.render({ step: 'address', complete: false, onStep });
+  harness.dispatchWindowEvent('ozonteck:back', new Event('ozonteck:back', { cancelable: true }));
+  harness.render({ step: 'payment', complete: true, onStep });
+  const confirmedBack = new Event('ozonteck:back', { cancelable: true }); harness.dispatchWindowEvent('ozonteck:back', confirmedBack);
+  assert.deepEqual(calls, ['address', 'cart']); assert.equal(confirmedBack.defaultPrevented, false); harness.unmount();
+});

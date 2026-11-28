@@ -3,8 +3,9 @@
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import BackButton from '@/components/BackButton';
 import { usePathname } from 'next/navigation';
-import { ArrowLeft, Heart, LayoutGrid, Search, ShoppingBag, UserRound, HelpCircle } from 'lucide-react';
+import { Heart, LayoutGrid, Search, ShoppingBag, UserRound, HelpCircle } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
 import { catalogReturn, isMobileDestinationActive, mobileCatalogHref, mobileDestinations, mobileSection, mobileTitles } from '@/lib/mobile-navigation';
 
@@ -44,7 +45,7 @@ export default function MobileNavigation() {
     <header className="mobile-app-header" aria-label="Cabeçalho da loja">
       <div className="mobile-app-header-row">
         {pathname === '/' ? <Link href="/" className="mobile-wordmark" aria-label="Ozonteck Recife, início"><Image src="/brand-icon.svg" width={28} height={28} alt="" /><span>OZONTECK<span className="text-teal-300">.</span><small>RECIFE</small></span></Link>
-          : <><Link href={parent} className="mobile-icon-button" aria-label={pathname.startsWith('/conta/') ? 'Voltar à minha conta' : 'Voltar ao catálogo'}><ArrowLeft size={22} /></Link><p className="min-w-0 flex-1 truncate font-bold">{mobileTitles[pathname] || (section === 'product' ? 'Detalhes do produto' : 'Ozonteck Recife')}</p></>}
+          : <><BackButton fallback={parent} className="mobile-icon-button" iconOnly /><p className="min-w-0 flex-1 truncate font-bold">{mobileTitles[pathname] || (section === 'product' ? 'Detalhes do produto' : 'Ozonteck Recife')}</p></>}
         <Link href="/suporte" className="mobile-icon-button" aria-label="Ajuda e atendimento"><HelpCircle size={23} /></Link>
       </div>
       {pathname === '/' && <Link href="/busca" className="mobile-search-entry"><Search size={20} aria-hidden="true" /><span>O que você está procurando?</span></Link>}

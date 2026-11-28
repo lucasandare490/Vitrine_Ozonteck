@@ -1,4 +1,5 @@
 'use client';
+import BackButton from '@/components/BackButton';
 
 import Link from 'next/link';
 import { ReactNode, useEffect, useState, useSyncExternalStore } from 'react';
@@ -146,9 +147,9 @@ const { theme, toggleTheme } = useThemeStore();
         {/* TOPBAR */}
         <header className="min-h-[72px] bg-white dark:bg-[#171717] border-b border-slate-200 dark:border-[#2D2D2D] flex flex-wrap gap-3 py-3 items-center justify-between px-4 sm:px-6 lg:px-10 shrink-0 transition-colors">
           <div className="flex items-center gap-6">
-            <Link href="/" className="flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-[#A1A1AA] dark:hover:text-white transition-colors bg-slate-100 dark:bg-[#202020] px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2D2D2D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
-              <ArrowLeft size={14} /> Retornar à Vitrine
-            </Link>
+            <BackButton fallback="/#catalogo" className="flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-[#A1A1AA] dark:hover:text-white transition-colors bg-slate-100 dark:bg-[#202020] px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2D2D2D] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
+              <ArrowLeft size={14} /> Voltar
+            </BackButton>
             <div className="hidden lg:flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-[#A1A1AA]">
               <Activity size={14} /> Painel Administrativo
             </div>

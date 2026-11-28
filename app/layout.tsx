@@ -14,6 +14,7 @@ import VLibrasWidget from "@/components/VLibrasWidget";
 import { getSiteUrl } from "@/lib/site";
 import MobileNavigation from '@/components/MobileNavigation';
 import AppRuntime from '@/components/AppRuntime';
+import BackNavigation from '@/components/BackNavigation';
 
 const inter = Inter({ subsets: ["latin"] });
 const siteName = "Ozonteck Recife";
@@ -66,6 +67,7 @@ export default function RootLayout({
           name: siteName, alternateName: 'Ozonteck Recife — Rogério André',
           url: getSiteUrl().toString(), inLanguage: 'pt-BR',
         }).replace(/</g, '\\u003c') }} />
+        <BackNavigation />
         <SecondFactorGate>
         <StorePricing>
         <CartSync />
