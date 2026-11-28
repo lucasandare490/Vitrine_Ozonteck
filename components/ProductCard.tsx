@@ -24,7 +24,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const estoqueAtual = product.estoque || 0;
   const isOutOfStock = estoqueAtual === 0;
-  const isLimitReached = currentQuantity >= estoqueAtual && !isOutOfStock;
+  const isLimitReached = currentQuantity >= Math.min(estoqueAtual, 100) && !isOutOfStock;
 
   const handleAdd = () => {
     if (isOutOfStock || isLimitReached || !pricing.ready) return;
@@ -42,7 +42,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <div className={`group flex flex-col h-full w-full ${isOutOfStock ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+    <div className={`product-card group flex flex-col h-full w-full ${isOutOfStock ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
       <Link href={productPath(product.code)} aria-label={`Ver detalhes de ${product.name}`} className="bg-white/60 backdrop-blur-xl border border-white/40 shadow-[0_4px_20px_rgb(0,0,0,0.03)] aspect-square rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 transition-transform duration-500 lg:group-hover:-translate-y-1.5 lg:group-hover:shadow-[0_15px_30px_rgb(13,148,136,0.1)] relative overflow-hidden">
         {product.imagePlaceholder && failedImage !== product.imagePlaceholder ? (
           <Image
@@ -83,9 +83,9 @@ export default function ProductCard({ product }: { product: Product }) {
           <button 
             onClick={handleAdd}
             disabled={isOutOfStock || isLimitReached || !pricing.ready}
-            aria-label={isOutOfStock ? `${product.name} esgotado` : isLimitReached ? `Limite de estoque de ${product.name} atingido` : isAdded ? `${product.name} adicionado` : `Adicionar ${product.name} à lista`}
-            title={isOutOfStock ? 'Esgotado' : isLimitReached ? 'Você adicionou todas as unidades disponíveis deste produto.' : 'Adicionar à lista'}
-            className={`flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 text-xs font-bold px-2 py-2 rounded-lg transition-all duration-300 ${
+            aria-label={isOutOfStock ? `${product.name} esgotado` : isLimitReached ? `Limite da seleção de ${product.name} atingido` : isAdded ? `${product.name} adicionado` : `Adicionar ${product.name} à lista`}
+            title={isOutOfStock ? 'Esgotado' : isLimitReached ? 'Limite de quantidade desta seleção atingido.' : 'Adicionar à lista'}
+            className={`product-card-add flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 text-xs font-bold px-2 py-2 rounded-lg transition-all duration-300 ${
               isOutOfStock 
                 ? 'bg-slate-100 text-slate-400 lg:opacity-100 lg:translate-x-0'
                 : isLimitReached
@@ -108,6 +108,7 @@ export default function ProductCard({ product }: { product: Product }) {
                 <Plus size={18} strokeWidth={2.5} aria-hidden="true" />
               </>
             )}
+            <span className="sm:hidden">{isOutOfStock ? 'Esgotado' : isLimitReached ? 'Limite' : isAdded ? 'Adicionado' : 'Adicionar'}</span>
           </button>
         </div>
       </div>

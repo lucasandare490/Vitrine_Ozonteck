@@ -23,7 +23,7 @@ export default function MeusDadosPage() {
   useEffect(() => {
     const fetchDados = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return router.push('/login');
+      if (!session) return router.push('/login?redirect=%2Fconta%2Fdados');
 
       const { data } = await supabase
         .from('profiles')
@@ -174,14 +174,14 @@ export default function MeusDadosPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {/* NOME COMPLETO */}
                     <div className="col-span-1 sm:col-span-2">
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                      <label htmlFor="field-app-conta-dados-page-tsx-184" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                         Nome Completo
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                           <User size={16} className="text-slate-400" />
                         </div>
-                        <input 
+                        <input aria-label="Nome completo" id="field-app-conta-dados-page-tsx-184" autoComplete="name"
                           type="text" 
                           name="nome"
                           value={formData.nome}
@@ -194,7 +194,7 @@ export default function MeusDadosPage() {
 
                     {/* E-MAIL (Bloqueado) */}
                     <div className="col-span-1 sm:col-span-2">
-                      <label className="flex justify-between items-center text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                      <label htmlFor="field-app-conta-dados-page-tsx-205" className="flex justify-between items-center text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                         <span>E-mail</span>
                         <span className="text-[9px] bg-slate-100 text-slate-400 px-2 py-0.5 rounded font-bold">NÃO EDITÁVEL</span>
                       </label>
@@ -202,7 +202,7 @@ export default function MeusDadosPage() {
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                           <Mail size={16} className="text-slate-400" />
                         </div>
-                        <input 
+                        <input aria-label="E-mail da conta" id="field-app-conta-dados-page-tsx-205"
                           type="email" 
                           value={formData.email}
                           disabled
@@ -213,14 +213,14 @@ export default function MeusDadosPage() {
 
                     {/* CPF */}
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                      <label htmlFor="field-app-conta-dados-page-tsx-223" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                         CPF
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                           <CreditCard size={16} className="text-slate-400" />
                         </div>
-                        <input 
+                        <input aria-label="CPF" id="field-app-conta-dados-page-tsx-223"
                           type="text" 
                           name="cpf"
                           value={formData.cpf}
@@ -235,14 +235,14 @@ export default function MeusDadosPage() {
 
                     {/* TELEFONE */}
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+                      <label htmlFor="field-app-conta-dados-page-tsx-245" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                         WhatsApp / Telefone
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                           <Phone size={16} className="text-slate-400" />
                         </div>
-                        <input 
+                        <input aria-label="Telefone" id="field-app-conta-dados-page-tsx-245"
                           type="tel" 
                           name="telefone"
                           value={formData.telefone}

@@ -129,12 +129,12 @@ export default function SegurancaPage() {
               <div className="p-6 sm:p-8">
                 <form onSubmit={handleUpdatePassword} className="flex flex-col gap-5 max-w-xl">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Senha Atual</label>
+                    <label htmlFor="field-app-conta-seguranca-page-tsx-137" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Senha Atual</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                         <Lock size={16} className="text-slate-400" />
                       </div>
-                      <input
+                      <input aria-label="Senha atual" id="field-app-conta-seguranca-page-tsx-137"
                         type="password"
                         name="atual"
                         value={passwords.atual}
@@ -147,12 +147,12 @@ export default function SegurancaPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nova Senha</label>
+                    <label htmlFor="field-app-conta-seguranca-page-tsx-155" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nova Senha</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                         <Lock size={16} className="text-slate-400" />
                       </div>
-                      <input 
+                      <input aria-label="Nova senha" id="field-app-conta-seguranca-page-tsx-155"
                         type="password" 
                         name="nova"
                         value={passwords.nova}
@@ -166,12 +166,12 @@ export default function SegurancaPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Confirmar Nova Senha</label>
+                    <label htmlFor="field-app-conta-seguranca-page-tsx-174" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Confirmar Nova Senha</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                         <Lock size={16} className="text-slate-400" />
                       </div>
-                      <input 
+                      <input aria-label="Confirme a nova senha" id="field-app-conta-seguranca-page-tsx-174"
                         type="password" 
                         name="confirmar"
                         value={passwords.confirmar}

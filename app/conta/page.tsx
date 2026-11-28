@@ -136,7 +136,7 @@ export default function PainelConta() {
                     <Camera size={20} className="text-white" />
                   </div>
                 </div>
-                <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" ref={fileInputRef} onChange={uploadAvatar} disabled={uploading}/>
+                <input aria-label="Alterar foto de perfil" id="field-app-conta-page-tsx-139" type="file" accept="image/jpeg,image/png,image/webp" className="hidden" ref={fileInputRef} onChange={uploadAvatar} disabled={uploading}/>
 
                 <h2 className="text-lg font-bold text-slate-900 truncate w-full tracking-tight">{profile?.nome || 'Cliente Ozonteck'}</h2>
                 <p className="text-xs font-medium text-slate-500 mt-1 truncate w-full">{userEmail}</p>

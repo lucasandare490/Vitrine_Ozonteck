@@ -39,6 +39,10 @@ Reprocessada a comparação salva na leitura de 27/11/2026, por código/EAN, som
 
 Não foi inferido que a diferença seja erro, promoção permanente ou autorização para baixar preços. Esta conferência trata da tabela pública observada, **não comprova a igualdade de todos os preços de consultor**. Não se calculam preços de consultor dividindo os valores públicos por dois.
 
+## Atualização de escopo — 28/11/2026
+
+A quantidade provisória 9999 é decisão confirmada, sem impedimento por falta de contagem física e sem divulgar ao consumidor 9.999 unidades físicas garantidas. PWA e reformulação mobile passaram a ser escopo atual; implementação e validação técnica estão em [mobile-pwa-ux-2026-11-28.md](mobile-pwa-ux-2026-11-28.md). Pesquisa com participantes reais foi adiada por decisão do usuário, sem bloquear a entrega de código. As confirmações comerciais e documentais abaixo não foram presumidas.
+
 ## Pendências mantidas separadas
 
 1. Confirmar a comercialização dos sete itens adicionais: Supremo Elixir de 100 ml e seis WO3 de 300 ml. Visaris já possui aprovação de inclusão e não é perguntado novamente como intenção comercial.

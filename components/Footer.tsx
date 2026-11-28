@@ -77,6 +77,7 @@ function CompactFooter({ checkout }: { checkout: boolean }) {
         <nav aria-label="Links auxiliares" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-xs font-bold text-slate-600 md:justify-end">
           <Link href="/" className="transition-colors hover:text-teal-700">Catálogo</Link>
           <Link href="/suporte" className="transition-colors hover:text-teal-700">Central de ajuda</Link>
+          <Link href="/instalar" className="transition-colors hover:text-teal-700">Instalar aplicativo</Link>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-teal-700 transition-colors hover:text-teal-900">
             <MessageCircle size={15} aria-hidden="true" /> WhatsApp
           </a>
@@ -128,6 +129,7 @@ function FullFooter() {
               <li><Link href="/#loja-fisica" className="transition-colors hover:text-teal-700">Nossa loja física</Link></li>
               <li><Link href="/sobre_cliente" className="transition-colors hover:text-teal-700">Conheça o consultor</Link></li>
               <li><Link href="/suporte" className="transition-colors hover:text-teal-700">Central de ajuda</Link></li>
+              <li><Link href="/instalar" className="transition-colors hover:text-teal-700">Instalar aplicativo</Link></li>
             </ul>
             <div className="mt-7 border-t border-slate-200 pt-5">
               <h3 className="text-sm font-bold text-slate-900">Faça parte da equipe OZONTECK</h3>

@@ -53,7 +53,7 @@ const RevealOnScroll = ({ children, delay = 0, className = "" }: { children: Rea
 };
 
 const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
+  <div className="mobile-decorative-background fixed inset-0 z-0 overflow-hidden bg-[#FAFAFC] pointer-events-none">
     <style dangerouslySetInnerHTML={{__html: `
       @keyframes float1 {
         0%, 100% { transform: translate(0px, 0px) scale(1); }

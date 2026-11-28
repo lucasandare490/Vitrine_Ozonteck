@@ -1,3 +1,3 @@
 export default function Loading() {
-  return <main aria-busy="true" className="min-h-[60dvh] px-4 py-12 text-center"><p role="status">Carregando produto...</p></main>;
+  return <main aria-busy="true" className="mx-auto min-h-[70dvh] max-w-6xl px-4 py-6"><p role="status" className="sr-only">Carregando produto...</p><div aria-hidden="true" className="animate-pulse motion-reduce:animate-none"><div className="mb-6 h-8 w-3/4 rounded-xl bg-slate-200" /><div className="grid gap-6 md:grid-cols-2"><div className="aspect-square rounded-3xl bg-slate-200" /><div className="space-y-5 rounded-3xl bg-white p-6"><div className="h-12 w-40 rounded-xl bg-slate-200" /><div className="h-8 w-32 rounded-full bg-teal-100" /><div className="h-16 rounded-2xl bg-slate-200" /><div className="h-14 rounded-2xl bg-teal-100" /><div className="h-24 rounded-xl bg-slate-100" /></div></div></div></main>;
 }

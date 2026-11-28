@@ -1,4 +1,5 @@
 'use client';
+import AppDialog from '@/components/AppDialog';
 
 import { useState, useEffect, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -192,7 +193,7 @@ export default function VisaoGeralAdmin() {
 
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <ArrowUpDown size={14} className="text-slate-400 dark:text-[#A1A1AA]" />
-            <select
+            <select aria-label="Ordem da fila de pedidos" id="field-app-admin-page-tsx-196"
               value={ordemFila}
               onChange={(e) => setOrdemFila(e.target.value as 'antigos' | 'recentes')}
               className="w-full sm:w-auto px-3 py-1.5 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-lg text-xs font-bold text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer"
@@ -220,24 +221,24 @@ export default function VisaoGeralAdmin() {
               </p>
             </div>
           ) : (
-            <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
-                <tr>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Data / Hora</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Cliente</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Valor</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Status</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ação</th>
+            <table role="table" className="admin-table w-full text-left text-sm whitespace-nowrap">
+              <thead role="rowgroup" className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
+                <tr role="row">
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Data / Hora</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Cliente</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Valor</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Status</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ação</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
+              <tbody role="rowgroup" className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
                 {filaDespacho.map((pedido) => {
                   const nomeCliente = pedido.endereco_entrega?.nome || 'Cliente não identificado';
                   const telefoneCliente = pedido.endereco_entrega?.telefone || 'Sem telefone';
 
                   return (
-                    <tr key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group">
-                      <td className="px-6 py-4">
+                    <tr role="row" key={pedido.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group">
+                      <td data-label="Data / Hora" role="cell" className="px-6 py-4">
                         <p className="font-bold text-xs text-slate-900 dark:text-[#F0F0F0]">
                           {new Date(pedido.created_at).toLocaleDateString('pt-BR')} às {new Date(pedido.created_at).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                         </p>
@@ -245,17 +246,17 @@ export default function VisaoGeralAdmin() {
                           #{pedido.id.split('-')[0]}
                         </p>
                       </td>
-                      <td className="px-6 py-4">
+                      <td data-label="Cliente" role="cell" className="px-6 py-4">
                         <p className="font-bold text-xs text-slate-700 dark:text-[#E5E5E5]">{nomeCliente}</p>
                         <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA]">{telefoneCliente}</p>
                       </td>
-                      <td className="px-6 py-4 font-bold text-teal-600 dark:text-teal-400 text-xs">
+                      <td data-label="Valor" role="cell" className="px-6 py-4 font-bold text-teal-600 dark:text-teal-400 text-xs">
                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(pedido.valor_total)}
                       </td>
-                      <td className="px-6 py-4">
+                      <td data-label="Status" role="cell" className="px-6 py-4">
                         {getStatusBadge(pedido)}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td data-label="Ação" role="cell" className="px-6 py-4 text-right">
                         <button
                           onClick={() => setPedidoSelecionado(pedido)}
                           className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#333333] hover:bg-teal-600 dark:hover:bg-teal-500 hover:text-white dark:hover:text-white text-slate-700 dark:text-[#F0F0F0] transition-colors text-[10px] font-bold uppercase tracking-widest cursor-pointer"
@@ -274,7 +275,7 @@ export default function VisaoGeralAdmin() {
 
       {/* MODAL DE GESTÃO DO PEDIDO */}
       {pedidoSelecionado && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+        <AppDialog title="Resumo do pedido" onClose={() => setPedidoSelecionado(null)} busy={false}>
           <div className="bg-white dark:bg-[#171717] w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-[#2D2D2D] overflow-hidden flex flex-col max-h-[90vh]">
 
             <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex justify-between items-center shrink-0">
@@ -340,7 +341,7 @@ export default function VisaoGeralAdmin() {
             <div className="px-6 py-4 border-t border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex items-center justify-between shrink-0">
               <div className="flex items-center gap-3">
                 <span className="text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest hidden sm:block">Alterar Status:</span>
-                <select
+                <select aria-label="Novo status do pedido" id="field-app-admin-page-tsx-344"
                   value={pedidoSelecionado.status}
                   onChange={(e) => handleAtualizarStatus(pedidoSelecionado.id, e.target.value)}
                   disabled={isAtualizando}
@@ -359,7 +360,7 @@ export default function VisaoGeralAdmin() {
             </div>
 
           </div>
-        </div>
+        </AppDialog>
       )}
 
     </div>

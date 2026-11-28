@@ -1,0 +1,104 @@
+{
+  "checkedAt": "2026-11-27T23:17:33.726Z",
+  "scope": "Read-only metadata and selected grants, not a full proof of every RLS predicate or complete production workflow",
+  "tables": [
+    {
+      "name": "admin_reminders",
+      "rls_enabled": true,
+      "policies": 3
+    },
+    {
+      "name": "affiliate_access",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "affiliate_prices",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "api_rate_limits",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "customer_email_outbox",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "customer_prices",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "enderecos",
+      "rls_enabled": true,
+      "policies": 2
+    },
+    {
+      "name": "favoritos",
+      "rls_enabled": true,
+      "policies": 1
+    },
+    {
+      "name": "join_interests",
+      "rls_enabled": true,
+      "policies": 1
+    },
+    {
+      "name": "pedidos",
+      "rls_enabled": true,
+      "policies": 2
+    },
+    {
+      "name": "pricing_audit",
+      "rls_enabled": true,
+      "policies": 0
+    },
+    {
+      "name": "profiles",
+      "rls_enabled": true,
+      "policies": 3
+    },
+    {
+      "name": "support_tickets",
+      "rls_enabled": true,
+      "policies": 1
+    }
+  ],
+  "functions": [
+    {
+      "signature": "public.reservar_pedido_checkout(text,uuid,numeric,jsonb,jsonb,integer)",
+      "installed": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "server_execute": true
+    },
+    {
+      "signature": "public.processar_status_pagamento(text,text,text,numeric)",
+      "installed": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "server_execute": true
+    },
+    {
+      "signature": "public.cancelar_reserva_checkout(text)",
+      "installed": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "server_execute": true
+    },
+    {
+      "signature": "public.reserve_changed_order(text,uuid,numeric,jsonb,jsonb,integer,uuid)",
+      "installed": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "server_execute": true
+    }
+  ],
+  "allSelectedTablesHaveRls": true,
+  "selectedServerFunctionsRestricted": true,
+  "customerRowsReadOrWritten": false
+}

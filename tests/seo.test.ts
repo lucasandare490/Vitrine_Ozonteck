@@ -83,7 +83,9 @@ test('SEO: linked raster assets exist and their declared dimensions are accurate
   assert.equal(icon.width, 192);
   assert.equal(icon.height, 192);
   assert.deepEqual(metadata.icons.icon, [{ url: '/brand-icon.png', type: 'image/png', sizes: '192x192' }]);
-  assert.equal(metadata.icons.apple, '/brand-icon.png');
+  assert.equal(metadata.icons.apple, '/app-icons/apple-180.png');
+  const apple = await sharp(read(`public${metadata.icons.apple}`)).metadata();
+  assert.equal(apple.width, 180); assert.equal(apple.height, 180);
   const share = await sharp(read('public/brand-share.png')).metadata();
   const image = metadata.openGraph.images[0];
   assert.equal(image.url, '/brand-share.png');

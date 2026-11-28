@@ -160,55 +160,55 @@ export default function LoginModal({ isOpen, onClose, onSuccess, message }: Logi
             {!isLogin && (
               <div className="animate-in fade-in duration-300 space-y-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
+                  <label htmlFor="field-components-LoginModal-tsx-166" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><User size={16} className="text-slate-400" /></div>
-                    <input type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin} autoComplete="name" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Seu nome" />
+                    <input aria-label="Nome completo" id="field-components-LoginModal-tsx-166" type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin} autoComplete="name" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Seu nome" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
+                    <label htmlFor="field-components-LoginModal-tsx-175" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">WhatsApp</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><Phone size={16} className="text-slate-400" /></div>
-                      <input type="tel" name="telefone" value={formData.telefone} onChange={handleChange} required={!isLogin} autoComplete="tel" inputMode="tel" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="(81) 99999-9999" />
+                      <input aria-label="Telefone" id="field-components-LoginModal-tsx-175" type="tel" name="telefone" value={formData.telefone} onChange={handleChange} required={!isLogin} autoComplete="tel" inputMode="tel" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="(81) 99999-9999" />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CPF</label>
+                    <label htmlFor="field-components-LoginModal-tsx-182" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CPF</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><CreditCard size={16} className="text-slate-400" /></div>
-                      <input type="text" name="cpf" value={formData.cpf} onChange={handleChange} required={!isLogin} inputMode="numeric" autoComplete="off" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="000.000.000-00" />
+                      <input aria-label="CPF" id="field-components-LoginModal-tsx-182" type="text" name="cpf" value={formData.cpf} onChange={handleChange} required={!isLogin} inputMode="numeric" autoComplete="off" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="000.000.000-00" />
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CEP</label>
+                  <label htmlFor="field-components-LoginModal-tsx-191" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">CEP</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPin size={16} className="text-slate-400" /></div>
-                    <input type="text" name="cep" value={formData.cep} onChange={handleChange} onBlur={(e) => buscarCep(e.target.value)} required={!isLogin} inputMode="numeric" autoComplete="postal-code" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="00000-000" />
+                    <input aria-label="CEP" id="field-components-LoginModal-tsx-191" type="text" name="cep" value={formData.cep} onChange={handleChange} onBlur={(e) => buscarCep(e.target.value)} required={!isLogin} inputMode="numeric" autoComplete="postal-code" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="00000-000" />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Endereço</label>
+                  <label htmlFor="field-components-LoginModal-tsx-199" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Endereço</label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPin size={16} className="text-slate-400" /></div>
-                    <input type="text" name="endereco" value={formData.endereco} onChange={handleChange} required={!isLogin} autoComplete="street-address" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Logradouro, número, bairro..." />
+                    <input aria-label="Endereço" id="field-components-LoginModal-tsx-199" type="text" name="endereco" value={formData.endereco} onChange={handleChange} required={!isLogin} autoComplete="street-address" className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400" placeholder="Logradouro, número, bairro..." />
                   </div>
                 </div>
               </div>
             )}
 
             <div className={!isLogin ? "pt-1" : ""}>
-              <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
+              <label htmlFor="field-components-LoginModal-tsx-211" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Mail size={16} className="text-slate-400" />
                 </div>
-                <input
+                <input aria-label="E-mail de acesso" id="field-components-LoginModal-tsx-211"
                   type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="email"
                   className="w-full pl-10 p-2.5 bg-white/80 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                   placeholder="seu.email@dominio.com"

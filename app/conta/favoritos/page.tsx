@@ -3,7 +3,7 @@
 import { isRetiredProduct } from '@/lib/catalog-availability';
 import { isHiddenTestProduct as isTestProduct } from '@/lib/products';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
 import PaginatedGrid from '@/components/PaginatedGrid';
@@ -15,7 +15,7 @@ import type { User } from '@supabase/supabase-js';
 import type { Product } from '@/lib/data';
 
 const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
+  <div className="mobile-decorative-background fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
     
     <style dangerouslySetInnerHTML={{__html: `
       @keyframes float1 {
@@ -50,31 +50,42 @@ export default function FavoritosPage() {
   const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [error, setError] = useState('');
+  const [reload, setReload] = useState(0);
+  const pendingRemovals = useRef(new Set<string>());
   const router = useRouter();
 
   useEffect(() => {
+    let active = true;
     const loadFavorites = async () => {
+      setIsLoading(true); setError('');
+      try {
       const { data: { session } } = await supabase.auth.getSession();
+      if (!active) return;
       
       if (!session?.user) {
-        router.push('/login');
+        router.push('/login?redirect=%2Fconta%2Ffavoritos');
         return;
       }
       
       setUser(session.user);
 
-      const { data: favs } = await supabase
+      const { data: favs, error: favoritesError } = await supabase
         .from('favoritos')
         .select('produto_code')
         .eq('user_id', session.user.id);
+      if (!active) return;
+      if (favoritesError) throw favoritesError;
 
       if (favs && favs.length > 0) {
         const codes = favs.map(f => f.produto_code);
         
-        const { data: prods } = await supabase
+        const { data: prods, error: productsError } = await supabase
           .from('produtos')
           .select('id, code, name, description, category, price, image_url, estoque')
           .in('code', codes).eq('is_deleted', false);
+        if (!active) return;
+        if (productsError) throw productsError;
 
         if (prods) {
           const formattedProducts = prods.filter((item) => !isRetiredProduct(item) && !isTestProduct(item)).map((item) => ({
@@ -89,20 +100,25 @@ export default function FavoritosPage() {
           }));
           setFavoriteProducts(formattedProducts);
         }
-      }
-      setIsLoading(false);
+      } else setFavoriteProducts([]);
+      } catch { if (active) setError('Não foi possível conferir seus favoritos. Verifique a conexão e tente novamente.'); }
+      finally { if (active) setIsLoading(false); }
     };
 
-    loadFavorites();
-  }, [router]);
+    void loadFavorites();
+    return () => { active = false; };
+  }, [router, reload]);
 
   const removeFavorite = async (produtoCode: string) => {
-    if (!user) return;
-    setFavoriteProducts(prev => prev.filter(p => p.code !== produtoCode));
-    toast.success('Removido dos favoritos');
-    await supabase.from('favoritos').delete().match({ user_id: user.id, produto_code: produtoCode });
-    
-    window.dispatchEvent(new Event('atualizarFavoritos'));
+    if (!user || pendingRemovals.current.has(produtoCode)) return;
+    pendingRemovals.current.add(produtoCode);
+    try {
+      const { data, error } = await supabase.from('favoritos').delete().match({ user_id: user.id, produto_code: produtoCode }).select('produto_code');
+      if (error || data?.length !== 1) throw new Error('REMOVE_NOT_CONFIRMED');
+      setFavoriteProducts(prev => prev.filter(p => p.code !== produtoCode));
+      toast.success('Removido dos favoritos'); window.dispatchEvent(new Event('atualizarFavoritos'));
+    } catch { toast.error('Não foi possível confirmar a remoção. Atualize os favoritos antes de repetir.'); }
+    finally { pendingRemovals.current.delete(produtoCode); }
   };
 
   // OTIMIZAÇÃO SÊNIOR: Memoização do filtro. Impede o React de recalcular o array em qualquer outra re-renderização da página.
@@ -143,7 +159,7 @@ export default function FavoritosPage() {
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Search size={16} className="text-slate-400" />
                 </div>
-                <input
+                <input aria-label="Buscar nos favoritos" id="field-app-conta-favoritos-page-tsx-162"
                   type="text"
                   placeholder="Buscar nos favoritos..."
                   value={searchQuery}
@@ -166,7 +182,7 @@ export default function FavoritosPage() {
             <div className="w-10 h-10 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin mb-4"></div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">A carregar...</p>
           </div>
-        ) : favoriteProducts.length === 0 ? (
+        ) : error ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6"><p role="alert">{error}</p><button type="button" onClick={() => setReload(value => value + 1)} className="action-link mt-4">Conferir favoritos novamente</button></div> : favoriteProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center animate-in fade-in zoom-in duration-500">
             <div className="w-20 h-20 bg-white/80 backdrop-blur-md rounded-full border border-slate-100 shadow-sm flex items-center justify-center mb-6">
               <Heart size={32} className="text-slate-200" strokeWidth={2} />
@@ -207,7 +223,8 @@ export default function FavoritosPage() {
                     e.stopPropagation();
                     removeFavorite(product.code);
                   }}
-                  className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 p-2 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-100 hover:scale-110 hover:bg-white transition-all cursor-pointer opacity-90 hover:opacity-100"
+                  aria-label={`Remover ${product.name} dos favoritos`}
+                  className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/95 shadow-sm border border-slate-100 hover:bg-white transition-colors cursor-pointer"
                   title="Remover dos Favoritos"
                 >
                   <Heart size={18} className="text-red-500 fill-red-500" />

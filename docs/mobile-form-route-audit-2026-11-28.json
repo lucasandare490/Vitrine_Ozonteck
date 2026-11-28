@@ -1,0 +1,164 @@
+{
+  "checkedAt": "2026-11-28T09:37:04.680Z",
+  "scope": "Static JSX label association across app/components; excludes provider-owned iframe inputs; no browser or participant evidence",
+  "controls": 101,
+  "missing": [],
+  "routes": [
+    {
+      "route": "/admin/categorias",
+      "file": "app\\admin\\categorias\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/clientes",
+      "file": "app\\admin\\clientes\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/clientes/[id]/precos",
+      "file": "app\\admin\\clientes\\[id]\\precos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/interessados",
+      "file": "app\\admin\\interessados\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/lembretes",
+      "file": "app\\admin\\lembretes\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin",
+      "file": "app\\admin\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/pedidos",
+      "file": "app\\admin\\pedidos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/precos",
+      "file": "app\\admin\\precos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/produtos",
+      "file": "app\\admin\\produtos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/relatorios",
+      "file": "app\\admin\\relatorios\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/admin/suporte",
+      "file": "app\\admin\\suporte\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Administrative shortcuts and menu"
+    },
+    {
+      "route": "/busca",
+      "file": "app\\busca\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta/dados",
+      "file": "app\\conta\\dados\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta/enderecos",
+      "file": "app\\conta\\enderecos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta/favoritos",
+      "file": "app\\conta\\favoritos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta",
+      "file": "app\\conta\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta/pedidos",
+      "file": "app\\conta\\pedidos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/conta/seguranca",
+      "file": "app\\conta\\seguranca\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/instalar",
+      "file": "app\\instalar\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/junte-se-a-nos",
+      "file": "app\\junte-se-a-nos\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/lista",
+      "file": "app\\lista\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/login",
+      "file": "app\\login\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/",
+      "file": "app\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/produto/[code]",
+      "file": "app\\produto\\[code]\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/sobre_cliente",
+      "file": "app\\sobre_cliente\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    },
+    {
+      "route": "/suporte",
+      "file": "app\\suporte\\page.tsx",
+      "inspection": "Source structure and shared shell; browser validation separate",
+      "mobileNavigation": "Store header and primary destinations"
+    }
+  ]
+}

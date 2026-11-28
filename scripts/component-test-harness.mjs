@@ -15,12 +15,13 @@ export function elements(tree, type) {
   return [...(!type || tree.type === type ? [tree] : []), ...elements(tree.props?.children, type)];
 }
 
-export function createComponentHarness(path, { supabase, imports = {}, window: windowOverrides = {}, env = {} }) {
+export function createComponentHarness(path, { supabase, imports = {}, window: windowOverrides = {}, env = {}, document: documentOverrides = {}, navigator: navigatorOverrides = {}, beforeEffects = () => {} }) {
   const slots = [], timeouts = new Map(), intervals = new Map(), listeners = new Map();
   let cursor = 0, pendingEffects = [], timerId = 0, mounted = true, updatesAfterUnmount = 0;
   const sameDeps = (before, after) => before && after && before.length === after.length
     && before.every((value, index) => Object.is(value, after[index]));
   const hooks = {
+    useSyncExternalStore(_subscribe, getSnapshot) { return getSnapshot(); },
     useId() { const index = cursor++; slots[index] ||= { value: `:test-${index}:` }; return slots[index].value; },
     useState(initial) {
       const index = cursor++;
@@ -67,7 +68,7 @@ export function createComponentHarness(path, { supabase, imports = {}, window: w
     jsx: ts.JsxEmit.ReactJSX, esModuleInterop: true,
   } });
   runInNewContext(outputText, {
-    exports, module: { exports }, ...timers, window, document: { hidden: false },
+    exports, module: { exports }, ...timers, window, document: { hidden: false, ...documentOverrides }, navigator: navigatorOverrides,
     crypto: { randomUUID }, Event, console, process: { env },
     require(name) {
       if (Object.hasOwn(imports, name)) return imports[name];
@@ -83,6 +84,7 @@ export function createComponentHarness(path, { supabase, imports = {}, window: w
       if (!mounted) throw new Error('Cannot render an unmounted component');
       cursor = 0; pendingEffects = [];
       const tree = exports.default(props);
+      beforeEffects(tree);
       // Commit dependency changes: clean up old effects before creating new ones.
       for (const effect of pendingEffects) slots[effect.index]?.cleanup?.();
       for (const effect of pendingEffects) {

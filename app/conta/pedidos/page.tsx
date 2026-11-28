@@ -227,7 +227,7 @@ export default function PedidosPage() {
                 Selecione qual pedido você deseja cancelar. As informações serão enviadas diretamente ao nosso suporte.
               </p>
               
-              <select 
+              <select aria-label="Escolha o pedido a cancelar" id="field-app-conta-pedidos-page-tsx-230"
                 value={orderToCancelId}
                 onChange={(e) => setOrderToCancelId(e.target.value)}
                 className="w-full mb-4 p-3 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-red-300 focus:ring-1 focus:ring-red-300 text-slate-700 font-semibold cursor-pointer shadow-sm"
@@ -448,7 +448,7 @@ export default function PedidosPage() {
                             )}
 
                             <div className="w-full relative mb-5">
-                              <textarea
+                              <textarea aria-label="Comentário sobre a compra" id="field-app-conta-pedidos-page-tsx-451"
                                 value={comentario}
                                 onChange={(e) => setComentario(e.target.value)}
                                 placeholder="Escreva um comentário (opcional)..."

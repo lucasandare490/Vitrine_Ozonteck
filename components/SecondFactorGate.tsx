@@ -41,9 +41,9 @@ export default function SecondFactorGate({ children }: { children: React.ReactNo
   // Preserve the server-rendered storefront while the browser checks its session.
   if (state === 'allowed' || (state === 'loading' && !accountRoute)) return children;
   if (state === 'loading') return <main aria-busy="true" className="flex min-h-dvh flex-col bg-slate-50 text-slate-900">
-    <header className="flex h-20 shrink-0 items-center border-b border-teal-900/10 bg-teal-950 px-6 sm:px-10">
+    <header className="flex min-h-16 flex-wrap gap-2 py-3 shrink-0 items-center border-b border-teal-900/10 bg-teal-950 px-4 sm:px-10">
       <span className="text-xl font-extrabold text-white">OZONTECK<span className="text-teal-400">.</span></span>
-      <span className="ml-5 border-l border-white/20 pl-5 text-xs font-semibold text-teal-200">UNIDADE RECIFE</span>
+      <span className="sm:ml-5 sm:border-l border-white/20 sm:pl-5 text-xs font-semibold text-teal-200">UNIDADE RECIFE</span>
     </header>
     <section className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
       <div aria-hidden="true" className="relative mb-7 flex h-20 w-20 items-center justify-center rounded-full border border-teal-200 bg-teal-50">

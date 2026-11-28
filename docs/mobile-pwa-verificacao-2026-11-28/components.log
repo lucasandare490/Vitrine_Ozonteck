@@ -1,0 +1,290 @@
+TAP version 13
+# Subtest: admin bell highlights a recent purchase change without an approved order or open support ticket
+ok 1 - admin bell highlights a recent purchase change without an approved order or open support ticket
+  ---
+  duration_ms: 149.4601
+  ...
+# Subtest: leads: late results cannot overwrite a changed filter
+ok 2 - leads: late results cannot overwrite a changed filter
+  ---
+  duration_ms: 102.9245
+  ...
+# Subtest: leads: dependency cleanup invalidates results before the next request starts
+ok 3 - leads: dependency cleanup invalidates results before the next request starts
+  ---
+  duration_ms: 75.9338
+  ...
+# Subtest: leads: older poll failures cannot replace the latest successful result
+ok 4 - leads: older poll failures cannot replace the latest successful result
+  ---
+  duration_ms: 91.402
+  ...
+# Subtest: leads: late page results cannot overwrite the next page
+ok 5 - leads: late page results cannot overwrite the next page
+  ---
+  duration_ms: 35.6121
+  ...
+# Subtest: leads: a mutation started on an old filter refreshes the current filter
+ok 6 - leads: a mutation started on an old filter refreshes the current filter
+  ---
+  duration_ms: 28.2108
+  ...
+# Subtest: leads: unmount invalidates an outstanding list request
+ok 7 - leads: unmount invalidates an outstanding list request
+  ---
+  duration_ms: 24.784
+  ...
+# Subtest: leads: a mutation completing after unmount cannot reload or update state
+ok 8 - leads: a mutation completing after unmount cannot reload or update state
+  ---
+  duration_ms: 17.1981
+  ...
+# Subtest: reminders: late results cannot overwrite a changed filter
+ok 9 - reminders: late results cannot overwrite a changed filter
+  ---
+  duration_ms: 74.576
+  ...
+# Subtest: reminders: dependency cleanup invalidates results before the next request starts
+ok 10 - reminders: dependency cleanup invalidates results before the next request starts
+  ---
+  duration_ms: 25.455
+  ...
+# Subtest: reminders: older poll failures cannot replace the latest successful result
+ok 11 - reminders: older poll failures cannot replace the latest successful result
+  ---
+  duration_ms: 34.0126
+  ...
+# Subtest: reminders: late page results cannot overwrite the next page
+ok 12 - reminders: late page results cannot overwrite the next page
+  ---
+  duration_ms: 46.7182
+  ...
+# Subtest: reminders: a mutation started on an old filter refreshes the current filter
+ok 13 - reminders: a mutation started on an old filter refreshes the current filter
+  ---
+  duration_ms: 35.4771
+  ...
+# Subtest: reminders: unmount invalidates an outstanding list request
+ok 14 - reminders: unmount invalidates an outstanding list request
+  ---
+  duration_ms: 20.0671
+  ...
+# Subtest: reminders: a mutation completing after unmount cannot reload or update state
+ok 15 - reminders: a mutation completing after unmount cannot reload or update state
+  ---
+  duration_ms: 18.7831
+  ...
+# Subtest: reminder creation refreshes the current filter
+ok 16 - reminder creation refreshes the current filter
+  ---
+  duration_ms: 45.8261
+  ...
+# Subtest: reminder creation retry refreshes the current filter
+ok 17 - reminder creation retry refreshes the current filter
+  ---
+  duration_ms: 34.9254
+  ...
+# Subtest: pricing: a disconnected read offers recovery instead of an endless loading state
+ok 18 - pricing: a disconnected read offers recovery instead of an endless loading state
+  ---
+  duration_ms: 201.5437
+  ...
+# Subtest: pricing: saving twice before React renders sends one global write and waits for the refreshed table
+ok 19 - pricing: saving twice before React renders sends one global write and waits for the refreshed table
+  ---
+  duration_ms: 119.5347
+  ...
+# Subtest: pricing: a saved value followed by a failed read is explicitly unconfirmed and cannot be edited from stale data
+ok 20 - pricing: a saved value followed by a failed read is explicitly unconfirmed and cannot be edited from stale data
+  ---
+  duration_ms: 149.1658
+  ...
+# Subtest: pricing: a failed write is re-read without reporting success or emitting a price change
+ok 21 - pricing: a failed write is re-read without reporting success or emitting a price change
+  ---
+  duration_ms: 58.1953
+  ...
+# Subtest: pricing: read completing after navigation does not update an unmounted screen
+ok 22 - pricing: read completing after navigation does not update an unmounted screen
+  ---
+  duration_ms: 51.1417
+  ...
+# Subtest: pricing: write completing after navigation does not update an unmounted screen
+ok 23 - pricing: write completing after navigation does not update an unmounted screen
+  ---
+  duration_ms: 37.2168
+  ...
+# Subtest: benefit control does not interpret an unread status as inactive or allow a write
+ok 24 - benefit control does not interpret an unread status as inactive or allow a write
+  ---
+  duration_ms: 216.3611
+  ...
+# Subtest: opening and cancelling confirmation do not change the benefit
+ok 25 - opening and cancelling confirmation do not change the benefit
+  ---
+  duration_ms: 142.4646
+  ...
+# Subtest: confirmed activation changes only access and re-reads its persisted state
+ok 26 - confirmed activation changes only access and re-reads its persisted state
+  ---
+  duration_ms: 91.3084
+  ...
+# Subtest: confirmed deactivation changes only access and re-reads its persisted state
+ok 27 - confirmed deactivation changes only access and re-reads its persisted state
+  ---
+  duration_ms: 61.3898
+  ...
+# Subtest: a failed save keeps its error visible after re-reading the unchanged server state
+ok 28 - a failed save keeps its error visible after re-reading the unchanged server state
+  ---
+  duration_ms: 57.7542
+  ...
+# Subtest: a stale read cannot overwrite the state of a more recent read
+ok 29 - a stale read cannot overwrite the state of a more recent read
+  ---
+  duration_ms: 53.6491
+  ...
+# Subtest: a save finishing after the card unmounts cannot update state or start another read
+ok 30 - a save finishing after the card unmounts cannot update state or start another read
+  ---
+  duration_ms: 30.3356
+  ...
+# Subtest: PWA controls: an available update never reloads automatically and is hidden throughout checkout
+ok 31 - PWA controls: an available update never reloads automatically and is hidden throughout checkout
+  ---
+  duration_ms: 154.1224
+  ...
+# Subtest: PWA controls: cancelling update preserves the page; explicit acceptance posts the activation message
+ok 32 - PWA controls: cancelling update preserves the page; explicit acceptance posts the activation message
+  ---
+  duration_ms: 44.327
+  ...
+# Subtest: PWA controls: network transitions produce a truthful offline notice without sending a mutation
+ok 33 - PWA controls: network transitions produce a truthful offline notice without sending a mutation
+  ---
+  duration_ms: 61.3374
+  ...
+# Subtest: PWA controls: navigation cleanup removes pending registration callbacks
+ok 34 - PWA controls: navigation cleanup removes pending registration callbacks
+  ---
+  duration_ms: 78.4804
+  ...
+# Subtest: product favorites: visitors return to this product after signing in
+ok 35 - product favorites: visitors return to this product after signing in
+  ---
+  duration_ms: 109.5839
+  ...
+# Subtest: product favorites: addition is owner-scoped, deduplicated and confirmed by a fresh read
+ok 36 - product favorites: addition is owner-scoped, deduplicated and confirmed by a fresh read
+  ---
+  duration_ms: 32.1094
+  ...
+# Subtest: product favorites: removal is owner-scoped, deduplicated and confirmed by a fresh read
+ok 37 - product favorites: removal is owner-scoped, deduplicated and confirmed by a fresh read
+  ---
+  duration_ms: 32.7157
+  ...
+# Subtest: product favorites: an unknown write result blocks further writes until state is re-read
+ok 38 - product favorites: an unknown write result blocks further writes until state is re-read
+  ---
+  duration_ms: 57.5384
+  ...
+# Subtest: product favorites: a late write for the previous account cannot replace the current account state
+ok 39 - product favorites: a late write for the previous account cannot replace the current account state
+  ---
+  duration_ms: 50.6186
+  ...
+# Subtest: product favorites: completion after unmount does not update the page or start another query
+ok 40 - product favorites: completion after unmount does not update the page or start another query
+  ---
+  duration_ms: 32.1684
+  ...
+# Subtest: bottom sheet: native dialog lifecycle locks scrolling, ignores inner clicks and restores focus
+ok 41 - bottom sheet: native dialog lifecycle locks scrolling, ignores inner clicks and restores focus
+  ---
+  duration_ms: 24.4484
+  ...
+# Subtest: application dialog: a pending save prevents escape dismissal without changing security or form data
+ok 42 - application dialog: a pending save prevents escape dismissal without changing security or form data
+  ---
+  duration_ms: 9.9392
+  ...
+# Subtest: product purchase: desktop and mobile use the same action and the provisional stock never bypasses the 100-unit cart limit
+ok 43 - product purchase: desktop and mobile use the same action and the provisional stock never bypasses the 100-unit cart limit
+  ---
+  duration_ms: 41.1817
+  ...
+# Subtest: addresses: a failed list is recoverable and is not presented as no saved addresses
+ok 44 - addresses: a failed list is recoverable and is not presented as no saved addresses
+  ---
+  duration_ms: 410.2041
+  ...
+# Subtest: addresses: repeated primary clicks send one owner action and a network failure releases controls after a fresh read
+ok 45 - addresses: repeated primary clicks send one owner action and a network failure releases controls after a fresh read
+  ---
+  duration_ms: 168.898
+  ...
+# Subtest: addresses: delete targets both the selected address and the authenticated owner, then refreshes
+ok 46 - addresses: delete targets both the selected address and the authenticated owner, then refreshes
+  ---
+  duration_ms: 128.8223
+  ...
+# Subtest: addresses: read finishing after navigation does not change state
+ok 47 - addresses: read finishing after navigation does not change state
+  ---
+  duration_ms: 70.0356
+  ...
+# Subtest: addresses: write finishing after navigation does not change state
+ok 48 - addresses: write finishing after navigation does not change state
+  ---
+  duration_ms: 82.3529
+  ...
+# Subtest: same-user SIGNED_IN retains the customer subject and message
+ok 49 - same-user SIGNED_IN retains the customer subject and message
+  ---
+  duration_ms: 211.9492
+  ...
+# Subtest: same-user SIGNED_IN preserves the idempotency ID after an uncertain submission
+ok 50 - same-user SIGNED_IN preserves the idempotency ID after an uncertain submission
+  ---
+  duration_ms: 131.9982
+  ...
+# Subtest: admin response drafts survive same-user SIGNED_IN
+ok 51 - admin response drafts survive same-user SIGNED_IN
+  ---
+  duration_ms: 87.7681
+  ...
+# Subtest: admin response drafts are cleared on account change
+ok 52 - admin response drafts are cleared on account change
+  ---
+  duration_ms: 47.4983
+  ...
+# Subtest: changing accounts clears customer drafts
+ok 53 - changing accounts clears customer drafts
+  ---
+  duration_ms: 51.4902
+  ...
+# Subtest: unmount cancels a queued auth reload and its state updates
+ok 54 - unmount cancels a queued auth reload and its state updates
+  ---
+  duration_ms: 30.3951
+  ...
+# Subtest: a previous account submission cannot clear the new account draft or expose its protocol
+ok 55 - a previous account submission cannot clear the new account draft or expose its protocol
+  ---
+  duration_ms: 55.7901
+  ...
+# Subtest: a submission finishing after unmount cannot reload or update state
+ok 56 - a submission finishing after unmount cannot reload or update state
+  ---
+  duration_ms: 57.6184
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1990.6433

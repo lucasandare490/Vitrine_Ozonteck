@@ -29,6 +29,7 @@ function mount() {
       'lucide-react': Object.fromEntries('ArrowLeft Plus Trash2 MapPin Loader2 Home Briefcase Map Building AlertTriangle Truck CheckCircle2'.split(' ').map(name => [name, 'svg'])),
       'react-hot-toast': { __esModule: true, default: { error: message => notifications.push(['error', message]), success: message => notifications.push(['success', message]) } },
       '@/components/PickupPoint': { __esModule: true, default: 'pickup-point' },
+      '@/components/AppDialog': { __esModule: true, default: 'app-dialog' },
       '@/lib/saved-address': { validateSavedAddress: () => null },
     },
   });

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
@@ -7,17 +7,19 @@ import Navbar from "@/components/Navbar";
 import SecondFactorGate from '@/components/SecondFactorGate';
 import CartSync from "@/components/CartSync";
 import { StorePricing } from '@/components/StorePricing';
-import FloatingCart from "@/components/FloatingCart";
 import Footer from "@/components/Footer";
 
 import AccessibilityWidget from "@/components/AccessibilityWidget";
 import VLibrasWidget from "@/components/VLibrasWidget";
 import { getSiteUrl } from "@/lib/site";
+import MobileNavigation from '@/components/MobileNavigation';
+import AppRuntime from '@/components/AppRuntime';
 
 const inter = Inter({ subsets: ["latin"] });
 const siteName = "Ozonteck Recife";
 const siteTitle = `${siteName} | Produtos e atendimento com Rogério André`;
 const siteDescription = "Cosméticos, cuidados capilares e produtos ozonizados com atendimento de Rogério André em Recife. Consulte os produtos e as opções de entrega ou retirada.";
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#064e49', interactiveWidget: 'resizes-content' };
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
@@ -26,8 +28,10 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
-  icons: { icon: [{ url: '/brand-icon.png', type: 'image/png', sizes: '192x192' }], apple: '/brand-icon.png' },
+  icons: { icon: [{ url: '/brand-icon.png', type: 'image/png', sizes: '192x192' }], apple: '/app-icons/apple-180.png' },
   applicationName: siteName,
+  manifest: '/manifest.webmanifest',
+  appleWebApp: { capable: true, title: 'Ozonteck', statusBarStyle: 'default' },
   category: "ecommerce",
   openGraph: {
     type: "website",
@@ -65,7 +69,9 @@ export default function RootLayout({
         <SecondFactorGate>
         <StorePricing>
         <CartSync />
+        <MobileNavigation />
         <Navbar />
+        <AppRuntime />
         {process.env.NEXT_PUBLIC_PAYMENT_SANDBOX === 'true' && (
           <div role="status" className="border-b border-amber-300 bg-amber-50 px-5 py-3 text-center text-sm font-semibold text-amber-950">
             Ambiente de teste. Sem compra ou entrega real. Use apenas cartão e dados fictícios de teste. Somente o produto TESTE-001 pode ser pago.
@@ -76,7 +82,6 @@ export default function RootLayout({
 
         <Footer />
 
-        <FloatingCart />
 
         {/* ========================================= */}
         {/* WIDGETS GLOBAIS DE TELA                   */}
@@ -93,7 +98,7 @@ export default function RootLayout({
           href="https://wa.me/5581981472684"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-5 sm:right-6 z-[9999] flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#1da851] text-white rounded-full shadow-[0_10px_35px_rgba(37,211,102,0.4)] transition-transform hover:scale-110"
+          className="app-whatsapp fixed bottom-6 right-5 sm:right-6 z-[60] flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#1da851] text-white rounded-full shadow-[0_10px_35px_rgba(37,211,102,0.4)] transition-transform hover:scale-110"
           title="Fale conosco no WhatsApp"
           aria-label="Fale conosco no WhatsApp"
         >

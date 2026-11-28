@@ -40,7 +40,9 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
-      ...['/admin/:path*', '/conta/:path*', '/api/:path*', '/lista', '/login'].map(source => ({
+      { source: '/sw.js', headers: [{ key: 'Cache-Control', value: 'no-cache, no-store, must-revalidate' }, { key: 'Service-Worker-Allowed', value: '/' }] },
+      { source: '/offline.html', headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }] },
+      ...['/admin/:path*', '/conta/:path*', '/api/:path*', '/lista', '/login', '/busca'].map(source => ({
         source, headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' }],
       })),
       {

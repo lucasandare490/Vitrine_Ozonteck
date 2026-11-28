@@ -1,0 +1,2 @@
+PASS: anonymous/customer direct reads, writes, self-approval, custom prices, foreign lookup and reservation denied.
+PASS: exact seed, disabled/deleted fallback, approval, individual override/removal, isolation, MFA, revocation, changed-price rejection, audit and idempotent seed.

@@ -150,7 +150,7 @@ Essa checagem lê `.env`, não verifica serviços remotos e rejeita URLs locais 
 - Homologar cada meio oferecido, incluindo webhook, interface, persistência e estoque. Pix aprovado não comprova cartão ou boleto.
 - Validar o cancelamento de cobranças no fluxo de alteração com o Mercado Pago; testes simulados não substituem essa verificação.
 - Configurar a conta beneficiária correta. Trocar credenciais não transfere cobranças antigas; planeje o tratamento das pendências.
-- Informar estoque físico e ocultar produtos de teste, preservando o histórico.
+- Manter a quantidade provisória 9999 autorizada, sem anunciá-la como contagem física garantida; ocultar produtos de teste, preservando o histórico.
 - Definir frete: atualmente ele é combinado com a loja e não está incluído no valor cobrado.
 - Conferir login, retorno de autenticação, acesso administrativo e limites no domínio definitivo.
 
@@ -197,3 +197,7 @@ No plano atual, o painel Netlify exige upgrade pago para ocultar o selo; ele per
 As duas entradas de cadastro mostram força estimada enquanto a pessoa digita, sem exigir classificação mínima ou novas regras de composição. A avaliação é local; o mínimo de oito caracteres já existente permanece. Suporte recebido e respondido/resolvido foi comprovado em produção até o Gmail do titular autorizado; o primeiro aviso foi inicialmente para spam e a resposta chegou à entrada após marcar o primeiro como legítimo. Detalhes e limites estão em `docs/email-delivery.md` e na revisão final.
 
 Indicador publicado no commit `d7fd28b`, deploy `6aecad29bc0dcbbea8d5b199`, com conferência pública das duas entradas em 05/11/2026. Suíte: 145 aprovados/zero falhas/um HTTP condicional ignorado; componentes 24/24; compilação aprovada.
+
+### Mobile e PWA — 28/11/2026
+
+Navegação própria para celular, busca dedicada, filtros em painel inferior, ações de produto fixas e atalhos administrativos. Manifest, ícones da marca, instalação opcional, aviso de atualização e página offline sem cache de dados comerciais. O desktop e as regras comerciais existentes foram preservados. Veja [implementação, testes e limites](docs/mobile-pwa-ux-2026-11-28.md). A conferência visual/instalação em aparelhos e a publicação são etapas separadas; os testes locais não as certificam. Quantidade 9999 permanece autorizada; pesquisa formal com usuários será posterior ao lançamento.

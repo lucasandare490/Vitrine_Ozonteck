@@ -45,6 +45,8 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
   // ESTADO: Controla o Menu Hambúrguer no Celular/Tablet
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const viewer = useRef<string | null>(null);
+  const sessionVersion = useRef(0);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -88,6 +90,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
 
   const fetchProfile = useCallback(async (userId: string) => {
     const { data } = await supabase.from('profiles').select('nome, avatar_url, role').eq('id', userId).single();
+    if (viewer.current !== userId) return;
     if (data) {
       if (data.nome && data.nome !== 'Cliente Ozonteck') setProfileName(data.nome.split(' ')[0]);
       if (data.avatar_url) setAvatarUrl(data.avatar_url);
@@ -99,10 +102,12 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
 
   const fetchQuickBuy = useCallback(async (userId: string) => {
     const { data: allFavs } = await supabase.from('favoritos').select('produto_code').eq('user_id', userId);
+    if (viewer.current !== userId) return;
     if (allFavs && allFavs.length > 0) {
       setTotalFavs(allFavs.length);
       const codes = allFavs.slice(0, 3).map(f => f.produto_code);
       const { data: prods } = await supabase.from('produtos').select('id, code, name, category, price, image_url, estoque').in('code', codes).eq('is_deleted', false);
+      if (viewer.current !== userId) return;
       if (prods) setQuickBuyProducts(prods.filter((product) => !isRetiredProduct(product) && !isTestProduct(product)));
     } else {
       setQuickBuyProducts([]);
@@ -111,8 +116,12 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
   }, []);
 
   useEffect(() => {
+    const version = ++sessionVersion.current;
     const loadSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
+      if (version !== sessionVersion.current) return;
+      if (viewer.current !== (session?.user.id || null)) clearUserData();
+      viewer.current = session?.user.id || null;
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchProfile(session.user.id);
@@ -124,6 +133,9 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
     loadSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      sessionVersion.current++;
+      if (viewer.current !== (session?.user.id || null)) clearUserData();
+      viewer.current = session?.user.id || null;
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchProfile(session.user.id);
@@ -133,7 +145,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => { sessionVersion.current++; viewer.current = null; subscription.unsubscribe(); };
   }, [clearUserData, fetchProfile, fetchQuickBuy, pathname]);
 
   useEffect(() => {
@@ -187,7 +199,7 @@ function NavbarView({ initialSearch }: { initialSearch: string }) {
 
   return (
     <>
-      <header className="w-full bg-gradient-to-r from-teal-950 to-teal-900 border-b border-teal-800 sticky top-0 z-50 transition-all shadow-md">
+      <header className="hidden md:block w-full bg-gradient-to-r from-teal-950 to-teal-900 border-b border-teal-800 sticky top-0 z-50 transition-all shadow-md">
         <nav className="w-full flex flex-wrap items-center justify-between px-3 sm:px-4 lg:px-6 py-2 md:py-3 min-h-16 md:min-h-20 gap-2 lg:gap-5">
           
           <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 shrink-0">
@@ -492,7 +504,14 @@ function NavbarContent() {
   return <NavbarView key={searchParams.toString()} initialSearch={search} />;
 }
 
+function subscribeDesktop(callback: () => void) {
+  const media = window.matchMedia('(min-width: 768px)');
+  media.addEventListener('change', callback);
+  return () => media.removeEventListener('change', callback);
+}
 export default function Navbar() {
+  const desktop = useSyncExternalStore(subscribeDesktop, () => window.matchMedia('(min-width: 768px)').matches, () => true);
+  if (!desktop) return null;
   return (
     <Suspense fallback={null}>
       <NavbarContent />

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowUpRight, ChevronRight, FileText, MapPin, MessageCircle, Package, ShieldCheck, Star, Truck } from 'lucide-react';
 import ProductActions from '@/components/ProductActions';
 import ProductGallery from '@/components/ProductGallery';
+import ProductFavorite from '@/components/ProductFavorite';
 import ProductCard from '@/components/ProductCard';
 import { getProduct, getRelatedProducts } from '@/lib/server/products';
 import { isTestProduct, productPath, serializeStructuredData } from '@/lib/products';
@@ -47,13 +48,13 @@ export default async function ProductPage({ params }: Props) {
       ...(description ? { description } : {}),
       ...(product.imagePlaceholder ? { image: new URL(product.imagePlaceholder, getSiteUrl()).toString() } : {}),
       offers: { '@type': 'Offer', url, priceCurrency: 'BRL', price: product.price,
-        availability: (product.estoque || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' } },
+        ...((product.estoque || 0) === 9999 ? {} : { availability: (product.estoque || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }) } },
     { '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Vitrine', item: getSiteUrl().toString() },
       { '@type': 'ListItem', position: 2, name: product.name, item: url },
     ] },
   ] };
-  return <main className="min-h-screen bg-[#f5f8f8] pb-10 text-slate-900">
+  return <main className="product-page min-h-screen bg-[#f5f8f8] pb-10 text-slate-900">
     {!isTestProduct(product) && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeStructuredData(structured) }} />}
     <div className="mx-auto w-full max-w-[1360px] px-4 py-5 sm:px-6 lg:px-10 lg:py-7">
       <nav aria-label="Caminho de navegação" className="mb-6 text-xs text-slate-500"><ol className="flex flex-wrap items-center gap-x-2 gap-y-1"><li><Link href="/" className="inline-flex min-h-8 items-center gap-1.5 rounded-md hover:text-teal-800 focus-visible:outline-teal-700"><ArrowLeft size={13} aria-hidden="true" />Vitrine</Link></li><li aria-hidden="true"><ChevronRight size={12} /></li><li className="break-words" aria-current="page">{product.name}</li></ol></nav>
@@ -64,6 +65,7 @@ export default async function ProductPage({ params }: Props) {
           <p className="mt-2 break-all text-xs text-slate-500">OZONTECK · Código: {product.code}</p>
         </div>
         {!isTestProduct(product) && <a href="#reviews-title" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200 bg-white px-4 text-xs font-semibold text-slate-600 hover:border-teal-300 hover:text-teal-800"><Star size={15} aria-hidden="true" />Ver avaliações<ArrowUpRight size={14} aria-hidden="true" /></a>}
+        {!isTestProduct(product) && <ProductFavorite code={product.code} name={product.name} />}
       </header>
       <div className="grid min-w-0 items-start gap-7 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,.85fr)] lg:gap-10">
         <div className="min-w-0">

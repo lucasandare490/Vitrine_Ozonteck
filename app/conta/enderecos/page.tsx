@@ -1,4 +1,5 @@
 'use client';
+import AppDialog from '@/components/AppDialog';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -67,7 +68,7 @@ export default function EnderecosPage() {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!state.mounted || ticket !== state.request) return;
-      if (!session) { router.push('/login'); return; }
+      if (!session) { router.push('/login?redirect=%2Fconta%2Fenderecos'); return; }
       const { data, error } = await supabase
         .from('enderecos')
         .select('id, user_id, apelido, cep, rua, numero, complemento, bairro, cidade, estado, principal, created_at')
@@ -405,7 +406,7 @@ export default function EnderecosPage() {
 
         {/* MODAL DE CADASTRO */}
         {showModal && (
-          <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <AppDialog title="Endereço de entrega" onClose={() => setShowModal(false)} busy={saving}>
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
               
               <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
@@ -489,12 +490,12 @@ export default function EnderecosPage() {
                 </div>
               </form>
             </div>
-          </div>
+          </AppDialog>
         )}
 
         {/* MODAL DE EXCLUSÃO */}
         {enderecoToDelete && (
-          <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+          <AppDialog title="Remover endereço" onClose={() => setEnderecoToDelete(null)} busy={isDeleting}>
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
               <div className="p-6 text-center">
                 <div className="w-14 h-14 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-4 border border-red-100">
@@ -523,7 +524,7 @@ export default function EnderecosPage() {
                 </button>
               </div>
             </div>
-          </div>
+          </AppDialog>
         )}
 
       </section>

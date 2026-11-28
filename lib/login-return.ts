@@ -6,5 +6,8 @@ const destinations = new Set([
 
 export function safeLoginReturn(search: string): string | null {
   const destination = new URLSearchParams(search).get('redirect');
-  return destination && destinations.has(destination) ? destination : null;
+  if (!destination) return null;
+  if (destinations.has(destination)) return destination;
+  // Product links created by the catalog use one known SKU segment, never a caller URL.
+  return /^\/produto\/[A-Za-z0-9][A-Za-z0-9_-]{0,79}$/.test(destination) ? destination : null;
 }

@@ -34,7 +34,7 @@ A fila e a função SQL de reserva foram instaladas no banco em 01/11/2026. As c
 
 `node --test --experimental-strip-types tests/customer-email*.test.ts` verifica conteúdo, escape de HTML, links restritos à loja, supressão de mensagens obsoletas e repetição limitada.
 
-Fiado e carnê estão excluídos do projeto por decisão do usuário. PWA continua reservado para o futuro.
+Fiado e carnê estão excluídos do projeto por decisão do usuário. A decisão histórica de reservar o PWA para o futuro foi superada pelo pedido de implementação atual: consulte [Mobile e PWA, 28/11/2026](mobile-pwa-ux-2026-11-28.md). Isso não altera as evidências nem os limites dos testes de e-mail.
 
 ## Incrementos de 04/11/2026
 

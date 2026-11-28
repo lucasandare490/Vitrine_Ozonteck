@@ -1,5 +1,7 @@
 # Preparação para a próxima publicação — 27/11/2026
 
+> Atualização de escopo em 28/11/2026: o relatório [Mobile, PWA e UX](mobile-pwa-ux-2026-11-28.md) complementa esta preparação. A quantidade provisória **9999 permanece autorizada e não impede o lançamento**; a orientação histórica do item 8 sobre substituí-la antes das vendas foi superada pela decisão explícita do usuário. PWA passou a ser escopo atual e foi implementado. A pesquisa formal de usabilidade ficará para depois do lançamento. Os resultados antigos abaixo são históricos, não os totais da nova execução.
+
 ## Correções implementadas nesta etapa
 
 ### Tabela geral de preços

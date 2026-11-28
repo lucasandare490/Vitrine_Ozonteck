@@ -24,15 +24,15 @@ export default function ProductActions({ product: original }: { product: Product
     if (!mounted || limit === 0 || !pricing.ready) return;
     const store = useCartStore.getState();
     if (store.items.length >= 50 && !store.items.some((item) => item.id === product.id)) {
-      setMessage('Sua lista atingiu 50 produtos. Revise a seleção antes de adicionar outro.');
+      setMessage('Seu carrinho atingiu 50 produtos. Revise a seleção antes de adicionar outro.');
       return;
     }
     for (let index = 0; index < selected; index++) store.addItem({
       id: product.id, code: product.code, name: product.name, price: product.price, estoque: stock,
     });
-    setMessage(`${selected} unidade(s) adicionada(s) à sua lista.`);
+    setMessage(`${selected} unidade(s) adicionada(s) ao carrinho.`);
   }
-  return <div className="space-y-5">
+  return <div className="product-actions space-y-5">
     <div>
       <p className="text-xs font-medium text-slate-500">{pricing.enabled ? 'Preço para sua conta' : 'Preço do produto'}</p>
       <p className="mt-1 break-words text-3xl font-extrabold tracking-tight text-teal-950 sm:text-[2.5rem]" aria-live="polite">{pricing.ready ? formatPrice(product.price) : pricing.error ? 'Preço indisponível' : 'Consultando preço…'}</p>
@@ -50,10 +50,14 @@ export default function ProductActions({ product: original }: { product: Product
       <p className="text-sm text-slate-600">Subtotal <strong className="block text-lg text-slate-900">{pricing.ready ? formatPrice(product.price * selected) : 'Consultando preço…'}</strong></p>
     </div>
     <div className="space-y-2.5">
-      <button type="button" disabled={!mounted || limit === 0 || !pricing.ready} onClick={add} className="flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl bg-teal-800 px-4 py-3.5 font-bold text-white shadow-[0_6px_20px_-8px_rgba(15,118,110,.65)] transition-colors hover:bg-teal-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 disabled:opacity-50"><ShoppingBag size={20} />{limit === 0 && stock > 0 ? 'Limite da lista atingido' : 'Adicionar à lista'}</button>
-      <Link href="/lista" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-teal-800/15 bg-teal-50/40 px-3 text-sm font-semibold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline-teal-700">Revisar minha lista<ArrowRight size={16} aria-hidden="true" /></Link>
+      <button type="button" disabled={!mounted || limit === 0 || !pricing.ready} onClick={add} className="flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl bg-teal-800 px-4 py-3.5 font-bold text-white shadow-[0_6px_20px_-8px_rgba(15,118,110,.65)] transition-colors hover:bg-teal-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-700 disabled:opacity-50"><ShoppingBag size={20} />{limit === 0 && stock > 0 ? 'Limite do carrinho atingido' : 'Adicionar ao carrinho'}</button>
+      <Link href="/lista" className="flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-teal-800/15 bg-teal-50/40 px-3 text-sm font-semibold text-teal-900 transition-colors hover:bg-teal-50 focus-visible:outline-teal-700">Revisar carrinho<ArrowRight size={16} aria-hidden="true" /></Link>
     </div>
     <p role="status" className="empty:hidden rounded-xl bg-teal-50 px-3 py-2 text-sm text-teal-900">{message}</p>
+    <div className="product-mobile-action" aria-label="Adicionar este produto ao carrinho">
+      <div><span className="text-xs text-slate-600">{selected} {selected === 1 ? 'unidade' : 'unidades'}</span><strong className="block text-lg text-teal-950">{pricing.ready ? formatPrice(product.price * selected) : 'Consultando…'}</strong></div>
+      <button type="button" disabled={!mounted || limit === 0 || !pricing.ready} onClick={add}><ShoppingBag size={20} aria-hidden="true" />{limit === 0 ? 'Indisponível' : 'Adicionar'}</button>
+    </div>
     <p className="flex items-start gap-2 text-xs leading-relaxed text-slate-500"><ShieldCheck size={16} className="mt-0.5 shrink-0 text-teal-700" aria-hidden="true" />Pagamento processado pelo Mercado Pago. Os dados completos do cartão não ficam armazenados na loja.</p>
     <details className="border-t border-slate-100 pt-4"><summary className="cursor-pointer py-2 text-sm font-semibold text-teal-900">Falar com o consultor</summary>
       <label htmlFor="product-note" className="mb-2 mt-3 block text-sm">Mensagem adicional (opcional)</label>

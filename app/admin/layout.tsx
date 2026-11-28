@@ -13,6 +13,7 @@ import { signOutWithCart } from '@/lib/cart-session';
 import { useThemeStore } from '@/store/useThemeStore';
 import Image from 'next/image';
 import AdminNotifications from '@/components/AdminNotifications';
+import AdminMobileNavigation from '@/components/AdminMobileNavigation';
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -21,6 +22,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const [adminName, setAdminName] = useState('');
   const [adminAvatar, setAdminAvatar] = useState('');
+  const [authError, setAuthError] = useState('');
   
 const { theme, toggleTheme } = useThemeStore();
   const mounted = useSyncExternalStore(() => () => undefined, () => true, () => false);
@@ -35,13 +37,18 @@ const { theme, toggleTheme } = useThemeStore();
   }, [theme]);
 
   useEffect(() => {
+    let active = true;
     const checkAuth = async () => {
+      try {
       const { data: { session } } = await supabase.auth.getSession();
+      if (!active) return;
       if (!session) return router.push('/login');
       
       const { data: profile, error } = await supabase.from('profiles').select('nome, avatar_url, role').eq('id', session.user.id).single();
+      if (!active) return;
 
       if (error || profile?.role !== 'admin') {
+        setIsAuthorized(false);
         toast.error('Acesso restrito à Diretoria.');
         router.push('/');
       } else {
@@ -49,8 +56,10 @@ const { theme, toggleTheme } = useThemeStore();
         setAdminAvatar(profile.avatar_url || '');
         setIsAuthorized(true);
       }
+      } catch { if (active) { setAuthError('Não foi possível conferir seu acesso ao painel. Verifique a conexão e tente novamente.'); setIsAuthorized(false); } }
     };
     void checkAuth();
+    return () => { active = false; };
   }, [router]);
 
   const handleLogout = async () => {
@@ -60,7 +69,7 @@ const { theme, toggleTheme } = useThemeStore();
   };
 
   const getLinkClass = (path: string) => {
-    const isActive = pathname === path;
+    const isActive = pathname === path || (path !== '/admin' && pathname.startsWith(path + '/'));
     return `flex min-h-12 items-center gap-3 px-3 py-3 rounded-xl font-semibold transition-colors text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 ${
       isActive 
         ? 'bg-teal-100 dark:bg-teal-500/10 text-teal-800 dark:text-teal-400' 
@@ -68,6 +77,7 @@ const { theme, toggleTheme } = useThemeStore();
     }`;
   };
 
+  if (isAuthorized === false) return <div className="mx-auto flex min-h-[65dvh] max-w-lg flex-col items-start justify-center gap-4 p-6"><h1 className="text-2xl font-bold">Acesso ao painel</h1><p role="alert">{authError || 'Esta área exige uma conta administrativa autorizada.'}</p><button type="button" onClick={() => window.location.reload()} className="action-link">Conferir acesso novamente</button><Link href="/login" className="action-link">Entrar na conta</Link></div>;
   if (isAuthorized === null || !mounted) {
     return (
       <div className="min-h-screen bg-[#FAFAFC] dark:bg-[#121212] flex flex-col items-center justify-center text-slate-500 dark:text-[#A1A1AA]">
@@ -126,6 +136,7 @@ const { theme, toggleTheme } = useThemeStore();
             <Link href="/admin/categorias" className={getLinkClass('/admin/categorias')}>
               <Tags size={16} /> Categorias
             </Link>
+            <Link href="/admin/precos" className={getLinkClass('/admin/precos')}><Tags size={16} /> Preços de consultor</Link>
           </div>
         </div>
       </aside>
@@ -171,7 +182,7 @@ const { theme, toggleTheme } = useThemeStore();
           </div>
         </header>
 
-        <nav aria-label="Navegação administrativa" className="flex overflow-x-auto gap-1 border-b border-slate-200 bg-white p-3 dark:bg-[#171717] lg:hidden [&>a]:shrink-0">
+        <nav aria-label="Navegação administrativa" className="hidden md:flex overflow-x-auto gap-1 border-b border-slate-200 bg-white p-3 dark:bg-[#171717] lg:hidden [&>a]:shrink-0">
           {[
             ['/admin', 'Visão geral'], ['/admin/pedidos', 'Pedidos'],
             ['/admin/clientes', 'Clientes'], ['/admin/produtos', 'Produtos'],
@@ -186,6 +197,7 @@ const { theme, toggleTheme } = useThemeStore();
             {children}
           </div>
         </main>
+        <AdminMobileNavigation />
       </div>
     </div>
   );

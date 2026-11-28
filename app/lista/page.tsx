@@ -618,31 +618,31 @@ export default function ListaDeInteresse() {
                   
                   <div className="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nome Completo</label>
+                      <label htmlFor="field-app-lista-page-tsx-624" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nome Completo</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><User size={16} className="text-slate-400" /></div>
-                        <input name="name" value={customerData.name} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Ex: João da Silva"/>
+                        <input aria-label="Nome completo" id="field-app-lista-page-tsx-624" autoComplete="name" name="name" value={customerData.name} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Ex: João da Silva"/>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">WhatsApp</label>
+                      <label htmlFor="field-app-lista-page-tsx-631" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">WhatsApp</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><Phone size={16} className="text-slate-400" /></div>
-                        <input name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="(81) 90000-0000"/>
+                        <input aria-label="Telefone de contato" id="field-app-lista-page-tsx-631" autoComplete="tel" inputMode="tel" name="phone" value={customerData.phone} onChange={handleCustomerDataChange} maxLength={15} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="(81) 90000-0000"/>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">E-mail</label>
+                      <label htmlFor="field-app-lista-page-tsx-638" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">E-mail</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><Mail size={16} className="text-slate-400" /></div>
-                        <input type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="seu@email.com"/>
+                        <input aria-label="E-mail de contato" id="field-app-lista-page-tsx-638" autoComplete="email" type="email" name="email" value={customerData.email} onChange={handleCustomerDataChange} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="seu@email.com"/>
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">CPF</label>
+                      <label htmlFor="field-app-lista-page-tsx-645" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">CPF</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"><CreditCard size={16} className="text-slate-400" /></div>
-                        <input name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="000.000.000-00"/>
+                        <input aria-label="CPF" id="field-app-lista-page-tsx-645" inputMode="numeric" name="cpf" value={customerData.cpf} onChange={handleCustomerDataChange} maxLength={14} className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="000.000.000-00"/>
                       </div>
                     </div>
                   </div>
@@ -688,35 +688,35 @@ export default function ListaDeInteresse() {
                     {selectedAddressId === 'new' && (
                       <div className="grid grid-cols-12 gap-5">
                         <div className="col-span-12 sm:col-span-4">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between">
+                          <label htmlFor="field-app-lista-page-tsx-694" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between">
                             <span>CEP</span> {isFetchingCep && <span className="text-teal-500 lowercase font-normal">(buscando)</span>}
                           </label>
-                          <input name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="00000-000"/>
+                          <input aria-label="CEP" id="field-app-lista-page-tsx-694" autoComplete="postal-code" inputMode="numeric" name="zipCode" value={customerData.zipCode} onChange={handleCepChange} maxLength={9} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="00000-000"/>
                         </div>
                         <div className="col-span-12 sm:col-span-6">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Rua / Logradouro</label>
-                          <input name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
+                          <label htmlFor="field-app-lista-page-tsx-698" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Rua / Logradouro</label>
+                          <input aria-label="Rua" id="field-app-lista-page-tsx-698" name="street" value={customerData.street} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
                         </div>
                         <div className="col-span-12 sm:col-span-2">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nº</label>
-                          <input name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="123"/>
+                          <label htmlFor="field-app-lista-page-tsx-702" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Nº</label>
+                          <input aria-label="Número" id="field-app-lista-page-tsx-702" name="number" value={customerData.number} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="123"/>
                         </div>
 
                         <div className="col-span-12 sm:col-span-4">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between"><span>Complemento</span><span className="text-[9px] text-slate-400 font-normal">(Opcional)</span></label>
-                          <input name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Apto, Casa..."/>
+                          <label htmlFor="field-app-lista-page-tsx-707" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 flex justify-between"><span>Complemento</span><span className="text-[9px] text-slate-400 font-normal">(Opcional)</span></label>
+                          <input aria-label="Complemento" id="field-app-lista-page-tsx-707" name="complement" value={customerData.complement} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 outline-none transition-all shadow-sm placeholder:text-slate-400 text-slate-800" placeholder="Apto, Casa..."/>
                         </div>
                         <div className="col-span-12 sm:col-span-4">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Bairro</label>
-                          <input name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
+                          <label htmlFor="field-app-lista-page-tsx-711" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Bairro</label>
+                          <input aria-label="Bairro" id="field-app-lista-page-tsx-711" name="neighborhood" value={customerData.neighborhood} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
                         </div>
                         <div className="col-span-12 sm:col-span-3">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Cidade</label>
-                          <input name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
+                          <label htmlFor="field-app-lista-page-tsx-715" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2">Cidade</label>
+                          <input aria-label="Cidade" id="field-app-lista-page-tsx-715" name="city" value={customerData.city} onChange={handleCustomerDataChange} className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
                         </div>
                         <div className="col-span-12 sm:col-span-1">
-                          <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 text-center">UF</label>
-                          <input name="state" value={customerData.state} onChange={handleCustomerDataChange} maxLength={2} className="w-full px-2 py-2.5 text-sm uppercase text-center bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
+                          <label htmlFor="field-app-lista-page-tsx-719" className="block text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-2 text-center">UF</label>
+                          <input aria-label="Estado (UF)" id="field-app-lista-page-tsx-719" name="state" value={customerData.state} onChange={handleCustomerDataChange} maxLength={2} className="w-full px-2 py-2.5 text-sm uppercase text-center bg-slate-50 border border-slate-200 rounded-lg outline-none shadow-sm text-slate-600" readOnly={isFetchingCep}/>
                         </div>
                       </div>
                     )}

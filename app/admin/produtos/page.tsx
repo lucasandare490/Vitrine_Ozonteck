@@ -1,6 +1,7 @@
 'use client';
+import AppDialog from '@/components/AppDialog';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { supabase } from '@/lib/supabase';
 import { Package, Plus, Search, Edit, Trash2, Image as ImageIcon, Loader2, AlertCircle, Filter, ArchiveRestore, ArchiveX, UploadCloud, ExternalLink } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -36,6 +37,8 @@ export default function ProdutosAdmin() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const deleteLock = useRef(false);
   
   const [isDragging, setIsDragging] = useState(false);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -182,23 +185,18 @@ export default function ProdutosAdmin() {
 
   const confirmDeleteAction = async () => {
     const { id, type } = deleteModal;
-    setDeleteModal({ isOpen: false, id: '', name: '', type: null });
-
-    if (type === 'soft') {
-      try {
-        const { error } = await supabase.from('produtos').update({ is_deleted: true }).eq('id', id);
-        if (error) throw error;
-        toast.success('Produto movido para a Lixeira.');
-        fetchData();
-      } catch (error: unknown) { toast.error(`Falha ao excluir: ${getErrorMessage(error)}`); }
-    } else if (type === 'hard') {
-      try {
-        const { error } = await supabase.from('produtos').delete().eq('id', id);
-        if (error) throw error;
-        toast.success('Produto excluído para sempre.');
-        fetchData();
-      } catch (error: unknown) { toast.error(`Falha ao excluir: ${getErrorMessage(error)}`); }
-    }
+    if (!id || !type || deleteLock.current) return;
+    deleteLock.current = true; setIsDeleting(true);
+    try {
+      const query = type === 'soft' ? supabase.from('produtos').update({ is_deleted: true }).eq('id', id) : supabase.from('produtos').delete().eq('id', id);
+      const { data, error } = await query.select('id');
+      if (error) throw error;
+      if (data?.length !== 1) throw new Error('A alteração não foi confirmada. Atualize a lista e confira sua autorização.');
+      toast.success(type === 'soft' ? 'Produto movido para a Lixeira.' : 'Produto excluído para sempre.');
+      setDeleteModal({ isOpen: false, id: '', name: '', type: null });
+      await fetchData();
+    } catch (error: unknown) { toast.error(`Não foi possível confirmar a exclusão: ${getErrorMessage(error)}`); }
+    finally { deleteLock.current = false; setIsDeleting(false); }
   };
 
   const handleRestore = async (id: string, name: string) => {
@@ -217,6 +215,7 @@ export default function ProdutosAdmin() {
   };
 
   const handleCloseModal = async () => {
+    if (isSaving || isUploadingImage) return;
     if (pendingImagePath) {
       const { error } = await supabase.storage.from('produtos').remove([pendingImagePath]);
       if (error) console.error('Falha ao remover upload não utilizado:', error.message);
@@ -264,7 +263,7 @@ export default function ProdutosAdmin() {
         <div className="p-4 border-b border-slate-200 dark:border-[#2D2D2D] flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50/50 dark:bg-transparent">
           <div className="relative w-full md:w-96">
             <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-[#A1A1AA]" />
-            <input 
+            <input aria-label="Buscar produtos por código ou nome" id="field-app-admin-produtos-page-tsx-266"
               type="text" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -275,7 +274,7 @@ export default function ProdutosAdmin() {
 
           <div className="flex items-center gap-2 w-full md:w-auto">
             <Filter size={16} className="text-slate-400 dark:text-[#A1A1AA] hidden sm:block" />
-            <select 
+            <select aria-label="Filtrar produtos por categoria" id="field-app-admin-produtos-page-tsx-277"
               value={selectedCategory} 
               onChange={(e) => setSelectedCategory(e.target.value)}
               className="w-full md:w-auto px-4 py-2 bg-white dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-700 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50 cursor-pointer"
@@ -295,20 +294,20 @@ export default function ProdutosAdmin() {
               <p className="text-xs font-bold uppercase tracking-widest">Sincronizando...</p>
             </div>
           ) : (
-            <table className="w-full text-left text-sm whitespace-nowrap">
-              <thead className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
-                <tr>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Produto</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Código (SKU)</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Preço</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Estoque</th>
-                  <th className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ações</th>
+            <table role="table" className="admin-table w-full text-left text-sm whitespace-nowrap">
+              <thead role="rowgroup" className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
+                <tr role="row">
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Produto</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Código (SKU)</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Preço</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px]">Estoque</th>
+                  <th scope="col" role="columnheader" className="px-6 py-4 font-bold uppercase tracking-widest text-[10px] text-right">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
+              <tbody role="rowgroup" className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
                 {produtosFiltrados.map((produto) => (
-                  <tr key={produto.id} className={`hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group ${viewMode === 'lixeira' ? 'opacity-75 grayscale hover:grayscale-0' : ''}`}>
-                    <td className="px-6 py-4 flex items-center gap-3">
+                  <tr role="row" key={produto.id} className={`hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors group ${viewMode === 'lixeira' ? 'opacity-75 grayscale hover:grayscale-0' : ''}`}>
+                    <td data-label="Produto" role="cell" className="px-6 py-4 flex items-center gap-3">
                       <div className="relative w-10 h-10 rounded-lg bg-slate-100 dark:bg-[#171717] border border-slate-200 dark:border-[#2D2D2D] flex items-center justify-center overflow-hidden shrink-0">
                         {produto.image_url ? <NextImage src={produto.image_url} alt={produto.name} fill sizes="40px" className="object-cover" /> : <ImageIcon size={16} className="text-slate-400 dark:text-[#A1A1AA]" />}
                       </div>
@@ -317,13 +316,13 @@ export default function ProdutosAdmin() {
                         <p className="text-[10px] text-slate-500 dark:text-[#A1A1AA] font-semibold mt-0.5">{produto.category || 'Sem Categoria'}</p>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td data-label="Código" role="cell" className="px-6 py-4">
                       <span className="font-mono text-[11px] font-bold text-slate-600 dark:text-[#A1A1AA] bg-slate-100 dark:bg-[#262626] px-2 py-1 rounded-md border border-slate-200 dark:border-[#2D2D2D]">{produto.code}</span>
                     </td>
-                    <td className="px-6 py-4 font-black text-slate-900 dark:text-[#F0F0F0] text-xs">
+                    <td data-label="Preço" role="cell" className="px-6 py-4 font-black text-slate-900 dark:text-[#F0F0F0] text-xs">
                       {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produto.price || 0)}
                     </td>
-                    <td className="px-6 py-4">
+                    <td data-label="Estoque" role="cell" className="px-6 py-4">
                       {viewMode === 'ativos' ? (
                         <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border
                           ${produto.estoque > 10 ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' 
@@ -336,7 +335,7 @@ export default function ProdutosAdmin() {
                         <span className="text-[10px] font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">Excluído</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-right">
+                    <td data-label="Ações" role="cell" className="px-6 py-4 text-right">
                       {viewMode === 'ativos' ? (
                         <div className="flex items-center justify-end gap-2">
                           <Link href={productPath(produto.code)} target="_blank" rel="noopener noreferrer" aria-label={`Ver página de ${produto.name} em nova aba`} title="Ver página do produto" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-teal-800 dark:bg-[#333333] dark:text-teal-300"><ExternalLink size={16} /></Link>
@@ -362,8 +361,8 @@ export default function ProdutosAdmin() {
                 ))}
 
                 {produtosFiltrados.length === 0 && !loading && (
-                  <tr>
-                    <td colSpan={5} className="px-6 py-20 text-center">
+                  <tr role="row">
+                    <td role="cell" colSpan={5} className="px-6 py-20 text-center">
                       <AlertCircle size={40} className="mx-auto mb-4 text-slate-300 dark:text-[#2D2D2D]" />
                       <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">
                         {viewMode === 'lixeira' ? 'A lixeira está vazia.' : 'Nenhum produto ativo encontrado.'}
@@ -378,7 +377,7 @@ export default function ProdutosAdmin() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+        <AppDialog title="Cadastro do produto" onClose={() => { void handleCloseModal(); }} busy={isSaving || isUploadingImage}>
           <div className="bg-white dark:bg-[#171717] w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 dark:border-[#2D2D2D] overflow-hidden flex flex-col max-h-[90vh]">
             
             <div className="px-6 py-4 border-b border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex justify-between items-center shrink-0">
@@ -393,27 +392,27 @@ export default function ProdutosAdmin() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">CÓDIGO DO PRODUTO (REF)</label>
-                    <input type="text" value={formData.code} onChange={e => setFormData({...formData, code: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Ex: OZO-123" />
+                    <label htmlFor="field-app-admin-produtos-page-tsx-396" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">CÓDIGO DO PRODUTO (REF)</label>
+                    <input aria-label="Código do produto" id="field-app-admin-produtos-page-tsx-396" type="text" value={formData.code} onChange={e => setFormData({...formData, code: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Ex: OZO-123" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Nome do Produto</label>
-                    <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Óleo de Girassol Ozonizado..." />
+                    <label htmlFor="field-app-admin-produtos-page-tsx-400" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Nome do Produto</label>
+                    <input aria-label="Nome do produto" id="field-app-admin-produtos-page-tsx-400" type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="Óleo de Girassol Ozonizado..." />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Preço (R$)</label>
-                    <input type="text" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="99,90" />
+                    <label htmlFor="field-app-admin-produtos-page-tsx-407" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Preço (R$)</label>
+                    <input aria-label="Preço de venda" id="field-app-admin-produtos-page-tsx-407" type="text" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="99,90" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Estoque</label>
-                    <input type="number" value={formData.estoque} onChange={e => setFormData({...formData, estoque: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="50" />
+                    <label htmlFor="field-app-admin-produtos-page-tsx-411" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Estoque</label>
+                    <input aria-label="Quantidade no sistema" id="field-app-admin-produtos-page-tsx-411" type="number" value={formData.estoque} onChange={e => setFormData({...formData, estoque: e.target.value})} required className="w-full px-4 py-2.5 bg-slate-50 dark:bg-[#202020] border border-slate-200 dark:border-[#2D2D2D] rounded-xl text-sm font-medium text-slate-900 dark:text-[#F0F0F0] focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500/50" placeholder="50" />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Categoria</label>
-                    <select 
+                    <label htmlFor="field-app-admin-produtos-page-tsx-415" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Categoria</label>
+                    <select aria-label="Categoria do produto" id="field-app-admin-produtos-page-tsx-415"
                       value={formData.category} 
                       onChange={e => setFormData({...formData, category: e.target.value})} 
                       required
@@ -434,7 +433,7 @@ export default function ProdutosAdmin() {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Imagem do Produto</label>
+                  <label htmlFor="image-upload" className="block text-[10px] font-bold text-slate-500 dark:text-[#A1A1AA] uppercase tracking-widest mb-1">Imagem do Produto</label>
                   <div
                     onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                     onDragLeave={() => setIsDragging(false)}
@@ -447,7 +446,7 @@ export default function ProdutosAdmin() {
                       ${isDragging ? 'border-teal-500 bg-teal-50/50 dark:bg-teal-500/10' : 'border-slate-300 dark:border-[#2D2D2D] hover:border-teal-400 dark:hover:border-teal-500 bg-slate-50 dark:bg-[#202020]'}`}
                     onClick={() => document.getElementById('image-upload')?.click()}
                   >
-                    <input type="file" id="image-upload" className="hidden" accept="image/jpeg,image/png,image/webp" onChange={(e) => {
+                    <input aria-label="Imagem do produto" type="file" id="image-upload" className="hidden" accept="image/jpeg,image/png,image/webp" onChange={(e) => {
                       const file = e.target.files?.[0];
                       if (file) handleImageUpload(file);
                     }} disabled={isUploadingImage} />
@@ -488,11 +487,11 @@ export default function ProdutosAdmin() {
             </div>
 
           </div>
-        </div>
+        </AppDialog>
       )}
 
       {deleteModal.isOpen && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+        <AppDialog title="Confirmar exclusão do produto" onClose={() => setDeleteModal({ isOpen: false, id: '', name: '', type: null })} busy={isDeleting}>
           <div className="bg-white dark:bg-[#171717] w-full max-w-sm rounded-2xl shadow-2xl border border-slate-200 dark:border-[#2D2D2D] overflow-hidden flex flex-col">
             <div className="p-8 text-center flex flex-col items-center">
               <div className="w-16 h-16 bg-red-50 dark:bg-red-500/10 rounded-full flex items-center justify-center mb-5 border border-red-100 dark:border-red-500/20">
@@ -510,19 +509,21 @@ export default function ProdutosAdmin() {
             <div className="px-6 py-4 border-t border-slate-200 dark:border-[#2D2D2D] bg-slate-50 dark:bg-[#202020] flex gap-3">
               <button 
                 onClick={() => setDeleteModal({ isOpen: false, id: '', name: '', type: null })} 
+                disabled={isDeleting}
                 className="flex-1 px-5 py-2.5 rounded-xl text-xs font-bold text-slate-600 dark:text-[#F0F0F0] hover:bg-slate-200 dark:hover:bg-[#333333] transition-colors cursor-pointer"
               >
                 Cancelar
               </button>
               <button 
                 onClick={confirmDeleteAction} 
+                disabled={isDeleting}
                 className="flex-1 px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-md shadow-red-500/20 cursor-pointer"
               >
-                {deleteModal.type === 'soft' ? 'Mover p/ Lixeira' : 'Sim, Excluir Tudo'}
+                {isDeleting ? 'Confirmando…' : deleteModal.type === 'soft' ? 'Mover para lixeira' : 'Excluir este produto'}
               </button>
             </div>
           </div>
-        </div>
+        </AppDialog>
       )}
 
     </div>

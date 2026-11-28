@@ -151,7 +151,7 @@ export default function SuportePage() {
           </h1>
 
           <div className="relative max-w-2xl mx-auto">
-            <input
+            <input aria-label="Buscar na central de ajuda" id="field-app-suporte-page-tsx-154"
               type="text"
               placeholder="Digite sua dúvida (ex: prazo de entrega, devolução, pagamento...)"
               value={busca}
@@ -161,7 +161,7 @@ export default function SuportePage() {
               }}
               className="w-full bg-white text-slate-800 rounded-full pl-6 pr-14 py-4 md:py-5 shadow-[0_10px_40px_rgba(0,0,0,0.1)] focus:outline-none focus:ring-4 focus:ring-teal-400/30 text-sm md:text-base transition-all"
             />
-            <button className="absolute right-2 top-2 bottom-2 bg-teal-600 hover:bg-teal-700 text-white w-10 md:w-12 rounded-full flex items-center justify-center transition-colors shadow-sm">
+            <button type="button" aria-label="Ver perguntas encontradas" onClick={() => { const results = document.getElementById('help-results'); results?.scrollIntoView({ block: 'start' }); results?.focus({ preventScroll: true }); }} className="absolute right-2 top-2 bottom-2 bg-teal-600 hover:bg-teal-700 text-white min-w-11 md:w-12 rounded-full flex items-center justify-center transition-colors shadow-sm">
               <Search size={20} />
             </button>
           </div>
@@ -213,7 +213,7 @@ export default function SuportePage() {
           </div>
         )}
 
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
+        <div id="help-results" tabIndex={-1} className="scroll-mt-28 bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10">
           <h2 className="text-lg md:text-xl font-bold text-slate-800 mb-6">
             {busca
               ? `Resultados para "${busca}"`

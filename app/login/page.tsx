@@ -472,12 +472,12 @@ export default function Login() {
                   {!isLogin && (
                     <div className="animate-in fade-in duration-300 space-y-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
+                        <label htmlFor="field-app-login-page-tsx-480" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">Nome Completo</label>
                         <div className="relative">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <User size={16} className="text-slate-400" />
                           </div>
-                          <input
+                          <input aria-label="Nome completo" id="field-app-login-page-tsx-480"
                             type="text" name="nome" value={formData.nome} onChange={handleChange} required={!isLogin} autoComplete="name"
                             className="w-full pl-10 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                             placeholder="Como devemos chamá-lo(a)?"
@@ -488,12 +488,12 @@ export default function Login() {
                   )}
 
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
+                    <label htmlFor="field-app-login-page-tsx-496" className="block text-[11px] font-bold text-slate-600 uppercase mb-1.5">E-mail</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Mail size={16} className="text-slate-400" />
                       </div>
-                      <input
+                      <input aria-label="E-mail de acesso" id="field-app-login-page-tsx-496"
                         type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="email"
                         className="w-full pl-10 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all placeholder:text-slate-400"
                         placeholder="seu.email@dominio.com"
@@ -517,7 +517,7 @@ export default function Login() {
                     placeholder="••••••••"
                   />
                   <button 
-                    type="button" onClick={() => setShowPassword(!showPassword)}
+                    type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'} aria-pressed={showPassword}
                     className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-teal-600 transition-colors cursor-pointer"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

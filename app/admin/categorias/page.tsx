@@ -137,18 +137,18 @@ export default function CategoriasAdmin() {
                 <p className="text-sm font-bold text-slate-400 dark:text-[#A1A1AA] uppercase tracking-widest">{archived ? 'Nenhuma categoria arquivada.' : 'Nenhuma categoria ativa.'}</p>
               </div>
             ) : (
-              <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
-                  <tr>
-                    <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Nome</th>
-                    <th className="px-6 py-4 font-black uppercase tracking-widest text-[10px] text-right">Ação</th>
+              <table role="table" className="admin-table w-full text-left text-sm whitespace-nowrap">
+                <thead role="rowgroup" className="bg-slate-50 dark:bg-[#202020] border-b border-slate-200 dark:border-[#2D2D2D] text-slate-500 dark:text-[#A1A1AA]">
+                  <tr role="row">
+                    <th scope="col" role="columnheader" className="px-6 py-4 font-black uppercase tracking-widest text-[10px]">Nome</th>
+                    <th scope="col" role="columnheader" className="px-6 py-4 font-black uppercase tracking-widest text-[10px] text-right">Ação</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
+                <tbody role="rowgroup" className="divide-y divide-slate-100 dark:divide-[#2D2D2D]">
                   {visibleCategories.map((cat) => (
-                    <tr key={cat.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors">
-                      <td className="px-6 py-4 font-bold text-slate-900 dark:text-[#F0F0F0] text-xs">{cat.name}</td>
-                      <td className="px-6 py-4 text-right">
+                    <tr role="row" key={cat.id} className="hover:bg-slate-50 dark:hover:bg-[#262626] transition-colors">
+                      <td data-label="Nome" role="cell" className="px-6 py-4 font-bold text-slate-900 dark:text-[#F0F0F0] text-xs">{cat.name}</td>
+                      <td data-label="Ação" role="cell" className="px-6 py-4 text-right">
                         <Link className="mr-3 inline-flex min-h-11 items-center text-teal-700 action-link" href={`/admin/produtos?categoria=${encodeURIComponent(cat.name)}`}>Gerenciar produtos</Link>
                         <button 
                           disabled={isSaving}

@@ -1,0 +1,170 @@
+{
+  "startedAt": "2026-11-28T09:34:07.978Z",
+  "mode": "local-release-check",
+  "revision": "111732137b742209b36af235c76fbc12cff371d4",
+  "trackedChanges": true,
+  "localChecksPassed": true,
+  "productionReady": false,
+  "boundary": "No UI/browser proof, external provider validation, live database migration, deployment or delivery is certified by this local run.",
+  "checksRequiringSeparateEvidence": [
+    "Visual and keyboard review in the browser",
+    "Verify migrations in the target database (this runner does not inspect it)",
+    "Deploy and verify the exact published revision",
+    "Public checkout/provider/webhook/stock/scheduled-email journey",
+    "Debit restriction and boleto settlement",
+    "Commercial approvals and Visaris label/manufacturer documentation",
+    "Google processing and historical supporting records"
+  ],
+  "sourceHashes": {
+    "components/AdminPricing.tsx": "8e3c6705519a8e680da3886fc6556941538ef6055ffeba0ba92a1536c777e61d",
+    "app/conta/enderecos/page.tsx": "33485ed87c8a91cb4d7e0bdd0cc55113447beb4ed3c26d7e3c7647b3a8f23a1c",
+    "supabase/migrations/202611270001_primary_address_switch.sql": "476ce3935d85fbd8cc9efb37a4a164c6639b32d1a72927392b32bd98dc08c661",
+    "scripts/check-release.mjs": "50425789998c0559ea169395932488871c8360562154d558077efa97aba8ec29",
+    "package.json": "2409cefadcd61c8a6cb1ad0c4f6c49ba1c19cf620ff8a1b66241fc571eb253dc",
+    "components/MobileNavigation.tsx": "99c6a114918f92b6d1b9a2fb31574f0f85b17ddb745488b2ac131bb13bd5b69a",
+    "components/AppRuntime.tsx": "c6e83fad69c7a1ce42feb800a329b12388e67d2b9bc2f88dd7acdffa0b5d15bf",
+    "components/ProductActions.tsx": "06faa521c38ba26bbd3b4161fee5242260f0d84d999a0cf3d608ff052e59dc1c",
+    "app/manifest.ts": "5f58e7c60e6a924660e66b3b0a9b0de15e6d0eb00d6e86e28e45d5d8d34ad534",
+    "public/sw.js": "ddd7256eb26b02500d45c6b216182ad1900e91b722fd60620ee816888c466d54",
+    "app/globals.css": "21e60ff487d52522f8398e2f5d42fbd5f685df36361c543bb09e92c6324ff460"
+  },
+  "steps": [
+    {
+      "id": "unit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 7331,
+      "log": "unit.log",
+      "executionError": null
+    },
+    {
+      "id": "components",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2130,
+      "log": "components.log",
+      "executionError": null
+    },
+    {
+      "id": "form-labels",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1196,
+      "log": "form-labels.log",
+      "executionError": null
+    },
+    {
+      "id": "address-database",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 3067,
+      "log": "address-database.log",
+      "executionError": null
+    },
+    {
+      "id": "category-audit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2706,
+      "log": "category-audit.log",
+      "executionError": null
+    },
+    {
+      "id": "product-import",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2830,
+      "log": "product-import.log",
+      "executionError": null
+    },
+    {
+      "id": "interested-customers",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2768,
+      "log": "interested-customers.log",
+      "executionError": null
+    },
+    {
+      "id": "admin-reminders",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 2338,
+      "log": "admin-reminders.log",
+      "executionError": null
+    },
+    {
+      "id": "support",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1975,
+      "log": "support.log",
+      "executionError": null
+    },
+    {
+      "id": "pickup-ready",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1971,
+      "log": "pickup-ready.log",
+      "executionError": null
+    },
+    {
+      "id": "email-queue",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1992,
+      "log": "email-queue.log",
+      "executionError": null
+    },
+    {
+      "id": "rate-limit",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1933,
+      "log": "rate-limit.log",
+      "executionError": null
+    },
+    {
+      "id": "benefit-pricing",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1880,
+      "log": "benefit-pricing.log",
+      "executionError": null
+    },
+    {
+      "id": "purchase-changes",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1826,
+      "log": "purchase-changes.log",
+      "executionError": null
+    },
+    {
+      "id": "payment-stock",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 1831,
+      "log": "payment-stock.log",
+      "executionError": null
+    },
+    {
+      "id": "changed-code-lint",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 20944,
+      "log": "changed-code-lint.log",
+      "executionError": null
+    },
+    {
+      "id": "production-build",
+      "passed": true,
+      "exitCode": 0,
+      "durationMs": 53457,
+      "log": "production-build.log",
+      "executionError": null
+    }
+  ],
+  "completedAt": "2026-11-28T09:36:00.440Z"
+}

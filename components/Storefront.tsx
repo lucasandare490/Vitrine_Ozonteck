@@ -9,6 +9,8 @@ import { matchesPerfumeryVolume, type PerfumeryVolume } from '@/lib/perfumery-fi
 import { useState, useEffect, useRef, ReactNode, Suspense, useMemo } from 'react';
 import { supabase } from '@/lib/supabase';
 import ProductCard from '@/components/ProductCard';
+import MobileCatalogFilters from '@/components/MobileCatalogFilters';
+import { useStorePricing } from '@/components/StorePricing';
 import Link from 'next/link';
 import PaginatedGrid from '@/components/PaginatedGrid';
 import { MapPin, Phone, Heart, Search, MessageCircle, CheckCircle2, Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -86,7 +88,7 @@ const RevealOnScroll = ({ children, delay = 0 }: { children: ReactNode; delay?: 
 };
 
 const OzoneBackground = () => (
-  <div className="fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
+  <div className="storefront-atmosphere fixed inset-0 z-0 bg-[#FAFAFC] pointer-events-none flex justify-center overflow-hidden">
     <style dangerouslySetInnerHTML={{__html: `
       @keyframes float1 {
         0%, 100% { transform: translate(0px, 0px) scale(1); }
@@ -241,13 +243,17 @@ const AvaliacoesDaLoja = () => {
 };
 
 function HomeContent() {
+  const pricing = useStorePricing();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [catalogError, setCatalogError] = useState('');
+  const [reloadCatalog, setReloadCatalog] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('Todas');
   const [perfumeryVolume, setPerfumeryVolume] = useState<PerfumeryVolume>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [sort, setSort] = useState('name');
 
   const [user, setUser] = useState<User | null>(null);
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -264,22 +270,37 @@ function HomeContent() {
     const q = searchParams.get('q');
     const timer = window.setTimeout(() => {
       setSearchQuery(q ?? '');
+      setSelectedCategory(searchParams.get('categoria') || 'Todas');
+      setSort(['price-asc', 'price-desc'].includes(searchParams.get('ordem') || '') ? searchParams.get('ordem')! : 'name');
       if (q) document.getElementById('catalogo')?.scrollIntoView({ behavior: 'smooth' });
     }, 300);
     return () => window.clearTimeout(timer);
   }, [searchParams]);
 
   useEffect(() => {
+    try { sessionStorage.setItem('ozonteck-catalog-context', `/${window.location.search}#catalogo`); } catch { /* Storage is optional. */ }
+  }, [searchParams]);
+
+  const changeCatalog = (category: string, order = sort) => {
+    setSelectedCategory(category); setSort(order); setPerfumeryVolume('all');
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete('page');
+    if (category === 'Todas') params.delete('categoria'); else params.set('categoria', category);
+    if (order === 'name') params.delete('ordem'); else params.set('ordem', order);
+    router.replace(`/${params.size ? `?${params}` : ''}#catalogo`, { scroll: false });
+  };
+
+  useEffect(() => {
+    let active = true;
     async function loadProducts() {
+      setIsLoading(true); setCatalogError('');
+      try {
       const { data, error } = await supabase
         .from('produtos')
         .select('id, code, name, description, category, price, image_url, estoque')
         .neq('is_deleted', true);
-      if (error) {
-        toast.error('Não foi possível carregar o catálogo.');
-        setIsLoading(false);
-        return;
-      }
+      if (!active) return;
+      if (error) throw error;
       if (data) {
         const sortedData = data.sort((a, b) => {
            if (a.category < b.category) return -1;
@@ -289,7 +310,8 @@ function HomeContent() {
         const formattedProducts = sortedData.filter((item) => !isRetiredProduct(item) && !isTestProduct(item)).map(toProduct);
         setProducts(formattedProducts);
       }
-      setIsLoading(false);
+      } catch { if (active) setCatalogError('Não foi possível carregar os produtos. Confira sua conexão e tente novamente.'); }
+      finally { if (active) setIsLoading(false); }
     }
 
     void loadProducts();
@@ -343,10 +365,11 @@ function HomeContent() {
       ).subscribe();
 
     return () => {
+      active = false;
       supabase.removeChannel(channel);
       subscription.unsubscribe();
     };
-  }, []);
+  }, [reloadCatalog]);
 
   const toggleFavorite = async (produtoCode: string) => {
     if (!user) {
@@ -375,8 +398,8 @@ function HomeContent() {
       const matchesSearch = normalize(`${product.name} ${product.category} ${product.code}`).includes(normalize(searchQuery));
       const matchesVolume = Boolean(searchQuery.trim()) || selectedCategory !== 'Perfumaria' || matchesPerfumeryVolume(product.code, perfumeryVolume);
       return matchesCategory && matchesSearch && matchesVolume;
-    });
-  }, [products, selectedCategory, searchQuery, perfumeryVolume]);
+    }).sort((a, b) => sort === 'price-asc' ? (pricing.prices[a.code] ?? a.price) - (pricing.prices[b.code] ?? b.price) : sort === 'price-desc' ? (pricing.prices[b.code] ?? b.price) - (pricing.prices[a.code] ?? a.price) : a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+  }, [products, selectedCategory, searchQuery, perfumeryVolume, sort, pricing.prices]);
 
   const scrollToObject = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -386,7 +409,7 @@ function HomeContent() {
     <>
       <OzoneBackground />
 
-      <section className="relative w-full pt-6 pb-8 sm:pt-16 sm:pb-20 z-10">
+      <section className="storefront-hero relative w-full pt-6 pb-8 sm:pt-16 sm:pb-20 z-10">
         <div className="max-w-[1800px] mx-auto px-5 sm:px-10 lg:px-16 flex flex-col items-center text-center">
 
           <FadeInOnLoad delay={100}>
@@ -435,8 +458,9 @@ function HomeContent() {
             <div className="w-10 h-10 border-4 border-teal-200 border-t-teal-600 rounded-full animate-spin mb-4"></div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">A carregar loja...</p>
           </div>
-        ) : (
+        ) : catalogError ? <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6"><p role="alert" className="text-sm text-slate-800">{catalogError}</p><button type="button" className="action-link mt-4" onClick={() => setReloadCatalog(value => value + 1)}>Carregar produtos novamente</button></div> : (
           <>
+            <MobileCatalogFilters categories={categories} category={selectedCategory} sort={sort} count={filteredProducts.length} onChange={changeCatalog} />
             <RevealOnScroll delay={50}>
 
               {searchQuery && (
@@ -451,16 +475,14 @@ function HomeContent() {
                 </div>
               )}
 
-              <div className="relative mb-8 sm:mb-12 flex justify-center max-w-4xl mx-auto">
+              <div className="desktop-category-tabs relative mb-8 sm:mb-12 flex justify-center max-w-4xl mx-auto">
                 <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#FAFAFC] to-transparent z-10 pointer-events-none lg:hidden"></div>
                 <div className="flex overflow-x-auto no-scrollbar gap-5 sm:gap-8 pb-3 snap-x snap-mandatory px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-slate-200 w-full justify-start lg:justify-center">
                   {categories.map((category) => (
                     <button
                       key={category}
                       onClick={() => {
-                        setSelectedCategory(category);
-                        setPerfumeryVolume('all');
-                        if(searchQuery) { setSearchQuery(''); router.push('/'); }
+                        changeCatalog(category);
                       }}
                       className={`min-h-11 text-xs sm:text-[13px] font-bold transition-all relative pb-3 -mb-[13px] whitespace-nowrap snap-start shrink-0 ${
                         selectedCategory === category && !searchQuery
@@ -512,7 +534,7 @@ function HomeContent() {
                 </button>
               </div>
             ) : (
-              <PaginatedGrid key={`${selectedCategory}:${perfumeryVolume}:${searchQuery}`} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-3 sm:gap-x-4 gap-y-6 sm:gap-y-12">
+              <PaginatedGrid key={`${selectedCategory}:${perfumeryVolume}:${searchQuery}:${sort}`} contextKey={`${selectedCategory}:${perfumeryVolume}:${searchQuery}:${sort}`} className="catalog-product-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-3 sm:gap-x-4 gap-y-6 sm:gap-y-12">
                 {filteredProducts.map((product, index) => (
                   <RevealOnScroll key={product.id} delay={index < 4 ? index * 100 : 0}>
                     <div className="relative group">
@@ -522,7 +544,9 @@ function HomeContent() {
                           e.stopPropagation();
                           toggleFavorite(product.code);
                         }}
-                        className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 p-2 rounded-full bg-white/80 backdrop-blur-md shadow-sm border border-slate-100 hover:scale-110 hover:bg-white transition-all cursor-pointer opacity-90 hover:opacity-100"
+                        aria-label={favorites.includes(product.code) ? `Remover ${product.name} dos favoritos` : `Salvar ${product.name} nos favoritos`}
+                        aria-pressed={favorites.includes(product.code)}
+                        className="absolute top-2 right-2 sm:top-3 sm:right-3 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/95 shadow-sm border border-slate-100 hover:bg-white transition-colors cursor-pointer"
                         title={favorites.includes(product.code) ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
                       >
                         <Heart 
@@ -642,7 +666,7 @@ function HomeContent() {
 export default function Home() {
   return (
     // ATENÇÃO AQUI: Removemos o overflow-hidden maldito que estava estragando o botão!
-    <main className="min-h-screen bg-[#FAFAFC] text-slate-900 selection:bg-teal-600 selection:text-white flex flex-col relative">
+    <main className="storefront-page min-h-screen bg-[#FAFAFC] text-slate-900 selection:bg-teal-600 selection:text-white flex flex-col relative">
       <Suspense fallback={<div className="min-h-screen bg-[#FAFAFC]"></div>}>
         <HomeContent />
       </Suspense>

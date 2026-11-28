@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-28T09:38:28.335Z",
+  "boundary": "HTTP of local production build only; no browser, installation, payment, account or external service validation.",
+  "checks": [
+    "manifest-standalone",
+    "worker-update-headers",
+    "offline-fallback-noindex",
+    "/app-icons/icon-192.png",
+    "/app-icons/icon-512.png",
+    "/app-icons/maskable-512.png",
+    "/app-icons/apple-180.png",
+    "home-manifest-and-safe-area",
+    "/busca",
+    "/instalar"
+  ],
+  "passed": true
+}
