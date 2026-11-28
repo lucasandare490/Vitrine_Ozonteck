@@ -26,3 +26,6 @@
 - Conferir pagamentos aprovados, recusados, expirados e reembolsados. Reembolso financeiro nao e implementado por estes ajustes: nenhuma devolucao de dinheiro e disparada automaticamente.
 - Verificar concorrencia no ambiente de homologacao antes de afirmar cobertura completa de estoque.
 - Tunel temporario nao substitui hospedagem permanente; computador desligado interrompe o atendimento.
+## Complemento de 28/11/2026 — verificação por formato do ID
+
+A sonda do deploy `8558a5e` aceita a assinatura quando o ID da URL está em minúsculas, mas rejeita o ID em maiúsculas assinado na forma canônica minúscula. O código atual já normaliza esse ID e o build local passou no mesmo teste. Publicar essa correção antes de liberar o fluxo e repetir `node scripts/check-orders-webhook-deployment.mjs` no domínio real. Não trocar credenciais nem usar somente `--lowercase-query` como aceite da versão antiga. Resultados e limites: [pendencias-executadas-2026-11-28.md](pendencias-executadas-2026-11-28.md).

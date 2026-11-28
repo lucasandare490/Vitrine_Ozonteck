@@ -5,9 +5,21 @@ import { parseEnv } from 'node:util';
 import { randomUUID } from 'node:crypto';
 import { createRequire } from 'node:module';
 import vm from 'node:vm';
+import { resolve, relative, dirname } from 'node:path';
 import { MercadoPagoConfig, Order } from 'mercadopago';
 const require = createRequire(import.meta.url);
 const ts = require('typescript');
+// A dated output allows a fresh, narrow recheck without rewriting historical evidence.
+const outputOption = process.argv.find(arg => arg.startsWith('--output='));
+const outputArgument = outputOption?.slice(9);
+if (outputOption !== undefined && !outputArgument) throw new Error('OUTPUT_PATH_REQUIRED');
+const output = outputArgument || 'docs/payment-provider-test-2026-11-05.json';
+if (outputArgument) {
+  const path = relative(resolve('docs'), resolve(outputArgument));
+  if (!path || path.startsWith('..') || /^[A-Za-z]:|^[/\\]/.test(path) || !path.endsWith('.json')) throw new Error('OUTPUT_MUST_BE_A_JSON_FILE_UNDER_DOCS');
+  await mkdir(dirname(resolve(outputArgument)), { recursive: true });
+  try { await writeFile(outputArgument, JSON.stringify({ status: 'not_started', productionPaymentsAllowed: false }) + '\n', { flag: 'wx' }); } catch { throw new Error('FRESH_OUTPUT_FILE_REQUIRED'); }
+}
 const config = parseEnv(await readFile('.env.orders-test.local', 'utf8'));
 const exported = {};
 vm.runInNewContext(ts.transpileModule(await readFile('lib/server/mercado-pago-orders.ts', 'utf8'), {
@@ -41,7 +53,7 @@ if (!seller.tags?.includes('test_user') || seller.site_id !== 'MLB') throw new E
 if (config.ORDERS_TEST_ACCESS_TOKEN.match(/^APP_USR-(\d+)-/)?.[1] !== config.ORDERS_TEST_APPLICATION_ID) throw new Error('TEST_APPLICATION_CONFIGURATION_MISMATCH');
 const ordersClient=new Order(new MercadoPagoConfig({accessToken:config.ORDERS_TEST_ACCESS_TOKEN,options:{timeout:15000,retries:1}}));
 let previous;
-try { previous=JSON.parse(await readFile('docs/payment-provider-test-2026-11-05.json','utf8')); } catch { /* First run. */ }
+if (!outputArgument) try { previous=JSON.parse(await readFile(output,'utf8')); } catch { /* First run. */ }
 const report = { date: new Date().toISOString(), environment: 'test', testSellerConfirmed: true,
   scope: 'Real provider sandbox requests using the shop request builder and normalizer. No shop DB, customer messages or real payments.', cases: [] };
 report.attempts=previous ? [...(previous.attempts || []),{date:previous.date,cases:previous.cases}] : [];
@@ -100,15 +112,22 @@ for (const scenario of scenarios) {
     record.normalizedStatus = exported.normalizeOrdersResponse(read, { ...expected, id: created.id }).status;
     record.result = 'created_and_read';
   } catch (error) {
-    record.result = 'failed'; record.error = /^[A-Z_]+$/.test(error.message) ? error.message : 'CHECK_FAILED';
-    if (error.httpStatus) record.httpStatus = error.httpStatus;
-    if (error.codes) record.codes = error.codes;
-    if (error.bodyKeys) record.bodyKeys=error.bodyKeys;
-    if (error.testOrderIdentifiers) record.testOrderIdentifiers=error.testOrderIdentifiers;
+    record.result = 'failed'; record.error = typeof error?.message === 'string' && /^[A-Z_]+$/.test(error.message) ? error.message : 'CHECK_FAILED';
+    const detail = error && typeof error === 'object' ? error : {};
+    const nested = detail.data && typeof detail.data === 'object' ? detail.data : {};
+    const status = detail.httpStatus || detail.status || nested.status;
+    if (Number.isInteger(status) && status >= 100 && status <= 599) record.httpStatus = status;
+    const errors = [detail, nested, ...(Array.isArray(detail.errors) ? detail.errors : []), ...(Array.isArray(nested.errors) ? nested.errors : []), ...(Array.isArray(detail.cause) ? detail.cause : [])];
+    const codes = [...(Array.isArray(detail.codes) ? detail.codes : []), ...errors.flatMap(item => [item?.code, item?.error])]
+      .filter(code => (typeof code === 'number' && Number.isSafeInteger(code) && code >= 0 && code <= 99999)
+        || (typeof code === 'string' && /^[a-z][a-z0-9_]{0,79}$/i.test(code) && !/^(?:APP_USR|Bearer|eyJ)/i.test(code) && !/^[a-f0-9]{24,}$/i.test(code)));
+    if (codes.length) record.codes = [...new Set(codes)];
+    if (detail.bodyKeys) record.bodyKeys=detail.bodyKeys;
+    if (detail.testOrderIdentifiers) record.testOrderIdentifiers=detail.testOrderIdentifiers;
   }
   report.cases.push(record);
-  await writeFile('docs/payment-provider-test-2026-11-05.json', JSON.stringify(report, null, 2) + '\n');
+  await writeFile(output, JSON.stringify(report, null, 2) + '\n');
   console.log(JSON.stringify(record));
 }
-await writeFile('docs/payment-provider-test-2026-11-05.json', JSON.stringify(report, null, 2) + '\n');
+await writeFile(output, JSON.stringify(report, null, 2) + '\n');
 if (report.cases.some(record => record.result === 'failed')) process.exitCode = 1;

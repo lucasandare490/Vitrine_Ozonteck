@@ -435,3 +435,11 @@ Comprovado fallback real do service worker: ao parar somente o servidor local 31
 Nova execução: **171 testes principais aprovados, zero falhas/um HTTP condicional ignorado; 56 componentes; 12 roteiros SQL; auditoria 101 controles/26 rotas; lint zero erros/12 avisos; build webpack/TypeScript aprovado**. Logs/hashes em `mobile-browser-verificacao-2026-11-28`. Quantidade 9999 e pesquisa formal futura não são bloqueios.
 
 Netlify foi consultada novamente: produção ainda `8558a5e`, publicações pausadas e botão de deploy desabilitado por créditos. Search Console: home indexada, último rastreamento em 30/10; uma tentativa de solicitar nova leitura em 28/11 foi recusada por cota diária. **Não houve solicitação aceita nem nova publicação.** Limites e evidências: [mobile-browser-review-2026-11-28.md](mobile-browser-review-2026-11-28.md). A prévia local não equivale ao site público atualizado.
+
+### Continuação das pendências — 28/11/2026
+
+Repetido somente o débito fictício com vendedor confirmado de teste; o provedor manteve `payment_method_not_allowed_for_collector`. Melhorado o diagnóstico do erro estruturado do SDK, sem despejar dados do pagador/credenciais e sem sobrescrever as evidências antigas. Quatro regressões novas passaram; suíte principal: **175 aprovados, zero falhas e um HTTP condicional ignorado**.
+
+A sonda segura do webhook encontrou diferença entre o deploy antigo e o código atual: ID em maiúsculas com assinatura canônica recebe 401 na versão publicada; ID em minúsculas recebe 400 por evento fictício, confirmando a assinatura. O build local corrigido também recebe 400 com ID em maiúsculas. A normalização já está corrigida no repositório, mas **a publicação dessa correção é necessária antes do aceite final**. Não se concluiu troca de segredo nem se desativou verificação. Sem consulta a pagamento real ou gravação de pedido nas sondas.
+
+O Chrome interrompeu o diagnóstico visual por falha ao confirmar a URL; não foi contornada a proteção e nenhuma medição de desempenho/instalação foi inventada. Documentados resultados, limitações e texto para suporte, sem envio: [pendencias-executadas-2026-11-28.md](pendencias-executadas-2026-11-28.md). Confirmações comerciais, publicação, Google e histórico continuam separados; 9999 e pesquisa formal futura não são bloqueios.

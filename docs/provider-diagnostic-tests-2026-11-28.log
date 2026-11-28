@@ -1,0 +1,37 @@
+(node:24692) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+TAP version 13
+# (node:10280) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:10280) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/provider-diagnostics.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: provider diagnostics: SDK object errors retain documented refusal codes
+ok 1 - provider diagnostics: SDK object errors retain documented refusal codes
+  ---
+  duration_ms: 3.2751
+  ...
+# Subtest: provider diagnostics: unknown/null errors stay safe without leaking message or nested payer information
+ok 2 - provider diagnostics: unknown/null errors stay safe without leaking message or nested payer information
+  ---
+  duration_ms: 1.9527
+  ...
+# Subtest: provider diagnostics: unexpected token, identity and response values are excluded
+ok 3 - provider diagnostics: unexpected token, identity and response values are excluded
+  ---
+  duration_ms: 0.9358
+  ...
+# Subtest: provider diagnostics: an empty output option refuses execution and preserves historical evidence
+ok 4 - provider diagnostics: an empty output option refuses execution and preserves historical evidence
+  ---
+  duration_ms: 1733.7198
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2848.6091

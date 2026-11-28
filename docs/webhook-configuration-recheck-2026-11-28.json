@@ -1,0 +1,1 @@
+{"checkedAt":"2026-11-28T10:31:18.250Z","scope":"Fictitious event rejected before provider lookup or order writes; does not prove a provider webhook delivery.","invalidSignature":{"status":401,"error":"Assinatura invalida.","expectedResponse":true},"canonicalSignature":{"status":401,"error":"Assinatura invalida.","expectedResponse":false},"passed":false}

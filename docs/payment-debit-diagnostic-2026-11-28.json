@@ -1,0 +1,20 @@
+{
+  "date": "2026-11-28T10:31:13.325Z",
+  "environment": "test",
+  "testSellerConfirmed": true,
+  "scope": "Real provider sandbox requests using the shop request builder and normalizer. No shop DB, customer messages or real payments.",
+  "cases": [
+    {
+      "scenario": "debit-approved",
+      "method": "debit_card",
+      "amount": 9.99,
+      "reference": "976ef19c-0048-4faa-a546-3898ea2c68b5",
+      "result": "failed",
+      "error": "CHECK_FAILED",
+      "codes": [
+        "payment_method_not_allowed_for_collector"
+      ]
+    }
+  ],
+  "attempts": []
+}
