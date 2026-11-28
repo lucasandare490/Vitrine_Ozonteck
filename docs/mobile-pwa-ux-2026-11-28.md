@@ -1,5 +1,7 @@
 # Mobile, PWA e revisão de UX — 28/11/2026
 
+> Complemento posterior na mesma data: o Chrome foi conectado, houve conferência real e correções adicionais, com 171 testes principais aprovados. Consulte [conferência no navegador](mobile-browser-review-2026-11-28.md). As limitações de navegador descritas na primeira execução abaixo são históricas; instalação em aparelhos, publicação e demais validações externas continuam separadas.
+
 ## Estado e limites da entrega
 
 Continuação do código existente, a partir de `1117321`, sem reiniciar o projeto. A implementação abaixo está no repositório local; não foi publicada nesta etapa. O último deploy autenticado observado anteriormente era `8558a5e`, com publicação pausada por créditos. Isso é uma observação anterior, não uma nova consulta de saldo.

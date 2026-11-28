@@ -1,0 +1,4 @@
+PASS: authenticated explicit consent, profile/account fallback, canonical contact data and idempotent deduplication.
+PASS: own-row isolation, validated provided contacts, forged claims and all direct client writes denied.
+PASS: contact limits, rate-bounded edits, admin MFA, durable/idempotent status changes and missing-row failures.
+PASS: customer MFA, one row per account, history-preserving reapplication and no server-role submission bypass.

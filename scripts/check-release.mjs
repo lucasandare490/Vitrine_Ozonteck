@@ -36,7 +36,7 @@ const steps = integrationsOnly ? sql : [
   { id: 'components', argv: ['--test', ...['check-admin-list-races', 'check-support-draft-races', 'check-customer-benefit-control', 'check-admin-pricing', 'check-saved-address-screen', 'check-mobile-pwa-controls'].map(file => `scripts/${file}.mjs`)] },
   { id: 'form-labels', argv: ['scripts/check-form-labels.mjs'] },
   ...sql,
-  { id: 'changed-code-lint', argv: ['node_modules/eslint/bin/eslint.js', 'app', 'components', 'lib/mobile-navigation.ts', 'lib/pwa-install.ts', 'public/sw.js', 'next.config.ts', 'scripts/check-admin-pricing.mjs', 'scripts/check-saved-address-screen.mjs', 'scripts/check-saved-addresses.mjs', 'scripts/check-release.mjs', 'scripts/apply-continuity-migrations.mjs', 'scripts/check-mobile-pwa-controls.mjs', 'scripts/generate-app-icons.mjs'] },
+  { id: 'changed-code-lint', argv: ['node_modules/eslint/bin/eslint.js', 'app', 'components', 'lib/mobile-navigation.ts', 'lib/dialog-focus.ts', 'lib/pwa-install.ts', 'public/sw.js', 'next.config.ts', 'scripts/check-admin-pricing.mjs', 'scripts/check-saved-address-screen.mjs', 'scripts/check-saved-addresses.mjs', 'scripts/check-release.mjs', 'scripts/apply-continuity-migrations.mjs', 'scripts/check-mobile-pwa-controls.mjs', 'scripts/generate-app-icons.mjs'] },
   { id: 'production-build', argv: ['node_modules/next/dist/bin/next', 'build', '--webpack'] },
 ];
 const git = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' });
@@ -49,7 +49,7 @@ const report = {
   checksRequiringSeparateEvidence: ['Visual and keyboard review in the browser', 'Verify migrations in the target database (this runner does not inspect it)', 'Deploy and verify the exact published revision', 'Public checkout/provider/webhook/stock/scheduled-email journey', 'Debit restriction and boleto settlement', 'Commercial approvals and Visaris label/manufacturer documentation', 'Google processing and historical supporting records'],
   sourceHashes: {}, steps: [],
 };
-for (const file of ['components/AdminPricing.tsx', 'app/conta/enderecos/page.tsx', 'supabase/migrations/202611270001_primary_address_switch.sql', 'scripts/check-release.mjs', 'package.json', 'components/MobileNavigation.tsx', 'components/AppRuntime.tsx', 'components/ProductActions.tsx', 'app/manifest.ts', 'public/sw.js', 'app/globals.css']) {
+for (const file of ['components/AdminPricing.tsx', 'app/conta/enderecos/page.tsx', 'supabase/migrations/202611270001_primary_address_switch.sql', 'scripts/check-release.mjs', 'package.json', 'components/MobileNavigation.tsx', 'lib/mobile-navigation.ts', 'lib/dialog-focus.ts', 'components/AppDialog.tsx', 'components/BottomSheet.tsx', 'components/AppRuntime.tsx', 'components/ProductActions.tsx', 'app/manifest.ts', 'public/sw.js', 'app/globals.css']) {
   report.sourceHashes[file] = createHash('sha256').update(readFileSync(join(root, file))).digest('hex');
 }
 const environment = { ...process.env };

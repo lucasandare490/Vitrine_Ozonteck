@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ArrowLeft, Heart, LayoutGrid, Search, ShoppingBag, UserRound, HelpCircle } from 'lucide-react';
 import { useCartStore } from '@/store/useCartStore';
-import { catalogReturn, isMobileDestinationActive, mobileDestinations, mobileSection, mobileTitles } from '@/lib/mobile-navigation';
+import { catalogReturn, isMobileDestinationActive, mobileCatalogHref, mobileDestinations, mobileSection, mobileTitles } from '@/lib/mobile-navigation';
 
 const icons = { catalog: LayoutGrid, search: Search, heart: Heart, cart: ShoppingBag, account: UserRound };
 const subscribe = () => () => undefined;
@@ -52,8 +52,8 @@ export default function MobileNavigation() {
     <nav className="mobile-bottom-nav" aria-label="Navegação principal no celular">
       {mobileDestinations.map(destination => {
         const Icon = icons[destination.icon]; const active = isMobileDestinationActive(pathname, destination.href);
-        return <Link key={destination.href} href={destination.href === '/#catalogo' ? returnToCatalog : destination.href} aria-current={active ? 'page' : undefined} className={active ? 'is-active' : undefined}>
-          <span className="mobile-tab-icon"><Icon size={22} strokeWidth={active ? 2.5 : 1.8} aria-hidden="true" />{destination.icon === 'cart' && mounted && count > 0 && <span className="mobile-tab-badge" aria-label={`${count} itens`}>{count > 99 ? '99+' : count}</span>}</span>
+        return <Link key={destination.href} href={destination.href === '/#catalogo' ? mobileCatalogHref(pathname, returnToCatalog) : destination.href} aria-current={active ? 'page' : undefined} className={active ? 'is-active' : undefined}>
+          <span className="mobile-tab-icon"><Icon size={22} strokeWidth={active ? 2.5 : 1.8} aria-hidden="true" />{destination.icon === 'cart' && mounted && count > 0 && <span className="mobile-tab-badge" aria-label={`${count} ${count === 1 ? 'item' : 'itens'}`}>{count > 99 ? '99+' : count}</span>}</span>
           <span>{destination.label}</span>
         </Link>;
       })}

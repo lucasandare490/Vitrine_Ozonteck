@@ -1,0 +1,5 @@
+PASS: migration/reapplication preserve active/archived categories and products; no backfill.
+PASS: admin insert/archive/restore/rename record exact full snapshots, actor and server time; rollback is atomic.
+PASS: admin-only client reads, anon/customer isolation and immutable audit ACLs (including truncate/sequence/RPC).
+PASS: hostile search path, service deletion without uid, deleted-actor retention and history-preserving reapplication.
+PASS: bulk changes create one event per row, including columns added later; products remain unchanged.

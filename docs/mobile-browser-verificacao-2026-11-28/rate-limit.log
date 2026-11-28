@@ -1,0 +1,1 @@
+PASS: shared rolling window, route/identity isolation, expiry, bounded cleanup, input validation, RLS and server-only permissions.

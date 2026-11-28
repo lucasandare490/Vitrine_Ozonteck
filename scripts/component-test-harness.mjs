@@ -75,6 +75,7 @@ export function createComponentHarness(path, { supabase, imports = {}, window: w
       if (name === 'react') return hooks;
       if (name === 'react/jsx-runtime') return require(name);
       if (name === '@/lib/supabase') return { supabase };
+      if (name === '@/lib/dialog-focus') return { keepDialogFocus() {} }; // Keyboard loop is tested against its real DOM helper separately.
       if (name === 'next/link') return { __esModule: true, default: 'a' };
       throw new Error(`Provide an explicit test double for ${name}`);
     },

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogReturn, mobileDestinations, mobileSection, mobileTitles, isMobileDestinationActive } from '../lib/mobile-navigation.ts';
+import { catalogReturn, mobileCatalogHref, mobileDestinations, mobileSection, mobileTitles, isMobileDestinationActive } from '../lib/mobile-navigation.ts';
 
 test('mobile: primary destinations cover browse, search, favorites, cart and account without duplicate active tabs', () => {
   assert.equal(mobileDestinations.length, 5);
@@ -16,4 +16,10 @@ test('mobile: private/admin/product contexts remain distinct and known pages hav
 test('mobile: return context preserves catalog filters but rejects external and private destinations', () => {
   assert.equal(catalogReturn('/?q=óleo&categoria=Perfumaria&ordem=price-asc'), '/?q=%C3%B3leo&categoria=Perfumaria&ordem=price-asc#catalogo');
   for (const value of [null, '//evil.invalid', 'https://evil.invalid/', '/admin', '/conta', 'javascript:alert(1)']) assert.equal(catalogReturn(value), '/#catalogo');
+});
+
+test('mobile: the catalog tab preserves newly selected filters on the current page', () => {
+  assert.equal(mobileCatalogHref('/', '/?q=old#catalogo'), '#catalogo');
+  assert.equal(mobileCatalogHref('/produto/QA', '/?q=óleo#catalogo'), '/?q=%C3%B3leo#catalogo');
+  assert.equal(mobileCatalogHref('/busca', 'https://evil.invalid/'), '/#catalogo');
 });

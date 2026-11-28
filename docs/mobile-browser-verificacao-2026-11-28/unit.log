@@ -1,0 +1,1082 @@
+TAP version 13
+# (node:44576) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:44576) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/account-order-filter.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: customer confirmed tabs require the same financial approval as sales reports
+ok 1 - customer confirmed tabs require the same financial approval as sales reports
+  ---
+  duration_ms: 1.2033
+  ...
+# Subtest: customer can still recover open payments and all terminal or legacy history
+ok 2 - customer can still recover open payments and all terminal or legacy history
+  ---
+  duration_ms: 0.2882
+  ...
+# (node:36952) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:36952) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/account.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: fulfilment does not prove that payment was approved
+ok 3 - fulfilment does not prove that payment was approved
+  ---
+  duration_ms: 1.5575
+  ...
+# Subtest: pending, declined and review orders never imply payment or shipment
+ok 4 - pending, declined and review orders never imply payment or shipment
+  ---
+  duration_ms: 0.1903
+  ...
+# Subtest: MFA is optional until verified, mandatory for all authenticated token types thereafter
+ok 5 - MFA is optional until verified, mandatory for all authenticated token types thereafter
+  ---
+  duration_ms: 0.261
+  ...
+# (node:39068) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:39068) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/audit-filter.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: confirmed audit view matches the financial reports and retains review/history access
+ok 6 - confirmed audit view matches the financial reports and retains review/history access
+  ---
+  duration_ms: 0.994
+  ...
+# (node:30512) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:30512) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/auth.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: aceita senha com oito ou mais caracteres
+ok 7 - aceita senha com oito ou mais caracteres
+  ---
+  duration_ms: 1.3107
+  ...
+# Subtest: rejeita senha curta
+ok 8 - rejeita senha curta
+  ---
+  duration_ms: 0.7299
+  ...
+# Subtest: valida CPF pelo digito verificador
+ok 9 - valida CPF pelo digito verificador
+  ---
+  duration_ms: 0.4497
+  ...
+# (node:40380) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:40380) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/authenticator-qr.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: preserves the complete Supabase SVG, including XML header, colors and trailing newline
+ok 10 - preserves the complete Supabase SVG, including XML header, colors and trailing newline
+  ---
+  duration_ms: 12.9005
+  ...
+# Subtest: rejects unexpected URLs instead of sending an authentication QR to another server
+ok 11 - rejects unexpected URLs instead of sending an authentication QR to another server
+  ---
+  duration_ms: 0.1968
+  ...
+# (node:15792) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:15792) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/cart-sync.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: remover e esvaziar persistem inclusive [] e não voltam após navegação ou novo login
+ok 12 - remover e esvaziar persistem inclusive [] e não voltam após navegação ou novo login
+  ---
+  duration_ms: 4.6786
+  ...
+# Subtest: sair preserva itens e quantidades, mas conta B não recebe itens da conta A
+ok 13 - sair preserva itens e quantidades, mas conta B não recebe itens da conta A
+  ---
+  duration_ms: 1.1427
+  ...
+# Subtest: uma leitura atrasada não desfaz uma exclusão durante a restauração
+ok 14 - uma leitura atrasada não desfaz uma exclusão durante a restauração
+  ---
+  duration_ms: 0.504
+  ...
+# Subtest: resposta da conta anterior não altera o carrinho da nova conta
+ok 15 - resposta da conta anterior não altera o carrinho da nova conta
+  ---
+  duration_ms: 0.5864
+  ...
+# Subtest: gravações são sequenciais e exclusão vence uma gravação anterior em andamento
+ok 16 - gravações são sequenciais e exclusão vence uma gravação anterior em andamento
+  ---
+  duration_ms: 0.76
+  ...
+# Subtest: falha de rede mantém exclusão pendente após recarregar, sem restaurar o banco antigo
+ok 17 - falha de rede mantém exclusão pendente após recarregar, sem restaurar o banco antigo
+  ---
+  duration_ms: 13.8306
+  ...
+# Subtest: carrinho visitante é adotado uma vez e não é transportado entre contas
+ok 18 - carrinho visitante é adotado uma vez e não é transportado entre contas
+  ---
+  duration_ms: 0.8202
+  ...
+# (node:46392) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:46392) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/cart.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: preserva quantidades validas ao restaurar o carrinho
+ok 19 - preserva quantidades validas ao restaurar o carrinho
+  ---
+  duration_ms: 1.249
+  ...
+# Subtest: limita quantidade ao estoque disponivel
+ok 20 - limita quantidade ao estoque disponivel
+  ---
+  duration_ms: 0.1992
+  ...
+# Subtest: descarta itens adulterados
+ok 21 - descarta itens adulterados
+  ---
+  duration_ms: 2.1009
+  ...
+# (node:18044) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:18044) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/customer-activity.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: activity ignores unpaid, cancelled, invalid and future purchases
+ok 22 - activity ignores unpaid, cancelled, invalid and future purchases
+  ---
+  duration_ms: 2.5381
+  ...
+# Subtest: last purchase does not depend on order and customers stay separate
+ok 23 - last purchase does not depend on order and customers stay separate
+  ---
+  duration_ms: 0.6388
+  ...
+# Subtest: contact drafts offer distinct purposes without inventing debts, benefits or customer dates
+ok 24 - contact drafts offer distinct purposes without inventing debts, benefits or customer dates
+  ---
+  duration_ms: 0.8017
+  ...
+# (node:33660) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33660) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/customer-email-delivery.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: never sends pending or rejected mail after approval, nor approval for payment review
+ok 25 - never sends pending or rejected mail after approval, nor approval for payment review
+  ---
+  duration_ms: 1.5459
+  ...
+# Subtest: refund and delivery messages require matching confirmed states
+ok 26 - refund and delivery messages require matching confirmed states
+  ---
+  duration_ms: 0.1953
+  ...
+# Subtest: retries back off and stop at the fifth attempt
+ok 27 - retries back off and stop at the fifth attempt
+  ---
+  duration_ms: 2.9427
+  ...
+# Subtest: pickup notice requires explicit readiness, approval and pickup mode
+ok 28 - pickup notice requires explicit readiness, approval and pickup mode
+  ---
+  duration_ms: 0.2378
+  ...
+# (node:44804) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:44804) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/customer-email-worker.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: support worker sends to confirmed owner, acknowledges lease and does not resend sent job
+ok 29 - support worker sends to confirmed owner, acknowledges lease and does not resend sent job
+  ---
+  duration_ms: 7.82
+  ...
+# Subtest: worker suppresses unverified recipients and foreign support protocols
+ok 30 - worker suppresses unverified recipients and foreign support protocols
+  ---
+  duration_ms: 3.6745
+  ...
+# Subtest: pickup worker requires current paid pickup readiness
+ok 31 - pickup worker requires current paid pickup readiness
+  ---
+  duration_ms: 2.2119
+  ...
+# Subtest: SMTP failures retry without exposing response and stop after fifth attempt
+ok 32 - SMTP failures retry without exposing response and stop after fifth attempt
+  ---
+  duration_ms: 2.7107
+  ...
+# Subtest: SMTP accepted with failed acknowledgement is held for review instead of retry
+ok 33 - SMTP accepted with failed acknowledgement is held for review instead of retry
+  ---
+  duration_ms: 1.4647
+  ...
+# Subtest: disabled worker neither claims nor sends
+ok 34 - disabled worker neither claims nor sends
+  ---
+  duration_ms: 0.9779
+  ...
+# (node:5636) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:5636) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/customer-email.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: email templates escape customer-controlled HTML and include a text alternative
+ok 35 - email templates escape customer-controlled HTML and include a text alternative
+  ---
+  duration_ms: 4.121
+  ...
+# Subtest: email action links cannot leave the store or use unsafe protocols
+ok 36 - email action links cannot leave the store or use unsafe protocols
+  ---
+  duration_ms: 0.7466
+  ...
+# Subtest: every transactional event has a subject and both body formats
+ok 37 - every transactional event has a subject and both body formats
+  ---
+  duration_ms: 0.8225
+  ...
+# (node:22092) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:22092) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/database-rate-limit.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: database limiter shares deterministic hashed identities without transmitting raw identifiers
+ok 38 - database limiter shares deterministic hashed identities without transmitting raw identifiers
+  ---
+  duration_ms: 156.3975
+  ...
+# Subtest: database limiter denies exhausted windows and fails closed on all storage/configuration errors
+ok 39 - database limiter denies exhausted windows and fails closed on all storage/configuration errors
+  ---
+  duration_ms: 113.5393
+  ...
+# Subtest: production HTTP guard always uses the shared database instead of local memory or unavailable Redis
+ok 40 - production HTTP guard always uses the shared database instead of local memory or unavailable Redis
+  ---
+  duration_ms: 84.6535
+  ...
+# (node:3676) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:3676) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/dialog-focus.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: modal focus: Shift+Tab on the first field returns to the last visible field
+ok 41 - modal focus: Shift+Tab on the first field returns to the last visible field
+  ---
+  duration_ms: 2.618
+  ...
+# Subtest: modal focus: Tab on the last field returns to the first visible field
+ok 42 - modal focus: Tab on the last field returns to the first visible field
+  ---
+  duration_ms: 0.3163
+  ...
+# Subtest: modal focus: regular editing and interior Tab keep native behavior
+ok 43 - modal focus: regular editing and interior Tab keep native behavior
+  ---
+  duration_ms: 0.2871
+  ...
+# Subtest: modal focus: a modal without available controls retains focus safely
+ok 44 - modal focus: a modal without available controls retains focus safely
+  ---
+  duration_ms: 0.1983
+  ...
+# (node:26824) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:26824) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/discontinued-products.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: owner-confirmed withdrawals stay blocked while Mel mask and capsule Xbooster remain available
+ok 45 - owner-confirmed withdrawals stay blocked while Mel mask and capsule Xbooster remain available
+  ---
+  duration_ms: 1.8002
+  ...
+# Subtest: saved interest lists discard discontinued products but preserve active items
+ok 46 - saved interest lists discard discontinued products but preserve active items
+  ---
+  duration_ms: 1.0615
+  ...
+# Subtest: document remains intact and explicit exception maps to exact code and EAN
+ok 47 - document remains intact and explicit exception maps to exact code and EAN
+  ---
+  duration_ms: 22.4155
+  ...
+# (node:5564) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:5564) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/load-all-rows.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: reads beyond API page limits without losing historical orders
+ok 48 - reads beyond API page limits without losing historical orders
+  ---
+  duration_ms: 3.4375
+  ...
+# Subtest: does not expose a partial report when a later page fails
+ok 49 - does not expose a partial report when a later page fails
+  ---
+  duration_ms: 0.447
+  ...
+# (node:38720) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:38720) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/login-return.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: returns to support and existing customer routes after login
+ok 50 - returns to support and existing customer routes after login
+  ---
+  duration_ms: 4.7899
+  ...
+# Subtest: rejects external, encoded, login-loop and unsupported destinations
+ok 51 - rejects external, encoded, login-loop and unsupported destinations
+  ---
+  duration_ms: 0.4896
+  ...
+# (node:44736) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:44736) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/mercado-pago-orders.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: Orders request uses decimal strings, new methods and state field
+ok 52 - Orders request uses decimal strings, new methods and state field
+  ---
+  duration_ms: 9.551
+  ...
+# Subtest: card request requires token, method type and valid installments
+ok 53 - card request requires token, method type and valid installments
+  ---
+  duration_ms: 0.7767
+  ...
+# Subtest: request rejects invalid amounts and references
+ok 54 - request rejects invalid amounts and references
+  ---
+  duration_ms: 0.4149
+  ...
+# Subtest: all supported states map without converting pending into approval
+ok 55 - all supported states map without converting pending into approval
+  ---
+  duration_ms: 0.377
+  ...
+# Subtest: Pix data is normalized without exposing payer, token or raw response
+ok 56 - Pix data is normalized without exposing payer, token or raw response
+  ---
+  duration_ms: 3.1662
+  ...
+# Subtest: actual Orders challenge can omit the nested authentication status
+ok 57 - actual Orders challenge can omit the nested authentication status
+  ---
+  duration_ms: 0.6683
+  ...
+# Subtest: foreign account, app, currency, order, reference and amount are rejected
+ok 58 - foreign account, app, currency, order, reference and amount are rejected
+  ---
+  duration_ms: 0.6687
+  ...
+# Subtest: approved requires full amount and a single matching transaction
+ok 59 - approved requires full amount and a single matching transaction
+  ---
+  duration_ms: 1.318
+  ...
+# Subtest: asynchronous creation may have no payment data and is not approved
+ok 60 - asynchronous creation may have no payment data and is not approved
+  ---
+  duration_ms: 0.4111
+  ...
+# Subtest: boleto data uses documented fields and rejects untrusted links
+ok 61 - boleto data uses documented fields and rejects untrusted links
+  ---
+  duration_ms: 0.8399
+  ...
+# Subtest: partial refund and authentication challenge remain explicit
+ok 62 - partial refund and authentication challenge remain explicit
+  ---
+  duration_ms: 0.2782
+  ...
+# (node:18648) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:18648) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/mobile-navigation.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: mobile: primary destinations cover browse, search, favorites, cart and account without duplicate active tabs
+ok 63 - mobile: primary destinations cover browse, search, favorites, cart and account without duplicate active tabs
+  ---
+  duration_ms: 1.1479
+  ...
+# Subtest: mobile: private/admin/product contexts remain distinct and known pages have titles
+ok 64 - mobile: private/admin/product contexts remain distinct and known pages have titles
+  ---
+  duration_ms: 0.2763
+  ...
+# Subtest: mobile: return context preserves catalog filters but rejects external and private destinations
+ok 65 - mobile: return context preserves catalog filters but rejects external and private destinations
+  ---
+  duration_ms: 0.2642
+  ...
+# Subtest: mobile: the catalog tab preserves newly selected filters on the current page
+ok 66 - mobile: the catalog tab preserves newly selected filters on the current page
+  ---
+  duration_ms: 0.1819
+  ...
+# (node:18952) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:18952) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/navbar-session.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: navigation: late fetchProfile reply cannot show a previous account's data
+ok 67 - navigation: late fetchProfile reply cannot show a previous account's data
+  ---
+  duration_ms: 108.9735
+  ...
+# Subtest: navigation: late fetchQuickBuy reply cannot show a previous account's data
+ok 68 - navigation: late fetchQuickBuy reply cannot show a previous account's data
+  ---
+  duration_ms: 23.1863
+  ...
+# Subtest: navigation: account switching during product lookup discards the old favorites preview
+ok 69 - navigation: account switching during product lookup discards the old favorites preview
+  ---
+  duration_ms: 12.7622
+  ...
+# (node:31868) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:31868) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/order-contact.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: contato usa telefone do pedido, normaliza DDI e inclui identificador
+ok 70 - contato usa telefone do pedido, normaliza DDI e inclui identificador
+  ---
+  duration_ms: 2.3516
+  ...
+# Subtest: telefone ausente ou inválido não produz link
+ok 71 - telefone ausente ou inválido não produz link
+  ---
+  duration_ms: 0.2476
+  ...
+# Subtest: mensagem não declara pagamento aprovado e distingue retirada
+ok 72 - mensagem não declara pagamento aprovado e distingue retirada
+  ---
+  duration_ms: 0.3499
+  ...
+# Subtest: endereço mantém número e complemento
+ok 73 - endereço mantém número e complemento
+  ---
+  duration_ms: 0.5429
+  ...
+# (node:12644) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:12644) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/orders-creation-recovery.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: SDK 402 response is recovered by authenticated GET and full identity validation
+ok 74 - SDK 402 response is recovered by authenticated GET and full identity validation
+  ---
+  duration_ms: 184.4134
+  ...
+# Subtest: unknown outcome and malformed identifiers cannot be fabricated into a rejection
+ok 75 - unknown outcome and malformed identifiers cannot be fabricated into a rejection
+  ---
+  duration_ms: 123.6878
+  ...
+# Subtest: recovery rejects another account, reference, amount or returned order ID
+ok 76 - recovery rejects another account, reference, amount or returned order ID
+  ---
+  duration_ms: 125.091
+  ...
+# (node:14868) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:14868) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/orders-webhook-route.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: Orders webhook verifies real SDK signatures and rejects stale, mismatched, sandbox and rate-limited events before reads
+ok 77 - Orders webhook verifies real SDK signatures and rejects stale, mismatched, sandbox and rate-limited events before reads
+  ---
+  duration_ms: 951.7563
+  ...
+# Subtest: Orders accepts a lowercase HMAC resource ID with the original uppercase URL and body ID
+ok 78 - Orders accepts a lowercase HMAC resource ID with the original uppercase URL and body ID
+  ---
+  duration_ms: 2.3374
+  ...
+# Subtest: each method reconciles only the authenticated provider status, never the webhook body status
+ok 79 - each method reconciles only the authenticated provider status, never the webhook body status
+  ---
+  duration_ms: 5.6063
+  ...
+# Subtest: foreign account, unknown provider states and missing orders cannot settle a sale
+ok 80 - foreign account, unknown provider states and missing orders cannot settle a sale
+  ---
+  duration_ms: 4.2705
+  ...
+# Subtest: a verified partial refund reconciles and is flagged for review
+ok 81 - a verified partial refund reconciles and is flagged for review
+  ---
+  duration_ms: 1.7176
+  ...
+# (node:33480) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:33480) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/pagination.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: pagination keeps first, last and nearby pages without allocating every page
+ok 82 - pagination keeps first, last and nearby pages without allocating every page
+  ---
+  duration_ms: 1.9691
+  ...
+# Subtest: shared control blocks unavailable pages and preserves server pagination without invented totals
+ok 83 - shared control blocks unavailable pages and preserves server pagination without invented totals
+  ---
+  duration_ms: 4.4585
+  ...
+# Subtest: pagination clamps invalid input and never creates duplicate or unreachable buttons
+ok 84 - pagination clamps invalid input and never creates duplicate or unreachable buttons
+  ---
+  duration_ms: 12.7403
+  ...
+# (node:37636) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:37636) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/password-strength.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: password guidance is absent before typing and never changes existing validity
+ok 85 - password guidance is absent before typing and never changes existing validity
+  ---
+  duration_ms: 3.3366
+  ...
+# Subtest: common passwords, repeated text and predictable sequences remain weak
+ok 86 - common passwords, repeated text and predictable sequences remain weak
+  ---
+  duration_ms: 0.4991
+  ...
+# Subtest: long passphrases can score highly without mandatory symbols or uppercase
+ok 87 - long passphrases can score highly without mandatory symbols or uppercase
+  ---
+  duration_ms: 0.9095
+  ...
+# Subtest: estimates are bounded and deterministic for long unicode or whitespace input
+ok 88 - estimates are bounded and deterministic for long unicode or whitespace input
+  ---
+  duration_ms: 1.3105
+  ...
+# Subtest: meter renders live guidance only, never exposes the password or adds a required control
+ok 89 - meter renders live guidance only, never exposes the password or adds a required control
+  ---
+  duration_ms: 164.7672
+  ...
+# (node:11584) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:11584) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/payment-ui-policy.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: Orders configuration review redacts values and never certifies production or sandbox
+ok 90 - Orders configuration review redacts values and never certifies production or sandbox
+  ---
+  duration_ms: 429.275
+  ...
+# Subtest: Orders public key alone cannot pass configuration checks
+ok 91 - Orders public key alone cannot pass configuration checks
+  ---
+  duration_ms: 281.2474
+  ...
+# Subtest: production rate-limit configuration uses the database and does not require Redis
+ok 92 - production rate-limit configuration uses the database and does not require Redis
+  ---
+  duration_ms: 461.3564
+  ...
+# Subtest: sandbox flag exposes frontend and backend Orders selection mismatch
+ok 93 - sandbox flag exposes frontend and backend Orders selection mismatch
+  ---
+  duration_ms: 192.1934
+  ...
+# Subtest: mismatched sandbox flags cannot pass configuration checks
+ok 94 - mismatched sandbox flags cannot pass configuration checks
+  ---
+  duration_ms: 129.0318
+  ...
+# Subtest: temporary, private and non-HTTPS site URLs cannot pass configuration checks
+ok 95 - temporary, private and non-HTTPS site URLs cannot pass configuration checks
+  ---
+  duration_ms: 1085.091
+  ...
+# Subtest: test-prefixed Orders credentials do not pass current production configuration checks
+ok 96 - test-prefixed Orders credentials do not pass current production configuration checks
+  ---
+  duration_ms: 79.6837
+  ...
+# Subtest: missing file produces a fixed diagnostic without exposing its path
+ok 97 - missing file produces a fixed diagnostic without exposing its path
+  ---
+  duration_ms: 76.6759
+  ...
+# (node:11804) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:11804) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/perfumery-filter.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: keeps confirmed perfume presentations separate
+ok 98 - keeps confirmed perfume presentations separate
+  ---
+  duration_ms: 0.9443
+  ...
+# Subtest: Virginia products and unknown presentations remain only in all
+ok 99 - Virginia products and unknown presentations remain only in all
+  ---
+  duration_ms: 0.183
+  ...
+# (node:38936) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:38936) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-admin-actions.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: admin product soft: one confirmation sends exactly one targeted write
+ok 100 - admin product soft: one confirmation sends exactly one targeted write
+  ---
+  duration_ms: 105.9345
+  ...
+# Subtest: admin product hard: one confirmation sends exactly one targeted write
+ok 101 - admin product hard: one confirmation sends exactly one targeted write
+  ---
+  duration_ms: 26.6925
+  ...
+# Subtest: admin product: zero affected rows never report success and preserve the confirmation for recovery
+ok 102 - admin product: zero affected rows never report success and preserve the confirmation for recovery
+  ---
+  duration_ms: 26.4995
+  ...
+# (node:47792) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:47792) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-content-complementary.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: thirteen missing summaries are filled and attributed without commercial mutations
+ok 103 - thirteen missing summaries are filled and attributed without commercial mutations
+  ---
+  duration_ms: 1.7935
+  ...
+# Subtest: enrichment is idempotent and does not replace an existing summary
+ok 104 - enrichment is idempotent and does not replace an existing summary
+  ---
+  duration_ms: 11.058
+  ...
+# Subtest: Amyno unit does not inherit box formula, dosage or therapeutic claims
+ok 105 - Amyno unit does not inherit box formula, dosage or therapeutic claims
+  ---
+  duration_ms: 0.4894
+  ...
+# (node:29292) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:29292) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-content.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: cada referencia recebida possui conteudo especifico e preserva fontes
+ok 106 - cada referencia recebida possui conteudo especifico e preserva fontes
+  ---
+  duration_ms: 4.3662
+  ...
+# Subtest: revisao substitui resumo antigo apenas nos codigos revisados
+ok 107 - revisao substitui resumo antigo apenas nos codigos revisados
+  ---
+  duration_ms: 0.9205
+  ...
+# Subtest: perfumaria separa volumes, notas completas e hidratante homonimo
+ok 108 - perfumaria separa volumes, notas completas e hidratante homonimo
+  ---
+  duration_ms: 0.7161
+  ...
+# Subtest: preserva rotulos e evita trocar flex por amyno ou capsulas por energetico
+ok 109 - preserva rotulos e evita trocar flex por amyno ou capsulas por energetico
+  ---
+  duration_ms: 0.2601
+  ...
+# Subtest: acessorios retirados nao voltam pelo carrinho persistido ou adicao
+ok 110 - acessorios retirados nao voltam pelo carrinho persistido ou adicao
+  ---
+  duration_ms: 4.1039
+  ...
+# Subtest: toque luminoso e energetico retirados sem afetar Xbooster em capsulas
+ok 111 - toque luminoso e energetico retirados sem afetar Xbooster em capsulas
+  ---
+  duration_ms: 0.7241
+  ...
+# (node:45680) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:45680) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-import.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: semicolon import supports Portuguese aliases, BOM, CRLF and decimal commas without losing code zeros
+ok 112 - semicolon import supports Portuguese aliases, BOM, CRLF and decimal commas without losing code zeros
+  ---
+  duration_ms: 3.2229
+  ...
+# Subtest: tab import handles quoted delimiters, escaped quotes and trailing empty lines
+ok 113 - tab import handles quoted delimiters, escaped quotes and trailing empty lines
+  ---
+  duration_ms: 0.5139
+  ...
+# Subtest: blank or absent update fields are omitted, never replaced with defaults
+ok 114 - blank or absent update fields are omitted, never replaced with defaults
+  ---
+  duration_ms: 0.3871
+  ...
+# Subtest: invalid headers, duplicate aliases and editable content columns are rejected
+ok 115 - invalid headers, duplicate aliases and editable content columns are rejected
+  ---
+  duration_ms: 0.7953
+  ...
+# Subtest: malformed CSV is rejected rather than silently shifting fields
+ok 116 - malformed CSV is rejected rather than silently shifting fields
+  ---
+  duration_ms: 0.5043
+  ...
+# Subtest: price and stock reject partial parsing, negative, fractional stock, nonfinite and overflow values
+ok 117 - price and stock reject partial parsing, negative, fractional stock, nonfinite and overflow values
+  ---
+  duration_ms: 10.5022
+  ...
+# Subtest: empty imports, duplicate exact codes, oversized codes/files and batches above 100 are blocked
+ok 118 - empty imports, duplicate exact codes, oversized codes/files and batches above 100 are blocked
+  ---
+  duration_ms: 1.1954
+  ...
+# Subtest: preview uses existing names and builds only field-specific updates and concurrency expectations
+ok 119 - preview uses existing names and builds only field-specific updates and concurrency expectations
+  ---
+  duration_ms: 0.8851
+  ...
+# Subtest: preview blocks missing/archived products, invalid existing names and nonexistent/archived categories
+ok 120 - preview blocks missing/archived products, invalid existing names and nonexistent/archived categories
+  ---
+  duration_ms: 4.5732
+  ...
+# (node:39300) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:39300) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-public-content.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: all 107 retained catalog entries have clean public content without mutating research
+ok 121 - all 107 retained catalog entries have clean public content without mutating research
+  ---
+  duration_ms: 16.2773
+  ...
+# Subtest: retired products remain excluded and new admin descriptions remain supported
+ok 122 - retired products remain excluded and new admin descriptions remain supported
+  ---
+  duration_ms: 0.3217
+  ...
+# Subtest: Soft Hair exposes the 20 ml presentation confirmed by the shop owner
+ok 123 - Soft Hair exposes the 20 ml presentation confirmed by the shop owner
+  ---
+  duration_ms: 0.2271
+  ...
+# Subtest: actual precautions survive and disputed facts are not republished
+ok 124 - actual precautions survive and disputed facts are not republished
+  ---
+  duration_ms: 0.5312
+  ...
+# Subtest: supplied vitamins, ingredients, preparation and detailed features remain public
+ok 125 - supplied vitamins, ingredients, preparation and detailed features remain public
+  ---
+  duration_ms: 0.7808
+  ...
+# Subtest: withdrawn Mel conditioner retains its research without exposing a public product description
+ok 126 - withdrawn Mel conditioner retains its research without exposing a public product description
+  ---
+  duration_ms: 0.23
+  ...
+# (node:44288) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:44288) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-registration.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: registration contains eleven distinct absent identities and no VG, lotions or accessories
+ok 127 - registration contains eleven distinct absent identities and no VG, lotions or accessories
+  ---
+  duration_ms: 3.1933
+  ...
+# Subtest: placeholders do not acquire descriptions, usage and safety notes remain separate
+ok 128 - placeholders do not acquire descriptions, usage and safety notes remain separate
+  ---
+  duration_ms: 0.6551
+  ...
+# Subtest: generated SQL has every approved price and image without changing existing products
+ok 129 - generated SQL has every approved price and image without changing existing products
+  ---
+  duration_ms: 4.5808
+  ...
+# (node:21928) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:21928) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/product-reviews.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: review filters accept only bounded supported options
+ok 130 - review filters accept only bounded supported options
+  ---
+  duration_ms: 8.9043
+  ...
+# Subtest: review photos cannot point to arbitrary hosts, scripts or traversals
+ok 131 - review photos cannot point to arbitrary hosts, scripts or traversals
+  ---
+  duration_ms: 2.7746
+  ...
+# Subtest: editorial catalog covers 123 separate products without commercial overrides
+ok 132 - editorial catalog covers 123 separate products without commercial overrides
+  ---
+  duration_ms: 1.47
+  ...
+# (node:21044) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:21044) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/products.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: codifica referencias sem permitir mudar a rota
+ok 133 - codifica referencias sem permitir mudar a rota
+  ---
+  duration_ms: 1.215
+  ...
+# Subtest: identifica cadastros de teste sem excluir produtos comuns
+ok 134 - identifica cadastros de teste sem excluir produtos comuns
+  ---
+  duration_ms: 0.3457
+  ...
+# Subtest: preserva precos em reais
+ok 135 - preserva precos em reais
+  ---
+  duration_ms: 38.646
+  ...
+# Subtest: JSON-LD nao permite encerrar o elemento script
+ok 136 - JSON-LD nao permite encerrar o elemento script
+  ---
+  duration_ms: 1.0209
+  ...
+# (node:38312) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:38312) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/pwa.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: PWA: install stores only the explicit offline shell and icons, without forcing an update
+ok 137 - PWA: install stores only the explicit offline shell and icons, without forcing an update
+  ---
+  duration_ms: 28.2697
+  ...
+# Subtest: PWA: authentication, APIs, mutations, external origins and Next RSC/prefetch bypass interception
+ok 138 - PWA: authentication, APIs, mutations, external origins and Next RSC/prefetch bypass interception
+  ---
+  duration_ms: 2.4658
+  ...
+# Subtest: PWA: live navigations including search and account always use fresh network and never persist responses
+ok 139 - PWA: live navigations including search and account always use fresh network and never persist responses
+  ---
+  duration_ms: 5.0342
+  ...
+# Subtest: PWA: disconnected navigation gets a neutral offline screen, never a cached account or false payment confirmation
+ok 140 - PWA: disconnected navigation gets a neutral offline screen, never a cached account or false payment confirmation
+  ---
+  duration_ms: 4.2459
+  ...
+# Subtest: PWA: server errors are not disguised as offline success and a missing offline asset fails safely
+ok 141 - PWA: server errors are not disguised as offline success and a missing offline asset fails safely
+  ---
+  duration_ms: 1.345
+  ...
+# Subtest: PWA: activation only removes this application cache; applying an update requires the explicit message
+ok 142 - PWA: activation only removes this application cache; applying an update requires the explicit message
+  ---
+  duration_ms: 2.5159
+  ...
+# Subtest: PWA: manifest has stable identity, standalone mode, icons and same-origin shortcuts
+ok 143 - PWA: manifest has stable identity, standalone mode, icons and same-origin shortcuts
+  ---
+  duration_ms: 73.4781
+  ...
+# Subtest: PWA: raster icons are correctly sized and maskable artwork stays inside the safe circle
+ok 144 - PWA: raster icons are correctly sized and maskable artwork stays inside the safe circle
+  ---
+  duration_ms: 193.0544
+  ...
+# (node:10116) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:10116) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/sales-report.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: reports only confirmed sales within Recife calendar dates
+ok 145 - reports only confirmed sales within Recife calendar dates
+  ---
+  duration_ms: 36.0019
+  ...
+# Subtest: aggregates cents and quantities and keeps same-name customers separate
+ok 146 - aggregates cents and quantities and keeps same-name customers separate
+  ---
+  duration_ms: 1.2225
+  ...
+# Subtest: empty reports do not create invalid averages and CSV neutralizes spreadsheet formulas
+ok 147 - empty reports do not create invalid averages and CSV neutralizes spreadsheet formulas
+  ---
+  duration_ms: 0.7535
+  ...
+# Subtest: delivered records without financial approval remain visible for review, outside revenue
+ok 148 - delivered records without financial approval remain visible for review, outside revenue
+  ---
+  duration_ms: 1.4883
+  ...
+# (node:15620) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:15620) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/saved-address.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: saved addresses require complete delivery data and a Brazilian state
+ok 149 - saved addresses require complete delivery data and a Brazilian state
+  ---
+  duration_ms: 1.8912
+  ...
+# (node:35344) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:35344) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/second-product-review.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: all 119 input records are accounted for and 108 identities match exact strings
+ok 150 - all 119 input records are accounted for and 108 identities match exact strings
+  ---
+  duration_ms: 2.1126
+  ...
+# Subtest: EAN validation rejects malformed values and preserves leading zeroes
+ok 151 - EAN validation rejects malformed values and preserves leading zeroes
+  ---
+  duration_ms: 0.1938
+  ...
+# Subtest: all fourteen perfume pairs share description and non-identity specifications
+ok 152 - all fourteen perfume pairs share description and non-identity specifications
+  ---
+  duration_ms: 3.444
+  ...
+# Subtest: placeholders retain every existing editorial field; no dosage or formula borrowed
+ok 153 - placeholders retain every existing editorial field; no dosage or formula borrowed
+  ---
+  duration_ms: 6.4537
+  ...
+# Subtest: all previous sources remain and specifications contain no empty values or commercial fields
+ok 154 - all previous sources remain and specifications contain no empty values or commercial fields
+  ---
+  duration_ms: 3.1049
+  ...
+# Subtest: new formulas do not receive previous lotion ingredients in specifications
+ok 155 - new formulas do not receive previous lotion ingredients in specifications
+  ---
+  duration_ms: 0.5518
+  ...
+# Subtest: 120 g lotion descriptions and rendered sections cannot reuse the former formula
+ok 156 - 120 g lotion descriptions and rendered sections cannot reuse the former formula
+  ---
+  duration_ms: 0.8663
+  ...
+# (node:12200) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:12200) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/secure-card-component.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: secure fields stay mounted across normal rerenders and CVV focus changes
+ok 157 - secure fields stay mounted across normal rerenders and CVV focus changes
+  ---
+  duration_ms: 217.8009
+  ...
+# Subtest: late BIN lookup cannot replace the current card method
+ok 158 - late BIN lookup cannot replace the current card method
+  ---
+  duration_ms: 62.1377
+  ...
+# Subtest: only token and selected provider terms are submitted, duplicate clicks blocked
+ok 159 - only token and selected provider terms are submitted, duplicate clicks blocked
+  ---
+  duration_ms: 78.5357
+  ...
+# Subtest: unmount invalidates delayed provider metadata and field events
+ok 160 - unmount invalidates delayed provider metadata and field events
+  ---
+  duration_ms: 41.7112
+  ...
+# (node:23496) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:23496) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/secure-card-fields.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: CVV illustration follows only the documented securityCode focus and blur events
+ok 161 - CVV illustration follows only the documented securityCode focus and blur events
+  ---
+  duration_ms: 3.4629
+  ...
+# Subtest: mount failure cleans all created fields
+ok 162 - mount failure cleans all created fields
+  ---
+  duration_ms: 1.5518
+  ...
+# Subtest: only documented BIN metadata and validity flags leave protected fields
+ok 163 - only documented BIN metadata and validity flags leave protected fields
+  ---
+  duration_ms: 1.148
+  ...
+# (node:16124) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:16124) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/secure-card-options.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: only active credit and debit methods are selectable
+ok 164 - only active credit and debit methods are selectable
+  ---
+  duration_ms: 1.8618
+  ...
+# Subtest: installments use the selected card type, provider limits and issuer
+ok 165 - installments use the selected card type, provider limits and issuer
+  ---
+  duration_ms: 1.2242
+  ...
+# (node:22852) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# (node:22852) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Vitrine_Ozonteck-main/tests/seo.test.ts is not specified and it doesn't parse as CommonJS.
+# Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+# To eliminate this warning, add "type": "module" to C:\\Vitrine_Ozonteck-main\\package.json.
+# Subtest: SEO: the site name, page title and social previews use one identity
+ok 166 - SEO: the site name, page title and social previews use one identity
+  ---
+  duration_ms: 1.5833
+  ...
+# Subtest: SEO: WebSite JSON-LD matches the name and configured home URL
+ok 167 - SEO: WebSite JSON-LD matches the name and configured home URL
+  ---
+  duration_ms: 16.6162
+  ...
+# Subtest: SEO: every ICO frame represents the existing brand rather than the starter favicon
+ok 168 - SEO: every ICO frame represents the existing brand rather than the starter favicon
+  ---
+  duration_ms: 52.119
+  ...
+# Subtest: SEO: linked raster assets exist and their declared dimensions are accurate
+ok 169 - SEO: linked raster assets exist and their declared dimensions are accurate
+  ---
+  duration_ms: 5.21
+  ...
+# Subtest: SEO: metadata and share artwork avoid unverified authorization or technical claims
+ok 170 - SEO: metadata and share artwork avoid unverified authorization or technical claims
+  ---
+  duration_ms: 2.9166
+  ...
+# Subtest: SEO: raster share preview retains every visible line of brand text
+ok 171 - SEO: raster share preview retains every visible line of brand text
+  ---
+  duration_ms: 38.3635
+  ...
+# Subtest: SEO: HTTP home exposes coherent metadata and crawlable brand assets
+ok 172 - SEO: HTTP home exposes coherent metadata and crawlable brand assets # SKIP
+  ---
+  duration_ms: 0.2638
+  ...
+1..172
+# tests 172
+# suites 0
+# pass 171
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 4203.3489
+(node:31268) ExperimentalWarning: Type Stripping is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

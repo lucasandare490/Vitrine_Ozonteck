@@ -1,0 +1,1 @@
+PASS: cancellation releases stock once and queues the correct email; reservation/approval/rejection/expiry replay, shipped/delivered preservation, stale pending, refund replay, no automatic return stock, late approval, amount mismatch, foreign payment, missing order and insufficient stock. Local PostgreSQL only; remote concurrency not covered.

@@ -33,3 +33,7 @@ export function catalogReturn(value: string | null) {
     return `/${url.search}#catalogo`;
   } catch { return '/#catalogo'; }
 }
+export function mobileCatalogHref(path: string, savedContext: string) {
+  // An anchor on the current catalog preserves freshly selected URL filters.
+  return path === '/' ? '#catalogo' : catalogReturn(savedContext);
+}
